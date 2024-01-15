@@ -9,7 +9,8 @@ const MainPage: FC = () => {
 
   return (
     <div className={classes.main}>
-      hello
+      faskdfhsadlkfnbasdnlkf
+      <div style={{ height: '100vh' }}></div>
     </div >
   );
 };
