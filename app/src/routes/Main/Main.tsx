@@ -1,12 +1,13 @@
 
 
+import { HeaderComponent } from "Components";
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 export default function Main() {
   return (
     <Layout style={{ overflow: "hidden" }}>
       <Layout>
-        <header>fs</header>
+        <HeaderComponent />
         <Outlet />
         <footer>fds</footer>
       </Layout>
