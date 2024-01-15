@@ -640,3 +640,180 @@ export const categoriesMack = [
   },
 
 ];
+export const FooterEl = [
+  {
+    "id": 1,
+    "title": "Ноутбуки и компьютеры",
+    "slug": "noutbuki-i-kompyutery",
+    "subcategories": [
+      {
+        "id": 2,
+        "title": "Ноутбуки",
+        "slug": "noutbuki",
+        "subcategories": []
+      },
+      {
+        "id": 3,
+        "title": "ПК и моноблоки",
+        "slug": "pk-i-monobloki",
+        "subcategories": []
+      },
+      {
+        "id": 4,
+        "title": "Серверы",
+        "slug": "servery",
+        "subcategories": []
+      },
+      {
+        "id": 5,
+        "title": "Аксессуары для компьютеров",
+        "slug": "aksessuary-dlya-kompyuterov",
+        "subcategories": []
+      },
+      {
+        "id": 6,
+        "title": "Компьютерные комплектующие",
+        "slug": "kompyuternye-komplektuyushchie",
+        "subcategories": []
+      },
+      {
+        "id": 7,
+        "title": "Сетевое оборудование",
+        "slug": "setevoe-oborudovanie",
+        "subcategories": []
+      },
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Смартфоны и гаджеты",
+    "slug": "smartfony-i-gadzhety",
+    "subcategories": [
+      {
+        "id": 9,
+        "title": "Смартфоны",
+        "slug": "smartfony",
+        "subcategories": []
+      },
+      {
+        "id": 10,
+        "title": "Гаджеты и аксессуары",
+        "slug": "gadzhety-i-aksessuary",
+        "subcategories": []
+      },
+      {
+        "id": 11,
+        "title": "Умные часы и браслеты",
+        "slug": "umnye-chasy-i-braslety",
+        "subcategories": []
+      },
+      {
+        "id": 12,
+        "title": "Фитнес-трекеры",
+        "slug": "fitnes-trekery",
+        "subcategories": []
+      },
+      {
+        "id": 13,
+        "title": "Зарядные устройства",
+        "slug": "zaryadnye-ustroystva",
+        "subcategories": []
+      },
+      {
+        "id": 14,
+        "title": "Наушники и колонки",
+        "slug": "naushniki-i-kolonki",
+        "subcategories": []
+      },
+    ]
+  },
+
+  {
+    "id": 15,
+    "title": "Фото и видео",
+    "slug": "foto-i-video",
+    "subcategories": [
+      {
+        "id": 16,
+        "title": "Фотокамеры",
+        "slug": "fotokamery",
+        "subcategories": []
+      },
+      {
+        "id": 17,
+        "title": "Видеокамеры",
+        "slug": "videokamery",
+        "subcategories": []
+      },
+      {
+        "id": 18,
+        "title": "Объективы",
+        "slug": "obektyvy",
+        "subcategories": []
+      },
+      {
+        "id": 19,
+        "title": "Студийное оборудование",
+        "slug": "studijnoe-oborudovanie",
+        "subcategories": []
+      },
+      {
+        "id": 20,
+        "title": "Аксессуары для фото и видео",
+        "slug": "aksessuary-dlya-foto-i-video",
+        "subcategories": []
+      },
+      {
+        "id": 21,
+        "title": "Память для фото и видео",
+        "slug": "pamyat-dlya-foto-i-video",
+        "subcategories": []
+      },
+    ]
+  },
+
+  {
+    "id": 22,
+    "title": "Телевизоры и аудио",
+    "slug": "televizory-i-audio",
+    "subcategories": [
+      {
+        "id": 23,
+        "title": "Телевизоры",
+        "slug": "televizory",
+        "subcategories": []
+      },
+      {
+        "id": 24,
+        "title": "Аудиосистемы",
+        "slug": "audiosistemy",
+        "subcategories": []
+      },
+      {
+        "id": 25,
+        "title": "Наушники",
+        "slug": "naushniki",
+        "subcategories": []
+      },
+      {
+        "id": 26,
+        "title": "Проекторы",
+        "slug": "proektory",
+        "subcategories": []
+      },
+      {
+        "id": 27,
+        "title": "Аксессуары для аудио и видео",
+        "slug": "aksessuary-dlya-audio-i-video",
+        "subcategories": []
+      },
+      {
+        "id": 28,
+        "title": "Медиаплееры",
+        "slug": "mediapleery",
+        "subcategories": []
+      },
+    ]
+  },
+
+];

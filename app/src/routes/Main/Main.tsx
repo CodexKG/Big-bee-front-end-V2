@@ -1,6 +1,7 @@
 
 
 import { HeaderComponent } from "Components";
+import FooterComponent from "Components/FooterComponent/FooterComponent";
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 export default function Main() {
@@ -9,7 +10,7 @@ export default function Main() {
       <Layout>
         <HeaderComponent />
         <Outlet />
-        <footer>fds</footer>
+        <FooterComponent />
       </Layout>
     </Layout>
   );
