@@ -1,0 +1,143 @@
+@import "../../scss/variables/colors.module.scss";
+
+.main {
+  &_baner {
+    width: 100vw;
+    height: 50%;
+    background: linear-gradient(0deg,
+        rgba(0, 0, 0, 0.65) 0%,
+        rgba(0, 0, 0, 0.65) 100%),
+      url(https://graphicsfamily.com/wp-content/uploads/edd/2022/06/Free-E-commerce-Product-Banner-Design-with-Green-Colors-2048x1152.jpg) center/cover,
+      lightgray 50% / cover no-repeat;
+
+    &_title {
+      max-width: 40%;
+      text-align: center;
+      margin: auto;
+      padding: 10% 0;
+
+      h1 {
+        font-size: 38px;
+        font-style: normal;
+        font-weight: 600;
+        color: $white;
+      }
+
+      h2 {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        color: $white;
+      }
+
+      :where(.css-dev-only-do-not-override-3t6pos).ant-btn-primary {
+        color: black !important;
+      }
+    }
+  }
+
+  &_info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 1280px;
+    margin: 48px auto;
+    grid-column-gap: 48px;
+    grid-row-gap: 48px;
+  }
+
+  &_bigcards {
+    padding: 1rem 0;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  &_bg {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(0deg,
+        rgba(0, 0, 0, 1) 58%,
+        rgba(255, 255, 255, 1) 58%);
+
+    &_media {
+      max-width: 1280px;
+      margin: 0 auto;
+      height: 80vh;
+      position: relative;
+      overflow: hidden;
+
+      display: flex;
+      justify-content: space-between;
+
+      &_left {
+        width: 270px;
+        position: absolute;
+        bottom: 100px;
+
+        h1 {
+          font-size: 38px;
+          font-style: normal;
+          font-weight: 600;
+          color: $white;
+        }
+      }
+
+      &_rigth {
+        position: absolute;
+        right: 50px;
+        display: flex;
+        gap: 32px;
+
+        &_leftImages {
+          &_image {
+            width: 350px;
+            height: 350px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 32px;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+
+        &_rigthImages {
+          margin-bottom: 5rem;
+
+          &_image {
+            width: 350px;
+            height: 350px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 32px;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 668px) {
+  .main {
+    &_info {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+padding: 50px;
+      grid-column-gap: 48px;
+      grid-row-gap: 48px;
+    }
+
+    &_baner_title {
+      max-width: 100%;
+    }
+  }
+}

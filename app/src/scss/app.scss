@@ -1,0 +1,13 @@
+@import "~antd/dist/reset.css";
+@import "./libs/normalize";
+@import "./variables/colors.module.scss";
+
+//заголовков таблицы
+thead[class*="ant-table-thead"] th{
+  background-color: $white !important;
+  border-top: .5px solid $lightdivider;
+  &::before {
+    display: none !important;
+  }
+}
+
