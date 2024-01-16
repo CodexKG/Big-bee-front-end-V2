@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "swiper": "^11.0.5",
+    "swiper-react": "^1.0.0"
+  }
+}
