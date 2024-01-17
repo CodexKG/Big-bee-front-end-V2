@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import classes from './PromotionCard.module.scss'
-import { IPromotionCard } from 'interfaces/IPromotion'
+import { IPromotionCard } from 'interfaces'
 import { Row, Col, Typography, Button, Carousel } from 'antd'
 import starIcon from '../../assets/icon/promotion/star.svg'
 import messageIcon from '../../assets/icon/promotion/message.svg'
