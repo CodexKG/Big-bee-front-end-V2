@@ -73,7 +73,6 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         <Button className={classes.cart_button}>Добавить в корзину</Button>
         <Button className={classes.cart_favorites}><img src={heartIcon} alt="" /></Button>
       </Row>
-
     </div>
   )
 }
