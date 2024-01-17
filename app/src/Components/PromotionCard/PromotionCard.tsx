@@ -19,13 +19,8 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
     rating,
     review,
   } = props
-
   const { Title, Text } = Typography
-
   const [dotPosition, setDotPosition] = useState<DotPosition>('top');
-
-
-
   return (
     <div className={classes.promotionCard}>
       <div className={classes.img_block}>

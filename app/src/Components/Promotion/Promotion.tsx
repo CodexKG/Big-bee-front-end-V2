@@ -12,13 +12,7 @@ const { Text } = Typography;
 const ArrowLeft: React.FC<any> = ({ currentSlide, slideCount, ...props }) => (
   <button
     {...props}
-    className={
-      "slick-prev slick-arrow" +
-      " " +
-      classes.prevBtn +
-      (currentSlide === 0 ? " slick-disabled" : "")
-    }
-    type="button"
+    className={`slick-prev slick-arrow ${classes.prevBtn}`}
     style={{ display: currentSlide === 0 ? "none" : "block" }}
   >
     <img src={arrowRightIcon} alt="" />
@@ -28,11 +22,7 @@ const ArrowRight: React.FC<any> = ({ currentSlide, slideCount, ...props }) => {
   return (
     <button
       {...props}
-      className={
-        "slick-next slick-arrow " +
-        classes.nextBtn +
-        (currentSlide === 2 ? " slick-disabled" : "")
-      }
+      className={`slick-next slick-arrow ${classes.nextBtn}`}
       style={{ display: currentSlide === 2 ? "none" : "block" }}
       type="button"
     >
@@ -123,14 +113,6 @@ const Promotion: React.FC = () => {
               rating={4.9}
               review={203}
             />
-
-            {/* <div className={classes.nextBtn} style={{ display: isNext ? 'flex' : 'none' }}>
-                            <img src={nextBtnIcon} alt="" />
-                        </div>
-
-                        <div className={classes.prevBtn} style={{ display: isPrev ? 'flex' : 'none' }}>
-                            <img src={nextBtnIcon} alt="" />
-                        </div> */}
           </Carousel>
         </div>
       </Layout>
