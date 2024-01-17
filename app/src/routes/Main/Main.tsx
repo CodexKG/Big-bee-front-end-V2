@@ -1,6 +1,6 @@
 
 
-import { HeaderComponent } from "Components";
+import { HeaderComponent} from "Components";
 import FooterComponent from "Components/FooterComponent/FooterComponent";
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
