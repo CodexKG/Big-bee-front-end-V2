@@ -1,4 +1,2 @@
-import HeaderComponent from "./Header/Header";
-import CategoryComponent from './CategoryComponent/CategoryComponent';
+import HeaderComponent from "./Header/Header"
 export { HeaderComponent }
-export {CategoryComponent}
