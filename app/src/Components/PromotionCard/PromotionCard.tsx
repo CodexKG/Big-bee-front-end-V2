@@ -30,16 +30,16 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
     <div className={classes.promotionCard}>
       <div className={classes.img_block}>
         <Carousel dotPosition={dotPosition}>
-          <div>
+          <div className={classes.img_block_item}>
             <img src={product_img} alt="" />
           </div>
-          <div>
+          <div className={classes.img_block_item}>
             <img src={product_img} alt="" />
           </div>
-          <div>
+          <div className={classes.img_block_item}>
             <img src={product_img} alt="" />
           </div>
-          <div>
+          <div className={classes.img_block_item}>
             <img src={product_img} alt="" />
           </div>
         </Carousel>

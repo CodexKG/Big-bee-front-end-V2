@@ -19,7 +19,7 @@ const Promotion: React.FC = () => {
         <section className={classes.promotion + ' promotion'}>
             <Layout>
                 <div className={classes.promotion_header}>
-                    <Title level={1}>
+                    <Title level={1} className={classes.promotion_title}>
                         Акции и скидки
                     </Title>
                     <Text>Все товары <img src={arrowRightIcon} alt="" /></Text>

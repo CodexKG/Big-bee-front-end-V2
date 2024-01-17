@@ -1,20 +1,25 @@
 .promotionCard{
     width: 100%;
-    height: 730px;
     overflow: hidden;
     border-left: 1px solid #DCDCDC;
     border-right: 1px solid #DCDCDC;
-
+    
     padding: 20px;
     .img_block{
-        height: 50%;
+        height: 40%;
         width: 100%;
-        margin-bottom: 50px;
-        img{
-            width: 100%;
+        padding-top: 20px;
+        margin-bottom:40px;
+        .img_block_item{
+           img{
+            width: 85%;
             height: 100%;
             object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        } 
         }
+        
     }
     .salesman_img{
         width: 25px;
