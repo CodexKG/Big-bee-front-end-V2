@@ -28,7 +28,9 @@
         top: 50%;
         right: -25px;
         transform: translateY(-50%);
-        background: white;
+        background: white !important;
+        border: none;
+        z-index: 9;
     }
     .prevBtn img{
         transform: rotate(180deg);
@@ -36,6 +38,7 @@
     .prevBtn{
         left: -25px;
     }
+
     .promotion_header{
         .promotion_title{
             margin-bottom: 50px;
