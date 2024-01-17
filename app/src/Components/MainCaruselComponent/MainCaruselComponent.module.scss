@@ -1,0 +1,51 @@
+.carusel{
+    padding: 20px ;
+    .container{
+        max-width: 90%;
+        margin: 0 auto; 
+        width: 100%;
+        >.ant-carousel .css-dev-only-do-not-override-x7gi70{
+            .slick-slider{
+                .slick-dots{
+                    li{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    &__item{
+        width: 100%;
+        height: fit-content;
+        color: #fff;
+    }
+    &__wrapper{
+        padding: 70px;
+        background-position: center !important;
+        background-size: cover !important;
+        object-fit: cover ;   
+        background-repeat: no-repeat !important;
+    }
+    &__inner{
+        width: 40%;
+        a{
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 0 6px;
+            font-size: 16px;
+        }
+        div{
+            h2{
+                font-size: 62px;
+            }
+            p{
+                font-size: 20px;
+            }
+        }
+    }
+    
+}
+.ant-carousel .slick-dots li button{
+    height: 4px;
+}

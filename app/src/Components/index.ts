@@ -1,4 +1,5 @@
 import HeaderComponent from "./Header/Header";
 import CategoryComponent from './CategoryComponent/CategoryComponent';
-export { HeaderComponent }
-export {CategoryComponent}
+import MainCaruselComponent from "./MainCaruselComponent/MainCaruselComponent";
+import CompanyListComponent from "./CompanyListComponent/CompanyListComponent";
+export { HeaderComponent, CategoryComponent, MainCaruselComponent,CompanyListComponent }
