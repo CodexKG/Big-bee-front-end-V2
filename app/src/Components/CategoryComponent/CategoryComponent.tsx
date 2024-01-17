@@ -5,7 +5,7 @@ import img1 from './img/img1.png';
 import img2 from './img/img2.png';
 import img3 from './img/img3.png';
 import img4 from './img/img4.png';
-
+import CategoryCardComponent from '../CategoryCardComponent/CategoryCardComponent'
 
 const CategoryComponent: React.FC = () =>{
     const categories = [
@@ -45,13 +45,7 @@ const CategoryComponent: React.FC = () =>{
             <div className={classes.category_row}>
                 {
                     categories.map(item =>{
-                        return <div className={classes.category_card} key={item.id} >
-                                <div className={classes.category_card_block}>
-                                    <img src={item.image} alt="" />
-                                </div>
-                                <h4 className={classes.category_card_title}>{item.title}</h4>
-                                <p className={classes.category_card_price}>{item.price}</p>
-                        </div>
+                        return <CategoryCardComponent key={item.id} item={item} />
                     })
                 }
             </div>
