@@ -1,2 +1,3 @@
 import HeaderComponent from "./Header/Header"
-export { HeaderComponent }
+import SubWithNews from "./SubscriptionsWithNews/SubWithNews"
+export { HeaderComponent, SubWithNews }
