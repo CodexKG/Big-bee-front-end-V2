@@ -29,7 +29,7 @@ const { createCart, addToCart, getOwnCartItems, deleteCartItem } = carts
 const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, } = reviews
 const { addProductToFavorite, delProductFromFavorite } = favorites
-const { getCategories } = categories
+const { getCategories, getCategoriesById } = categories
 
 
 
@@ -54,6 +54,7 @@ const api = {
   addReview,
   updateReview,
   deleteReview,
+  getCategoriesById
 }
 
 export { instance, api };
