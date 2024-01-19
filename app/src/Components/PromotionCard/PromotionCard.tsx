@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 import classes from "./PromotionCard.module.scss";
 import { IPromotionCard } from "interfaces";
 import { Row, Col, Typography, Button, Carousel } from "antd";
 import messageIcon from "../../assets/icon/message.svg";
 import type { CarouselProps } from "antd";
 import { numberWithSpaces } from "helpers";
-import { StarFilled,HeartOutlined  } from "@ant-design/icons";
+import { StarFilled, HeartOutlined } from "@ant-design/icons";
+import { CarouselRef } from "antd/es/carousel";
 type DotPosition = CarouselProps["dotPosition"];
 
 const PromotionCard: React.FC<IPromotionCard> = (props) => {
@@ -21,19 +22,34 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   } = props;
   const { Title, Text } = Typography;
   const [dotPosition, setDotPosition] = useState<DotPosition>("top");
-
+  const carouselRef = useRef<CarouselRef>(null)
+  const imgHover = (index:number) => {
+    carouselRef.current?.goTo(index,true)
+  };
+  
   return (
     <div className={classes.promotionCard}>
+
+
       <div className={classes.img_block}>
-        <Carousel dotPosition={dotPosition}>
+        <div className={classes.discount_block}>
+            -14%
+        </div>
+        <div className={classes.img_block_hover}>
+          <div className={classes.img_block_hover_it} onMouseMove={()=>imgHover(0)}></div>
+          <div className={classes.img_block_hover_it} onMouseMove={()=>imgHover(1)}></div>
+          <div className={classes.img_block_hover_it} onMouseMove={()=>imgHover(2)}></div>
+          <div className={classes.img_block_hover_it} onMouseMove={()=>imgHover(3)}></div>
+        </div>
+        <Carousel dotPosition={dotPosition} ref={carouselRef}>
           <div className={classes.img_block_item}>
-            <img src={product_img} alt={title} />
+            <img src={'https://object.pscloud.io/cms/cms/Photo/img_0_77_4248_9_6.png'} alt={title} />
           </div>
           <div className={classes.img_block_item}>
-            <img src={product_img} alt="" />
+            <img src={'https://softech.kg/image/cache/a250ce5c38cb97be0e0629db55a922e4.jpg'} alt="" />
           </div>
           <div className={classes.img_block_item}>
-            <img src={product_img} alt="" />
+            <img src={'https://gudini.kg/image/cache/catalog/Samsung/S23%20FE/71ii1syiyrl._sl1500_-800x800.jpg'} alt="" />
           </div>
           <div className={classes.img_block_item}>
             <img src={product_img} alt="" />
@@ -49,21 +65,21 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         </Row>
       </div>
       <Title level={3}>{title}</Title>
-      <div className={classes.subtitle}>
-        <Text>{subtitle}</Text>
+      <div className={classes.subtitle}  >
+        <Text >{subtitle}</Text>
       </div>
       <Text strong>
         <Title level={3}>{numberWithSpaces(price)} с</Title>
       </Text>
       <Row className={classes.old_price_wrap}>
-        <Col span={14}>
+        <Col span={12}>
           <span className={classes.old_price}>
             {numberWithSpaces(old_price)}
           </span>
         </Col>
-        <Col span={10} className={classes.old_price_item}>
+        <Col span={12} className={classes.old_price_item}>
           <span>
-            <StarFilled style={{color:'#F5C423'}}/>
+            <StarFilled style={{ color: "#F5C423" }} />
             {rating}
           </span>
           <span>
@@ -75,7 +91,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
       <Row style={{ justifyContent: "space-between" }}>
         <Button className={classes.cart_button}>Добавить в корзину</Button>
         <Button className={classes.cart_favorites}>
-          <HeartOutlined/>
+          <HeartOutlined />
         </Button>
       </Row>
     </div>
