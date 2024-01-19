@@ -7,19 +7,17 @@ import logo from "../../assets/icon/logo.svg";
 import { AppleOutlined, CloseOutlined, HeartOutlined, SearchOutlined, ShoppingCartOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'store/hook';
 import axios from 'axios';
-import { fetchCategories, fetchCategoriesById } from 'store/reducers/categoryReduser';
+import { fetchCategories } from 'store/reducers/categoryReduser';
 import { Categories } from 'types/types';
-import { setHoveredItem } from 'store/slices/categorySlice';
+import { categoriesMack } from 'data/categories/navCategories';
 
 const HeaderComponent: React.FC = () => {
-    const { data, children } = useAppSelector((state) => state.category)
+    const { data } = useAppSelector((state) => state.category)
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false);
-    const [category, setCategory] = useState<number>(1)
-
     useEffect(() => {
         const source = axios.CancelToken.source();
-        dispatch(fetchCategories({ cancelToken: source.token, }))
+        dispatch(fetchCategories({ cancelToken: source.token, }));
         return () => {
             source.cancel('Запрос отменен, компонент размонтирован');
         };
@@ -37,15 +35,7 @@ const HeaderComponent: React.FC = () => {
         return () => { document.body.style.overflow = 'auto' };
     }, [open]);
 
-    const handleMouseEnter = (key: string) => {
-        const source = axios.CancelToken.source();
-        if (!children[category]) {
-            dispatch(fetchCategoriesById({ cancelToken: source.token, id: +key })).then((res: any) => {
-                dispatch(setHoveredItem(res.payload));
-            });
-        }
-        setCategory(+key);
-    };
+
     return (
 
         <header className={classes.header}>
@@ -75,12 +65,13 @@ const HeaderComponent: React.FC = () => {
                     Каталог
                 </Button>
                 <ul>
-                    {data.map((item: Categories) =>
+                    {data.slice(0, 7).map((item: Categories) =>
                         <li key={item.id}>{item.title}</li>
                     )}
                 </ul>
                 <Space wrap>
                     <Select
+
                         defaultValue="USD"
                         style={{ width: 90 }}
                         bordered={false}
@@ -92,13 +83,13 @@ const HeaderComponent: React.FC = () => {
                         className={classes.header_top_curens}
                     />
                     <Select
-                        defaultValue="EN"
+                        defaultValue="en"
                         style={{ width: 90 }}
                         bordered={false}
                         options={[
-                            { value: "EN", label: "EN" },
-                            { value: "RU", label: "RU" },
-                            { value: "KG", label: "KG" },
+                            { value: "en", label: "en" },
+                            { value: "ru", label: "ru" },
+                            { value: "kg", label: "kg" },
                         ]}
                         className={classes.header_top_curens}
                     />
@@ -107,7 +98,7 @@ const HeaderComponent: React.FC = () => {
 
 
             <div className={classes.test}>
-                <div style={!open ? { height: '1px' } : { height: '100vh', opacity: '1' }} className={classes.all}>
+                <div style={!open ? { height: '1px', opacity: '0' } : { height: '100vh', opacity: '1' }} className={classes.all}>
                     <Drawer
                         size={'large'}
                         placement={'top'}
@@ -125,19 +116,20 @@ const HeaderComponent: React.FC = () => {
                             <aside className={classes.openCategories_sideBar}>
                                 <ul>
                                     {data?.map((item: Categories) =>
-                                        <li onMouseOver={() => handleMouseEnter(`${item.id}`)} key={item.id}><Button icon={<AppleOutlined />} className={classes.categoryItem} type="text">{item.title}</Button></li>
+
+                                        <li key={item.id}><Button icon={<AppleOutlined />} className={classes.categoryItem} type="text">{item.title}</Button></li>
                                     )}
                                 </ul>
                             </aside>
                             <main className={classes.openCategories_main}>
-                                {children[category]?.subcategories?.map((item: Categories) =>
+                                {categoriesMack?.map((item: any) =>
                                     <div className={classes.openCategories_main_item} key={item.id}>
                                         <h1>
                                             {item.title}
                                         </h1>
                                         <div>
                                             {
-                                                item.subcategories.map((el: Categories) =>
+                                                item.subcategories.map((el: any) =>
                                                     <p key={el.id}>
                                                         {el.title}
                                                     </p>
