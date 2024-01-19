@@ -8,11 +8,10 @@ const MainPage: FC = () => {
 
 
   return (
-    <div className={classes.main}>
-      
+    <main className={classes.main}>
       <Promotion/>
       <div style={{ height: '100vh' }}></div>
-    </div >
+    </main >
   );
 };
 
