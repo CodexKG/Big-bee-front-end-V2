@@ -93,9 +93,11 @@
     max-width: 1722px;
     margin: 0 auto;
     display: flex;
+    justify-content: space-between;
+
 
     &_sideBar {
-        max-width: 400px;
+        width: 20%;
         height: 77vh;
         overflow-y: auto;
         padding-right: 1rem;
@@ -128,7 +130,7 @@
     &_main {
         height: 77vh;
         overflow-y: auto;
-        width: 100%;
+        width: 80%;
         display: flex;
         gap: 1rem;
         flex-wrap: wrap;
