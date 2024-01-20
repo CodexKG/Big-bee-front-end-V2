@@ -1,6 +1,6 @@
 import classes from "./MainPage.module.scss";
 import { FC } from "react";
-import { CategoryComponent, MainCaruselComponent, CompanyListComponent } from "Components";
+import { MainCaruselComponent, CompanyListComponent } from "Components";
 
 
 const MainPage: FC = () => {
@@ -11,7 +11,6 @@ const MainPage: FC = () => {
     <div className={classes.main}>
       <MainCaruselComponent/>
       <CompanyListComponent/>
-      <CategoryComponent />
     </div >
   );
 };

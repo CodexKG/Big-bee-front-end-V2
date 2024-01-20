@@ -1,7 +1,6 @@
 import { Flex } from 'antd';
 import classes from './CompanyListComponent.module.scss'
 import { company_list } from 'data/companyList/companyList';
-import { Divider } from 'antd';
 import React, {useEffect} from 'react'
 
 interface Props {
