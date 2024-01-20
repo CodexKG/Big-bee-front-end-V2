@@ -1,6 +1,6 @@
 import { Footer } from "antd/es/layout/layout"
 import { FC } from "react"
-import classes from './FooterComponetn.module.scss'
+import classes from './FooterComponent.module.scss'
 import { FooterEl, categoriesMack } from "data/categories/navCategories"
 import logoFooter from '../../assets/icon/logoFooter.svg'
 import { Button, Form, Input } from "antd"
