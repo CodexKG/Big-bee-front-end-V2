@@ -1,7 +1,6 @@
 // Header.tsx
 import React, { useEffect, useState } from 'react';
 import { Button, Drawer, DrawerProps, Layout, Menu, Select, Space } from 'antd';
-import { Link } from 'react-router-dom';
 import classes from './Header.module.scss'
 import logo from "../../assets/icon/logo.svg";
 import { AppleOutlined, CloseOutlined, HeartOutlined, SearchOutlined, ShoppingCartOutlined, UnorderedListOutlined } from '@ant-design/icons';
