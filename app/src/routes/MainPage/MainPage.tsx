@@ -10,7 +10,6 @@ const MainPage: FC = () => {
   return (
     <main className={classes.main}>
       <Promotion/>
-      <div style={{ height: '100vh' }}></div>
     </main >
   );
 };
