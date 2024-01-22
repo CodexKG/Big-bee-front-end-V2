@@ -11,10 +11,10 @@ function App() {
   // document.cookie = `kc-access=${token}; expires=${new Date(Date.now() + 86400000).toUTCString()}; path=/`;
   return (
     <Routes>
-    
-      <Route path='/' element={<Protected><Main /></Protected>}>
-        <Route index element={<Protected> <MainPage /></Protected>} />
-        <Route path='/catalog' element={<Protected> <Catalog /></Protected>} />
+
+      <Route path='/' element={<Main />}>
+        <Route index element={<MainPage />} />
+        <Route path='/catalog' element={<Catalog />} />
       </Route>
 
       <Route path='*' element={<main className={'errorPage'}><p>Неверный адрес</p></main>} />
@@ -23,16 +23,6 @@ function App() {
   );
 }
 
-const Protected = ({ children }: any) => {
-  // let location = useLocation();
-  // const accessToken = getCookie('access_token');
-
-  // if (!accessToken) {
-  //   return <Navigate to='/login' state={{ from: location }} />
-  // }
-
-  return children;
-}
 
 // const Authorization = ({ children }: any) => {
 //   if (getCookie('access_token')) {
