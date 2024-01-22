@@ -3,7 +3,7 @@ import Main from 'routes/Main/Main';
 import './scss/app.scss';
 import MainPage from 'routes/MainPage/MainPage';
 // import { getCookie } from 'helpers/cookies';
-
+import { Catalog } from 'routes';
 
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
     
       <Route path='/' element={<Protected><Main /></Protected>}>
         <Route index element={<Protected> <MainPage /></Protected>} />
-
+        <Route path='/catalog' element={<Protected> <Catalog /></Protected>} />
       </Route>
 
       <Route path='*' element={<main className={'errorPage'}><p>Неверный адрес</p></main>} />
