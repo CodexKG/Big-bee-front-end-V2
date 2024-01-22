@@ -2,12 +2,14 @@ import { Route, Routes } from 'react-router-dom';
 import Main from 'routes/Main/Main';
 import './scss/app.scss';
 import MainPage from 'routes/MainPage/MainPage';
+import { Catalog } from 'routes';
 function App() {
 
   return (
     <Routes>
       <Route path='/' element={<Main />}>
         <Route index element={<MainPage />} />
+        <Route path='/catalog/:id' element={<Catalog />} />
       </Route>
       <Route path='*' element={<main className={'errorPage'}><p>Неверный адрес</p></main>} />
     </Routes>
