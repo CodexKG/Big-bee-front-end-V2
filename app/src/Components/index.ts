@@ -3,4 +3,7 @@ import HeaderComponent from "./Header/Header"
 import PromotionCard from "./PromotionCard/PromotionCard"
 import Promotion from "./Promotion/Promotion"
 import SubWithNews from "./SubscriptionsWithNews/SubWithNews"
-export { HeaderComponent,PromotionCard,Promotion,  SubWithNews,TopOffer }
+import CompanyListComponent from "./CompanyListComponent/CompanyListComponent";
+import MainCaruselComponent from "./MainCaruselComponent/MainCaruselComponent";
+
+export { HeaderComponent,PromotionCard,Promotion,  SubWithNews,TopOffer,CompanyListComponent,MainCaruselComponent }

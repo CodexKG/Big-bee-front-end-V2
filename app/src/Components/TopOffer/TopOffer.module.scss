@@ -1,11 +1,12 @@
-
 .topOffer {
-  width: 87%;
+  max-width: 1722px;
+  padding: 0 24px;
   height: 70vh;
   margin: 100px auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  gap: 10px;
 
   &_Block {
     position: relative;
@@ -13,8 +14,8 @@
     border-radius: 10px;
     background-color: #F2F3F7;
     overflow: hidden;
-    row-gap: 5px;
-    margin: 10px;
+ 
+   
 
     &_Link {
       position: absolute;
