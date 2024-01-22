@@ -2,6 +2,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Main from 'routes/Main/Main';
 import './scss/app.scss';
 import MainPage from 'routes/MainPage/MainPage';
+import { AuthRegister } from 'Components';
 // import { getCookie } from 'helpers/cookies';
 
 
@@ -16,6 +17,7 @@ function App() {
         <Route index element={<Protected> <MainPage /></Protected>} />
 
       </Route>
+      <Route path='/register' element={<AuthRegister />} />
 
       <Route path='*' element={<main className={'errorPage'}><p>Неверный адрес</p></main>} />
 

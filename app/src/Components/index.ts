@@ -1,2 +1,3 @@
 import HeaderComponent from "./Header/Header"
-export { HeaderComponent }
+import AuthRegister from "./AuthRegister/AuthRegister"
+export { HeaderComponent, AuthRegister }
