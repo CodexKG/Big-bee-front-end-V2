@@ -1,4 +1,4 @@
-import { TopOffer } from "Components";
+import { CategoryComponent, TopOffer } from "Components";
 import classes from "./MainPage.module.scss";
 import { FC } from "react";
 import { MainCaruselComponent, CompanyListComponent } from "Components";
@@ -14,6 +14,7 @@ const MainPage: FC = () => {
       <CompanyListComponent />
       <TopOffer products={exampleProducts} />
       <Promotion title="Акции и скидки" />
+      <CategoryComponent />
       <Promotion title="Специально для вас" />
       <TopOffer products={productfff} />
       <Promotion title="Хиты продаж" />

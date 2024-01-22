@@ -5,5 +5,6 @@ import Promotion from "./Promotion/Promotion"
 import SubWithNews from "./SubscriptionsWithNews/SubWithNews"
 import CompanyListComponent from "./CompanyListComponent/CompanyListComponent";
 import MainCaruselComponent from "./MainCaruselComponent/MainCaruselComponent";
+import CategoryComponent from './CategoryComponent/CategoryComponent'
 
-export { HeaderComponent,PromotionCard,Promotion,  SubWithNews,TopOffer,CompanyListComponent,MainCaruselComponent }
+export { HeaderComponent, PromotionCard, Promotion, SubWithNews, TopOffer, CompanyListComponent, MainCaruselComponent, CategoryComponent }
