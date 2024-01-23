@@ -23,7 +23,7 @@ function App() {
   );
 }
 
-const Protected = ({ children }: any) => {
+const   Protected = ({ children }: any) => {
   // let location = useLocation();
   // const accessToken = getCookie('access_token');
 
