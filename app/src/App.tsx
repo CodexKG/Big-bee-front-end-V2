@@ -4,7 +4,7 @@ import './scss/app.scss';
 import MainPage from 'routes/MainPage/MainPage';
 // import { getCookie } from 'helpers/cookies';
 import { Catalog } from 'routes';
-
+import {Favorites} from 'routes';
 
 function App() {
   // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA2ODE4NDA3LCJpYXQiOjE3MDQyMjY0MDcsImp0aSI6IjQ2MDdhNWIzNGYyMjRkY2FiMTM2NjFhZmVmODQzMTkzIiwidXNlcl9pZCI6M30.WxtH_MO1Pa1LplwBM5wb8JTYv06Svw90GIMM9_cy01Q';
@@ -15,6 +15,8 @@ function App() {
       <Route path='/' element={<Protected><Main /></Protected>}>
         <Route index element={<Protected> <MainPage /></Protected>} />
         <Route path='/catalog' element={<Protected> <Catalog /></Protected>} />
+        <Route path='/favorites' element={<Protected> <Favorites /></Protected>} />
+
       </Route>
 
       <Route path='*' element={<main className={'errorPage'}><p>Неверный адрес</p></main>} />

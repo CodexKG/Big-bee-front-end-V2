@@ -1,3 +1,3 @@
 import Catalog from "./Catalog/Catalog";
-
-export {Catalog}
+import Favorites from "./Favorites/Favorites";
+export {Catalog,Favorites}
