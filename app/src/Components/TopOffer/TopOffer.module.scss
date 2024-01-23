@@ -1,62 +1,87 @@
-
 .topOffer {
-  width: 87%;
-  height: 70vh;
+  width: 80%;
+  height: 440px;
   margin: 100px auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  min-height: 220px;
+  max-height: 510px;
+  gap: 10px;
 
   &_Block {
-    position: relative;
-    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
     border-radius: 10px;
     background-color: #F2F3F7;
     overflow: hidden;
-    row-gap: 5px;
-    margin: 10px;
+    row-gap: 15px;
+    gap: 10px;
 
-    &_Link {
-      position: absolute;
-      left: 40px;
-      bottom: 20px;
-      margin-top: 4px;
-      font-weight: 400;
-      text-decoration: none;
-      color: inherit;
-    }
 
-    &_Title {
-      font-family: 'SFProText-Regular', sans-serif;
-      position: absolute;
-      left: 40px;
-      top: 30px;
-      font-size: 30px;
-      font-weight: 700;
-    }
-
-    &_Price {
-      font-family: 'SFProText-Regular', sans-serif;
-      position: absolute;
-      left: 40px;
-      top: 105px;
-      font-weight: bold;
-      font-size: 20px;
-    }
-
-    &_Image {
+    &_Up {
+      display: flex;
+      flex-wrap: wrap;
       width: 50%;
-      height: 80%;
-      position: absolute;
-      right: 20px;
-      bottom: 0;
+      gap: 20px;
 
-      img {
+      &_Title {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        background-color: transparent;
+        font-family: 'SFProText-Regular', sans-serif;
+        font-size: 25px;
+        font-weight: 600;
+      }
+
+      &_Price {
+        width: 100%;
+        font-family: 'SFProText-Regular', sans-serif;
+        font-weight: bold;
+        font-size: 20px;
       }
     }
+
+    &_Down {
+      margin: 0 auto;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative;
+
+      &_Link {
+        font-weight: 400;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      &_Image {
+        width: 50%;
+        height: auto;
+        max-width: 500px;
+        max-height: 80vh;
+
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        object-fit: contain;
+
+        img {
+          width: 100%;
+          max-width: 210px;
+
+          background-color: transparent;
+        }
+      }
+    }
+
   }
+}
+
+.x2{
+  height: 220px;
+  width: 80vw;
 }
