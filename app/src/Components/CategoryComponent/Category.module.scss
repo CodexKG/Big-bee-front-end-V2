@@ -31,7 +31,8 @@
         display: flex;
         column-gap: 20px;
         overflow: auto;
-        &::-webkit-scrollbar{
+
+        &::-webkit-scrollbar {
             display: none;
         }
     }
