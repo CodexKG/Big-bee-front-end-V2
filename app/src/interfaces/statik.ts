@@ -9,3 +9,14 @@ export interface UnderMainInfoDataType {
   title: string;
   content: string;
 }
+export interface CaruselDataType{
+  id: number;
+  title: string;
+  descr: string;
+  image: string;
+  url: string;
+}
+export interface CompanyListDataType{
+  id: number;
+  image: string;
+}

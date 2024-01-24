@@ -7,6 +7,7 @@ import icon2 from "../../assets/icon/TopOffer/express-car.svg";
 import icon3 from "../../assets/icon/TopOffer/settings-icon.svg";
 import icon4 from "../../assets/icon/TopOffer/card-icon.svg";
 
+
 interface TopOfferProps {
   products: Product[];
 }
@@ -88,7 +89,9 @@ const TopOffer: React.FC<TopOfferProps> = ({ products }) => {
           <div className={classes.offer_Image}>
             <img src={icon4} alt="offer" />
           </div>
+
           <h3>Система быстрых платежей</h3>
+
         </div>
       </div>
     </div>

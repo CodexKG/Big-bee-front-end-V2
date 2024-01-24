@@ -4,9 +4,10 @@ import { AddFavoriteProduct, FavoriteProductData, FavoriteProduct } from "store/
 
 interface favoritesState {
     data: FavoriteProductData;
-    loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+    status: 'idle' | 'pending' | 'succeeded' | 'failed';
     selectedShop: FavoriteProduct | null;
     error: string | null;
+    laoding: boolean
 }
 
 const initialState: favoritesState = {
@@ -16,9 +17,10 @@ const initialState: favoritesState = {
         previous: null,
         results: []
     },
-    loading: 'idle',
+    status: 'idle',
     selectedShop: null,
     error: null,
+    laoding: false
 };
 
 
@@ -31,7 +33,12 @@ const favoritesSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchProductToFavorite.pending, (state) => {
-                state.loading = 'pending';
+                state.status = 'pending';
+                state.laoding = true
+            })
+            .addCase(fetchProductToFavorite.fulfilled, (state) => {
+                state.status = 'succeeded';
+                state.laoding = false
             })
     },
 });
