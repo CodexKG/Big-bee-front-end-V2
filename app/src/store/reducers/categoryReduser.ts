@@ -16,3 +16,14 @@ export const fetchCategories = createAsyncThunk<Categories[], { cancelToken?: Ca
         }
     }
 );
+export const fetchCategoriesById = createAsyncThunk<Categories, { id: number, cancelToken?: CancelToken, }, { rejectValue?: string }>(
+    'category/fetchCategoriesById',
+    async ({ id, cancelToken }, { rejectWithValue }) => {
+        try {
+            const response = await api.getCategoriesById(id, cancelToken);
+            return response.data
+        } catch (error) {
+            return rejectWithValue(typeof error === 'string' ? error : 'Failed to fetch categories');
+        }
+    }
+);
