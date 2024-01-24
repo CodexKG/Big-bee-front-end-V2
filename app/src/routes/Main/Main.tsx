@@ -1,14 +1,18 @@
 
 
+import { HeaderComponent, SubWithNews } from "Components";
+import FooterComponent from "Components/FooterComponent/FooterComponent";
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 export default function Main() {
   return (
     <Layout style={{ overflow: "hidden" }}>
       <Layout>
-        <header>fs</header>
+        
+        <HeaderComponent />
         <Outlet />
-        <footer>fds</footer>
+        <SubWithNews />
+        <FooterComponent />
       </Layout>
     </Layout>
   );
