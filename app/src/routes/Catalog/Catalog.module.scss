@@ -1,0 +1,14 @@
+.catalog{
+    display: flex;
+    justify-content: center;
+    max-width: 1722px;
+    margin: 0 auto;
+    padding:  0 24px  ;
+    aside{
+        width: 20%;
+        border: 1px solid black;
+    }
+    .catalog_block{
+        width: 80%;
+    }
+}

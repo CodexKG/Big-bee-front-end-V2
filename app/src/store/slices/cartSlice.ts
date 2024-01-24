@@ -5,8 +5,9 @@ import { CartData, localCartItem } from 'types/types';
 interface CartState {
     data: CartData;
     localData: localCartItem[]
-    loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+    status: 'idle' | 'pending' | 'succeeded' | 'failed';
     error: string | null;
+    laoding: boolean
 }
 
 const initialState: CartState = {
@@ -16,8 +17,9 @@ const initialState: CartState = {
         cart_items: [],
     },
     localData: loadCartFromLocalStorage(),
-    loading: 'idle',
+    status: 'idle',
     error: null,
+    laoding: false
 };
 
 const cartSlice = createSlice({
@@ -39,15 +41,18 @@ const cartSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchCartItems.pending, (state) => {
-                state.loading = 'pending';
+                state.status = 'pending';
+                state.laoding = true
             })
             .addCase(fetchCartItems.fulfilled, (state, action) => {
-                state.loading = 'succeeded';
+                state.status = 'succeeded';
                 state.data = action.payload;
+                state.laoding = false
             })
             .addCase(fetchCartItems.rejected, (state, action) => {
-                state.loading = 'failed';
+                state.status = 'failed';
                 state.error = action.error ? action.error.message || 'Failed to fetch cart items' : 'Failed to fetch cart items';
+                state.laoding = false
             });
     },
 });
