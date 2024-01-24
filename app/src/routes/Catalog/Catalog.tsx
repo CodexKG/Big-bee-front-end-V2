@@ -1,12 +1,32 @@
 import classes from "./Catalog.module.scss";
-import { FC } from "react";
+import React, { FC, useEffect } from "react";
 import CatalogProductCard from "Components/CatalogProductCard/CatalogProductCard";
+import { Avatar, List, Space } from "antd";
+import { StarOutlined } from "@ant-design/icons";
+import { useAppDispatch, useAppSelector } from "store/hook";
+import axios from "axios";
+import { fetchFilterProducts } from "store/reducers/producRedusers";
+import { useParams } from "react-router-dom";
 
 type StringKeyObject = {
   [key: string]: any;
 };
 
 const Catalog: FC = () => {
+  const { data, error, } = useAppSelector((state) => state.produckt)
+  const { id } = useParams()
+  const dispatch = useAppDispatch()
+
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+
+
+    dispatch(fetchFilterProducts({ cancelToken: source.token, limit: 10, category: id }))
+    return () => {
+      source.cancel('Запрос отменен, компонент размонтирован');
+    };
+  }, [dispatch]);
   const product_imgs = [
     "https://www.att.com/scmsassets/global/devices/phones/apple/apple-iphone-15-pro-max/gallery/white-titanium-1.jpg",
     "https://mtscdn.ru/upload/iblock/1e6/Pro-Blue-Titanium.png",
@@ -21,84 +41,45 @@ const Catalog: FC = () => {
     Фото: "двойная камера, основная 48 МП",
     Процессор: "Apple A16 Bionic",
   };
+  const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
+    <Space>
+      {React.createElement(icon)}
+      {text}
+    </Space>
+  );
+
   return (
     <div className={classes.catalog}>
-    <aside>
-    </aside>
+      <aside>
+      </aside>
       <div className={classes.catalog_block}>
-        <CatalogProductCard
-          product_imgs={product_imgs}
-          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
-          colors={product_colors}
-          characteristics={characteristics}
-          rating={4.9}
-          price={94990}
-          old_price={124990}
-          salesman="Продавец"
-          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
-          offer={109}
+        <List
+          itemLayout="vertical"
+          size="large"
+          pagination={{
+            onChange: (page) => {
+              console.log(page);
+            },
+            pageSize: 20,
+          }}
+          dataSource={data.results}
+
+          renderItem={(item) => (
+            <CatalogProductCard
+              product_imgs={product_imgs}
+              title={item.title}
+              colors={product_colors}
+              characteristics={characteristics}
+              rating={4.9}
+              price={item.price}
+              old_price={124990}
+              salesman="Продавец"
+              salesman_img={"https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"}
+              offer={109}
+            />
+          )}
         />
-         <CatalogProductCard
-          product_imgs={product_imgs}
-          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
-          colors={product_colors}
-          characteristics={characteristics}
-          rating={4.9}
-          price={94990}
-          old_price={124990}
-          salesman="Продавец"
-          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
-          offer={109}
-        />
-         <CatalogProductCard
-          product_imgs={product_imgs}
-          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
-          colors={product_colors}
-          characteristics={characteristics}
-          rating={4.9}
-          price={94990}
-          old_price={124990}
-          salesman="Продавец"
-          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
-          offer={109}
-        />
-         <CatalogProductCard
-          product_imgs={product_imgs}
-          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
-          colors={product_colors}
-          characteristics={characteristics}
-          rating={4.9}
-          price={94990}
-          old_price={124990}
-          salesman="Продавец"
-          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
-          offer={109}
-        />
-         <CatalogProductCard
-          product_imgs={product_imgs}
-          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
-          colors={product_colors}
-          characteristics={characteristics}
-          rating={4.9}
-          price={94990}
-          old_price={124990}
-          salesman="Продавец"
-          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
-          offer={109}
-        />
-         <CatalogProductCard
-          product_imgs={product_imgs}
-          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
-          colors={product_colors}
-          characteristics={characteristics}
-          rating={4.9}
-          price={94990}
-          old_price={124990}
-          salesman="Продавец"
-          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
-          offer={109}
-        />
-        
+
       </div>
     </div>
   );
