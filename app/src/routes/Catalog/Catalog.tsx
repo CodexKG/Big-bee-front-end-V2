@@ -38,6 +38,67 @@ const Catalog: FC = () => {
           salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
           offer={109}
         />
+         <CatalogProductCard
+          product_imgs={product_imgs}
+          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
+          colors={product_colors}
+          characteristics={characteristics}
+          rating={4.9}
+          price={94990}
+          old_price={124990}
+          salesman="Продавец"
+          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
+          offer={109}
+        />
+         <CatalogProductCard
+          product_imgs={product_imgs}
+          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
+          colors={product_colors}
+          characteristics={characteristics}
+          rating={4.9}
+          price={94990}
+          old_price={124990}
+          salesman="Продавец"
+          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
+          offer={109}
+        />
+         <CatalogProductCard
+          product_imgs={product_imgs}
+          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
+          colors={product_colors}
+          characteristics={characteristics}
+          rating={4.9}
+          price={94990}
+          old_price={124990}
+          salesman="Продавец"
+          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
+          offer={109}
+        />
+         <CatalogProductCard
+          product_imgs={product_imgs}
+          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
+          colors={product_colors}
+          characteristics={characteristics}
+          rating={4.9}
+          price={94990}
+          old_price={124990}
+          salesman="Продавец"
+          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
+          offer={109}
+        />
+         <CatalogProductCard
+          product_imgs={product_imgs}
+          title="Apple iPhone 15 + SIM + SIM 256Gb (new)"
+          colors={product_colors}
+          characteristics={characteristics}
+          rating={4.9}
+          price={94990}
+          old_price={124990}
+          salesman="Продавец"
+          salesman_img="https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"
+          offer={109}
+        />
+        
       </div>
     </div>
   );
