@@ -1,3 +1,4 @@
 import HeaderComponent from "./Header/Header"
-import AuthRegister from "./AuthRegister/AuthRegister"
-export { HeaderComponent, AuthRegister }
+import Login from "./Login/Login"
+import SignUp from "./SignUp/SignUp"
+export { HeaderComponent, Login, SignUp }
