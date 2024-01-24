@@ -4,9 +4,10 @@ import { Product, ProductData } from 'types/types';
 
 interface ProductsState {
     data: ProductData;
-    loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+    status: 'idle' | 'pending' | 'succeeded' | 'failed';
     selectedProduct: Product | null;
     error: string | null;
+    laoding: boolean
 }
 
 const initialState: ProductsState = {
@@ -16,9 +17,10 @@ const initialState: ProductsState = {
         previous: null,
         results: []
     },
-    loading: 'idle',
+    status: 'idle',
     selectedProduct: null,
     error: null,
+    laoding: false
 };
 
 
@@ -41,42 +43,52 @@ const productsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchFilterProducts.pending, (state) => {
-                state.loading = 'pending';
+                state.status = 'pending';
+                state.laoding = true
             })
             .addCase(fetchFilterProducts.fulfilled, (state, action: PayloadAction<ProductData>) => {
-                state.loading = 'succeeded';
+                state.status = 'succeeded';
                 state.data = {
                     ...action.payload,
                     results: [...state.data.results, ...action.payload.results]
+
                 };
+                state.laoding = false
             })
             .addCase(fetchFilterProducts.rejected, (state, action) => {
-                state.loading = 'failed';
+                state.status = 'failed';
                 state.error = action.error ? action.error.message || 'Failed to fetch products' : 'Failed to fetch products';
+                state.laoding = false
             })
 
             .addCase(fetchProducts.pending, (state) => {
-                state.loading = 'pending';
+                state.status = 'pending';
+                state.laoding = true
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
-                state.loading = 'succeeded';
+                state.status = 'succeeded';
                 state.data = action.payload;
+                state.laoding = false
             })
             .addCase(fetchProducts.rejected, (state, action) => {
-                state.loading = 'failed';
+                state.status = 'failed';
                 state.error = action.error ? action.error.message || 'Failed to fetch products' : 'Failed to fetch products';
+                state.laoding = false
             })
 
             .addCase(fetchProductById.pending, (state) => {
-                state.loading = 'pending';
+                state.status = 'pending';
+                state.laoding = true
             })
             .addCase(fetchProductById.fulfilled, (state, action) => {
-                state.loading = 'succeeded';
+                state.status = 'succeeded';
                 state.selectedProduct = action.payload;
+                state.laoding = false
             })
             .addCase(fetchProductById.rejected, (state, action) => {
-                state.loading = 'failed';
+                state.status = 'failed';
                 state.error = action.error ? action.error.message || 'Failed to fetch product' : 'Failed to fetch product';
+                state.laoding = false
             });
     },
 });
