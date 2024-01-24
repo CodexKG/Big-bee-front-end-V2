@@ -4,22 +4,19 @@ import { Categories } from 'types/types';
 interface CategoryState {
     data: any[];
     children: { [key: string]: Categories };
-    loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+    status: 'idle' | 'pending' | 'succeeded' | 'failed';
     error: string | null;
+    laoding: boolean
 }
 
 const initialState: CategoryState = {
     data: [],
     children: {
-        '0': {
-            id: 0,
-            title: "",
-            slug: '',
-            subcategories: []
-        }
+
     },
-    loading: 'idle',
+    status: 'idle',
     error: null,
+    laoding: false
 };
 
 
@@ -38,20 +35,34 @@ const categorySlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchCategories.pending, (state) => {
-                state.loading = 'pending';
+                state.status = 'pending';
+                state.laoding = true
             })
             .addCase(fetchCategories.fulfilled, (state, action) => {
-                state.loading = 'succeeded';
+                state.status = 'succeeded';
                 state.data = action.payload;
+                state.laoding = false
             })
             .addCase(fetchCategories.rejected, (state, action) => {
-                state.loading = 'failed';
+                state.status = 'failed';
                 state.error = action.error ? action.error.message || 'Failed to fetch products' : 'Failed to fetch products';
+                state.laoding = false
+            })
+            .addCase(fetchCategoriesById.pending, (state) => {
+                state.status = 'pending';
+                state.laoding = true
             })
             .addCase(fetchCategoriesById.fulfilled, (state, action) => {
                 const { id } = action.meta.arg;
                 const data = action.payload;
                 state.children[id] = data;
+                state.status = 'succeeded'
+                state.laoding = false
+            })
+            .addCase(fetchCategoriesById.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error ? action.error.message || 'Failed to fetch products' : 'Failed to fetch products';
+                state.laoding = false
             })
 
     },

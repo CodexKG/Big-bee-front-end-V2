@@ -1,6 +1,6 @@
 // Header.tsx
 import React, { useEffect, useState } from 'react';
-import { Button, Drawer, DrawerProps, Layout, Menu, Select, Space } from 'antd';
+import { Button, Drawer, DrawerProps, Layout, Menu, Select, Skeleton, Space } from 'antd';
 import classes from './Header.module.scss'
 import logo from "../../assets/icon/logo.svg";
 import { AppleOutlined, CloseOutlined, HeartOutlined, SearchOutlined, ShoppingCartOutlined, UnorderedListOutlined } from '@ant-design/icons';
@@ -9,13 +9,14 @@ import axios from 'axios';
 import { fetchCategories, fetchCategoriesById } from 'store/reducers/categoryReduser';
 import { Categories } from 'types/types';
 import { setHoveredItem } from 'store/slices/categorySlice';
+import { Link } from 'react-router-dom';
+import HeaderSceleton from 'Components/Skeleton/HeaderSkeleton';
 
 const HeaderComponent: React.FC = () => {
-    const { data, children } = useAppSelector((state) => state.category)
+    const { data, children, status } = useAppSelector((state) => state.category)
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false);
     const [category, setCategory] = useState<number>(1)
-
     useEffect(() => {
         const source = axios.CancelToken.source();
         dispatch(fetchCategories({ cancelToken: source.token, }))
@@ -23,19 +24,16 @@ const HeaderComponent: React.FC = () => {
             source.cancel('Запрос отменен, компонент размонтирован');
         };
     }, []);
-
     const showDrawer = () => {
         setOpen(true);
     };
     const onClose = () => {
         setOpen(false);
     };
-
     useEffect(() => {
         document.body.style.overflow = open ? 'hidden' : 'auto';
         return () => { document.body.style.overflow = 'auto' };
     }, [open]);
-
     const handleMouseEnter = (key: string) => {
         const source = axios.CancelToken.source();
         if (!children[category]) {
@@ -45,6 +43,28 @@ const HeaderComponent: React.FC = () => {
         }
         setCategory(+key);
     };
+
+    const subCateoryList = {
+        'succeeded': children[category]?.subcategories?.map((item: Categories) =>
+            <div className={classes.openCategories_main_items_item} key={item.id}>
+                <h1>
+                    {item.title}
+                </h1>
+                <div>
+                    {item.subcategories.map((el: Categories) =>
+                        <Link to={`/catalog/${el.id}`}>
+                            <p key={el.id}>{el.title}</p>
+                        </Link>
+                    )}
+                </div>
+            </div>
+        ),
+        'pending': <HeaderSceleton />,
+        'idle': <HeaderSceleton />,
+        'failed': 'samthing went wrong'
+
+    }
+
     return (
 
         <header className={classes.header}>
@@ -65,7 +85,7 @@ const HeaderComponent: React.FC = () => {
                     </div>
                     <HeartOutlined style={{ fontSize: '24px' }} />
                     <ShoppingCartOutlined style={{ fontSize: '24px' }} />
-                    <Button style={{ color: 'black' }} type='primary'>Войти</Button>
+                    <Button style={{ color: 'black' }} type='primary'><Link to={'/register'}>Войти</Link></Button>
 
                 </div>
             </nav>
@@ -119,38 +139,34 @@ const HeaderComponent: React.FC = () => {
                         getContainer={false}
 
                     >
-
                         <main className={classes.openCategories}>
                             <aside className={classes.openCategories_sideBar}>
                                 <ul>
                                     {data?.map((item: Categories) =>
-                                        <li onMouseOver={() => handleMouseEnter(`${item.id}`)} key={item.id}><Button icon={<AppleOutlined />} className={classes.categoryItem} type="text">{item.title}</Button></li>
+                                        <li onMouseOver={() => handleMouseEnter(`${item.id}`)} key={item.id}>
+
+                                            <Button icon={<img width={24} height={24} src={`${item.icon}`} />} className={classes.categoryItem} type="text">
+                                                {item.title}
+                                            </Button>
+
+                                        </li>
                                     )}
                                 </ul>
                             </aside>
-                            <main className={classes.openCategories_main}>
-                                {children[category]?.subcategories?.map((item: Categories) =>
-                                    <div className={classes.openCategories_main_item} key={item.id}>
-                                        <h1>
-                                            {item.title}
-                                        </h1>
-                                        <div>
-                                            {
-                                                item.subcategories.map((el: Categories) =>
-                                                    <p key={el.id}>
-                                                        {el.title}
-                                                    </p>
-                                                )
-                                            }
-                                        </div>
-                                    </div>
-                                )}
-                            </main>
+                            <div className={classes.openCategories_main}>
+                                <h1>
+                                    {status === 'pending' ? <Skeleton.Input active size={'large'} /> : children[category]?.title}
+                                </h1>
+                                <main className={classes.openCategories_main_items}>
+                                    {subCateoryList[status]}
+                                </main>
+                            </div>
+
                         </main>
                     </Drawer>
                 </div>
             </div>
-        </header>
+        </header >
 
     );
 };

@@ -79,6 +79,8 @@ export interface localCartItem {
     quantity: number;
 }
 export interface Categories {
+    banner: string
+    icon: string
     id: number,
     title: string,
     slug: string,

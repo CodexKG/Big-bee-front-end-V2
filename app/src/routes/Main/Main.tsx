@@ -8,6 +8,7 @@ export default function Main() {
   return (
     <Layout style={{ overflow: "hidden" }}>
       <Layout>
+        
         <HeaderComponent />
         <Outlet />
         <SubWithNews />

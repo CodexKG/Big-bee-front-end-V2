@@ -7,16 +7,18 @@ import { CaretLeftFilled, CaretRightFilled, } from "@ant-design/icons";
 import "./Promotion.scss";
 import "swiper/css";
 const { Text } = Typography;
+
 interface IPromotion{
   title?:string
 }
+
 const ArrowLeft: React.FC<any> = ({ currentSlide, slideCount, ...props }) => (
   <button
     {...props}
     className={`slick-prev slick-arrow ${classes.prevBtn}`}
     style={{ display: currentSlide === 0 ? "none" : "block" }}
   >
-    <CaretLeftFilled style={{ color: "black" ,fontSize:15 }} />
+    <CaretLeftFilled style={{ color: "black", fontSize: 15 }} />
   </button>
 );
 const ArrowRight: React.FC<any> = ({ currentSlide, slideCount, ...props }) => {
@@ -27,12 +29,14 @@ const ArrowRight: React.FC<any> = ({ currentSlide, slideCount, ...props }) => {
       style={{ display: currentSlide === 2 ? "none" : "block" }}
       type="button"
     >
-      <CaretRightFilled style={{ color: "black" ,fontSize:15 }} />
+      <CaretRightFilled style={{ color: "black", fontSize: 15 }} />
     </button>
   );
 };
 
+
 const Promotion: React.FC<IPromotion> = ({title}) => {
+
   return (
     <section className={classes.promotion + " promotion"}>
       <div className={classes.promotion_header}>

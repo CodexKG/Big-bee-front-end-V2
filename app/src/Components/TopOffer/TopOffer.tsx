@@ -1,8 +1,7 @@
 import React from 'react';
 import { Product } from 'types/types';
 import classes from './TopOffer.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { CaretRightOutlined } from "@ant-design/icons";
 
 interface TopOfferProps {
   products: Product[];
@@ -40,7 +39,7 @@ const TopOffer: React.FC<TopOfferProps> = ({ products }) => {
           <div className={classes.topOffer_Block_Image}>
             <img src={product.image} alt={product.title} />
           </div>
-          <a className={classes.topOffer_Block_Link}>Перейти в каталог <FontAwesomeIcon icon={faCaretRight} />
+          <a className={classes.topOffer_Block_Link}>Перейти в каталог <CaretRightOutlined />
           </a>
         </div>
       ))}

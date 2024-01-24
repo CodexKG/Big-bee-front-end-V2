@@ -1,6 +1,7 @@
 import classes from "./Catalog.module.scss";
 import { FC } from "react";
 import CatalogProductCard from "Components/CatalogProductCard/CatalogProductCard";
+
 type StringKeyObject = {
   [key: string]: any;
 };
@@ -23,7 +24,6 @@ const Catalog: FC = () => {
   return (
     <div className={classes.catalog}>
     <aside>
-
     </aside>
       <div className={classes.catalog_block}>
         <CatalogProductCard
