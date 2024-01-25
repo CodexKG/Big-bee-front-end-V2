@@ -5,10 +5,10 @@ import { ProductData } from 'types/types';
 
 //product
 const getProducts = (shop?: string, search?: string, limit: number = 10, offset: number = 0, sourceToken?: CancelToken) =>
-    instance.get<ProductData>(`/products/?limit=${limit}&offset=${offset}&search=${search}&shop=${shop}`, { cancelToken: sourceToken });
+    instance.get<ProductData>(`/products/products/?limit=${limit}&offset=${offset}&search=${search}&shop=${shop}`, { cancelToken: sourceToken });
 
 const getFilteredProducts = (shop?: string, category?: string, search?: string, limit: number = 10, offset: number = 0, sourceToken?: CancelToken) =>
-    instance.get<ProductData>(`/products/?${category}`, {
+    instance.get<ProductData>(`/products/products/?${category}`, {
         params: {
             search: search,
             limit: limit,
@@ -19,7 +19,7 @@ const getFilteredProducts = (shop?: string, category?: string, search?: string, 
     },);
 
 const getProductsById = (id: number, sourceToken?: CancelToken) =>
-    instance.get(`/products/${id}`, { cancelToken: sourceToken });
+    instance.get(`/products/products/${id}`, { cancelToken: sourceToken });
 
 
 const endpoints = {

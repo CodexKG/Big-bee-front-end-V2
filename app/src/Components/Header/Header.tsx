@@ -46,7 +46,7 @@ const HeaderComponent: React.FC = () => {
 
     const subCateoryList = {
         'succeeded': children[category]?.subcategories?.map((item: Categories) =>
-            <div className={classes.openCategories_main_items_item} key={item.id}>
+            <div  className={classes.openCategories_main_items_item} key={item.id}>
                 <h1>
                     {item.title}
                 </h1>
