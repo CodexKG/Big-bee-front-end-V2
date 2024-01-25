@@ -1,10 +1,13 @@
 import { Footer } from "antd/es/layout/layout"
 import { FC } from "react"
-import classes from './FooterComponetn.module.scss'
+import classes from './FooterComponent.module.scss'
 import { FooterEl, categoriesMack } from "data/categories/navCategories"
 import logoFooter from '../../assets/icon/logoFooter.svg'
+import instagramLogo from "../../assets/icon/instagram.svg";
+import telegramLogo from "../../assets/icon/telegram.svg";
+import whatsappLogo from "../../assets/icon/whatsapp.svg";
 import { Button, Form, Input } from "antd"
-import { InstagramOutlined, PhoneOutlined, WhatsAppOutlined } from "@ant-design/icons"
+
 const FooterComponent: FC = () => {
 
 
@@ -19,7 +22,7 @@ const FooterComponent: FC = () => {
     return (
         <Footer className={classes.footer}>
             <div className={classes.wrapper}>
-                <div className={classes.footer_right}>
+                <div className={classes.footer_left}>
                     <div>
                         <img src={logoFooter} height={63} alt="" />
                     </div>
@@ -66,15 +69,12 @@ const FooterComponent: FC = () => {
                     )}
                 </div>
             </div>
-            <br />
-            <br />
             <footer className={classes.footer_bottom}>
                 <div className={classes.footer_bottom_SM}>
-                    <InstagramOutlined style={{ fontSize: '50px' }} />
-                    <WhatsAppOutlined style={{ fontSize: '50px' }} />
-                    <PhoneOutlined style={{ fontSize: '50px' }} />
+                    <img src={instagramLogo} height={40} alt="instagramLogo" />
+                    <img src={telegramLogo} height={40} alt="telegramLogo" />
+                    <img src={whatsappLogo} height={40} alt="whatsappLogo" />
                 </div>
-                <br /><br />
                 <div className={classes.flex_justify}>
                     <p>© 2024 ООО «BIGBEE». Все права защищены.</p>
                     <div className={classes.flex}>

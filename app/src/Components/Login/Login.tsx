@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, message } from 'antd';
-import classes from './AuthRegister.module.scss';
+import classes from './Login.module.scss';
 import { useAppDispatch } from 'store/hook';
 import { loginAsync } from 'store/reducers/authRedusers';
 import { setCookie } from 'helpers/cookies';
+import {Link} from 'react-router-dom';
 
-const AuthRegister: React.FC = () => {
+const Login: React.FC = () => {
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
@@ -85,7 +86,7 @@ const AuthRegister: React.FC = () => {
                         <Button loading={loading} type="primary" htmlType="submit" className="login-form-button" block>
                             Log in
                         </Button>
-                        Or <a href="#/">register now!</a>
+                        Or <a href="#/"> <Link to={'/signUp'}>register now!</Link></a>
                     </Form.Item>
                 </Form>
             </div>
@@ -94,4 +95,4 @@ const AuthRegister: React.FC = () => {
     );
 };
 
-export default AuthRegister;
+export default Login;
