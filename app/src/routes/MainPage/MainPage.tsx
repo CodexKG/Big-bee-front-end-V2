@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import { Advantages, TopOffer } from "Components";
+=======
 import { CategoryComponent, TopOffer } from "Components";
+>>>>>>> 3c97e0b50376800c60673ff5e3f59db125c690cd
 import classes from "./MainPage.module.scss";
 import { FC } from "react";
 import { MainCaruselComponent, CompanyListComponent } from "Components";

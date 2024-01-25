@@ -11,18 +11,18 @@ const exampleProducts = [
         currency: 'USD',
         created: '2022-01-21',
     },
-    {
-        id: 3,
-        shop: 103,
-        category: ['Home', 'Appliances'],
-        title: 'Coffee Maker Pro',
-        description: 'An advanced coffee maker for coffee enthusiasts.',
-        image: 'https://freepngimg.com/download/technology/50670-6-desktop-computer-download-free-transparent-image-hq.png',
-        product_images: ["https://hpstore.uz/uploads/Kartinki/MONITOR/z40%20monitor%201.webp", "https://hpstore.uz/uploads/Kartinki/MONITOR/z40%20monitor%201.webp"],
-        price: 129.99,
-        currency: 'USD',
-        created: '2022-01-22',
-    },
+    // {
+    //     id: 3,
+    //     shop: 103,
+    //     category: ['Home', 'Appliances'],
+    //     title: 'Coffee Maker Pro',
+    //     description: 'An advanced coffee maker for coffee enthusiasts.',
+    //     image: 'https://freepngimg.com/download/technology/50670-6-desktop-computer-download-free-transparent-image-hq.png',
+    //     product_images: ["https://hpstore.uz/uploads/Kartinki/MONITOR/z40%20monitor%201.webp", "https://hpstore.uz/uploads/Kartinki/MONITOR/z40%20monitor%201.webp"],
+    //     price: 129.99,
+    //     currency: 'USD',
+    //     created: '2022-01-22',
+    // },
     {
         id: 1,
         shop: 101,
@@ -59,33 +59,6 @@ const exampleProducts = [
     //     currency: 'USD',
     //     created: '2022-01-23',
     // },
-];
-export const productfff = [
-    {
-        id: 2,
-        shop: 102,
-        category: ['Fashion', 'Shoes'],
-        title: 'Casual Sneakers',
-        description: 'Comfortable and stylish sneakers for everyday wear.',
-        image: 'https://m.media-amazon.com/images/I/41E--PcEnEL._AC_UF894,1000_QL80_FMwebp_.jpg',
-        product_images: ['https://m.media-amazon.com/images/I/41E--PcEnEL._AC_UF894,1000_QL80_FMwebp_.jpg', 'https://m.media-amazon.com/images/I/41E--PcEnEL._AC_UF894,1000_QL80_FMwebp_.jpg'],
-        price: 59.99,
-        currency: 'USD',
-        created: '2022-01-21',
-    },
-    {
-        id: 3,
-        shop: 103,
-        category: ['Home', 'Appliances'],
-        title: 'Coffee Maker Pro',
-        description: 'An advanced coffee maker for coffee enthusiasts.',
-        image: 'https://hpstore.uz/uploads/Kartinki/MONITOR/z40%20monitor%201.webp',
-        product_images: ["https://hpstore.uz/uploads/Kartinki/MONITOR/z40%20monitor%201.webp", "https://hpstore.uz/uploads/Kartinki/MONITOR/z40%20monitor%201.webp"],
-        price: 129.99,
-        currency: 'USD',
-        created: '2022-01-22',
-    },
-    
 ];
 
 export default exampleProducts;

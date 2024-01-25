@@ -1,4 +1,5 @@
 import TopOffer from './TopOffer/TopOffer';
+import Advantages from './Advantages/Advantages';
 import HeaderComponent from "./Header/Header"
 import Login from "./Login/Login"
 import SignUp from "./SignUp/SignUp"
@@ -10,5 +11,5 @@ import CompanyListComponent from "./CompanyListComponent/CompanyListComponent";
 import MainCaruselComponent from "./MainCaruselComponent/MainCaruselComponent";
 import CategoryComponent from './CategoryComponent/CategoryComponent'
 
-export { HeaderComponent,Login, SignUp, PromotionCard,OrderPlacing, Promotion, SubWithNews, TopOffer, CompanyListComponent, MainCaruselComponent, CategoryComponent }
+export { HeaderComponent,Login, SignUp, PromotionCard,OrderPlacing, Promotion, SubWithNews, TopOffer, CompanyListComponent, MainCaruselComponent, CategoryComponent,Advantages }
 
