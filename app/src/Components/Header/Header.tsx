@@ -9,11 +9,12 @@ import axios from 'axios';
 import { fetchCategories, fetchCategoriesById } from 'store/reducers/categoryReduser';
 import { Categories } from 'types/types';
 import { setHoveredItem } from 'store/slices/categorySlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import HeaderSceleton from 'Components/Skeleton/HeaderSkeleton';
 
 const HeaderComponent: React.FC = () => {
     const { data, children, status } = useAppSelector((state) => state.category)
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false);
     const [category, setCategory] = useState<number>(1)
@@ -47,17 +48,23 @@ const HeaderComponent: React.FC = () => {
     const subCateoryList = {
         'succeeded': children[category]?.subcategories?.map((item: Categories) =>
             <div className={classes.openCategories_main_items_item} key={item.id}>
-                <h1>
+                <h1 onClick={() => {
+                    navigate(`/catalog/${item.id}`)
+                    onClose()
+                }}>
                     {item.title}
                 </h1>
                 <div>
                     {item.subcategories.map((el: Categories) =>
-                        <Link to={`/catalog/${el.id}`}>
-                            <p key={el.id}>{el.title}</p>
-                        </Link>
+
+                        <p onClick={() => {
+                            navigate(`/catalog/${el.id}`)
+                            onClose()
+                        }} key={el.id}>{el.title}</p>
+
                     )}
                 </div>
-            </div>
+            </div >
         ),
         'pending': <HeaderSceleton />,
         'idle': <HeaderSceleton />,

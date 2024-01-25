@@ -9,13 +9,15 @@ import categories from './categories'
 
 const instance = axios.create({
   // @ts-ignore
-  baseURL: window.REACT_APP_SERVER_API !== 'REPLACE_REACT_APP_SERVER_API' ? window.REACT_APP_SERVER_API : process.env.REACT_APP_SERVER_API || 'https://bee.webtm.ru/api/v1/',
+  baseURL: window.REACT_APP_SERVER_API !== 'REPLACE_REACT_APP_SERVER_API' ? window.REACT_APP_SERVER_API : process.env.REACT_APP_SERVER_API || 'http://localhost:8000/api/v1/',
   // headers: {
   //   Authorization: `Bearer ${getCookie('access_token')}`
   // }
 
 
 })
+//@ts-ignore
+console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
 
 
 // instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
