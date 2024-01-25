@@ -7,8 +7,9 @@ import { CaretLeftFilled, CaretRightFilled, } from "@ant-design/icons";
 import "./Promotion.scss";
 import "swiper/css";
 const { Text } = Typography;
-type Props = {
-  title: string
+
+interface IPromotion{
+  title?:string
 }
 
 const ArrowLeft: React.FC<any> = ({ currentSlide, slideCount, ...props }) => (
@@ -33,12 +34,14 @@ const ArrowRight: React.FC<any> = ({ currentSlide, slideCount, ...props }) => {
   );
 };
 
-const Promotion: React.FC<Props> = ({ title }) => {
+
+const Promotion: React.FC<IPromotion> = ({title}) => {
+
   return (
     <section className={classes.promotion + " promotion"}>
       <div className={classes.promotion_header}>
         <Title level={1} className={classes.promotion_title}>
-          {title}
+          {title?title:'Акции и скидки'}
         </Title>
         <Text>
           Все товары <CaretRightFilled color="#000" />

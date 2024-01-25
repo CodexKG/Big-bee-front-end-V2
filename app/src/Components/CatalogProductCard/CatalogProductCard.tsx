@@ -1,4 +1,5 @@
-import { FC,useRef } from "react";
+
+import { FC, useRef } from "react";
 import classes from "./CatalogProductCard.module.scss";
 import { Button, Carousel, Col, Layout, Row } from "antd";
 import { Typography } from "antd";
@@ -8,6 +9,7 @@ import { DefaultButton } from "Components/UI";
 import { HeartOutlined } from "@ant-design/icons";
 import { numberWithSpaces } from "helpers";
 import { CarouselProps } from "antd";
+
 import { CarouselRef } from "antd/es/carousel";
 interface ICatalogProductCart {
   product_imgs: Array<string>;
@@ -58,30 +60,36 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
   return (
     <section className={classes.catalogProductCard}>
       <div className={classes.catalogProductCard_item}>
-      <div className={classes.img_block_hover}>
-            <div
-              className={classes.img_block_hover_it}
-              onMouseMove={() => imgHover(0)}
-            ></div>
-            <div
-              className={classes.img_block_hover_it}
-              onMouseMove={() => imgHover(1)}
-            ></div>
-            <div
-              className={classes.img_block_hover_it}
-              onMouseMove={() => imgHover(2)}
-            ></div>
-            <div
-              className={classes.img_block_hover_it}
-              onMouseMove={() => imgHover(3)}
-            ></div>
-          </div>
-        <Carousel dots={false} ref={carouselRef} style={{alignItems:'center'}}>
-          
+        <div className={classes.img_block_hover}>
+          <div
+            className={classes.img_block_hover_it}
+            onMouseMove={() => imgHover(0)}
+          ></div>
+          <div
+            className={classes.img_block_hover_it}
+            onMouseMove={() => imgHover(1)}
+          ></div>
+          <div
+            className={classes.img_block_hover_it}
+            onMouseMove={() => imgHover(2)}
+          ></div>
+          <div
+            className={classes.img_block_hover_it}
+            onMouseMove={() => imgHover(3)}
+          ></div>
+        </div>
+        <Carousel
+          dots={false}
+          ref={carouselRef}
+          style={{ alignItems: "center" }}
+        >
           {product_imgs.map((src) => {
             return (
               <div className={classes.carousel_item}>
                 <img src={src} alt={title} />
+
+                <div className={classes.carousel_item_discount}>-14%</div>
+
               </div>
             );
           })}
