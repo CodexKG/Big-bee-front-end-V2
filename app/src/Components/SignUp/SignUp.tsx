@@ -14,7 +14,6 @@ const SignUp: React.FC = () => {
 
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);
-        dispatch(registerAsync({ username: values.username, password: values.password, confirm_password: values.confirm_password }));
         try {
             setLoading(true);
             dispatch(registerAsync({ username: values.username, password: values.password, confirm_password: values.confirm_password }));
