@@ -8,23 +8,6 @@ interface TopOfferProps {
   products: Product[];
 }
 
-const getBlockSize = (quantityOfBlocks: number) => {
-  if (quantityOfBlocks === 4) {
-    return new Array(quantityOfBlocks).fill('50%');
-  }
-
-  if (quantityOfBlocks >= 1 && quantityOfBlocks <= 4) {
-    const baseSize = 92 / quantityOfBlocks;
-    const blockSizes = Array.from({ length: quantityOfBlocks }, (_, index) =>
-      index === quantityOfBlocks - 1 ? baseSize * 2 : baseSize
-    );
-
-    return blockSizes.map(size => `${size}%`);
-  }
-
-  return new Array(quantityOfBlocks).fill('100%');
-};
-
 const getDynamicClass = (quantityOfBlocks: number) => {
   if (quantityOfBlocks >= 1 && quantityOfBlocks <= 4) {
     return `x${quantityOfBlocks}`;
@@ -35,15 +18,18 @@ const getDynamicClass = (quantityOfBlocks: number) => {
 
 const TopOffer: React.FC<TopOfferProps> = ({ products }) => {
   const quantityOfBlocks = products.length;
-  const blockSizes = getBlockSize(quantityOfBlocks);
   const dynamicClass = getDynamicClass(quantityOfBlocks);
 
 
   return (
     <div className={`${classes.topOffer} ${classes[dynamicClass]}`}>
       {products.map((product, index) => (
-        <div key={index} style={{ flex: blockSizes[index] }} className={classes.topOffer_Block}>
+        <div key={index} className={`${classes.topOffer_Block} ${classes[dynamicClass]}`}>
           <div className={classes.topOffer_Block_Up}>
+            <div className={classes.topOffer_Block_Up_Discount}>
+              {/* {product.discount} */}
+              Скидка 40%
+            </div>
             <h3 className={classes.topOffer_Block_Up_Title}>{product.title}</h3>
             <p className={classes.topOffer_Block_Up_Price}>
               {`Price: $${product.price.toFixed(2)} ${product.currency}`}
