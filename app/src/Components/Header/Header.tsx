@@ -84,7 +84,7 @@ const HeaderComponent: React.FC = () => {
                         поиск
                     </div>
                     <HeartOutlined style={{ fontSize: '24px' }} />
-                    <ShoppingCartOutlined style={{ fontSize: '24px' }} />
+                    <Link to={'/cart'}><ShoppingCartOutlined style={{ fontSize: '24px' }} /></Link>
                     <Button style={{ color: 'black' }} type='primary'><Link to={'/login'}>Войти</Link></Button>
 
                 </div>

@@ -57,7 +57,7 @@ export interface CartItem {
         category: [],
         title: string,
         description: string,
-        image: string,
+        image: string, 
         product_images: [],
         price: number,
         currency: string,
