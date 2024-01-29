@@ -11,6 +11,7 @@ import { Categories } from 'types/types';
 import { setHoveredItem } from 'store/slices/categorySlice';
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderSceleton from 'Components/Skeleton/HeaderSkeleton';
+import { setFilters } from 'store/slices/WindowSlice';
 
 const HeaderComponent: React.FC = () => {
     const { data, children, status } = useAppSelector((state) => state.category)
@@ -49,6 +50,7 @@ const HeaderComponent: React.FC = () => {
         'succeeded': children[category]?.subcategories?.map((item: Categories) =>
             <div className={classes.openCategories_main_items_item} key={item.id}>
                 <h1 onClick={() => {
+                    dispatch(setFilters({ category: item.id }))
                     navigate(`/catalog/${item.id}`)
                     onClose()
                 }}>
@@ -58,6 +60,7 @@ const HeaderComponent: React.FC = () => {
                     {item.subcategories.map((el: Categories) =>
 
                         <p onClick={() => {
+                            dispatch(setFilters({ category: el.id }))
                             navigate(`/catalog/${el.id}`)
                             onClose()
                         }} key={el.id}>{el.title}</p>

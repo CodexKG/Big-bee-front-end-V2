@@ -5,6 +5,7 @@ import productsReducer from './slices/ProductSlice';
 import cartReducer from './slices/cartSlice'
 import shopReduser from './slices/shopSlice'
 import categoryReducer from './slices/categorySlice'
+import windowReducer from './slices/WindowSlice'
 
 const store = configureStore({
   reducer: {
@@ -12,7 +13,8 @@ const store = configureStore({
     produckt: productsReducer,
     cart: cartReducer,
     shop: shopReduser,
-    category: categoryReducer
+    category: categoryReducer,
+    window: windowReducer
   },
 });
 

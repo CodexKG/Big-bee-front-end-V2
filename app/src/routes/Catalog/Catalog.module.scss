@@ -1,14 +1,35 @@
-.catalog{
+.catalog {
     display: flex;
     justify-content: center;
     max-width: 1722px;
     margin: 0 auto;
-    padding:  0 24px  ;
-    aside{
+    padding: 0 24px;
+
+    aside {
         width: 20%;
-        border: 1px solid black;
+        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .flex {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+        }
+
+        .title {
+            color: #000;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 100%;
+            margin-bottom: 18px;
+        }
     }
-    .catalog_block{
+
+    .catalog_block {
         width: 80%;
     }
 }

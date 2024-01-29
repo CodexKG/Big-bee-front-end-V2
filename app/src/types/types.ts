@@ -85,4 +85,5 @@ export interface Categories {
     title: string,
     slug: string,
     subcategories: Categories[]
+    product_attributes: { [key: string]: string[] };
 }

@@ -1,32 +1,66 @@
 import classes from "./Catalog.module.scss";
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import CatalogProductCard from "Components/CatalogProductCard/CatalogProductCard";
-import { Avatar, List, Space } from "antd";
-import { StarOutlined } from "@ant-design/icons";
+import { Avatar, Button, Input, List, Form, InputNumber, Radio, Space, RadioChangeEvent } from "antd";
+import { LockOutlined, StarOutlined, UserOutlined } from "@ant-design/icons";
 import { useAppDispatch, useAppSelector } from "store/hook";
 import axios from "axios";
 import { fetchFilterProducts } from "store/reducers/producRedusers";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { FilterParams } from "store/models/WindowTypes";
+import { createQueryString, useQuery } from "helpers/params";
+import { setFilters, setOffset } from "store/slices/WindowSlice";
+import { fetchCategoriesById } from "store/reducers/categoryReduser";
 
 type StringKeyObject = {
   [key: string]: any;
 };
 
+
+
+
 const Catalog: FC = () => {
-  const { data, error, } = useAppSelector((state) => state.produckt)
+
+
+
+
+
+
+  let query = useQuery();
+  const { data, laoding } = useAppSelector((state) => state.produckt)
+  const atributes = useAppSelector((state) => state.category.children)
+  const { filters } = useAppSelector((state) => state.window)
   const { id } = useParams()
   const dispatch = useAppDispatch()
+
+  let navigate = useNavigate();
+  let location = useLocation();
+
+  function handleFilterChange(newFilters: string) {
+    navigate({
+      pathname: location.pathname,
+      search: newFilters
+    });
+  }
+
+  useEffect(() => {
+    handleFilterChange(createQueryString(filters))
+  }, [filters])
+  useEffect(() => {
+    dispatch(setFilters({ category: id }))
+  }, [id])
 
 
   useEffect(() => {
     const source = axios.CancelToken.source();
+    dispatch(fetchCategoriesById({ cancelToken: source.token, id: Number(id) }))
+    dispatch(fetchFilterProducts({ filters: `?${query.toString()}`, cancelToken: source.token }))
 
-
-    dispatch(fetchFilterProducts({ cancelToken: source.token, limit: 10, category: id }))
     return () => {
       source.cancel('Запрос отменен, компонент размонтирован');
     };
-  }, [dispatch]);
+  }, [dispatch, id, filters]);
+
   const product_imgs = [
     "https://www.att.com/scmsassets/global/devices/phones/apple/apple-iphone-15-pro-max/gallery/white-titanium-1.jpg",
     "https://mtscdn.ru/upload/iblock/1e6/Pro-Blue-Titanium.png",
@@ -41,19 +75,62 @@ const Catalog: FC = () => {
     Фото: "двойная камера, основная 48 МП",
     Процессор: "Apple A16 Bionic",
   };
-  const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
-    <Space>
-      {React.createElement(icon)}
-      {text}
-    </Space>
-  );
+  const options = [
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange', title: 'Orange' },
+  ];
+  const [value1, setValue1] = useState('Apple');
+  const onChange1 = ({ target: { value } }: RadioChangeEvent) => {
+    console.log('radio1 checked', value);
+    setValue1(value);
+  };
+
+  console.log(atributes[Number(id)]?.product_attributes, 'atributes');
+  const [value, setValue] = useState(1);
+
+  const onChange = (e: RadioChangeEvent) => {
+    console.log('radio checked', e.target.value);
+    setValue(e.target.value);
+  };
 
   return (
     <div className={classes.catalog}>
       <aside>
+        <div>
+          <h1 className={classes.title}>Цена, ₽</h1>
+          <div className={classes.flex}>
+            <InputNumber
+              style={{ width: '117px', padding: '6px 12px' }}
+              min={972}
+              max={296000}
+              placeholder="от 972"
+              onChange={(value) => dispatch(setFilters({ price_min: value }))}
+            />
+            <InputNumber
+              style={{ width: '137px', padding: '6px 12px' }}
+              min={972}
+              max={296000}
+              placeholder="до 296 000"
+              onChange={(value) => dispatch(setFilters({ price_max: value }))}
+            />
+          </div>
+        </div>
+        <div>
+          <h1 className={classes.title}>Срок доставки</h1>
+          <Radio.Group size="large" onChange={onChange} value={value}>
+            <Space direction="vertical">
+              <Radio value={1}>Option A</Radio>
+              <Radio value={2}>Option B</Radio>
+              <Radio value={3}>Option C</Radio>
+
+            </Space>
+          </Radio.Group>
+        </div>
       </aside>
       <div className={classes.catalog_block}>
         <List
+          loading={laoding}
           itemLayout="vertical"
           size="large"
           pagination={{
