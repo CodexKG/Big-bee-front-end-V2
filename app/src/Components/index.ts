@@ -7,5 +7,7 @@ import SubWithNews from "./SubscriptionsWithNews/SubWithNews"
 import CompanyListComponent from "./CompanyListComponent/CompanyListComponent";
 import MainCaruselComponent from "./MainCaruselComponent/MainCaruselComponent";
 import CategoryComponent from './CategoryComponent/CategoryComponent'
+import ExpandableCheckboxGroup from './ChekboxGroup/CheckBoxGroup'
+import ExpandableRadioGroup from './RadioGroup/RadioGroup'
 
-export { HeaderComponent,AuthRegister, PromotionCard, Promotion, SubWithNews, TopOffer, CompanyListComponent, MainCaruselComponent, CategoryComponent }
+export { ExpandableRadioGroup, ExpandableCheckboxGroup, HeaderComponent, AuthRegister, PromotionCard, Promotion, SubWithNews, TopOffer, CompanyListComponent, MainCaruselComponent, CategoryComponent, }

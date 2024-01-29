@@ -11,3 +11,8 @@ thead[class*="ant-table-thead"] th{
   }
 }
 
+.ant-breadcrumb-separator{
+  border: 1px solid #ffffff00 !important;
+  background: rgba(0, 0, 0, 0) !important;
+  margin: -10px !important;
+}
