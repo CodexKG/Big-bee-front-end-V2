@@ -6,6 +6,7 @@ import shops from './shops'
 import reviews from './reviews'
 import favorites from './favorites'
 import categories from './categories'
+import email from './getEmail'
 
 const instance = axios.create({
   // @ts-ignore
@@ -30,6 +31,7 @@ const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, } = reviews
 const { addProductToFavorite, delProductFromFavorite } = favorites
 const { getCategories, getCategoriesById } = categories
+const { getEmail } = email
 
 
 
@@ -56,6 +58,7 @@ const api = {
   deleteReview,
   getCategoriesById,
   updateCartItem
+  getEmail
 }
 
 export { instance, api };
