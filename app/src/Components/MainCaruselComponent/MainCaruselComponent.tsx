@@ -12,13 +12,13 @@ const MainCaruselComponent : React.FC<Props> = ()=>{
     return (
         <div className={classes.carusel}>
             <div className={classes.container}>
-                <Carousel dotPosition={'top'}>
+                <Carousel dotPosition={'top'} autoplay>
                     {
                         caruselItems.map(e=>{
                             return (
                                 <Flex  className={classes.carusel__item}  key={e.id}>
                                     <div style={{background: `url(${e.image})`}} className={classes.carusel__wrapper}>
-                                    <Flex gap={150} className={classes.carusel__inner}  vertical={true} justify="space-between">
+                                    <Flex className={classes.carusel__inner}  vertical={true} gap={'auto'} justify="space-between">
                                         <Flex gap={10} vertical>
                                             <h2>{e.title}</h2>
                                             <p>{e.descr}</p>

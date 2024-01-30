@@ -6,6 +6,20 @@
     font-style: normal;
     font-weight: 400;
     .cart{
+        &__empty{
+            padding: 100px;
+            >h2{
+                font-size: 34px;
+                font-weight: 600;
+            }
+            >p{
+                font-size: 22px;
+            }
+            >a{
+                color: #005BFF;
+                font-size: 18px;
+            }
+        }
         &__items{
             width: 100%;
         }

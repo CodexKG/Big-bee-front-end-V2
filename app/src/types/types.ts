@@ -44,40 +44,6 @@ export interface ShopData {
     results: Shop[]
 }
 
-
-
-
-
-export interface CartItem {
-    id: number,
-    cart: number,
-    product: {
-        id: number,
-        shop: number,
-        category: [],
-        title: string,
-        description: string,
-        image: string, 
-        product_images: [],
-        price: number,
-        currency: string,
-        created: string
-    },
-    quantity: number
-}
-export interface CartData {
-    id: number,
-    session_key: string,
-    cart_items: CartItem[]
-}
-export interface localCartItem {
-    image: string;
-    title: string;
-    name: string;
-    price: number;
-    id: number;
-    quantity: number;
-}
 export interface Categories {
     banner: string
     icon: string

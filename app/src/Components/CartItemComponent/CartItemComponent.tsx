@@ -1,37 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './CartItemComponent.module.scss'
 import { Flex, Checkbox } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { CloseOutlined, HeartOutlined, MinusOutlined, PlusOutlined, HeartFilled } from '@ant-design/icons'; 
-import { CartItem } from 'types/types';
+import { localCartItem } from 'store/models/CartTypes';
+import { updateCartToLocalStorage } from 'store/reducers/cartRedusers';
 
 
 type Props = {
-    cart_item?: CartItem
+    cart_item: localCartItem,
+    setCartItems: any,
 }
 
-const CartItemComponent : React.FC<Props> = ({cart_item}:Props)=>{
+const CartItemComponent : React.FC<Props> = ({cart_item, setCartItems}:Props)=>{
     const onChange: CheckboxProps['onChange'] = (e) => {
-        console.log(`checked = ${e.target.checked}`);
+        setCartItems(updateCartToLocalStorage(cart_item.id, 'check'))
     };
-    const [count, setCount] = useState(1)
+    const [count, setCount] = useState(cart_item.quantity)
     const [fav, setFav] = useState(false)
     const inp_change=(add:boolean)=>{
         add ? setCount(count+1) : count-1 > 0 ? setCount(count-1): setCount(1)
-
     }
+    useEffect(()=>{
+        setCartItems(updateCartToLocalStorage(cart_item.id, 'count', count))
+    }, [count])
     return (
         <Flex gap={50} justify='space-between' align='start' className={classes.cart__item}>
             <Flex gap={20} align='start' className={classes.left}>
-                <Checkbox onChange={onChange}></Checkbox>
-                <img src="https://www.freeiconspng.com/thumbs/iphone-x-pictures/apple-iphone-x-pictures-5.png" alt="" />
+                <Checkbox onChange={onChange} checked={cart_item.is_selected}></Checkbox>
+                <img src={cart_item.image} alt="" />
                 <Flex gap={15} vertical>
                     <span className={classes.title}>
-                        Apple iPhone 15 256Gb Dual: 
-                        nano SIM + eSIN, черный (new)
+                        {cart_item.title}
                     </span>
-                    <p className={classes.code}>Код товара: 1445094</p>
-                    <p className={classes.category}>Цвет товара:<span>Черный</span></p>
+                    <p className={classes.code}>Код товара: {cart_item.code}</p>
+                    <p className={classes.category}>Цвет товара:<span>{cart_item.category}</span></p>
                 </Flex>
             </Flex>
             <Flex align='start' gap={40} className={classes.right}>
@@ -41,8 +44,8 @@ const CartItemComponent : React.FC<Props> = ({cart_item}:Props)=>{
                     <PlusOutlined onClick={()=>{inp_change(true)}}/>
                 </Flex>
                 <Flex vertical gap={10}>
-                    <span className={classes.old_price}>124 990</span>
-                    <span className={classes.price}>94 990 с</span>
+                    <span className={classes.old_price}>{cart_item.old_price}</span>
+                    <span className={classes.price}>{cart_item.price}</span>
                 </Flex>
                 <Flex gap={20} className={classes.spans}>
                     {
@@ -51,7 +54,7 @@ const CartItemComponent : React.FC<Props> = ({cart_item}:Props)=>{
                         :
                         <HeartOutlined onClick={()=>setFav(!fav)}></HeartOutlined>
                     }
-                    <CloseOutlined ></CloseOutlined>
+                    <CloseOutlined onClick={()=>{setCartItems(updateCartToLocalStorage(cart_item.id, 'delete'))}}></CloseOutlined>
                 </Flex>
             </Flex>
 

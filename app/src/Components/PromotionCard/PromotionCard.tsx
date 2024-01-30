@@ -7,6 +7,8 @@ import type { CarouselProps } from "antd";
 import { numberWithSpaces } from "helpers";
 import { StarFilled, HeartOutlined } from "@ant-design/icons";
 import { CarouselRef } from "antd/es/carousel";
+import { saveCartToLocalStorage } from "store/reducers/cartRedusers"
+
 type DotPosition = CarouselProps["dotPosition"];
 
 const PromotionCard: React.FC<IPromotionCard> = (props) => {
@@ -19,6 +21,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
     old_price,
     rating,
     review,
+    id,
   } = props;
   const { Title, Text } = Typography;
   const [dotPosition, setDotPosition] = useState<DotPosition>("top");
@@ -26,6 +29,19 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const imgHover = (index: number) => {
     carouselRef.current?.goTo(index, true);
   };
+  const cart_info = {
+    id:id,
+    image:product_img,
+    title:title,
+    description:subtitle,
+    old_price:old_price,
+    price:price,
+    quantity:1,
+    is_selected:false,
+    code:12312,
+    category:'Чёрный',
+  }
+
 
   return (
     <div className={classes.promotionCard}>
@@ -116,7 +132,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         </Col>
       </Row>
       <Row style={{ justifyContent: "space-between" }}>
-        <Button className={classes.cart_button}>Добавить в корзину</Button>
+        <Button onClick={()=>{saveCartToLocalStorage(cart_info)}} className={classes.cart_button}>Добавить в корзину</Button>
         <Button className={classes.cart_favorites}>
           <HeartOutlined />
         </Button>

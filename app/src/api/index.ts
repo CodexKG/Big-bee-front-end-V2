@@ -25,7 +25,7 @@ const instance = axios.create({
 // });
 const { getFilteredProducts, getProducts, getProductsById } = produckts
 const { login, register } = auth
-const { createCart, addToCart, getOwnCartItems, deleteCartItem } = carts
+const { createCart, addToCart, getOwnCartItems, deleteCartItem,updateCartItem } = carts
 const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, } = reviews
 const { addProductToFavorite, delProductFromFavorite } = favorites
@@ -54,7 +54,8 @@ const api = {
   addReview,
   updateReview,
   deleteReview,
-  getCategoriesById
+  getCategoriesById,
+  updateCartItem
 }
 
 export { instance, api };
