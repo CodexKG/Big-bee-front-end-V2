@@ -32,11 +32,11 @@ const MainCaruselComponent : React.FC<Props> = ()=>{
                         data.map(e=>{
                             return (
                                 <Flex  className={classes.carusel__item}  key={e.id}>
-                                    <div style={{background: `url(${e.image.url})`}} className={classes.carusel__wrapper}>
+                                    <div style={{background: `url(${e.image})`}} className={classes.carusel__wrapper}>
                                     <Flex className={classes.carusel__inner}  vertical={true} gap={'auto'} justify="space-between">
                                         <Flex gap={10} vertical>
                                             <h2>{e.title}</h2>
-                                            <p>{e.descr}</p>
+                                            <p>{e.description}</p>
                                         </Flex>
                                         <Link to={e.url}>
                                             Узнать подробнее
