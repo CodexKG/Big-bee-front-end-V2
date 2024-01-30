@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchFilterProducts, fetchProductById, fetchProductOfDay, fetchProducts } from 'store/reducers/producRedusers';
-import { Product, ProductData } from 'types/types';
+import { Product, ProductData, ProductPopular } from 'types/types';
 
 interface ProductsState {
     data: ProductData;
     status: 'idle' | 'pending' | 'succeeded' | 'failed';
+    productsDay: ProductPopular | null;
     selectedProduct: Product | null;
     error: string | null;
     laoding: boolean
@@ -18,6 +19,7 @@ const initialState: ProductsState = {
         results: []
     },
     status: 'idle',
+    productsDay: null,
     selectedProduct: null,
     error: null,
     laoding: false
@@ -39,8 +41,8 @@ const productsSlice = createSlice({
         replaceProducts: (state, action) => {
             state.data = action.payload;
         },
-        setProductOfDay: (state, action: PayloadAction<Product>) => {
-            state.selectedProduct = action.payload;
+        setProductOfDay: (state, action: PayloadAction<ProductPopular>) => {
+            state.productsDay = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -99,7 +101,7 @@ const productsSlice = createSlice({
             })
             .addCase(fetchProductOfDay.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.selectedProduct = action.payload;
+                state.productsDay = action.payload;
                 state.laoding = false;
             })
             .addCase(fetchProductOfDay.rejected, (state, action) => {

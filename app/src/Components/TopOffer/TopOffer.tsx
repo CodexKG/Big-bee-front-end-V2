@@ -5,40 +5,42 @@ import { CaretRightOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'store/hook';
 import axios, { CancelToken } from 'axios';
 import { fetchProductOfDay } from 'store/reducers/producRedusers';
-
 const getDynamicClass = (quantityOfBlocks: number) => {
   if (quantityOfBlocks >= 1 && quantityOfBlocks <= 4) {
     return `x${quantityOfBlocks}`;
   }
-
   return 'default';
 };
 
 const TopOffer: React.FC = () => {
   const dispatch = useAppDispatch();
-  const productOfDay = useAppSelector((state) => state.produckt.selectedProduct);
+  const productOfDay = useAppSelector((state) => state.produckt.productsDay);
   // const topOfferBlockCount = productOfDay.length || 0;
 
-  const dynamicClass = getDynamicClass(4);
-  const source = axios.CancelToken.source();
-  console.log(productOfDay);
+
+  const dynamicClass = getDynamicClass(3);
 
 
   useEffect(() => {
-      dispatch(fetchProductOfDay({ cancelToken: source.token }))
-  }, [dispatch, source]);
+    const source = axios.CancelToken.source();
+    dispatch(fetchProductOfDay({ cancelToken: source.token }))
+  }, []);
+
+  console.log(productOfDay?.top_products);
+
 
   return (
     <div className={`${classes.topOffer} ${classes[dynamicClass]}`}>
-      {productOfDay && (
-        <div className={`${classes.topOffer_Block} ${classes[dynamicClass]}`}>
+      {productOfDay?.top_products.slice(0, 3).map((product, index) => (
+        <div key={index} className={`${classes.topOffer_Block} ${classes[dynamicClass]}`}>
           <div className={classes.topOffer_Block_Up}>
             <div className={classes.topOffer_Block_Up_Discount}>
               {/* Скидка {productOfDay.discount}% */}
+              <p>Hello</p>
             </div>
-            <h3 className={classes.topOffer_Block_Up_Title}>{productOfDay.title}</h3>
+            <h3 className={classes.topOffer_Block_Up_Title}>{product.title}</h3>
             <p className={classes.topOffer_Block_Up_Price}>
-              {`Price: $${productOfDay.price.toFixed(2)} ${productOfDay.currency}`}
+              {`Price: $${product.price.toFixed(2)} ${product.currency}`}
             </p>
           </div>
           <div className={classes.topOffer_Block_Down}>
@@ -46,11 +48,11 @@ const TopOffer: React.FC = () => {
               Перейти в каталог <CaretRightOutlined />
             </a>
             <div className={classes.topOffer_Block_Down_Image}>
-              <img src={productOfDay.image} alt={productOfDay.title} />
+              <img src={product.image} alt={product.title} />
             </div>
           </div>
         </div>
-      )}
+      ))}
     </div>
   );
 };
