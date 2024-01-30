@@ -40,3 +40,16 @@ export const fetchProductById = createAsyncThunk<Product, { id: number; cancelTo
         }
     }
 );
+
+export const fetchProductOfDay = createAsyncThunk<Product, { cancelToken?: CancelToken }, { rejectValue?: string }>(
+    'products/fetchProductOfDay',
+    async (_, { rejectWithValue }) => {
+      try {
+        const response = await api.getProductsofDay();
+        return response.data as Product;
+      } catch (error) {
+        return rejectWithValue(typeof error === 'string' ? error : 'Failed to fetch product');
+      }
+    }
+  );
+  

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchFilterProducts, fetchProductById, fetchProducts } from 'store/reducers/producRedusers';
+import { fetchFilterProducts, fetchProductById, fetchProductOfDay, fetchProducts } from 'store/reducers/producRedusers';
 import { Product, ProductData } from 'types/types';
 
 interface ProductsState {
@@ -38,6 +38,9 @@ const productsSlice = createSlice({
         },
         replaceProducts: (state, action) => {
             state.data = action.payload;
+        },
+        setProductOfDay: (state, action: PayloadAction<Product>) => {
+            state.selectedProduct = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -89,11 +92,25 @@ const productsSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error ? action.error.message || 'Failed to fetch product' : 'Failed to fetch product';
                 state.laoding = false
+            })
+            .addCase(fetchProductOfDay.pending, (state) => {
+                state.status = 'pending';
+                state.laoding = true;
+            })
+            .addCase(fetchProductOfDay.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.selectedProduct = action.payload;
+                state.laoding = false;
+            })
+            .addCase(fetchProductOfDay.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error ? action.error.message || 'Failed to fetch product' : 'Failed to fetch product';
+                state.laoding = false;
             });
     },
 });
 
-export const { clearProducts, replaceProducts } = productsSlice.actions;
+export const { clearProducts, replaceProducts, setProductOfDay } = productsSlice.actions;
 export const selectProducts = (state: { products: ProductsState }) => state.products;
 
 export default productsSlice.reducer;

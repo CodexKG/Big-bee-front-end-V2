@@ -7,6 +7,8 @@ import { ProductData } from 'types/types';
 const getProducts = (shop?: string, search?: string, limit: number = 10, offset: number = 0, sourceToken?: CancelToken) =>
     instance.get<ProductData>(`/products/products/?limit=${limit}&offset=${offset}&search=${search}&shop=${shop}`, { cancelToken: sourceToken });
 
+
+
 const getFilteredProducts = (shop?: string, category?: string, search?: string, limit: number = 10, offset: number = 0, sourceToken?: CancelToken) =>
     instance.get<ProductData>(`/products/products/?${category}`, {
         params: {
@@ -21,10 +23,16 @@ const getFilteredProducts = (shop?: string, category?: string, search?: string, 
 const getProductsById = (id: number, sourceToken?: CancelToken) =>
     instance.get(`/products/products/${id}`, { cancelToken: sourceToken });
 
+const getProductsofDay = (sourceToken?: CancelToken) =>
+    instance.get(`/products/product_day`, { cancelToken: sourceToken });
+
+
+
 
 const endpoints = {
     getProducts,
     getProductsById,
-    getFilteredProducts
+    getFilteredProducts,
+    getProductsofDay,
 };
 export default endpoints;
