@@ -7,6 +7,8 @@ import reviews from './reviews'
 import favorites from './favorites'
 import categories from './categories'
 import banners from './banners'
+import email from './getEmail'
+
 const instance = axios.create({
   // @ts-ignore
   baseURL: window.REACT_APP_SERVER_API !== 'REPLACE_REACT_APP_SERVER_API' ? window.REACT_APP_SERVER_API : process.env.REACT_APP_SERVER_API || 'https://bee.webtm.ru/api/v1/',
@@ -31,6 +33,8 @@ const { getReviews, getReviewById, addReview, updateReview, deleteReview, } = re
 const { addProductToFavorite, delProductFromFavorite } = favorites
 const { getCategories, getCategoriesById } = categories
 const { getBanners } = banners
+const { getEmail } = email
+
 
 
 const api = {
@@ -57,6 +61,7 @@ const api = {
   getCategoriesById,
   updateCartItem,
   getBanners,
+  getEmail
 }
 
 export { instance, api };
