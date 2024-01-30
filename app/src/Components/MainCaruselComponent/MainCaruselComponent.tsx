@@ -1,23 +1,38 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import classes from './MainCaruselComponent.module.scss'
 import './slider.css'
+import axios from 'axios';
 import { Carousel, Flex } from 'antd';
 import { caruselItems } from 'data/carusel/carusel';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'store/hook';
+import { fetchBanners } from 'store/reducers/BannerReducesr';
 
 type Props = {
 
 }
 const MainCaruselComponent : React.FC<Props> = ()=>{
+    const dispatch = useAppDispatch();
+    const [loading, setLoading] = useState(false);
+    const { data, status } = useAppSelector((state) => state.banner)
+    useEffect(()=>{
+        const source = axios.CancelToken.source();
+        dispatch(fetchBanners({ cancelToken: source.token, }))
+        console.log(data);
+        
+        return () => {
+            source.cancel('Запрос отменен, Слайдер приостоновлен');
+        };
+    },[])
     return (
         <div className={classes.carusel}>
             <div className={classes.container}>
                 <Carousel dotPosition={'top'} autoplay>
                     {
-                        caruselItems.map(e=>{
+                        data.map(e=>{
                             return (
                                 <Flex  className={classes.carusel__item}  key={e.id}>
-                                    <div style={{background: `url(${e.image})`}} className={classes.carusel__wrapper}>
+                                    <div style={{background: `url(${e.image.url})`}} className={classes.carusel__wrapper}>
                                     <Flex className={classes.carusel__inner}  vertical={true} gap={'auto'} justify="space-between">
                                         <Flex gap={10} vertical>
                                             <h2>{e.title}</h2>

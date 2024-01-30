@@ -8,10 +8,6 @@ interface Props {
 }
  
 const CompanyListComponent: React.FC<Props> = () => {
-    useEffect(()=>{
-        console.log(company_list.length);
-        
-    }, [])
     return ( 
        <div className={classes.company__list}>
             <Flex className={classes.container}>
