@@ -48,7 +48,7 @@ const TopOffer: React.FC = () => {
               Перейти в каталог <CaretRightOutlined />
             </a>
             <div className={classes.topOffer_Block_Down_Image} style={{position:"absolute", bottom:"20px", right:"20px"}}>
-              <img src={product.image} alt={product.title} />
+              <img src={`https://bee.webtm.ru${product.image}`} alt={product.title} />
             </div>
           </div>
         </div>
