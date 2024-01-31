@@ -11,3 +11,9 @@ thead[class*="ant-table-thead"] th{
   }
 }
 
+a{
+  color: inherit;
+  &:hover{
+    color: inherit;
+  }
+}

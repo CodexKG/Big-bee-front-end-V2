@@ -3,8 +3,7 @@ import Main from 'routes/Main/Main';
 import './scss/app.scss';
 import MainPage from 'routes/MainPage/MainPage';
 import { Login, OrderPlacing, SignUp } from 'Components';
-import { Catalog } from 'routes';
-import { Favorites } from 'routes';
+import { Catalog, Favorites, Cart } from 'routes';
 
 function App() {
 
@@ -17,6 +16,7 @@ function App() {
         <Route path='/catalog/:id' element={<Catalog />} />
         <Route path='/favorites' element={<Favorites />} />
         <Route path='/orderplasing' element={<OrderPlacing />} />
+        <Route path='/cart' element={<Cart />} />
       </Route>
       <Route path='*' element={<main className={'errorPage'}><p>Неверный адрес</p></main>} />
     </Routes>

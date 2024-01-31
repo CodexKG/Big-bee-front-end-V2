@@ -4,3 +4,6 @@
 .ant-carousel .slick-dots li, .ant-carousel .slick-dots li.slick-active{
     width: 100%;
 }
+.ant-carousel .slick-dots{
+    padding: 20px 40px;
+}
