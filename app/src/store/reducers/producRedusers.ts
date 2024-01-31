@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { CancelToken } from "axios";
-import { Product, ProductData } from "../../types/types";
+import { Product, ProductData, ProductPopular } from "../../types/types";
 import { api } from "../../api";
 
 
@@ -39,4 +39,16 @@ export const fetchProductById = createAsyncThunk<Product, { id: number; cancelTo
             return rejectWithValue(typeof error === 'string' ? error : 'Failed to fetch product');
         }
     }
+);
+
+export const fetchProductOfDay = createAsyncThunk<ProductPopular, { cancelToken?: CancelToken }, { rejectValue?: string }>(
+  'products/fetchProductOfDay',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.getProductsofDay();
+      return response.data as ProductPopular;
+    } catch (error) {
+      return rejectWithValue(typeof error === 'string' ? error : 'Failed to fetch product');
+    }
+  }
 );

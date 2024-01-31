@@ -1,3 +1,4 @@
+import { producktData } from '../data/test/testData';
 
 export interface loginValues {
     username: string
@@ -85,4 +86,10 @@ export interface Categories {
     title: string,
     slug: string,
     subcategories: Categories[]
+}
+
+
+export interface ProductPopular{
+    top_products:Product[]
+    products_of_day:Product[]
 }
