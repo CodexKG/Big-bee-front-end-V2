@@ -1,25 +1,32 @@
 import { Button, Checkbox } from "antd";
 import { FC, useState } from "react";
 import classes from './CheckBoxGroup.module.scss'
-interface Option {
-    label: string;
-    value: string;
-}
+import { useAppDispatch } from "store/hook";
+import { setAtribute } from "store/slices/WindowSlice";
+import { useQuery } from "helpers/params";
+import { useLocation } from "react-router-dom";
 
 interface ExpandableCheckboxGroupProps {
-    options: Option[];
+    options: string[];
+    title: string
 }
-const ExpandableCheckboxGroup: FC<ExpandableCheckboxGroupProps> = ({ options }) => {
+const ExpandableCheckboxGroup: FC<ExpandableCheckboxGroupProps> = ({ options, title }) => {
+    const query = useQuery();
+    const dispatch = useAppDispatch()
     const [expanded, setExpanded] = useState(false);
+    console.log(useLocation().search);
+
+  
+
 
     const visibleOptions = expanded ? options : options.slice(0, 5);
 
     return (
         <div>
-            <Checkbox.Group style={{ flexDirection: 'column', gap: '12px' }}>
+            <Checkbox.Group onChange={(e) => dispatch(setAtribute({ [title]: e[0] }))} style={{ flexDirection: 'column', gap: '12px' }}>
                 {visibleOptions.map(option => (
-                    <Checkbox className={classes.Checkbox} key={option.value} value={option.value}>
-                        {option.label}
+                    <Checkbox className={classes.Checkbox} key={option} value={option}>
+                        {option}
                     </Checkbox>
                 ))}
             </Checkbox.Group>

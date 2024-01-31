@@ -10,6 +10,9 @@ const exampleProducts = [
         price: 59.99,
         currency: 'USD',
         created: '2022-01-21',
+        product_attributes: [
+            { key: "Основная камера", value: "48 Mpx + 12 Mpx + 12 Mpx" }
+        ]
     },
     {
         id: 3,
@@ -22,6 +25,9 @@ const exampleProducts = [
         price: 129.99,
         currency: 'USD',
         created: '2022-01-22',
+        product_attributes: [
+            { key: "Основная камера", value: "48 Mpx + 12 Mpx + 12 Mpx" }
+        ]
     },
     {
         id: 1,
@@ -34,6 +40,10 @@ const exampleProducts = [
         price: 699.99,
         currency: 'USD',
         created: '2022-01-20',
+        product_attributes: [
+            { key: "Основная камера", value: "48 Mpx + 12 Mpx + 12 Mpx" }
+        ]
+
     },
     // {
     //     id: 4,
@@ -72,6 +82,9 @@ export const productfff = [
         price: 59.99,
         currency: 'USD',
         created: '2022-01-21',
+        product_attributes: [
+            { key: "Основная камера", value: "48 Mpx + 12 Mpx + 12 Mpx" }
+        ]
     },
     {
         id: 3,
@@ -84,8 +97,11 @@ export const productfff = [
         price: 129.99,
         currency: 'USD',
         created: '2022-01-22',
+        product_attributes: [
+            { key: "Основная камера", value: "48 Mpx + 12 Mpx + 12 Mpx" }
+        ]
     },
-    
+
 ];
 
 export default exampleProducts;

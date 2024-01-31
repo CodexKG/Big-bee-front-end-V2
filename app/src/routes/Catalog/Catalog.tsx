@@ -1,14 +1,14 @@
 import classes from "./Catalog.module.scss";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import CatalogProductCard from "Components/CatalogProductCard/CatalogProductCard";
-import { Avatar, Button, Input, List, Form, InputNumber, Radio, Space, RadioChangeEvent, Checkbox, Select, Breadcrumb } from "antd";
+import { Avatar, Button, Input, List, Form, InputNumber, Radio, Space, RadioChangeEvent, Checkbox, Select, Breadcrumb, Skeleton } from "antd";
 import { LockOutlined, StarOutlined, UserOutlined } from "@ant-design/icons";
 import { useAppDispatch, useAppSelector } from "store/hook";
 import axios from "axios";
 import { fetchFilterProducts } from "store/reducers/producRedusers";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FilterParams } from "store/models/WindowTypes";
-import { createQueryString, useQuery } from "helpers/params";
+import { createQueryString, parseQueryString, useQuery } from "helpers/params";
 import { setFilters, setOffset } from "store/slices/WindowSlice";
 import { fetchCategoriesById } from "store/reducers/categoryReduser";
 import { ExpandableCheckboxGroup, ExpandableRadioGroup } from "Components";
@@ -17,315 +17,11 @@ type StringKeyObject = {
   [key: string]: any;
 };
 
-const test = [
-  {
-    "id": 283,
-    "shop": 3,
-    "category": [
-      34
-    ],
-    "title": "Apple iPhone 14 Pro Max 6/256GB Space Black",
-    "description": "Всегда включённый дисплей Super Retina XDR 6,1 дюйма с технологией ProMotion\r\nDynamic Island — новый волшебный способ взаимодействовать с iPhone\r\nОсновная камера 48 Мп обеспечивает разрешение до 4 раз выше\r\nРежим «Киноэффект» теперь поддерживает съёмку видео в стандарте Dolby Vision до 4K с частотой 30 кадров в секунду\r\nРежим«Экшн» для съёмки невероятно плавных видео с рук\r\nВажные технологии безопасности: функция «Распознавание аварии» вызывает помощь, когда вы не можете\r\nЦелый день работы без подзарядки и до 23 часов воспроизведения видео\r\nA16 Bionic, самый мощный чип iPhone. Поддержка 5G\r\nПередовые технологии для прочности устройства: Ceramic Shield и защита от воды\r\nВ iOS 16 ещё больше возможностей для персонализации, общения и обмена контентом",
-    "image": "https://bee.webtm.ru/media/product_images/aaple_14_1.webp",
-    "product_attributes": [
-      {
-        "key": "Основная камера",
-        "value": "48 Mpx + 12 Mpx + 12 Mpx"
-      },
-      {
-        "key": "Фронтальная камера",
-        "value": "12 Mpx"
-      },
-      {
-        "key": "Объем оперативной памяти",
-        "value": "6 GB"
-      },
-      {
-        "key": "Объем встроенной памяти",
-        "value": "256 GB"
-      },
-      {
-        "key": "Процессор",
-        "value": "A 16 Bionic"
-      }
-    ],
-    "product_images": [
-      {
-        "id": 13,
-        "product": 283,
-        "image": "https://bee.webtm.ru/media/product_images/aaple_14_2.webp"
-      },
-      {
-        "id": 14,
-        "product": 283,
-        "image": "https://bee.webtm.ru/media/product_images/aaple_14_3.webp"
-      },
-      {
-        "id": 15,
-        "product": 283,
-        "image": "https://bee.webtm.ru/media/product_images/aaple_14_4.webp"
-      },
-      {
-        "id": 16,
-        "product": 283,
-        "image": "https://bee.webtm.ru/media/product_images/aaple_14_5.webp"
-      }
-    ],
-    "price": 150990,
-    "old_price": 158539,
-    "currency": "KGS",
-    "shop_name": "Mnogosushi",
-    "shop_logo": "/media/shop_images/Screenshot_from_2023-12-15_18-08-18.png",
-    "review_count": 0,
-    "average_rating": null,
-    "created": "2024-01-24T16:22:57.477326+06:00"
-  },
-  {
-    "id": 284,
-    "shop": 2,
-    "category": [
-      34
-    ],
-    "title": "Apple iPhone 15 6/128GB Blue",
-    "description": "iPhone 15 с Dynamic Island, основной камерой 48 Мп и USB-C — в алюминиевом корпусе и с прочной задней панелью из насыщенного цветом стекла.\r\n\r\n\r\nОсновные характеристики\r\nDYNAMIC ISLAND НА iPhone 15.\r\nБлагодаря Dynamic Island оповещения и Эфир активности удобно отображаются в верхней части экрана, поэтому вы ничего не пропустите, пока будете заниматься другими делами. Вы можете смотреть, кто звонит, проверять информацию о рейсе и делать многое другое.\r\nОСНОВНАЯ КАМЕРА 48 МП И ЗУМ 2X.\r\nОсновная камера 48 Мп позволяет делать снимки с невероятно высоким разрешением. Создавать качественные фотографии с потрясающей детализацией ещё никогда не было так просто. Оптический зум 2X — это отличный инструмент для съёмки крупным планом.\r\nМОЩНЫЙ ЧИП A16 BIONIC.\r\nСупербыстрый чип обеспечивает работу передовых функций iPhone: обработка фотографий, плавное отображение Dynamic Island и режим «Изоляция голоса» во время звонков. А ещё A16 Bionic очень энергоэффективен, поэтому вашим устройством можно пользоваться целый день без подзарядки.3\r\nВАЖНЕЙШИЕ ФУНКЦИИ БЕЗОПАСНОСТИ.\r\nФункция «Распознавание аварии» позволяет iPhone определить серьёзную автомобильную аварию и вызвать помощь, когда вы не можете.4\r\nИННОВАЦИОННЫЙ ДИЗАЙН.\r\niPhone 15 Plus изготовлен из алюминия и оснащён прочной задней панелью из насыщенного цветом стекла. Он устойчив к воздействию брызг, воды и пыли.1 А дисплей Super Retina XDR 6,7 дюйма2 обеспечивает вдвое большую яркость по сравнению с iPhone 14 и надёжно защищён Ceramic Shield.\r\nПОРТРЕТЫ НА НОВОМ УРОВНЕ.\r\nСоздавайте более детализированные и насыщенные фото. Просто коснитесь объекта, чтобы перевести на него фокус, — даже когда кадр уже отснят.\r\nПОДКЛЮЧЕНИЕ ЧЕРЕЗ USB-C.\r\nБлагодаря порту USB-C вы можете заряжать Mac или iPad с помощью того же кабеля, что и iPhone 15. Более того, от iPhone 15 можно подзаряжать Apple Watch или AirPods.\r\nСОЗДАН ДЛЯ ПЕРЕМЕН К ЛУЧШЕМУ.\r\nВ iPhone предусмотрены средства защиты конфиденциальности, поэтому вашими данными управляете только вы. Он изготовлен из большего количества переработанных материалов, что минимизирует влияние на окружающую среду. А встроенные функции делают iPhone ещё более удобным для каждого.",
-    "image": "https://bee.webtm.ru/media/product_images/apple_15_1.webp",
-    "product_attributes": [
-      {
-        "key": "Основная камера",
-        "value": "48 Mpx + 12 Mpx"
-      },
-      {
-        "key": "Фронтальная камера",
-        "value": "12 Mpx"
-      },
-      {
-        "key": "Объем оперативной памяти",
-        "value": "6 GB"
-      },
-      {
-        "key": "Объем встроенной памяти",
-        "value": "128 GB"
-      },
-      {
-        "key": "Процессор",
-        "value": "A16 Bionic"
-      }
-    ],
-    "product_images": [
-      {
-        "id": 17,
-        "product": 284,
-        "image": "https://bee.webtm.ru/media/product_images/apple_15_2.webp"
-      },
-      {
-        "id": 18,
-        "product": 284,
-        "image": "https://bee.webtm.ru/media/product_images/apple_15_3.webp"
-      },
-      {
-        "id": 19,
-        "product": 284,
-        "image": "https://bee.webtm.ru/media/product_images/apple_15_4.webp"
-      }
-    ],
-    "price": 92190,
-    "old_price": 96799,
-    "currency": "KGS",
-    "shop_name": "Kuma",
-    "shop_logo": "/media/shop_images/photo_2023-12-24_18-05-40_2.jpg",
-    "review_count": 0,
-    "average_rating": null,
-    "created": "2024-01-24T16:25:43.661698+06:00"
-  },
-  {
-    "id": 282,
-    "shop": 2,
-    "category": [
-      34
-    ],
-    "title": "ZTE Nubia NEO 5G 8\\256GB Black",
-    "description": "Полное погружение в виртуальную реальность\r\nСмартфон ZTE Nubia NEO 5G предлагает беспрецедентные возможности для иммерсивной игры. Мощная мобильная платформа на базе 6 нм процессора Unisoc T820 с частотой до 2.7 ГГц обеспечивает суперплавную и быструю работу всех приложений. Поддержка 5G гарантирует стабильную связь и супербыстрый обмен данными. 6.6-дюймовый дисплей с частотой обновления 120 Гц просто создан для динамичной игры. Батарея 4500 мАч и зарядка мощностью 22.5 Вт позволят забыть о дефиците заряда на целый день.",
-    "image": "https://bee.webtm.ru/media/product_images/zte_1.webp",
-    "product_attributes": [
-      {
-        "key": "Основная камера",
-        "value": "50 Mpx + 2 Mpx"
-      },
-      {
-        "key": "Фронтальная камера",
-        "value": "8 Mpx"
-      },
-      {
-        "key": "Объем оперативной памяти",
-        "value": "8 GB"
-      },
-      {
-        "key": "Объем встроенной памяти",
-        "value": "256 GB"
-      },
-      {
-        "key": "Процессор",
-        "value": "Unisoc T820"
-      }
-    ],
-    "product_images": [
-      {
-        "id": 9,
-        "product": 282,
-        "image": "https://bee.webtm.ru/media/product_images/zte_2.webp"
-      },
-      {
-        "id": 10,
-        "product": 282,
-        "image": "https://bee.webtm.ru/media/product_images/zte_3.webp"
-      },
-      {
-        "id": 11,
-        "product": 282,
-        "image": "https://bee.webtm.ru/media/product_images/zte_4.webp"
-      },
-      {
-        "id": 12,
-        "product": 282,
-        "image": "https://bee.webtm.ru/media/product_images/zte_5.webp"
-      }
-    ],
-    "price": 21590,
-    "old_price": 22669,
-    "currency": "KGS",
-    "shop_name": "Kuma",
-    "shop_logo": "/media/shop_images/photo_2023-12-24_18-05-40_2.jpg",
-    "review_count": 0,
-    "average_rating": null,
-    "created": "2024-01-24T16:17:56.245097+06:00"
-  },
-  {
-    "id": 281,
-    "shop": 4,
-    "category": [
-      34
-    ],
-    "title": "Xiaomi Redmi 12 8/256GB Midnight Black",
-    "description": "Захватывающий экран для впечатляющего визуального опыта.\r\nСмартфон оснащен 6.79-дюймовым IPS LCD-экраном с разрешением 1080 x 2400 пикселей и соотношением сторон 20:9. С этим экраном пользователи могут наслаждаться яркими и четкими цветами, а также широким углом обзора. Благодаря частоте обновления 90 Гц, экран обеспечивает плавную прокрутку и реактивность при использовании смартфона.",
-    "image": "https://bee.webtm.ru/media/product_images/redmi_12_1.webp",
-    "product_attributes": [
-      {
-        "key": "Основная камера",
-        "value": "50 Mpx + 8 Mpx + 2 Mpx"
-      },
-      {
-        "key": "Фронтальная камера",
-        "value": "8 Mpx"
-      },
-      {
-        "key": "Объем оперативной памяти",
-        "value": "8 GB"
-      },
-      {
-        "key": "Процессор",
-        "value": "MediaTek Helio G88"
-      }
-    ],
-    "product_images": [
-      {
-        "id": 5,
-        "product": 281,
-        "image": "https://bee.webtm.ru/media/product_images/redmi_12_2.webp"
-      },
-      {
-        "id": 6,
-        "product": 281,
-        "image": "https://bee.webtm.ru/media/product_images/redmi_12_3.webp"
-      },
-      {
-        "id": 7,
-        "product": 281,
-        "image": "https://bee.webtm.ru/media/product_images/redmi_12_4.webp"
-      },
-      {
-        "id": 8,
-        "product": 281,
-        "image": "https://bee.webtm.ru/media/product_images/redmi_12_5.webp"
-      }
-    ],
-    "price": 17690,
-    "old_price": 18574,
-    "currency": "KGS",
-    "shop_name": "ArzanAll",
-    "shop_logo": "/media/shop_images/photo_2023-12-24_18-05-38.jpg",
-    "review_count": 0,
-    "average_rating": null,
-    "created": "2024-01-24T16:14:32.103028+06:00"
-  },
-  {
-    "id": 280,
-    "shop": 2,
-    "category": [
-      34
-    ],
-    "title": "Apple iPhone 13 4/128GB Midnight",
-    "description": "Дисплей Super Retina XDR 6,1 дюйма\r\nРежим «Киноэффект» автоматически переводит фокус между объектами при съёмке видео и создаёт красивый эффект размытия\r\nПередовая система двух камер 12 Мп (широкоугольная и сверхширокоугольная); Фотографические стили, Smart HDR 4, Ночной режим, съёмка HDR-видео 4K в стандарте Dolby Vision\r\nФронтальная камера TrueDepth 12 Мп: Ночной режим, съёмка HDR‑видео 4K в стандарте Dolby Vision\r\nA15 Bionic — чип, с которым всё супербыстро\r\nДо 19 часов воспроизведения видео\r\nПанель Ceramic Shield для повышенной прочности\r\nНадёжная защита от воды (IP68)\r\niOS 15 с новыми функциями, расширяющими возможности iPhone\r\nПоддержка аксессуаров MagSafe, которые легко крепятся и обеспечивают более быструю беспроводную зарядку",
-    "image": "https://bee.webtm.ru/media/product_images/apple_13_1.webp",
-    "product_attributes": [
-      {
-        "key": "Основная камера",
-        "value": "12 Mpx + 12 Mpx"
-      },
-      {
-        "key": "Фронтальная камера",
-        "value": "12 Mpx"
-      },
-      {
-        "key": "Объем оперативной памяти",
-        "value": "4 GB"
-      },
-      {
-        "key": "Объем встроенной памяти",
-        "value": "128 GB"
-      },
-      {
-        "key": "Процессор",
-        "value": "A15 Bionic"
-      }
-    ],
-    "product_images": [
-      {
-        "id": 1,
-        "product": 280,
-        "image": "https://bee.webtm.ru/media/product_images/apple_13_2.webp"
-      },
-      {
-        "id": 2,
-        "product": 280,
-        "image": "https://bee.webtm.ru/media/product_images/apple_13_3.webp"
-      },
-      {
-        "id": 3,
-        "product": 280,
-        "image": "https://bee.webtm.ru/media/product_images/apple_13_4.webp"
-      },
-      {
-        "id": 4,
-        "product": 280,
-        "image": "https://bee.webtm.ru/media/product_images/apple_13_5.webp"
-      }
-    ],
-    "price": 68690,
-    "old_price": 72124,
-    "currency": "KGS",
-    "shop_name": "Kuma",
-    "shop_logo": "/media/shop_images/photo_2023-12-24_18-05-40_2.jpg",
-    "review_count": 0,
-    "average_rating": null,
-    "created": "2024-01-24T16:11:35.711645+06:00"
-  }
-]
-
-
 const Catalog: FC = () => {
-  let query = useQuery();
+
   const { data, laoding } = useAppSelector((state) => state.produckt)
   const atributes = useAppSelector((state) => state.category.children)
+  const sortStatus = useAppSelector((state) => state.category.laoding)
   const { filters } = useAppSelector((state) => state.window)
   const { id } = useParams()
   const dispatch = useAppDispatch()
@@ -339,10 +35,9 @@ const Catalog: FC = () => {
     });
   }
 
-  useEffect(() => {
-    handleFilterChange(createQueryString(filters))
-  }, [filters])
 
+  const queryRef = useRef(location.search);
+  queryRef.current = location.search;
   useEffect(() => {
     dispatch(setFilters({ category: id }))
   }, [id])
@@ -350,12 +45,26 @@ const Catalog: FC = () => {
 
   useEffect(() => {
     const source = axios.CancelToken.source();
+    handleFilterChange(createQueryString(filters))
+    const queryString = queryRef.current; // Используем текущее значение из ref
+
+    const timeoutId = setTimeout(() => {
+      dispatch(fetchFilterProducts({ filters: `?${queryString}`, cancelToken: source.token }));
+    }, 300); // Задержка 300 мс (0.3 секунды)
+
+    return () => {
+      clearTimeout(timeoutId); // Очистка таймера при размонтировании компонента
+      source.cancel('Запрос отменен, компонент размонтирован');
+    };
+  }, [dispatch, id, filters, location.search]);
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
     dispatch(fetchCategoriesById({ cancelToken: source.token, id: Number(id) }))
-    dispatch(fetchFilterProducts({ filters: `?${query.toString()}`, cancelToken: source.token }))
     return () => {
       source.cancel('Запрос отменен, компонент размонтирован');
     };
-  }, [dispatch, id, filters]);
+  }, [id]);
 
   const product_imgs = [
     "https://www.att.com/scmsassets/global/devices/phones/apple/apple-iphone-15-pro-max/gallery/white-titanium-1.jpg",
@@ -383,9 +92,41 @@ const Catalog: FC = () => {
     { title: '', label: 'Orange', value: 'Orange', }
   ];
 
-  console.log(atributes[Number(id)]?.product_attributes, 'atributes');
+  const sort = atributes[Number(id)]?.category_attributes
+  const sortRender = Object.entries(!sort ? { a: '', b: '' } : sort)?.map(([key, values]) => {
+    if (!sort) {
+      return <div key={key}>
+        <h3 className={classes.title}><Skeleton.Input active size={'default'} /></h3>
+        <Skeleton active />
 
+      </div>
+    }
+    return <div key={key}>
+      <h3 className={classes.title}>{key}</h3>
+      <ExpandableCheckboxGroup options={values} title={key} />
+    </div>
+  })
 
+  interface Test {
+    [key: string]: string;
+
+  }
+  const [Test, setTest] = useState<Test>({});
+
+  useEffect(() => {
+    const parseQuery = (queryString: string): Test => {
+      const params = new URLSearchParams(queryString);
+      const newTest: Test = {};
+      params.forEach((value, key) => {
+        newTest[key] = value;
+      });
+      return newTest;
+    };
+
+    setTest(parseQuery(location.search));
+  }, [location.search]);
+  console.log(filters);
+  console.log('test:',parseQueryString('limit=20&offset=0&category=34&attribute=%D0%9E%D0%B1%D1%8A%D0%B5%D0%BC%20%D0%B2%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%B8__128%20GB&%D0%9E%D0%B1%D1%8A%D0%B5%D0%BC%20%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D0%B9%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%B8__4%20GB&%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%B0%D0%BC%D0%B5%D1%80%D0%B0__12%20Mpx%20%2B%2012%20Mpx&price_min=978&price_max=977'))
   return (
     <div>
       <div className={classes.catalogHead}>
@@ -420,6 +161,7 @@ const Catalog: FC = () => {
       </div>
       <div className={classes.catalog}>
         <aside>
+
           <div>
             <h1 className={classes.title}>Цена, ₽</h1>
             <div className={classes.flex}>
@@ -443,10 +185,8 @@ const Catalog: FC = () => {
             <h1 className={classes.title}>Срок доставки</h1>
             <ExpandableRadioGroup options={options} />
           </div>
-          <div>
-            <h1 className={classes.title}>Производитель</h1>
-            <ExpandableCheckboxGroup options={options} />
-          </div>
+          {sortRender}
+
         </aside>
         <div className={classes.catalog_block}>
           <List
@@ -459,15 +199,15 @@ const Catalog: FC = () => {
               },
               pageSize: 20,
             }}
-            // dataSource={data.results}
-            dataSource={test}
+            dataSource={data.results}
+
 
             renderItem={(item) => (
               <CatalogProductCard
-                product_imgs={product_imgs}
+                product_imgs={item.product_images}
                 title={item.title}
                 colors={product_colors}
-                characteristics={characteristics}
+                characteristics={item.product_attributes}
                 rating={4.9}
                 price={item.price}
                 old_price={124990}

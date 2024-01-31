@@ -18,6 +18,7 @@ export interface Product {
     price: number;
     currency: string;
     created: string; // Дата в формате строки
+    product_attributes: { key: string, value: string }[]
 }
 export interface ProductData {
     count: number,
@@ -85,5 +86,5 @@ export interface Categories {
     title: string,
     slug: string,
     subcategories: Categories[]
-    product_attributes: { [key: string]: string[] };
+    category_attributes: { [key: string]: string[] };
 }

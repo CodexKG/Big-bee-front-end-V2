@@ -8,9 +8,11 @@ interface windowState {
 const initialState: windowState = {
     user: {},
     filters: {
+
         limit: 20,
         offset: 0,
-        category: 0
+        category: 0,
+        attribute: {}
     }
 };
 
@@ -22,6 +24,9 @@ const windowSlice = createSlice({
         setFilters: (state, action: PayloadAction<FilterParams>) => {
             state.filters = { ...state.filters, ...action.payload };
         },
+        setAtribute: (state, action: PayloadAction<FilterParams>) => {
+            state.filters.attribute = { ...state.filters.attribute, ...action.payload };
+        },
         clearFilters: (state) => {
             state.filters = {}
         },
@@ -32,7 +37,7 @@ const windowSlice = createSlice({
 
 });
 
-export const { setFilters, clearFilters, setOffset } = windowSlice.actions;
+export const { setFilters, clearFilters, setOffset, setAtribute } = windowSlice.actions;
 
 
 export default windowSlice.reducer;

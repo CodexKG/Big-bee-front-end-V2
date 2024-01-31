@@ -15,7 +15,7 @@ interface ICatalogProductCart {
   product_imgs: Array<string>;
   title: string;
   colors: Array<string>;
-  characteristics: object;
+  characteristics: { key: string | number, value: string | number }[];
   rating: number;
   price: number;
   old_price: number;
@@ -83,10 +83,10 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
           ref={carouselRef}
           style={{ alignItems: "center" }}
         >
-          {product_imgs.map((src) => {
+          {product_imgs.map((src: any) => {
             return (
               <div className={classes.carousel_item}>
-                <img src={src} alt={title} />
+                <img src={src.image} alt={title} />
 
                 <div className={classes.carousel_item_discount}>-14%</div>
 
@@ -108,11 +108,19 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
           })}
         </div>
         <div className={classes.characteristics}>
-          {characteristicsKeys.map((el: string) => {
+          {/* {characteristicsKeys.map((el: string) => {
             return (
               <div>
                 <Text className={classes.chctr_title}>{el}</Text>:
                 {characteristics[el as keyof typeof characteristics]}
+              </div>
+            );
+          })} */}
+          {characteristics.map((el) => {
+            return (
+              <div>
+                <Text className={classes.chctr_title}>{el.key}</Text>:
+                {el.value}
               </div>
             );
           })}
