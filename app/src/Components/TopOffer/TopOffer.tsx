@@ -32,11 +32,11 @@ const TopOffer: React.FC = () => {
   return (
     <div className={`${classes.topOffer} ${classes[dynamicClass]}`}>
       {productOfDay?.top_products.slice(0, 3).map((product, index) => (
-        <div key={index} className={`${classes.topOffer_Block} ${classes[dynamicClass]}`}>
+        <div key={index} style={{position:"relative"}} className={`${classes.topOffer_Block} ${classes[dynamicClass]}`}>
           <div className={classes.topOffer_Block_Up}>
             <div className={classes.topOffer_Block_Up_Discount}>
               {/* Скидка {productOfDay.discount}% */}
-              <p>Hello</p>
+              <p>Скидка - 45%</p>
             </div>
             <h3 className={classes.topOffer_Block_Up_Title}>{product.title}</h3>
             <p className={classes.topOffer_Block_Up_Price}>
@@ -47,7 +47,7 @@ const TopOffer: React.FC = () => {
             <a className={classes.topOffer_Block_Down_Link}>
               Перейти в каталог <CaretRightOutlined />
             </a>
-            <div className={classes.topOffer_Block_Down_Image}>
+            <div className={classes.topOffer_Block_Down_Image} style={{position:"absolute", bottom:"20px", right:"20px"}}>
               <img src={product.image} alt={product.title} />
             </div>
           </div>
