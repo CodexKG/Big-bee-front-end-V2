@@ -36,6 +36,9 @@ const Catalog: FC = () => {
   useEffect(() => {
     dispatch(setFilters({ category: id }))
   }, [id])
+  useEffect(() => {
+    dispatch(setFilters({ category: id }))
+  }, [])
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -46,6 +49,7 @@ const Catalog: FC = () => {
 
       dispatch(fetchFilterProducts({ filters: `${queryString}`, cancelToken: source.token }));
     }, 300);
+    console.log(filters);
     return () => {
       clearTimeout(timeoutId)
       source.cancel('Запрос отменен, компонент размонтирован');
@@ -60,17 +64,17 @@ const Catalog: FC = () => {
     };
   }, [id]);
 
-  // useEffect(() => {
-  //   const parseQuery = (queryString: string): Test => {
-  //     const params = new URLSearchParams(queryString);
-  //     const newTest: Test = {};
-  //     params.forEach((value, key) => {
-  //       newTest[key] = value;
-  //     });
-  //     return newTest;
-  //   };
-  //   setTest(parseQuery(location.search));
-  // }, [location.search]);
+  useEffect(() => {
+    const parseQuery = (queryString: string): Test => {
+      const params = new URLSearchParams(queryString);
+      const newTest: Test = {};
+      params.forEach((value, key) => {
+        newTest[key] = value;
+      });
+      return newTest;
+    };
+    setTest(parseQuery(location.search));
+  }, [location.search]);
 
   const product_colors = ["red", "green", "blue"];
 
@@ -97,12 +101,17 @@ const Catalog: FC = () => {
   useEffect(() => {
     const queryString = queryRef.current;
     const parsedParams = parseQueryString(queryString);
-    dispatch(setParams(parsedParams));
+    if (queryString.includes('limit') && queryString.includes('category') && queryString.includes('offset')) {
+      dispatch(setParams(parsedParams));
+    }
+
   }, []);
 
 
   const currentPage = filters.offset / filters.limit + 1;
   const total = data.count;
+
+
 
   return (
     <div>
