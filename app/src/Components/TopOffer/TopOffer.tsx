@@ -4,6 +4,11 @@ import { CaretRightOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'store/hook';
 import axios, { CancelToken } from 'axios';
 import { fetchProductOfDay } from 'store/reducers/producRedusers';
+
+interface TopOfferProps {
+  products_quantity: number;
+}
+
 const getDynamicClass = (quantityOfBlocks: number) => {
   if (quantityOfBlocks >= 1 && quantityOfBlocks <= 4) {
     return `x${quantityOfBlocks}`;
@@ -19,12 +24,11 @@ const getDiscount = (newPrice: number, oldPrice: number) => {
 }
 
 
-const TopOffer: React.FC = () => {
+const TopOffer: React.FC<TopOfferProps> = ({products_quantity}) => {
   const dispatch = useAppDispatch();
   const productOfDay = useAppSelector((state) => state.produckt.productsDay);
 
-  const dinamic: number = 2;
-  const dynamicClass = getDynamicClass(dinamic);
+  const dynamicClass = getDynamicClass(products_quantity);
 
 
 
@@ -38,7 +42,7 @@ const TopOffer: React.FC = () => {
 
   return (
     <div className={`${classes.topOffer} ${classes[dynamicClass]}`}>
-      {productOfDay?.top_products.slice(0, dinamic).map((product, index) => (
+      {productOfDay?.top_products.slice(0, products_quantity).map((product, index) => (
         <div key={index} style={{ position: "relative" }} className={`${classes.topOffer_Block} ${classes[dynamicClass]}`}>
           <div className={classes.topOffer_Block_Up}>
             <div className={classes.topOffer_Block_Up_Discount}>              
@@ -49,6 +53,12 @@ const TopOffer: React.FC = () => {
             <h3 className={classes.topOffer_Block_Up_Title}>{product.title}</h3>
             <p className={classes.topOffer_Block_Up_Price}>
               {`Price: $${product.price.toFixed(2)} ${product.currency}`}
+              {/* <span className={classes.topOffer_Block_Up_Price_Old}>
+                {`${product.old_price.toFixed(2)}`}
+              </span> */}
+              <span className={classes.topOffer_Block_Up_Price_Old}>
+                {`9999999 `}
+              </span>
             </p>
           </div>
           <div className={classes.topOffer_Block_Down}>

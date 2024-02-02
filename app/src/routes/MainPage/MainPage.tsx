@@ -12,12 +12,12 @@ const MainPage: FC = () => {
     <div className={classes.main}>
       <MainCaruselComponent />
       <CompanyListComponent />
-      <TopOffer  />
+      <TopOffer products_quantity={3} />
       <Advantages />
       <Promotion title="Акции и скидки" />
       <CategoryComponent />
       <Promotion title="Специально для вас" />
-      <TopOffer />
+      <TopOffer products_quantity={2} />
       <Promotion title="Хиты продаж" />
 
     </div >
