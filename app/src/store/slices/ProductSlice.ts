@@ -52,12 +52,15 @@ const productsSlice = createSlice({
                 state.laoding = true
             })
             .addCase(fetchFilterProducts.fulfilled, (state, action: PayloadAction<ProductData>) => {
-                state.status = 'succeeded';
-                state.data = {
-                    ...action.payload,
-                    results: [...state.data.results, ...action.payload.results]
+                // state.status = 'succeeded';
+                // state.data = {
+                //     ...action.payload,
+                //     results: [...state.data.results, ...action.payload.results]
 
-                };
+                // };
+                // state.laoding = false
+                state.status = 'succeeded';
+                state.data = action.payload;
                 state.laoding = false
             })
             .addCase(fetchFilterProducts.rejected, (state, action) => {

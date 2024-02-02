@@ -1,4 +1,4 @@
-import {  createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { fetchBanners } from 'store/reducers/BannerReducesr';
 // import { Banner } from 'store/models/BannersType';
 
@@ -10,25 +10,33 @@ interface BannerState {
 }
 
 const initialState: BannerState = {
-    data: [],
+    data: [{
+        description: "Передовая камера с разрешением 200 Мп и оптической стабилизацией изображения 120 Вт, быстрая зарядка HyperCharge AMOLED-дисплей 120 Гц",
+        id: 1,
+        image: "https://bee.webtm.ru/media/banners/bc360944412d8b013db900c0451ff18c.png",
+        title: "Redmi Note 12 Pro+ 37 990 с",
+        url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    }],
     status: 'idle',
     error: null,
     laoding: false
 };
 const BannerSlice = createSlice({
-    name:'banner',
+    name: 'banner',
     initialState,
-    reducers:{
+    reducers: {
 
     },
-    extraReducers: (builder)=>{
+    extraReducers: (builder) => {
         builder
-            .addCase(fetchBanners.pending, (state)=>{
+            .addCase(fetchBanners.pending, (state) => {
                 state.status = 'pending';
                 state.laoding = true
             })
-            .addCase(fetchBanners.fulfilled, (state, action)=>{
+            .addCase(fetchBanners.fulfilled, (state, action) => {
                 state.status = 'succeeded';
+                console.log(action.payload);
+                
                 state.data = action.payload;
                 state.laoding = false
             })
