@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import classes from './TopOffer.module.scss';
 import { CaretRightOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'store/hook';
@@ -12,13 +11,21 @@ const getDynamicClass = (quantityOfBlocks: number) => {
   return 'default';
 };
 
+const getDiscount = (newPrice: number, oldPrice: number) => {
+  const parsedNewPrice = parseFloat(newPrice.toFixed(2));
+  const parsedOldPrice = parseFloat(oldPrice.toFixed(2));
+
+  return 100 - (parsedNewPrice * 100 / parsedOldPrice);
+}
+
+
 const TopOffer: React.FC = () => {
   const dispatch = useAppDispatch();
   const productOfDay = useAppSelector((state) => state.produckt.productsDay);
-  // const topOfferBlockCount = productOfDay.length || 0;
 
+  const dinamic: number = 2;
+  const dynamicClass = getDynamicClass(dinamic);
 
-  const dynamicClass = getDynamicClass(3);
 
 
   useEffect(() => {
@@ -31,12 +38,13 @@ const TopOffer: React.FC = () => {
 
   return (
     <div className={`${classes.topOffer} ${classes[dynamicClass]}`}>
-      {productOfDay?.top_products.slice(0, 3).map((product, index) => (
-        <div key={index} style={{position:"relative"}} className={`${classes.topOffer_Block} ${classes[dynamicClass]}`}>
+      {productOfDay?.top_products.slice(0, dinamic).map((product, index) => (
+        <div key={index} style={{ position: "relative" }} className={`${classes.topOffer_Block} ${classes[dynamicClass]}`}>
           <div className={classes.topOffer_Block_Up}>
-            <div className={classes.topOffer_Block_Up_Discount}>
-              {/* Скидка {productOfDay.discount}% */}
+            <div className={classes.topOffer_Block_Up_Discount}>              
+              {/* <p>Скидка - {getDiscount(product.price, product.old_price)}%</p> */}
               <p>Скидка - 45%</p>
+
             </div>
             <h3 className={classes.topOffer_Block_Up_Title}>{product.title}</h3>
             <p className={classes.topOffer_Block_Up_Price}>
@@ -47,7 +55,7 @@ const TopOffer: React.FC = () => {
             <a className={classes.topOffer_Block_Down_Link}>
               Перейти в каталог <CaretRightOutlined />
             </a>
-            <div className={classes.topOffer_Block_Down_Image} style={{position:"absolute", bottom:"20px", right:"20px"}}>
+            <div className={classes.topOffer_Block_Down_Image} style={{ position: "absolute", bottom: "20px", right: "20px" }}>
               <img src={`https://bee.webtm.ru${product.image}`} alt={product.title} />
             </div>
           </div>

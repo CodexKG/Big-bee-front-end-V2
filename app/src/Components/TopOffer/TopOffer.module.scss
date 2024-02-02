@@ -7,9 +7,17 @@
   max-height: 650px;
   gap: 14px;
 
-  &:last-child {
-    height: 500px;
-  }
+  
+    &.x1{
+      height: 450px;
+      width: 67%;
+      max-width: 1722px;
+      margin: 0 auto;
+      .topOffer_Block{
+        width: 100%;
+      }
+    }
+
 
   &.x2 {
     height: 300px;
@@ -55,7 +63,9 @@
     flex-direction: column;
     padding: 20px;
     border-radius: 10px;
-    background-color: #F2F3F7;
+    border: 5px outset #F5C423;
+    // background-color: #F2F3F7;
+    background-color: #fff;
     overflow: hidden;
     gap: 10px;
     position: relative;
@@ -68,7 +78,6 @@
       gap: 10px;
 
       &_Discount {
-        width: 50%;
         display: flex;
         align-items: center;
         vertical-align: middle;
