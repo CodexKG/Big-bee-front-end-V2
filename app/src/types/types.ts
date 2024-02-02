@@ -19,6 +19,10 @@ export interface Product {
     currency: string;
     created: string; // Дата в формате строки
     product_attributes: { key: string, value: string }[]
+    shop_name: string
+    shop_logo: string
+    old_price: number
+    average_rating: number | null
 }
 export interface ProductData {
     count: number,

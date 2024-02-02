@@ -1,62 +1,56 @@
 import classes from "./Catalog.module.scss";
-import React, { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import CatalogProductCard from "Components/CatalogProductCard/CatalogProductCard";
-import { Avatar, Button, Input, List, Form, InputNumber, Radio, Space, RadioChangeEvent, Checkbox, Select, Breadcrumb, Skeleton } from "antd";
-import { LockOutlined, StarOutlined, UserOutlined } from "@ant-design/icons";
+import { List, InputNumber, Select, Breadcrumb, Skeleton, Button } from "antd";
 import { useAppDispatch, useAppSelector } from "store/hook";
 import axios from "axios";
 import { fetchFilterProducts } from "store/reducers/producRedusers";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { FilterParams } from "store/models/WindowTypes";
-import { createQueryString, parseQueryString, useQuery } from "helpers/params";
-import { setFilters, setOffset } from "store/slices/WindowSlice";
+import { createQueryString, parseQueryString } from "helpers/params";
+import { clearFilters, setFilters, setOffset, setParams } from "store/slices/WindowSlice";
 import { fetchCategoriesById } from "store/reducers/categoryReduser";
 import { ExpandableCheckboxGroup, ExpandableRadioGroup } from "Components";
+const options = [
+  { title: '', label: 'Apple', value: 'Apple' },
+  { title: '', label: 'Pear', value: 'Pear' },
+  { title: '', label: 'Orange', value: 'Orange' },
 
-type StringKeyObject = {
-  [key: string]: any;
-};
+];
 
 const Catalog: FC = () => {
-
   const { data, laoding } = useAppSelector((state) => state.produckt)
   const atributes = useAppSelector((state) => state.category.children)
-  const sortStatus = useAppSelector((state) => state.category.laoding)
   const { filters } = useAppSelector((state) => state.window)
   const { id } = useParams()
   const dispatch = useAppDispatch()
   let navigate = useNavigate();
   let location = useLocation();
-
+  const queryRef = useRef(location.search);
+  queryRef.current = location.search;
   function handleFilterChange(newFilters: string) {
     navigate({
       pathname: location.pathname,
       search: newFilters
     });
   }
-
-
-  const queryRef = useRef(location.search);
-  queryRef.current = location.search;
   useEffect(() => {
     dispatch(setFilters({ category: id }))
   }, [id])
 
-
   useEffect(() => {
     const source = axios.CancelToken.source();
     handleFilterChange(createQueryString(filters))
-    const queryString = queryRef.current; // Используем текущее значение из ref
+    const queryString = queryRef.current;
 
     const timeoutId = setTimeout(() => {
-      dispatch(fetchFilterProducts({ filters: `?${queryString}`, cancelToken: source.token }));
-    }, 300); // Задержка 300 мс (0.3 секунды)
 
+      dispatch(fetchFilterProducts({ filters: `${queryString}`, cancelToken: source.token }));
+    }, 300);
     return () => {
-      clearTimeout(timeoutId); // Очистка таймера при размонтировании компонента
+      clearTimeout(timeoutId)
       source.cancel('Запрос отменен, компонент размонтирован');
     };
-  }, [dispatch, id, filters, location.search]);
+  }, [id, filters, location.search]);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -66,31 +60,19 @@ const Catalog: FC = () => {
     };
   }, [id]);
 
-  const product_imgs = [
-    "https://www.att.com/scmsassets/global/devices/phones/apple/apple-iphone-15-pro-max/gallery/white-titanium-1.jpg",
-    "https://mtscdn.ru/upload/iblock/1e6/Pro-Blue-Titanium.png",
-    "https://yablophone.ru/images/virtuemart/product/iphone-15-pro-blue-titanium-13.png",
-    "https://nissei.com/media/catalog/product/cache/24e3af3791642c18c52611620aeb2e21/6/9/69736_2_2.jpg",
-  ];
+  // useEffect(() => {
+  //   const parseQuery = (queryString: string): Test => {
+  //     const params = new URLSearchParams(queryString);
+  //     const newTest: Test = {};
+  //     params.forEach((value, key) => {
+  //       newTest[key] = value;
+  //     });
+  //     return newTest;
+  //   };
+  //   setTest(parseQuery(location.search));
+  // }, [location.search]);
+
   const product_colors = ["red", "green", "blue"];
-  const characteristics: StringKeyObject = {
-    display: '6.1" (2556×1179) OLED',
-    SIM: "Dual: nano SIM + eSIM",
-    Экран: '6.1" (2556×1179) OLED',
-    Фото: "двойная камера, основная 48 МП",
-    Процессор: "Apple A16 Bionic",
-  };
-  const options = [
-    { title: '', label: 'Apple', value: 'Apple' },
-    { title: '', label: 'Pear', value: 'Pear' },
-    { title: '', label: 'Orange', value: 'Orange' },
-    { title: '', label: 'Apple', value: 'Apple' },
-    { title: '', label: 'Pear', value: 'Pear' },
-    { title: '', label: 'Orange', value: 'Orange' },
-    { title: '', label: 'Apple', value: 'Apple' },
-    { title: '', label: 'Pear', value: 'Pear' },
-    { title: '', label: 'Orange', value: 'Orange', }
-  ];
 
   const sort = atributes[Number(id)]?.category_attributes
   const sortRender = Object.entries(!sort ? { a: '', b: '' } : sort)?.map(([key, values]) => {
@@ -109,27 +91,23 @@ const Catalog: FC = () => {
 
   interface Test {
     [key: string]: string;
-
   }
   const [Test, setTest] = useState<Test>({});
 
   useEffect(() => {
-    const parseQuery = (queryString: string): Test => {
-      const params = new URLSearchParams(queryString);
-      const newTest: Test = {};
-      params.forEach((value, key) => {
-        newTest[key] = value;
-      });
-      return newTest;
-    };
+    const queryString = queryRef.current;
+    const parsedParams = parseQueryString(queryString);
+    dispatch(setParams(parsedParams));
+  }, []);
 
-    setTest(parseQuery(location.search));
-  }, [location.search]);
-  console.log(filters);
-  console.log('test:',parseQueryString('limit=20&offset=0&category=34&attribute=%D0%9E%D0%B1%D1%8A%D0%B5%D0%BC%20%D0%B2%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%B8__128%20GB&%D0%9E%D0%B1%D1%8A%D0%B5%D0%BC%20%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D0%B9%20%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%B8__4%20GB&%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%B0%D0%BC%D0%B5%D1%80%D0%B0__12%20Mpx%20%2B%2012%20Mpx&price_min=978&price_max=977'))
+
+  const currentPage = filters.offset / filters.limit + 1;
+  const total = data.count;
+
   return (
     <div>
       <div className={classes.catalogHead}>
+
         <div >
           <h1>Смартфоны</h1>
           <Breadcrumb
@@ -161,6 +139,11 @@ const Catalog: FC = () => {
       </div>
       <div className={classes.catalog}>
         <aside>
+          <div>
+            <Button onClick={() => dispatch(clearFilters())}>
+              сбросить фильтры
+            </Button>
+          </div>
 
           <div>
             <h1 className={classes.title}>Цена, ₽</h1>
@@ -194,10 +177,13 @@ const Catalog: FC = () => {
             itemLayout="vertical"
             size="large"
             pagination={{
+              current: currentPage,
+              total: total,
+              pageSize: filters.limit,
               onChange: (page) => {
-                console.log(page);
+                const newOffset = (page - 1) * filters.limit;
+                dispatch(setOffset(newOffset));
               },
-              pageSize: 20,
             }}
             dataSource={data.results}
 
@@ -208,11 +194,11 @@ const Catalog: FC = () => {
                 title={item.title}
                 colors={product_colors}
                 characteristics={item.product_attributes}
-                rating={4.9}
+                rating={item.average_rating}
                 price={item.price}
-                old_price={124990}
-                salesman="Продавец"
-                salesman_img={"https://soloha.info/wp-content/uploads/2017/01/53811363350152.jpeg"}
+                old_price={item.old_price}
+                salesman={item.shop_name}
+                salesman_img={`https://bee.webtm.ru${item.shop_logo}`}
                 offer={109}
               />
             )}

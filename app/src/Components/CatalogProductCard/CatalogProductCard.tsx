@@ -16,7 +16,7 @@ interface ICatalogProductCart {
   title: string;
   colors: Array<string>;
   characteristics: { key: string | number, value: string | number }[];
-  rating: number;
+  rating: number | null;
   price: number;
   old_price: number;
   salesman: string;
@@ -126,7 +126,7 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
           })}
         </div>
         <div className={classes.stars}>
-          <span className={classes.wrap_star}>{getStarForNumber(rating)}</span>
+          <span className={classes.wrap_star}>{getStarForNumber(rating === null ? 0 : rating)}</span>
           <span>{rating}/5</span>
         </div>
       </div>

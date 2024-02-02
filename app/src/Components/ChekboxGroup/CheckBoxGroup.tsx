@@ -1,11 +1,23 @@
 import { Button, Checkbox } from "antd";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import classes from './CheckBoxGroup.module.scss'
-import { useAppDispatch } from "store/hook";
-import { setAtribute } from "store/slices/WindowSlice";
+import { useAppDispatch, useAppSelector } from "store/hook";
+import { addAttribute, removeValue, setAtribute } from "store/slices/WindowSlice";
 import { useQuery } from "helpers/params";
 import { useLocation } from "react-router-dom";
-
+import { CheckboxValueType } from "antd/es/checkbox/Group";
+type CheckboxOption = {
+    key: string;
+    value: string;
+};
+const parsToCheckboxValue = (array: CheckboxOption[]) => {
+    const newArray = []
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i];
+        newArray.push(element.value)
+    }
+    return newArray;
+}
 interface ExpandableCheckboxGroupProps {
     options: string[];
     title: string
@@ -14,16 +26,32 @@ const ExpandableCheckboxGroup: FC<ExpandableCheckboxGroupProps> = ({ options, ti
     const query = useQuery();
     const dispatch = useAppDispatch()
     const [expanded, setExpanded] = useState(false);
-    console.log(useLocation().search);
-
-  
+    const selectedValues = useAppSelector((state) => state.window.filters.attribute)
+    const [checkedValues, setCheckedValues] = useState<any>([]);
 
 
     const visibleOptions = expanded ? options : options.slice(0, 5);
 
+    const onChange = (checkedList: CheckboxValueType[]) => {
+        // Формируем список ключей, которые уже выбраны для этой категории
+        const selectedKeys = selectedValues
+            .filter((item: CheckboxOption) => item.key === title)
+            .map((item: CheckboxOption) => item.value);
+
+        // Удаляем все значения для этой категории
+        selectedKeys.forEach((value: any) => {
+            dispatch(removeValue({ key: title, value }));
+        });
+
+        // Теперь добавляем обратно только те, что были выбраны
+        checkedList.forEach(value => {
+            dispatch(addAttribute({ key: title, value: String(value) }));
+        });
+    };
+
     return (
         <div>
-            <Checkbox.Group onChange={(e) => dispatch(setAtribute({ [title]: e[0] }))} style={{ flexDirection: 'column', gap: '12px' }}>
+            <Checkbox.Group value={parsToCheckboxValue(selectedValues)} onChange={onChange} style={{ flexDirection: 'column', gap: '12px' }}>
                 {visibleOptions.map(option => (
                     <Checkbox className={classes.Checkbox} key={option} value={option}>
                         {option}

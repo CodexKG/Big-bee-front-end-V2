@@ -2,16 +2,10 @@ import { useLocation } from "react-router-dom";
 import { FilterParams } from "store/models/WindowTypes";
 
 export function createQueryAtribute(filters: FilterParams): string {
-    const queryParts: string[] = [];
-
-    for (const key in filters) {
-        const value = filters[key];
-        if (value !== undefined) { // Игнорировать поля с неопределенными значениями
-            queryParts.push(`${encodeURIComponent(key)}__${encodeURIComponent(value)}`);
-        }
-    }
-
-    return queryParts.join('&');
+    const attributesString = filters
+        .map((attribute: { key: string, value: string }) => `${attribute.key}__${attribute.value}`)
+        .join('&');
+    return attributesString;
 }
 export function createQueryString(filters: FilterParams): string {
     const queryParts: string[] = [];
@@ -33,32 +27,36 @@ export function createQueryString(filters: FilterParams): string {
 export function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
-export function parseQueryString(queryString: string): FilterParams {
+
+type FilterParamss = {
+    attribute: { key: string, value: string }[]
+    [key: string]: any
+};
+export function parseQueryString(queryString: string): FilterParamss {
     const params = new URLSearchParams(queryString);
-    const filters: FilterParams = {};
+
+
+    const filters: FilterParamss = {
+        attribute: []
+    };
+    const atrributeArray: any = [];
+
 
     params.forEach((value, key) => {
-        // Проверка, является ли параметр атрибутом
-        if (key.startsWith('attribute__')) {
-            const attributeKey = key.replace('attribute__', '');
-            // Создание объекта атрибутов, если он ещё не существует
-            if (!filters.attribute) {
-                filters.attribute = {};
-            }
-            // Добавление атрибута в объект
-            filters.attribute[attributeKey] = value;
+        filters.attribute = [];
+
+        if (key.includes('__')) {
+            const [attrKey, attrValue] = key.split('__');
+            atrributeArray.push({ key: decodeURIComponent(attrKey), value: decodeURIComponent(attrValue) });
         } else {
-            // Обработка обычных параметров
-            filters[key] = value;
+            if (key === 'limit' || key === 'offset' || key === 'price_min' || key === 'price_max') {
+                filters[key] = parseInt(value, 10);
+            } else {
+                filters[key] = decodeURIComponent(value);
+            }
         }
     });
-
-    // Преобразование числовых значений для известных полей
-    ['price_min', 'price_max', 'limit', 'offset'].forEach((field) => {
-        if (filters[field]) {
-            filters[field] = Number(filters[field]);
-        }
-    });
-
+    console.log('atribute ', atrributeArray);
+    filters.attribute = atrributeArray
     return filters;
 }
