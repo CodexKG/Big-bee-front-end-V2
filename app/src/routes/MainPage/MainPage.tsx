@@ -5,7 +5,7 @@ import { FC } from "react";
 import { MainCaruselComponent, CompanyListComponent } from "Components";
 import { Promotion } from '../../Components/index'
 import exampleProducts from "Components/TopOffer/exampleProducts";
-
+import { api } from "api";
 
 
 const MainPage: FC = () => {
@@ -15,11 +15,11 @@ const MainPage: FC = () => {
       <CompanyListComponent />
       <TopOffer products={exampleProducts} />
       <Advantages />
-      <Promotion title="Акции и скидки" />
+      <Promotion title="Акции и скидки" getCarts={api.getProductBestSellers}/>
       <CategoryComponent />
-      <Promotion title="Специально для вас" />
+      <Promotion title="Специально для вас" getCarts={api.getForYouRandomProducts} />
       <TopOffer products={exampleProducts} />
-      <Promotion title="Хиты продаж" />
+      <Promotion title="Хиты продаж" getCarts={api.getPromotionRandomProducts} />
 
     </div >
   );

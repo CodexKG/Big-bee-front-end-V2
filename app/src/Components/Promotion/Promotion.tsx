@@ -4,16 +4,19 @@ import Title from "antd/es/typography/Title";
 import { Typography, Carousel } from "antd";
 import { PromotionCard } from "../index";
 import { CaretLeftFilled, CaretRightFilled } from "@ant-design/icons";
-import { api } from "../../api";
 import "./Promotion.scss";
 import "swiper/css";
 import { IPromotionCard } from "interfaces";
 import { sliceText } from "helpers/sliceText";
 import { PromotionSkeleton } from "Components/Skeleton";
 const { Text } = Typography;
-
+interface Data{
+  data:IPromotionCard[];
+  status:number
+}
 interface IPromotion {
   title?: string;
+  getCarts:()=>any
 }
 type Status = "fullfiled" | "rejected" | "pending";
 
@@ -39,15 +42,17 @@ const ArrowRight: React.FC<any> = ({ currentSlide, slideCount, ...props }) => {
   );
 };
 
-const Promotion: React.FC<IPromotion> = ({ title }) => {
+const Promotion: React.FC<IPromotion> = ({ title,getCarts }) => {
   const [cards, setCards] = useState([]);
   const [status, setStatus] = useState<Status>("pending");
   const getProducts = async () => {
     setStatus("pending");
     try {
-      const data = await api.getProductBestSellers();
+      const data = await getCarts()
+      console.log(data);
+      
       if (data.status === 200) {
-        setCards(data.data);
+        setCards(data.data)
         setStatus("fullfiled");
       }
     } catch (err) {

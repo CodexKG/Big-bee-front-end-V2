@@ -1,6 +1,7 @@
 import { CancelToken } from "axios";
 import { instance } from "./index";
 import { ProductData } from "types/types";
+import { get } from "http";
 
 //product
 const getProducts = (
@@ -39,13 +40,22 @@ const getProductsById = (id: number, sourceToken?: CancelToken) =>
 const getProduct = (id: number, sourceToken?: CancelToken) =>
   instance.get(`/products/products/${id}`, { cancelToken: sourceToken });
 
-const getProductBestSellers = (sourceToken?:CancelToken) => 
+const getProductBestSellers = (sourceToken?: CancelToken) =>
   instance.get(`/products/bestsellers/`, { cancelToken: sourceToken });
+
+const getForYouRandomProducts = (sourceToken?: CancelToken) =>
+  instance.get("/products/for-you-products/random_products",{ cancelToken: sourceToken });
+
+const getPromotionRandomProducts = (sourceToken?: CancelToken) =>
+  instance.get("/products/promotions/random_products",{ cancelToken: sourceToken });
+
 
 const endpoints = {
   getProducts,
   getProductsById,
   getFilteredProducts,
-  getProductBestSellers
+  getProductBestSellers,
+  getForYouRandomProducts,
+  getPromotionRandomProducts
 };
 export default endpoints;
