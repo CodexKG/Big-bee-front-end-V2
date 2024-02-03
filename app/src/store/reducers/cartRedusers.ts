@@ -3,15 +3,22 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { CancelToken } from "axios";
 import { CartData, CartItem, localCartItem } from "../models/CartTypes";
 import { api } from "../../api";
+import { getCookie } from "helpers/cookies";
 
 
-
-export const fetchCartItems = createAsyncThunk<CartData, { cancelToken?: CancelToken, id: number }, { rejectValue?: string }>(
+export const fetchCartItems = createAsyncThunk<any, { cancelToken?: CancelToken, id: number }, { rejectValue?: string }>(
     'cart/fetchCartItems',
     async ({ id }, { rejectWithValue }) => {
         try {
-            const response = await api.getOwnCartItems(id); 
-            return response.data;
+            const access_token = getCookie('access_token')
+            if (access_token){
+                const response = await api.getOwnCartItems(id); 
+                return response.data;
+            }
+            else{
+                const storedData = localStorage.getItem("cartItems");
+                return storedData ? JSON.parse(storedData) : [];
+            }
         } catch (error) {
             return rejectWithValue(typeof error === 'string' ? error : 'Failed to fetch cart items');
         }

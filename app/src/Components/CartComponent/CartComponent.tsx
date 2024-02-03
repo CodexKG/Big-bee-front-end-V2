@@ -4,14 +4,19 @@ import { Flex, Checkbox, Button  } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { CloseOutlined } from '@ant-design/icons'; 
 import CartItemComponent from 'Components/CartItemComponent/CartItemComponent';
-import { loadCartFromLocalStorage, updateCartToLocalStorage,deleteCheckedCartToLocalStorage } from 'store/reducers/cartRedusers';
+import { loadCartFromLocalStorage, updateCartToLocalStorage,deleteCheckedCartToLocalStorage, fetchCartItems } from 'store/reducers/cartRedusers';
 import { Link } from 'react-router-dom';
-import { localCartItem } from 'store/models/CartTypes';
+import { CartItem, CartProduct, localCartItem } from 'store/models/CartTypes';
+import { useAppDispatch, useAppSelector } from 'store/hook';
 type Props = {
 
 }
 
 const CartComponent : React.FC<Props> = ()=>{
+    const dispatch = useAppDispatch();
+    const { data, status } = useAppSelector((state) => state.cart)
+
+
     const onChange: CheckboxProps['onChange'] = (e) => {
         setIsAllCheck(!e.target.value)
         cart_items.map(el=>{
@@ -19,7 +24,7 @@ const CartComponent : React.FC<Props> = ()=>{
         })
     };
     const cart = loadCartFromLocalStorage()
-    const [cart_items, setCartItems] = useState<localCartItem[]>([])
+    const [cart_items, setCartItems] = useState<localCartItem[]|CartProduct[]>([])
     const [is_all_check, setIsAllCheck] = useState(false)
     const [cost, setCost] = useState(0)
     const [sell, setSell] = useState(0)
@@ -27,6 +32,8 @@ const CartComponent : React.FC<Props> = ()=>{
     const [total_cost, setTotalCost] = useState(0)
     useEffect(()=>{
         setCartItems(cart)
+        console.log(data);
+        
     },[])
     useEffect(()=>{
         setIsAllCheck(cart_items.every(item => item.is_selected === true))
