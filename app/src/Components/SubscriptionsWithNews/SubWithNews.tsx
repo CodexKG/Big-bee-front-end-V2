@@ -1,11 +1,26 @@
 import classes from "./SubWithNews.module.scss"
 import Input from 'antd/es/input/Input'
-import { Form, Button } from 'antd'
+import { Form, Button, message } from 'antd'
 import logo from "../../assets/icon/logo.svg"
+import { useAppDispatch } from "store/hook"
+import { getEmailAsync } from "store/reducers/getEmailReducer"
 
 type Props = {};
 
 const SubWithNews: React.FC<Props> = () => {
+
+    const dispatch = useAppDispatch();
+
+
+    const onFinish = (values: any) => {
+        console.log('Success:', values);
+        try {
+            dispatch(getEmailAsync({ email: values.email }))
+            message.success('Ваш email успешно принят, на вашу почту будут отправлятся новости!')
+        } catch (error) {
+            message.success('Упс, что то пошло не так!')
+        }
+    };
 
     return (
 
@@ -21,22 +36,29 @@ const SubWithNews: React.FC<Props> = () => {
                     <p>Получайте самые интересные предложения первыми!</p>
                 </div>
 
-                <Form>
-                    <Form.Item name="email">
-                        <Input
-                            required
-                            placeholder='Email'
-                            type='email'
-                            size='large'
-                            className={classes.input}
-                        ></Input>
+                <Form
+                    name="emailForm"
+                    onFinish={onFinish}
+                >
 
-                        <Button
-                            htmlType='submit'
-                            className={classes.button}
+                    <div className={classes.flexFrom}>
+                        <Form.Item name="email">
+                            <Input
+                                required
+                                placeholder='Email'
+                                type='email'
+                                size='large'
+                                className={classes.input}
+                            ></Input>
+                        </Form.Item>
 
-                        >Отправить</Button>
-                    </Form.Item>
+                        <Form.Item>
+                            <Button htmlType='submit' className={classes.button}>
+                                Отправить
+                            </Button>
+                        </Form.Item>
+                    </div>
+
                 </Form>
 
                 <div className={classes.text}>

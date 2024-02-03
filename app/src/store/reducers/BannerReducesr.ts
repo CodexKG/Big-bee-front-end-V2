@@ -6,7 +6,7 @@ import { api } from "../../api/";
 
 
 export const fetchBanners = createAsyncThunk<any, { cancelToken?: CancelToken }, { rejectValue?: string }>(
-    'cart/fetchCartItems',
+    'baner/fetchBanners',
     async ({cancelToken},{ rejectWithValue }) => {
         try {
             const response = await api.getBanners(cancelToken); 

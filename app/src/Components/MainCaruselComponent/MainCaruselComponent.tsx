@@ -13,10 +13,16 @@ type Props = {
 const MainCaruselComponent : React.FC<Props> = ()=>{
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState(false);
-    const { data, status } = useAppSelector((state) => state.banner)
+    const { data, status } = useAppSelector((state) => state.baner)
     useEffect(()=>{
         const source = axios.CancelToken.source();
+<<<<<<< HEAD
         dispatch(fetchBanners({ cancelToken: source.token, }))        
+=======
+        dispatch(fetchBanners({ cancelToken: source.token, }))
+    
+        
+>>>>>>> 89a8e5f1239e2f75d2fc3a1880b122bece308f2d
         return () => {
             source.cancel('Запрос отменен, Слайдер приостоновлен');
         };

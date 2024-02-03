@@ -7,6 +7,8 @@ import reviews from './reviews'
 import favorites from './favorites'
 import categories from './categories'
 import banners from './banners'
+import email from './getEmail'
+
 const instance = axios.create({
   // @ts-ignore
   baseURL: window.REACT_APP_SERVER_API !== 'REPLACE_REACT_APP_SERVER_API' ? window.REACT_APP_SERVER_API : process.env.REACT_APP_SERVER_API || 'https://bee.webtm.ru/api/v1/',
@@ -16,6 +18,8 @@ const instance = axios.create({
 
 
 })
+//@ts-ignore
+console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
 
 
 // instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
@@ -23,7 +27,7 @@ const instance = axios.create({
 //   if (kc_access) config.headers!['kc-access'] = kc_access;
 //   return config
 // });
-const { getFilteredProducts, getProducts, getProductsById } = produckts
+const { getFilteredProducts, getProducts, getProductsById, getProductsofDay } = produckts
 const { login, register } = auth
 const { createCart, addToCart, getOwnCartItems, deleteCartItem,updateCartItem } = carts
 const { getFilteredShops, getShopById, getShops } = shops
@@ -31,6 +35,8 @@ const { getReviews, getReviewById, addReview, updateReview, deleteReview, } = re
 const { addProductToFavorite, delProductFromFavorite } = favorites
 const { getCategories, getCategoriesById } = categories
 const { getBanners } = banners
+const { getEmail } = email
+
 
 
 const api = {
@@ -42,6 +48,7 @@ const api = {
   addToCart,
   getOwnCartItems,
   getFilteredProducts,
+  getProductsofDay,
   getShops,
   getShopById,
   getFilteredShops,
@@ -57,6 +64,7 @@ const api = {
   getCategoriesById,
   updateCartItem,
   getBanners,
+  getEmail
 }
 
 export { instance, api };
