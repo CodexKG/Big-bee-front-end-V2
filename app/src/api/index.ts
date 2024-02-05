@@ -27,9 +27,10 @@ console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
 //   if (kc_access) config.headers!['kc-access'] = kc_access;
 //   return config
 // });
-const { getFilteredProducts, getProducts, getProductsById, getProductsofDay } = produckts
+
 const { login, register, getUsers } = auth
 const { createCart, addToCart, getOwnCartItems, deleteCartItem,updateQuantityCartItem, updateSelectedCartItem } = carts
+const { getFilteredProducts, getProducts, getProductsById,getProductBestSellers ,getForYouRandomProducts,getPromotionRandomProducts,getProductsofDay} = produckts
 const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, } = reviews
 const { addProductToFavorite, delProductFromFavorite } = favorites
@@ -44,7 +45,6 @@ const api = {
   getProducts,
   getProductsById,
   register,
-  getUsers,
   createCart,
   addToCart,
   getOwnCartItems,
@@ -65,8 +65,13 @@ const api = {
   getCategoriesById,
   updateQuantityCartItem,
   updateSelectedCartItem,
+  getProductBestSellers,
+  getForYouRandomProducts,
+  getPromotionRandomProducts,
   getBanners,
   getEmail
+
+
 }
 
 export { instance, api };

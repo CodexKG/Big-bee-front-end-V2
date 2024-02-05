@@ -41,10 +41,10 @@ const CartItemComponent : React.FC<Props> = ({cart_item}:Props)=>{
         <Flex  gap={50} justify='space-between' align='start' className={classes.cart__item}>
             <Flex gap={20} align='start' className={classes.left}>
                 <Checkbox onChange={onChange} checked={cart_item.is_selected}></Checkbox>
-                <img src={cart_item.product.image} alt="" />
+                <img src={cart_item.image} alt="" />
                 <Flex gap={15} vertical>
                     <span className={classes.title}>
-                        {cart_item.product.title}
+                        {cart_item.title}
                     </span>
                     <p className={classes.code}>Код товара: {cart_item.product.product_code}</p>
                     <p className={classes.category}>
@@ -60,8 +60,8 @@ const CartItemComponent : React.FC<Props> = ({cart_item}:Props)=>{
                     <PlusOutlined onClick={()=>{inp_change(true)}}/>
                 </Flex>
                 <Flex vertical gap={10}>
-                    <span className={classes.old_price}>{cart_item.product.old_price}</span>
-                    <span className={classes.price}>{cart_item.product.price}</span>
+                    <span className={classes.old_price}>{cart_item.old_price}</span>
+                    <span className={classes.price}>{cart_item.price}</span>
                 </Flex>
                 <Flex gap={20} className={classes.spans}>
                     {

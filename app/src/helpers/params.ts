@@ -3,7 +3,7 @@ import { FilterParams } from "store/models/WindowTypes";
 
 export function createQueryAtribute(filters: FilterParams): string {
     const attributesString = filters
-        .map((attribute: { key: string, value: string }) => `${attribute.key}__${attribute.value}`)
+        .map((attribute: { key: string, value: string }) => `${encodeURIComponent(attribute.key)}__${encodeURIComponent(attribute.value)}`)
         .join('&');
     return attributesString;
 }
@@ -34,6 +34,9 @@ type FilterParamss = {
 };
 export function parseQueryString(queryString: string): FilterParamss {
     const params = new URLSearchParams(queryString);
+    console.log('call');
+
+
 
 
     const filters: FilterParamss = {
@@ -43,9 +46,21 @@ export function parseQueryString(queryString: string): FilterParamss {
 
 
     params.forEach((value, key) => {
+        console.log('call params:', { key: key, value: value });
         filters.attribute = [];
 
-        if (key.includes('__')) {
+        if (key === 'attribute' && value.includes('__')) {
+            const [attrKey, attrValue] = value.split('__');
+            console.log(attrKey, attrValue);
+
+            atrributeArray.push({ key: decodeURIComponent(attrKey), value: decodeURIComponent(attrValue) });
+        } else if (key.includes('__') || value.includes('__')) {
+            if (key === 'attribute' && value.includes('__')) {
+                const [attrKey, attrValue] = value.split('__');
+                console.log(attrKey, attrValue);
+
+                atrributeArray.push({ key: decodeURIComponent(attrKey), value: decodeURIComponent(attrValue) });
+            }
             const [attrKey, attrValue] = key.split('__');
             atrributeArray.push({ key: decodeURIComponent(attrKey), value: decodeURIComponent(attrValue) });
         } else {
@@ -56,7 +71,7 @@ export function parseQueryString(queryString: string): FilterParamss {
             }
         }
     });
-    console.log('atribute ', atrributeArray);
+    // console.log('atribute ', atrributeArray);
     filters.attribute = atrributeArray
     return filters;
 }

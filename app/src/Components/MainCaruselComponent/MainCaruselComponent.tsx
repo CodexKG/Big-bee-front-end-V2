@@ -3,6 +3,7 @@ import classes from './MainCaruselComponent.module.scss'
 import './slider.css'
 import axios from 'axios';
 import { Carousel, Flex } from 'antd';
+import { caruselItems } from 'data/carusel/carusel';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hook';
 import { fetchBanners } from 'store/reducers/BannerReducesr';
@@ -16,6 +17,8 @@ const MainCaruselComponent : React.FC<Props> = ()=>{
     useEffect(()=>{
         const source = axios.CancelToken.source();
         dispatch(fetchBanners({ cancelToken: source.token, }))
+    
+        
         return () => {
             source.cancel('Запрос отменен, Слайдер приостоновлен');
         };
@@ -42,7 +45,7 @@ const MainCaruselComponent : React.FC<Props> = ()=>{
                                         </Link>
                                     </Flex>
                                     </div>
-                                    {/* <img src={e.image} alt="" /> */}
+                                    <img src={e.image} alt="" />
                                 </Flex>
                             )
                         })
