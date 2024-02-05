@@ -3,8 +3,8 @@
 .header {
     position: relative;
     max-width: 1722px;
-    margin: 0 auto; 
-    width: 100%;    
+    margin: 0 auto;
+    width: 100%;
 
     nav {
 
@@ -137,12 +137,14 @@
             gap: 1rem;
             flex-wrap: wrap;
 
+
             &_item {
                 width: 24%;
                 height: fit-content;
             }
 
             h1 {
+                cursor: pointer;
                 color: #000;
                 font-size: 18px;
                 font-style: normal;
@@ -151,6 +153,7 @@
             }
 
             p {
+                cursor: pointer;
                 color: #71767E;
                 font-size: 16px;
                 font-style: normal;
@@ -165,7 +168,7 @@
 }
 
 .test {
-    height: 100vh;
+    // height: 100vh;
     position: absolute;
     width: 100%;
 }

@@ -110,6 +110,7 @@ const Promotion: React.FC<IPromotion> = ({ title }) => {
               />
             );
           })}
+
         </Carousel>
       </div>
     </section>

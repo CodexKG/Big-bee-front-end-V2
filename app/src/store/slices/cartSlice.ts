@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchCartItems, loadCartFromLocalStorage, saveCartToLocalStorage } from 'store/reducers/cartRedusers';
-import { CartData, localCartItem } from 'types/types';
+import { CartData, localCartItem, CartItem } from '../models/CartTypes';
 
 interface CartState {
     data: CartData;
@@ -13,7 +13,7 @@ interface CartState {
 const initialState: CartState = {
     data: {
         id: 0,
-        session_key: '',
+        user_id: 1,
         cart_items: [],
     },
     localData: loadCartFromLocalStorage(),
@@ -34,8 +34,6 @@ const cartSlice = createSlice({
             } else {
                 state.localData.push({ ...action.payload, quantity: 1 });
             }
-
-            saveCartToLocalStorage(state.localData);
         },
     },
     extraReducers: (builder) => {
