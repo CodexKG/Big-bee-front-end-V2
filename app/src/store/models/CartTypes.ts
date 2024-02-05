@@ -1,10 +1,13 @@
+export interface attrType {
+    key: string,
+    value:string
+}
 export interface CartProduct {
     id: number,
-    shop: number,
     title: string,
     description: string,
     image: string,
-    product_attributes: object[],
+    product_attributes: attrType[],
     price:number,
     old_price:number,
     product_code:number,
@@ -22,14 +25,12 @@ export interface CartData {
     total_cost?: number,
     cart_items: CartItem[]
 }
-
 export interface localCartProduct {
     id: number,
-    shop: number,
     title: string,
     description: string,
     image: string,
-    product_attributes: object[],
+    product_attributes: attrType[],
     price:number,
     old_price:number,
     product_code:number,
@@ -38,7 +39,16 @@ export interface localCartProduct {
 export interface localCartItem {
     id: number,
     cart: number,
-    product:localCartProduct[];
+    product:localCartProduct;
     quantity: number,
     is_selected:boolean,
+}
+export interface user {
+    id: number,
+    username: string,
+    first_name: string,
+    last_name: string,
+    email: string,
+    date_joined: string,
+    profile_image: string,
 }

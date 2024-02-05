@@ -28,7 +28,7 @@ console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
 //   return config
 // });
 const { getFilteredProducts, getProducts, getProductsById, getProductsofDay } = produckts
-const { login, register } = auth
+const { login, register, getUsers } = auth
 const { createCart, addToCart, getOwnCartItems, deleteCartItem,updateCartItem } = carts
 const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, } = reviews
@@ -44,6 +44,7 @@ const api = {
   getProducts,
   getProductsById,
   register,
+  getUsers,
   createCart,
   addToCart,
   getOwnCartItems,

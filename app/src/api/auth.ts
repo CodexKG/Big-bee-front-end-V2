@@ -9,10 +9,12 @@ const register = (username: string, password: string, confirm_password: string, 
     instance.post('/users/', { username, password, confirm_password }, { cancelToken: sourceToken });
 
 
-
+const getUsers = (sourceToken?: CancelToken) =>
+    instance.get('/users/', { cancelToken: sourceToken });
 
 const endpoints = {
     login,
-    register
+    register,
+    getUsers
 };
 export default endpoints;

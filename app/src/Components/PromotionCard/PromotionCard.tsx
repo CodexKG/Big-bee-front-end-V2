@@ -31,15 +31,13 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   };
   const cart_info = {
     id:id,
-    image:product_img,
     title:title,
     description:subtitle,
-    old_price:old_price,
+    image:product_img,
+    product_attributes:[{key: "Основная камера",value: "48 Mpx + 12 Mpx + 12 Mpx"}],
     price:price,
-    quantity:1,
-    is_selected:false,
-    code:12312,
-    category:'Чёрный',
+    old_price:old_price,
+    product_code:12312,
   }
 
 
