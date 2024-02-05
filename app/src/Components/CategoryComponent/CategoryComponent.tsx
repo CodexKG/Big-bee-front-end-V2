@@ -1,11 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 import classes from './Category.module.scss';
 import moreIcon from './img/icon.svg';
 import CategoryCardComponent from '../CategoryCardComponent/CategoryCardComponent';
 import { Carousel } from "antd";
 import { CaretLeftFilled, CaretRightFilled, } from "@ant-design/icons";
+import {api} from '../../api/index';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPopularCategories } from "store/reducers/popularCategoryRedusers";
+import { Categories } from 'types/types';
+import { useAppDispatch, useAppSelector } from 'store/hook';
+import axios from "axios";
 
 const CategoryComponent: React.FC = () =>{
+  const { data, children, status } = useAppSelector((state) => state.popularCategories);
+  const dispatch = useAppDispatch();
     const categories = [
         {
             id: 1,
@@ -33,6 +41,17 @@ const CategoryComponent: React.FC = () =>{
         },
     ]
 
+    useEffect(() => {
+      const source = axios.CancelToken.source();
+      dispatch(fetchPopularCategories({ cancelToken: source.token, }))
+      return () => {
+          source.cancel('Запрос отменен, компонент размонтирован');
+      };
+  }, []);
+  useEffect(()=>{
+    console.log(data);
+
+  },[data])
     return (
         <div className={classes.category}>
             <div className={classes.category_block}>
@@ -50,7 +69,7 @@ const CategoryComponent: React.FC = () =>{
               arrows={true}
             >
                 {
-                    categories.map(item =>{
+                    data.map(item =>{
                         return <CategoryCardComponent key={item.id} item={item} />
                     })
                 }

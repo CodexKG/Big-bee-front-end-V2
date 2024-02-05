@@ -1,0 +1,80 @@
+.adblock {
+
+
+    &_link_blue {
+        font-family: SF Pro Display;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 15px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: #005BFF;
+        display: block;
+        margin-top: 10px;
+    }
+
+    &_item {
+
+        border-radius: 8px;
+        height: 552px;
+        padding: 30px;
+        position: relative;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &_black{
+            background: linear-gradient(332.28deg, #090F13 0%, #1D2830 100%);
+        }
+        &_purple{
+            background: linear-gradient(332.28deg, #4D2CBA 0%, #BD8DFA 100%);
+        }
+        &_green{
+            background: linear-gradient(332.28deg, #0A1A0B 0%, #84AA76 100%, #86AE76 100%);
+        }
+        &_title {
+
+            font-family: SF Pro Display;
+            font-size: 38px;
+            font-weight: 700;
+            line-height: 38px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        &_text {
+            font-family: SF Pro Display;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: #8D9093;
+            &_white{
+                color: #ffffff;
+            }
+        }
+
+        &_link {
+            font-family: SF Pro Display;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 25px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        &_img {
+            width: 220px;
+            height: 300px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            object-fit: cover;
+            border-radius: 0 0 8px 0;
+        }
+    }
+}
