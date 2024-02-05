@@ -43,7 +43,7 @@ const MainCaruselComponent : React.FC<Props> = ()=>{
                                         </Link>
                                     </Flex>
                                     </div>
-                                    {/* <img src={e.image} alt="" /> */}
+                                    <img src={e.image} alt="" />
                                 </Flex>
                             )
                         })
