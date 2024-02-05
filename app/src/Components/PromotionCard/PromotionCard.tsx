@@ -33,14 +33,16 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
     carouselRef.current?.goTo(index, true);
   };
   const cart_info = {
-    id:id,
-    title:title,
-    description:subtitle,
-    image:product_img,
-    product_attributes:[{key: "Основная камера",value: "48 Mpx + 12 Mpx + 12 Mpx"}],
-    price:price,
-    old_price:old_price,
-    product_code:12312,
+    id: id,
+    image: product_img,
+    title: title,
+    description: subtitle,
+    old_price: old_price,
+    price: price,
+    quantity: 1,
+    is_selected: false,
+    code: 12312,
+    category: 'Чёрный',
   }
 
 

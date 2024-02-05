@@ -18,8 +18,7 @@
     &__item{
         width: 100%;
         height: fit-content;
-        color: #fff;
-        background-color: black;
+        color: #000000;
     }
     &__wrapper{
         padding: 70px;
@@ -27,14 +26,15 @@
         background-size: cover !important;
         object-fit: cover ;   
         background-repeat: no-repeat !important;
+        height: 100%;
         border-radius: 8px;
-        height: 700px !important;
-        box-sizing: border-box;
+        height: 100%;
+        min-height: 500px;
     }
     &__inner{
         width: 40%;
         height: inherit;
-        height: 100%;
+        min-height: inherit;
         a{
             color: inherit;
             display: flex;
@@ -44,7 +44,7 @@
         }
         div{
             h2{
-                font-size: 55px;
+                font-size: 62px;
             }
             p{
                 font-size: 20px;
