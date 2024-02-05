@@ -1,0 +1,28 @@
+.btn {
+    display: flex;
+    color: #005BFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn:hover {
+    color: #005BFF !important;
+}
+
+.Checkbox {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    /* 18px */
+}

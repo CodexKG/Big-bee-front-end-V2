@@ -66,6 +66,7 @@ const Promotion: React.FC<IPromotion> = ({title}) => {
             old_price={124990}
             rating={4.9}
             review={203}
+            id={1}
           />
           <PromotionCard
             product_img="https://3dplanet.am/wp-content/uploads/2023/09/30069469bb.jpg"
@@ -76,6 +77,7 @@ const Promotion: React.FC<IPromotion> = ({title}) => {
             old_price={124990}
             rating={4.9}
             review={203}
+            id={2}
           />
           <PromotionCard
             product_img="https://3dplanet.am/wp-content/uploads/2023/09/30069469bb.jpg"
@@ -86,6 +88,7 @@ const Promotion: React.FC<IPromotion> = ({title}) => {
             old_price={124990}
             rating={4.9}
             review={203}
+            id={3}
           />
           <PromotionCard
             product_img="https://3dplanet.am/wp-content/uploads/2023/09/30069469bb.jpg"
@@ -96,6 +99,7 @@ const Promotion: React.FC<IPromotion> = ({title}) => {
             old_price={124990}
             rating={4.9}
             review={203}
+            id={4}
           />
           <PromotionCard
             product_img="https://3dplanet.am/wp-content/uploads/2023/09/30069469bb.jpg"
@@ -106,6 +110,7 @@ const Promotion: React.FC<IPromotion> = ({title}) => {
             old_price={124990}
             rating={4.9}
             review={203}
+            id={5}
           />
           <PromotionCard
             product_img="https://3dplanet.am/wp-content/uploads/2023/09/30069469bb.jpg"
@@ -116,6 +121,7 @@ const Promotion: React.FC<IPromotion> = ({title}) => {
             old_price={124990}
             rating={4.9}
             review={203}
+            id={6}
           />
         </Carousel>
       </div>

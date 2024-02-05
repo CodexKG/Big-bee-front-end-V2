@@ -1,27 +1,42 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import classes from './MainCaruselComponent.module.scss'
 import './slider.css'
+import axios from 'axios';
 import { Carousel, Flex } from 'antd';
 import { caruselItems } from 'data/carusel/carusel';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'store/hook';
+import { fetchBanners } from 'store/reducers/BannerReducesr';
 
 type Props = {
 
 }
 const MainCaruselComponent : React.FC<Props> = ()=>{
+    const dispatch = useAppDispatch();
+    const [loading, setLoading] = useState(false);
+    const { data, status } = useAppSelector((state) => state.baner)
+    useEffect(()=>{
+        const source = axios.CancelToken.source();
+        dispatch(fetchBanners({ cancelToken: source.token, }))
+    
+        
+        return () => {
+            source.cancel('Запрос отменен, Слайдер приостоновлен');
+        };
+    },[])
     return (
         <div className={classes.carusel}>
             <div className={classes.container}>
-                <Carousel dotPosition={'top'}>
+                <Carousel dotPosition={'top'} autoplay>
                     {
-                        caruselItems.map(e=>{
+                        data.map(e=>{
                             return (
                                 <Flex  className={classes.carusel__item}  key={e.id}>
                                     <div style={{background: `url(${e.image})`}} className={classes.carusel__wrapper}>
-                                    <Flex gap={150} className={classes.carusel__inner}  vertical={true} justify="space-between">
+                                    <Flex className={classes.carusel__inner}  vertical={true} gap={'auto'} justify="space-between">
                                         <Flex gap={10} vertical>
                                             <h2>{e.title}</h2>
-                                            <p>{e.descr}</p>
+                                            <p>{e.description}</p>
                                         </Flex>
                                         <Link to={e.url}>
                                             Узнать подробнее
