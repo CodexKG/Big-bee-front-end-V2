@@ -13,12 +13,14 @@ type DotPosition = CarouselProps["dotPosition"];
 
 const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const {
-    product_img,
     salesman_img,
     title,
-    subtitle,
+    description,
     price,
     old_price,
+    average_rating,
+    review_count,
+    product_images,
     rating,
     review,
     id,
@@ -48,51 +50,24 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
       <div className={classes.img_block}>
         <div className={classes.discount_block}>-14%</div>
         <div className={classes.img_block_hover}>
-          <div
-            className={classes.img_block_hover_it}
-            onMouseMove={() => imgHover(0)}
-          ></div>
-          <div
-            className={classes.img_block_hover_it}
-            onMouseMove={() => imgHover(1)}
-          ></div>
-          <div
-            className={classes.img_block_hover_it}
-            onMouseMove={() => imgHover(2)}
-          ></div>
-          <div
-            className={classes.img_block_hover_it}
-            onMouseMove={() => imgHover(3)}
-          ></div>
+          {product_images.map((item,index) => {
+            return (
+              <div
+                className={classes.img_block_hover_it}
+                onMouseMove={() => imgHover(index)}
+                key={item.id}
+              ></div>
+            );
+          })}
         </div>
         <Carousel dotPosition={dotPosition} ref={carouselRef}>
-          <div className={classes.img_block_item}>
-            <img
-              src={
-                "https://object.pscloud.io/cms/cms/Photo/img_0_77_4248_9_6.png"
-              }
-              alt={title}
-            />
-          </div>
-          <div className={classes.img_block_item}>
-            <img
-              src={
-                "https://softech.kg/image/cache/a250ce5c38cb97be0e0629db55a922e4.jpg"
-              }
-              alt=""
-            />
-          </div>
-          <div className={classes.img_block_item}>
-            <img
-              src={
-                "https://gudini.kg/image/cache/catalog/Samsung/S23%20FE/71ii1syiyrl._sl1500_-800x800.jpg"
-              }
-              alt=""
-            />
-          </div>
-          <div className={classes.img_block_item}>
-            <img src={product_img} alt="" />
-          </div>
+          {product_images.map((item, index) => {
+            return (
+              <div className={classes.img_block_item}>
+                <img src={item.image} alt={title} key={item.id} />
+              </div>
+            );
+          })}
         </Carousel>
       </div>
       <div className={classes.salesman}>
@@ -109,7 +84,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
       </div>
       <Title level={3}>{title}</Title>
       <div className={classes.subtitle}>
-        <Text>{subtitle}</Text>
+        <Text>{description}</Text>
       </div>
       <Text strong>
         <Title level={3}>{numberWithSpaces(price)} с</Title>
@@ -123,16 +98,17 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         <Col span={12} className={classes.old_price_item}>
           <span>
             <StarFilled style={{ color: "#F5C423" }} />
-            {rating}
+            {average_rating}
           </span>
           <span>
-            <img src={messageIcon} alt="" />
-            {numberWithSpaces(review)} отзыва
+            <img src={messageIcon} alt="message" />
+            {numberWithSpaces(review_count)} отзыва
           </span>
         </Col>
       </Row>
       <Row style={{ justifyContent: "space-between" }}>
         <Button onClick={()=>{saveCartToLocalStorage(cart_info)}} className={classes.cart_button}>Добавить в корзину</Button>
+
         <Button className={classes.cart_favorites}>
           <HeartOutlined />
         </Button>
