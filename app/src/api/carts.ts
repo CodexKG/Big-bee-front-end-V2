@@ -6,9 +6,10 @@ import { instance } from './index'
 const createCart = (id: number, sourceToken?: CancelToken) =>
     instance.post(
         '/carts/cart/',
-        { id: id, },
+        { user: id, },
         { cancelToken: sourceToken }
     );
+
 const addToCart = (cart: number, product: number,quantity:number, sourceToken?: CancelToken) =>
     instance.post(
         '/carts/items/',
@@ -21,34 +22,51 @@ const addToCart = (cart: number, product: number,quantity:number, sourceToken?: 
     );
 
 
-const getOwnCartItems = (id: number, sourceToken?: CancelToken) =>
-    instance.get(`/carts/cart/${id}`, { cancelToken: sourceToken });
+const getOwnCartItems = (id?: number, sourceToken?: CancelToken) =>
+    instance.get(`/carts/cart/?user=${id}`, { cancelToken: sourceToken });
 
-const deleteCartItem = (id: number, sourceToken?: CancelToken) =>
+const deleteCartItem = (id: number, access_token:string, sourceToken?: CancelToken) =>
     instance.delete(`/carts/items/${id}`, {
         headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3MjcxMDgzLCJpYXQiOjE3MDQ2NzkwODMsImp0aSI6IjAwYjQxNjVhZWJhNTQ1M2E4Y2EyYTAwN2VlYzYxNjk2IiwidXNlcl9pZCI6Mn0.tZkF8Xf_YHUIHqrFMkHqIK-OhC_0FaSEM-tw-JQ6YQ8`
+            Authorization: `Bearer ${access_token}`
         },
     cancelToken: sourceToken
 },);
 
-const updateCartItem = (id: number,quantity:number, sourceToken?: CancelToken) =>
-instance.put(
-    `/carts/items/${id}`,{
-    params: {
+const updateQuantityCartItem = (id: number,quantity:number, access_token:string, sourceToken?: CancelToken) =>
+instance.patch(
+    `/carts/items/${id}`,
+    {
         quantity: quantity
     },
-    headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3MjcxMDgzLCJpYXQiOjE3MDQ2NzkwODMsImp0aSI6IjAwYjQxNjVhZWJhNTQ1M2E4Y2EyYTAwN2VlYzYxNjk2IiwidXNlcl9pZCI6Mn0.tZkF8Xf_YHUIHqrFMkHqIK-OhC_0FaSEM-tw-JQ6YQ8`
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      },
+      cancelToken: sourceToken 
+    }
+);
+
+const updateSelectedCartItem = (id: number,is_selected:boolean, access_token:string, sourceToken?: CancelToken) =>
+instance.patch(
+    `/carts/items/${id}`,
+    {
+      is_selected: is_selected
     },
-    cancelToken: sourceToken 
-});
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      },
+      cancelToken: sourceToken 
+    }
+);
 
 const endpoints = {
     createCart,
     addToCart,
     getOwnCartItems,
     deleteCartItem,
-    updateCartItem
+    updateQuantityCartItem,
+    updateSelectedCartItem,
 };
 export default endpoints;

@@ -15,7 +15,7 @@ export interface CartProduct {
 export interface CartItem {
     id: number,
     cart: number,
-    product:CartProduct[];
+    product:CartProduct;
     quantity: number,
     is_selected:boolean,
 }

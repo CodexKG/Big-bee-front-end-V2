@@ -7,11 +7,15 @@ import type { CarouselProps } from "antd";
 import { numberWithSpaces } from "helpers";
 import { StarFilled, HeartOutlined } from "@ant-design/icons";
 import { CarouselRef } from "antd/es/carousel";
-import { saveCartToLocalStorage } from "store/reducers/cartRedusers"
+import { addLocalCartItem } from "store/reducers/cartRedusers"
+import { CartProduct } from "store/models/CartTypes";
+import { useAppDispatch } from "store/hook";
 
 type DotPosition = CarouselProps["dotPosition"];
 
 const PromotionCard: React.FC<IPromotionCard> = (props) => {
+  const dispatch = useAppDispatch();
+
   const {
     product_img,
     salesman_img,
@@ -29,15 +33,15 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const imgHover = (index: number) => {
     carouselRef.current?.goTo(index, true);
   };
-  const cart_info = {
-    id:id,
-    title:title,
-    description:subtitle,
-    image:product_img,
-    product_attributes:[{key: "Основная камера",value: "48 Mpx + 12 Mpx + 12 Mpx"}],
-    price:price,
-    old_price:old_price,
-    product_code:12312,
+  const cart_info: CartProduct = {
+    id: id,
+    title: title,
+    description: subtitle,
+    image: product_img,
+    product_attributes: [{ key: "Основная камера", value: "48 Mpx + 12 Mpx + 12 Mpx" }],
+    price: price,
+    old_price: old_price,
+    product_code: 12312,
   }
 
 
@@ -130,7 +134,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         </Col>
       </Row>
       <Row style={{ justifyContent: "space-between" }}>
-        <Button onClick={()=>{saveCartToLocalStorage(cart_info)}} className={classes.cart_button}>Добавить в корзину</Button>
+        <Button onClick={() => { dispatch(addLocalCartItem({ cartItem: cart_info })) }} className={classes.cart_button}>Добавить в корзину</Button>
         <Button className={classes.cart_favorites}>
           <HeartOutlined />
         </Button>

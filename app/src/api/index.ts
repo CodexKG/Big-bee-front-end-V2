@@ -29,7 +29,7 @@ console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
 // });
 const { getFilteredProducts, getProducts, getProductsById, getProductsofDay } = produckts
 const { login, register, getUsers } = auth
-const { createCart, addToCart, getOwnCartItems, deleteCartItem,updateCartItem } = carts
+const { createCart, addToCart, getOwnCartItems, deleteCartItem,updateQuantityCartItem, updateSelectedCartItem } = carts
 const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, } = reviews
 const { addProductToFavorite, delProductFromFavorite } = favorites
@@ -63,7 +63,8 @@ const api = {
   updateReview,
   deleteReview,
   getCategoriesById,
-  updateCartItem,
+  updateQuantityCartItem,
+  updateSelectedCartItem,
   getBanners,
   getEmail
 }
