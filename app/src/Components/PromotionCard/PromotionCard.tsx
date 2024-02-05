@@ -15,15 +15,16 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const {
     salesman_img,
     title,
+    subtitle,
     description,
     price,
     old_price,
     average_rating,
     review_count,
     product_images,
-    rating,
-    review,
     id,
+    product_img,
+    
   } = props;
   const { Title, Text } = Typography;
   const [dotPosition, setDotPosition] = useState<DotPosition>("top");
@@ -32,16 +33,16 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
     carouselRef.current?.goTo(index, true);
   };
   const cart_info = {
-    id:id,
-    image:product_img,
-    title:title,
-    description:subtitle,
-    old_price:old_price,
-    price:price,
-    quantity:1,
-    is_selected:false,
-    code:12312,
-    category:'Чёрный',
+    id: id,
+    image: product_img,
+    title: title,
+    description: subtitle,
+    old_price: old_price,
+    price: price,
+    quantity: 1,
+    is_selected: false,
+    code: 12312,
+    category: 'Чёрный',
   }
 
 
@@ -50,7 +51,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
       <div className={classes.img_block}>
         <div className={classes.discount_block}>-14%</div>
         <div className={classes.img_block_hover}>
-          {product_images.map((item,index) => {
+          {product_images.map((item, index) => {
             return (
               <div
                 className={classes.img_block_hover_it}
@@ -107,7 +108,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         </Col>
       </Row>
       <Row style={{ justifyContent: "space-between" }}>
-        <Button onClick={()=>{saveCartToLocalStorage(cart_info)}} className={classes.cart_button}>Добавить в корзину</Button>
+        <Button onClick={() => { saveCartToLocalStorage(cart_info) }} className={classes.cart_button}>Добавить в корзину</Button>
 
         <Button className={classes.cart_favorites}>
           <HeartOutlined />

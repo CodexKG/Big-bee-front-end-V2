@@ -28,7 +28,7 @@ console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
 //   return config
 // });
 
-const { getFilteredProducts, getProducts, getProductsById,getProductBestSellers ,getForYouRandomProducts,getPromotionRandomProducts} = produckts
+const { getFilteredProducts, getProducts, getProductsById,getProductBestSellers ,getForYouRandomProducts,getPromotionRandomProducts,getProductsofDay} = produckts
 
 const { login, register } = auth
 const { createCart, addToCart, getOwnCartItems, deleteCartItem,updateCartItem } = carts
@@ -65,10 +65,8 @@ const api = {
   deleteReview,
   getCategoriesById,
   getProductBestSellers,
-
   getForYouRandomProducts,
   getPromotionRandomProducts,
-
   updateCartItem,
   getBanners,
   getEmail

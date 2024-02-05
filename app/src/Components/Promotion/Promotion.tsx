@@ -10,13 +10,13 @@ import { IPromotionCard } from "interfaces";
 import { sliceText } from "helpers/sliceText";
 import { PromotionSkeleton } from "Components/Skeleton";
 const { Text } = Typography;
-interface Data{
-  data:IPromotionCard[];
-  status:number
+interface Data {
+  data: IPromotionCard[];
+  status: number
 }
 interface IPromotion {
   title?: string;
-  getCarts:()=>any
+  getCarts: () => any
 }
 type Status = "fullfiled" | "rejected" | "pending";
 
@@ -42,7 +42,7 @@ const ArrowRight: React.FC<any> = ({ currentSlide, slideCount, ...props }) => {
   );
 };
 
-const Promotion: React.FC<IPromotion> = ({ title,getCarts }) => {
+const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
   const [cards, setCards] = useState([]);
   const [status, setStatus] = useState<Status>("pending");
   const getProducts = async () => {
@@ -50,7 +50,7 @@ const Promotion: React.FC<IPromotion> = ({ title,getCarts }) => {
     try {
       const data = await getCarts()
       console.log(data);
-      
+
       if (data.status === 200) {
         setCards(data.data)
         setStatus("fullfiled");
@@ -104,6 +104,9 @@ const Promotion: React.FC<IPromotion> = ({ title,getCarts }) => {
           {cards.map((item: IPromotionCard) => {
             return (
               <PromotionCard
+                id={item.id}
+                subtitle={item.subtitle}
+                product_img={item.product_img}
                 salesman_img="https://sartoreale.ru/upload/iblock/dc1/dc17cad50138ce5b963516754faba6f0.jpg"
                 title={item.title}
                 description={sliceText(item.description)}
