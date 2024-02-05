@@ -4,7 +4,7 @@ import { CartData, localCartItem, CartItem } from '../models/CartTypes';
 
 interface CartState {
     data: CartData;
-    localData: CartItem[]
+    localData: localCartItem[]
     status: 'idle' | 'pending' | 'succeeded' | 'failed';
     error: string | null;
     laoding: boolean
@@ -15,7 +15,6 @@ const initialState: CartState = {
         id: 0,
         user_id: 1,
         cart_items: [],
-        total_cost:0
     },
     localData: loadCartFromLocalStorage(),
     status: 'idle',
@@ -27,7 +26,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addItem: (state, action: PayloadAction<CartItem>) => {
+        addItem: (state, action: PayloadAction<localCartItem>) => {
             const existingItem = state.localData.find(item => item.id === action.payload.id);
 
             if (existingItem) {

@@ -1,36 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import axios, { CancelToken } from "axios";
-import { CartData, CartItem, localCartItem, localCartProduct, user } from "../models/CartTypes";
+import { CancelToken } from "axios";
+import { CartData, CartItem, localCartItem } from "../models/CartTypes";
 import { api } from "../../api";
-import { getCookie } from "helpers/cookies";
 
 
-export const fetchCartItems = createAsyncThunk<any, { cancelToken?: CancelToken, id: number }, { rejectValue?: string }>(
+
+export const fetchCartItems = createAsyncThunk<CartData, { cancelToken?: CancelToken, id: number }, { rejectValue?: string }>(
     'cart/fetchCartItems',
     async ({ id }, { rejectWithValue }) => {
         try {
-            const access_token = getCookie('access_token')
-            if (access_token){
-                const response = await api.getOwnCartItems(id); 
-                return response.data;
-            }
-            else{
-                const storedData = localStorage.getItem("cart");
-                return storedData ? JSON.parse(storedData) : [];
-            }
+            const response = await api.getOwnCartItems(id); 
+            return response.data;
         } catch (error) {
             return rejectWithValue(typeof error === 'string' ? error : 'Failed to fetch cart items');
         }
-    }
-);
-export const createCart = createAsyncThunk(
-    'cart/createCart',
-    async ({ user_id }: { user_id: number;}, { signal }) => {
-        const source = axios.CancelToken.source();
-        signal.addEventListener('abort', () => source.cancel('Operation canceled by the user.'));
-        const response = await api.createCart(user_id, source.token);
-        return response.data;
     }
 );
 
@@ -59,22 +43,15 @@ export const updateCartItem = createAsyncThunk<CartItem, { cancelToken?: CancelT
 );
 
 // Local cart
-export function loadCartFromLocalStorage(): CartItem[] {
-    const storedData = localStorage.getItem("cart");
+export function loadCartFromLocalStorage(): localCartItem[] {
+    const storedData = localStorage.getItem("cartItems");
     return storedData ? JSON.parse(storedData) : [];
 }
 
-export function saveCartToLocalStorage(cartItem: localCartProduct): void {
-    let list: localCartItem[]=[]
-    
-    let cart_item:localCartItem = {
-        id:cartItem.id,
-        cart:1,
-        product:cartItem,
-        quantity:1,
-        is_selected:false
-    }
-    const storedItems = localStorage.getItem('cart');
+export function saveCartToLocalStorage(cartItem: localCartItem): void {
+    let list: localCartItem[] = [];
+
+    const storedItems = localStorage.getItem('cartItems');
     if (storedItems) {
         try {
             list = JSON.parse(storedItems) as localCartItem[];
@@ -83,16 +60,16 @@ export function saveCartToLocalStorage(cartItem: localCartProduct): void {
         }
     }
 
-    let existingItem = list.find(item => item.id === cart_item.id);
+    let existingItem = list.find(item => item.id === cartItem.id);
     if (existingItem) {
-        existingItem.quantity += cart_item.quantity;
+        existingItem.quantity += cartItem.quantity;
     } else {
-        list.push(cart_item);
+        list.push(cartItem);
     }
-    localStorage.setItem('cart', JSON.stringify(list));
+    localStorage.setItem('cartItems', JSON.stringify(list));
 }
 export function updateCartToLocalStorage(id: number, action:string, value?:any): any {
-    const storedItems = localStorage.getItem('cart');
+    const storedItems = localStorage.getItem('cartItems');
     if (storedItems) {
         try {
             const list: localCartItem[] = JSON.parse(storedItems) as localCartItem[];
@@ -112,10 +89,10 @@ export function updateCartToLocalStorage(id: number, action:string, value?:any):
             let updatedListd = []
             if(action=='delete'){
                 updatedListd =  list.filter(item => item.id !== id);
-                localStorage.setItem('cart', JSON.stringify(updatedListd));
+                localStorage.setItem('cartItems', JSON.stringify(updatedListd));
                 return updatedListd
             }
-            localStorage.setItem('cart', JSON.stringify(updatedList));
+            localStorage.setItem('cartItems', JSON.stringify(updatedList));
             return updatedList
         } catch (error) {
             console.error('Error parsing or updating cart items:', error);
@@ -123,12 +100,12 @@ export function updateCartToLocalStorage(id: number, action:string, value?:any):
     }
 }
 export function deleteCheckedCartToLocalStorage(): any {
-    const storedItems = localStorage.getItem('cart');
+    const storedItems = localStorage.getItem('cartItems');
     if (storedItems) {
         try {
             const list: localCartItem[] = JSON.parse(storedItems) as localCartItem[];
             const updatedList = list.filter(item => item.is_selected == false);
-            localStorage.setItem('cart', JSON.stringify(updatedList));
+            localStorage.setItem('cartItems', JSON.stringify(updatedList));
             return updatedList
         } catch (error) {
             console.error('Error parsing or updating cart items:', error);
