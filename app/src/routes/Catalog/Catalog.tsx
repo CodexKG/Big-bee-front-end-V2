@@ -29,10 +29,28 @@ const Catalog: FC = () => {
   queryRef.current = location.search;
   function handleFilterChange(newFilters: string) {
     navigate({
-      pathname: location.pathname,
       search: newFilters
     });
   }
+
+
+
+  useEffect(() => {
+    const queryString = queryRef.current;
+    console.log('queryString:', decodeURIComponent(queryString));
+
+
+
+    const parsedParams = parseQueryString(queryString);
+    if (queryString.includes('limit') && queryString.includes('category') && queryString.includes('offset')) {
+      dispatch(setParams(parsedParams));
+
+    }
+
+
+  }, []);
+
+  console.log('filters#1', filters);
   useEffect(() => {
     dispatch(setFilters({ category: id }))
   }, [id])
@@ -42,19 +60,22 @@ const Catalog: FC = () => {
 
   useEffect(() => {
     const source = axios.CancelToken.source();
-    handleFilterChange(createQueryString(filters))
+
     const queryString = queryRef.current;
 
     const timeoutId = setTimeout(() => {
 
       dispatch(fetchFilterProducts({ filters: `${queryString}`, cancelToken: source.token }));
     }, 300);
-    console.log(filters);
+    // console.log(filters);
     return () => {
       clearTimeout(timeoutId)
       source.cancel('Запрос отменен, компонент размонтирован');
     };
   }, [id, filters, location.search]);
+  useEffect(() => {
+    handleFilterChange(createQueryString(filters))
+  }, [filters, location.search])
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -97,15 +118,9 @@ const Catalog: FC = () => {
     [key: string]: string;
   }
   const [Test, setTest] = useState<Test>({});
+  console.log(Test);
 
-  useEffect(() => {
-    const queryString = queryRef.current;
-    const parsedParams = parseQueryString(queryString);
-    if (queryString.includes('limit') && queryString.includes('category') && queryString.includes('offset')) {
-      dispatch(setParams(parsedParams));
-    }
 
-  }, []);
 
 
   const currentPage = filters.offset / filters.limit + 1;
