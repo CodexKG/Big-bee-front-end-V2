@@ -1,3 +1,4 @@
+import { producktData } from '../data/test/testData';
 
 export interface loginValues {
     username: string
@@ -18,6 +19,11 @@ export interface Product {
     price: number;
     currency: string;
     created: string; // Дата в формате строки
+    product_attributes: { key: string, value: string }[]
+    shop_name: string
+    shop_logo: string
+    old_price: number
+    average_rating: number | null
 }
 export interface ProductData {
     count: number,
@@ -44,40 +50,6 @@ export interface ShopData {
     results: Shop[]
 }
 
-
-
-
-
-export interface CartItem {
-    id: number,
-    cart: number,
-    product: {
-        id: number,
-        shop: number,
-        category: [],
-        title: string,
-        description: string,
-        image: string,
-        product_images: [],
-        price: number,
-        currency: string,
-        created: string
-    },
-    quantity: number
-}
-export interface CartData {
-    id: number,
-    session_key: string,
-    cart_items: CartItem[]
-}
-export interface localCartItem {
-    image: string;
-    title: string;
-    name: string;
-    price: number;
-    id: number;
-    quantity: number;
-}
 export interface Categories {
     banner: string
     icon: string
@@ -85,4 +57,11 @@ export interface Categories {
     title: string,
     slug: string,
     subcategories: Categories[]
+    category_attributes: { [key: string]: string[] };
+}
+
+
+export interface ProductPopular{
+    top_products:Product[]
+    products_of_day:Product[]
 }

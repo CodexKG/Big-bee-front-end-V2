@@ -1,6 +1,7 @@
 import Catalog from "./Catalog/Catalog";
 import Favorites from "./Favorites/Favorites";
-export {Catalog,Favorites}
+import Cart from "./Cart/Cart";
+export {Catalog,Favorites, Cart}
 
 
 

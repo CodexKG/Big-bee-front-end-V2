@@ -115,6 +115,7 @@ const Promotion: React.FC<IPromotion> = ({ title,getCarts }) => {
               />
             );
           })}
+
         </Carousel>
       </div>
     </section>
