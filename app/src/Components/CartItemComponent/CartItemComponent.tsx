@@ -3,12 +3,12 @@ import classes from './CartItemComponent.module.scss'
 import { Flex, Checkbox } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { CloseOutlined, HeartOutlined, MinusOutlined, PlusOutlined, HeartFilled } from '@ant-design/icons'; 
-import { localCartItem } from 'store/models/CartTypes';
+import { CartItem } from 'store/models/CartTypes';
 import { updateCartToLocalStorage } from 'store/reducers/cartRedusers';
 
 
 type Props = {
-    cart_item: localCartItem,
+    cart_item: CartItem,
     setCartItems: any,
 }
 
@@ -28,13 +28,14 @@ const CartItemComponent : React.FC<Props> = ({cart_item, setCartItems}:Props)=>{
         <Flex gap={50} justify='space-between' align='start' className={classes.cart__item}>
             <Flex gap={20} align='start' className={classes.left}>
                 <Checkbox onChange={onChange} checked={cart_item.is_selected}></Checkbox>
-                <img src={cart_item.image} alt="" />
+                <img src={cart_item.product.image} alt="" />
                 <Flex gap={15} vertical>
                     <span className={classes.title}>
-                        {cart_item.title}
+                        {cart_item.product.title}
                     </span>
-                    <p className={classes.code}>Код товара: {cart_item.code}</p>
-                    <p className={classes.category}>Цвет товара:<span>{cart_item.category}</span></p>
+                    <p className={classes.code}>Код товара: {cart_item.product.product_code}</p>
+                    {cart_item.product.product_attributes.map((e)=>(
+                    <p className={classes.category}>{e.key} :<span>{e.value}</span></p>))}
                 </Flex>
             </Flex>
             <Flex align='start' gap={40} className={classes.right}>
@@ -44,8 +45,8 @@ const CartItemComponent : React.FC<Props> = ({cart_item, setCartItems}:Props)=>{
                     <PlusOutlined onClick={()=>{inp_change(true)}}/>
                 </Flex>
                 <Flex vertical gap={10}>
-                    <span className={classes.old_price}>{cart_item.old_price}</span>
-                    <span className={classes.price}>{cart_item.price}</span>
+                    <span className={classes.old_price}>{cart_item.product.old_price}</span>
+                    <span className={classes.price}>{cart_item.product.price}</span>
                 </Flex>
                 <Flex gap={20} className={classes.spans}>
                     {

@@ -8,6 +8,7 @@ import { useAppDispatch } from 'store/hook';
 import { loginAsync } from 'store/reducers/authRedusers';
 import { setCookie } from 'helpers/cookies';
 import {Link} from 'react-router-dom';
+import { createCart } from 'store/reducers/cartRedusers';
 
 const Login: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -21,8 +22,9 @@ const Login: React.FC = () => {
             setLoading(true);
             const response = await dispatch(loginAsync({ username: values.username, password: values.password }));
             message.success('Login successful');
+            const cart_id = createCart(values.username)
             navigate('/');
-            setCookie('access_token', response.payload.access, 30);            
+            setCookie('access_token', response.payload.access, 30);         
         } catch (error) {
             message.error('Login failed. Please check your credentials.');
         }finally{

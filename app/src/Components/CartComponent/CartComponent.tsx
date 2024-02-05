@@ -4,42 +4,67 @@ import { Flex, Checkbox, Button  } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { CloseOutlined } from '@ant-design/icons'; 
 import CartItemComponent from 'Components/CartItemComponent/CartItemComponent';
-import { loadCartFromLocalStorage, updateCartToLocalStorage,deleteCheckedCartToLocalStorage } from 'store/reducers/cartRedusers';
+import { loadCartFromLocalStorage, updateCartToLocalStorage,deleteCheckedCartToLocalStorage, fetchCartItems } from 'store/reducers/cartRedusers';
 import { Link } from 'react-router-dom';
-import { localCartItem } from 'store/models/CartTypes';
+import { CartItem, CartProduct, localCartItem, localCartProduct } from 'store/models/CartTypes';
+import { useAppDispatch, useAppSelector } from 'store/hook';
+import { getCookie } from 'helpers/cookies';
+import axios from 'axios';
 type Props = {
 
 }
 
 const CartComponent : React.FC<Props> = ()=>{
+    const [is_auth, setAuth] = useState(false)
+    const dispatch = useAppDispatch();
+    const { data, status } = useAppSelector((state) => state.cart)
+    const [is_all_check, setIsAllCheck] = useState(false)
+    const [cost, setCost] = useState(0)
+    const [sell, setSell] = useState(0)
+    const [delivery, setDelivery] = useState(0)
+    const [total_cost, setTotalCost] = useState(0)
+
     const onChange: CheckboxProps['onChange'] = (e) => {
         setIsAllCheck(!e.target.value)
         cart_items.map(el=>{
             setCartItems(updateCartToLocalStorage(el.id, 'check', e.target.checked))
         })
     };
-    const cart = loadCartFromLocalStorage()
-    const [cart_items, setCartItems] = useState<localCartItem[]>([])
-    const [is_all_check, setIsAllCheck] = useState(false)
-    const [cost, setCost] = useState(0)
-    const [sell, setSell] = useState(0)
-    const [delivery, setDelivery] = useState(0)
-    const [total_cost, setTotalCost] = useState(0)
+    const [cart_items, setCartItems] = useState<CartItem[]>([]) 
     useEffect(()=>{
-        setCartItems(cart)
+        if(getCookie('access_token')){
+            setAuth(true)
+            const source = axios.CancelToken.source();
+            dispatch(fetchCartItems({ cancelToken: source.token, id:1 }))
+        }
+        else{
+            setAuth(false)
+        }
     },[])
     useEffect(()=>{
-        setIsAllCheck(cart_items.every(item => item.is_selected === true))
-        setCost(cart_items.reduce((accumulator, currentItem) => accumulator + (currentItem.old_price * currentItem.quantity), 0))
-        setTotalCost(cart_items.reduce((accumulator, currentItem) => accumulator + (currentItem.price * currentItem.quantity), 0))
-        setSell(cart_items.reduce((accumulator, currentItem) => accumulator + (currentItem.price* currentItem.quantity), 0)-cart_items.reduce((accumulator, currentItem) => accumulator + (currentItem.old_price * currentItem.quantity), 0))
+        if (is_auth) {
+            
+            setCartItems(data.cart_items)
+            console.log(data);
+        }else{
+            const cart = loadCartFromLocalStorage()
+            setCartItems(cart)
+        }
+    },[is_auth])
+    useEffect(()=>{
+        if (cart_items.length >0) {
+            setIsAllCheck(cart_items.every(item => item.is_selected === true))
+            setCost(cart_items.reduce((accumulator, currentItem) => accumulator + (currentItem.product.old_price * currentItem.quantity), 0))
+            setTotalCost(cart_items.reduce((accumulator, currentItem) => accumulator + (currentItem.product.price * currentItem.quantity), 0))
+            setSell(cart_items.reduce((accumulator, currentItem) => accumulator + (currentItem.product.price* currentItem.quantity), 0)-cart_items.reduce((accumulator, currentItem) => accumulator + (currentItem.product.old_price * currentItem.quantity), 0))
+        }
     },[
         cart_items
     ])
     return (
         <>
         {
-            cart.length===0?(
+            cart_items.length===0?(
                 <div className={classes.container}>
                     <Flex vertical justify='center' gap={20} align='center'  className={classes.cart__empty}>
                         <h2>Корзина пуста</h2>
