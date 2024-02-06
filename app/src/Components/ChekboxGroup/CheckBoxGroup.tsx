@@ -27,7 +27,6 @@ const ExpandableCheckboxGroup: FC<ExpandableCheckboxGroupProps> = ({ options, ti
     const dispatch = useAppDispatch()
     const [expanded, setExpanded] = useState(false);
     const selectedValues = useAppSelector((state) => state.window.filters.attribute)
-    const [checkedValues, setCheckedValues] = useState<any>([]);
 
 
     const visibleOptions = expanded ? options : options.slice(0, 5);

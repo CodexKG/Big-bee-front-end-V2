@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios, { CancelToken } from "axios";
-import { CartData, CartItem, CartProduct, localCartItem, localCartProduct, user } from "../models/CartTypes";
+import { CartData, CartItem, localCartItem,CartProduct  } from "../models/CartTypes";
 import { api } from "../../api";
 import { getCookie } from "helpers/cookies";
 

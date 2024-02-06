@@ -9,4 +9,4 @@ const HeaderSceleton: FC = () => {
         }
     </>)
 }
-export default HeaderSceleton
+export default HeaderSceleton   

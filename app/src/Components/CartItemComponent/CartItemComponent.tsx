@@ -3,10 +3,10 @@ import classes from './CartItemComponent.module.scss'
 import { Flex, Checkbox } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { CloseOutlined, HeartOutlined, MinusOutlined, PlusOutlined, HeartFilled } from '@ant-design/icons'; 
-import { CartItem } from 'store/models/CartTypes';
 import { deleteCartItem, updateCartToLocalStorage, updateQuantityCartItem, updateSelectedCartItem } from 'store/reducers/cartRedusers';
 import { getCookie } from 'helpers/cookies';
 import { useAppDispatch } from 'store/hook';
+import { CartItem } from 'store/models/CartTypes';
 
 
 type Props = {
