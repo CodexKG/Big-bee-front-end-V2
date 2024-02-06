@@ -13,7 +13,6 @@ type Props = {
 }
 const MainCaruselComponent : React.FC<Props> = ()=>{
     const dispatch = useAppDispatch();
-    const [loading, setLoading] = useState(false);
     const { data, status } = useAppSelector((state) => state.baner)
     useEffect(()=>{
         const source = axios.CancelToken.source();
@@ -46,7 +45,6 @@ const MainCaruselComponent : React.FC<Props> = ()=>{
                                         </Link>
                                     </Flex>
                                     </div>
-                                    <img src={e.image} alt="" />
                                 </Flex>
                             )
                         })

@@ -47,6 +47,8 @@
         .category{
             font-size: 18px;
             font-weight: 400;
+            display: flex;
+            flex-direction: column;
         }
     }
     >.right{

@@ -28,10 +28,10 @@ console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
 //   return config
 // });
 
-const { getFilteredProducts, getProducts, getProductsById,getProductBestSellers ,getForYouRandomProducts,getPromotionRandomProducts,getProductsofDay} = produckts
 
+const { getFilteredProducts, getProducts, getProductsById,getProductBestSellers ,getForYouRandomProducts,getPromotionRandomProducts,getProductsofDay} = produckts
 const { login, register } = auth
-const { createCart, addToCart, getOwnCartItems, deleteCartItem,updateCartItem } = carts
+const { createCart, addToCart, getOwnCartItems, deleteCartItem,updateQuantityCartItem, updateSelectedCartItem } = carts
 const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, } = reviews
 const { addProductToFavorite, delProductFromFavorite } = favorites
@@ -64,12 +64,13 @@ const api = {
   updateReview,
   deleteReview,
   getCategoriesById,
+  updateQuantityCartItem,
+  updateSelectedCartItem,
   getProductBestSellers,
   getForYouRandomProducts,
   getPromotionRandomProducts,
-  updateCartItem,
   getBanners,
-  getEmail
+  getEmail,
 
 
 }
