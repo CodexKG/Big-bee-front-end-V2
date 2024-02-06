@@ -6,18 +6,20 @@ import { Button, Form, Input, message } from 'antd';
 import classes from './SignUp.module.scss';
 import { useAppDispatch } from 'store/hook';
 import { registerAsync } from 'store/reducers/authRedusers';
+import { fetchCartItems } from 'store/reducers/cartRedusers';
 
 const SignUp: React.FC = () => {
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
-    const onFinish = (values: any) => {
+    const onFinish = async (values: any) => {
         console.log('Received values of form: ', values);
         try {
             setLoading(true);
-            dispatch(registerAsync({ username: values.username, password: values.password, confirm_password: values.confirm_password }));
+            const response = await dispatch(registerAsync({ username: values.username, password: values.password, confirm_password: values.confirm_password }));
             message.success('Registration successful. You can now log in.');
+            await dispatch(fetchCartItems(response.payload.user_id))
             navigate('/login');
         } catch (error) {
             message.error('Registration failed. Please try again.');

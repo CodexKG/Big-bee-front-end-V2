@@ -59,8 +59,14 @@ export const addCartItem = createAsyncThunk<CartItem, { cancelToken?: CancelToke
     'cart/addCartItem',
     async ({ cart, product_id, quantity }, { rejectWithValue }) => {
         try {
-            const response = await api.addToCart(cart, product_id, quantity);
-            return response.data;
+            if (cart !-=0) {
+                const response = await api.addToCart(cart, product_id, quantity);
+                return response.data;
+            }
+            else{
+                return rejectWithValue('Ошибка корзинки');
+            }
+            
         } catch (error) {
             return rejectWithValue(typeof error === 'string' ? error : 'Ошибка корзинки');
         }
@@ -102,7 +108,6 @@ export const addLocalCartItem = createAsyncThunk<CartItem[], { cancelToken?: Can
     async ({ cartItem }, { rejectWithValue }) => {
         try {
             let list: CartItem[] = []
-            console.log('test');
 
             let cart_item: CartItem = {
                 id: cartItem.id,
