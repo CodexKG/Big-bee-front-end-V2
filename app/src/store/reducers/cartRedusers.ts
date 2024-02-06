@@ -1,9 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
 import axios, { CancelToken } from "axios";
 import { CartData, CartItem, localCartItem,CartProduct  } from "../models/CartTypes";
 import { api } from "../../api";
-import { getCookie } from "helpers/cookies";
+import { getCookie, setCookie } from "helpers/cookies";
 
 
 const access_token = getCookie('access_token')
@@ -13,7 +12,9 @@ export const fetchCartItems = createAsyncThunk<any, { cancelToken?: CancelToken,
         try {
             if (access_token) {
                 const response = await api.getOwnCartItems(id);
+                setCookie('cart_id', response.data[0].id, 30)
                 return response.data[0];
+
             }
             else {
                 const storedData = localStorage.getItem("cart");

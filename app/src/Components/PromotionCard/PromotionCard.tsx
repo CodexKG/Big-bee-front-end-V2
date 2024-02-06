@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import classes from "./PromotionCard.module.scss";
 import { IPromotionCard } from "interfaces";
 import { Row, Col, Typography, Button, Carousel } from "antd";
@@ -7,9 +7,10 @@ import type { CarouselProps } from "antd";
 import { numberWithSpaces } from "helpers";
 import { StarFilled, HeartOutlined } from "@ant-design/icons";
 import { CarouselRef } from "antd/es/carousel";
-import { addLocalCartItem } from "store/reducers/cartRedusers"
+import { addCartItem, addLocalCartItem } from "store/reducers/cartRedusers"
 import { CartProduct } from "store/models/CartTypes";
 import { useAppDispatch } from "store/hook";
+import { getCookie } from "helpers/cookies";
 
 type DotPosition = CarouselProps["dotPosition"];
 
@@ -36,18 +37,26 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const imgHover = (index: number) => {
     carouselRef.current?.goTo(index, true);
   };
-  const cart_info: CartProduct = {
-    id: id,
-    title: title,
-    description: subtitle,
-    image: product_img,
-    product_attributes: [{ key: "Основная камера", value: "48 Mpx + 12 Mpx + 12 Mpx" }],
-    price: price,
-    old_price: old_price,
-    product_code: 12312,
+  const add_item = ()=>{
+    if (getCookie('access_token')) {
+      const cart_id = Number(getCookie('cart_id'))
+      dispatch(addCartItem({cart:cart_id, product_id:id,quantity:1}))
+      
+    }else{
+      const cart_info: CartProduct = {
+        id: id,
+        title: title,
+        description: subtitle,
+        image: product_images[0]? product_images[0].image:'' ,
+        product_attributes: [{ key: "Основная камера", value: "48 Mpx + 12 Mpx + 12 Mpx" }],
+        price: price,
+        old_price: old_price,
+        product_code: 12312,
+      }
+      dispatch(addLocalCartItem({ cartItem: cart_info }))
+    }
   }
-
-
+  
   return (
     <div className={classes.promotionCard}>
       <div className={classes.img_block}>
@@ -110,7 +119,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         </Col>
       </Row>
       <Row style={{ justifyContent: "space-between" }}>
-        <Button onClick={() => { dispatch(addLocalCartItem({ cartItem: cart_info })) }} className={classes.cart_button}>Добавить в корзину</Button>
+        <Button onClick={() => { add_item() }} className={classes.cart_button}>Добавить в корзину</Button>
         <Button className={classes.cart_favorites}>
           <HeartOutlined />
         </Button>

@@ -44,6 +44,8 @@ const CartComponent: React.FC<Props> = () => {
             dispatch(deleteCheckedCartItems({ cart_items: cart_items }))
         } else {
             dispatch(deleteCheckedCartToLocalStorage() )
+            dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));        
+
         }
     }
 
