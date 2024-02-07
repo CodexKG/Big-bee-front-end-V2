@@ -1,0 +1,141 @@
+.salesman {
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #DCDCDC;
+    margin-bottom: 20px;
+
+    &_active {
+        background: #F2F3F7;
+        border-color: #F2F3F7;
+
+        &_btn {
+            color: #000;
+            text-align: center;
+            font-family: "SF Pro Display";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 111.111%;
+            border-radius: 8px;
+            background: #F5C423;
+            width: 100%;
+            height: 73px;
+            border: none;
+            margin-top: 20px;
+        }
+    }
+
+    &_discount {
+
+        &_row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &_oldPrice {
+            color: #71767E;
+            font-family: "SF Pro Display";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            text-decoration-line: line-through;
+        }
+
+        &_current_price {
+            color: #FF0032;
+            font-family: "SF Pro Display";
+            font-size: 29px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        &_text {
+            color: #71767E;
+            font-family: "SF Pro Display";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        &_discount {
+            color: #FFF;
+            font-family: "SF Pro Display";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            border-radius: 4px;
+            background: #FF0032;
+            padding: 5px 10px;
+        }
+    }
+
+    &_price {
+        color: #000;
+        font-family: "SF Pro Display";
+        font-size: 29px;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 10px;
+    }
+
+    &_text {
+        color: #000;
+        font-family: "SF Pro Display";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        align-self: center;
+
+        &_green {
+            color: #3D9966;
+            font-family: "SF Pro Display";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+        }
+    }
+
+    &_payment {
+        color: #FA9214;
+        font-family: "SF Pro Display";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        margin: 10px 0;
+    }
+
+    &_icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+
+        &_block {
+            display: flex;
+            column-gap: 10px;
+        }
+    }
+
+    &_raiting {
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+
+        &_full {
+            color: rgba(0, 0, 0, 0.40);
+            font-family: "SF Pro Display";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 110%;
+        }
+    }
+}

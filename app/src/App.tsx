@@ -4,6 +4,7 @@ import './scss/app.scss';
 import MainPage from 'routes/MainPage/MainPage';
 import { Login, OrderPlacing, SignUp } from 'Components';
 import { Catalog, Favorites, Cart } from 'routes';
+import SinglePageProduct from 'routes/SinglePageProduct/SinglePageProduct';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path='/catalog/:id' element={<Catalog />} />
         <Route path='/favorites' element={<Favorites />} />
         <Route path='/orderplasing' element={<OrderPlacing />} />
+        <Route path='/product/:id' element={<SinglePageProduct />} />
         <Route path='/cart' element={<Cart />} />
       </Route>
       <Route path='*' element={<main className={'errorPage'}><p>Неверный адрес</p></main>} />

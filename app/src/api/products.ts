@@ -1,7 +1,7 @@
 
 import { CancelToken } from "axios";
 import { instance } from "./index";
-import { ProductData } from 'types/types';
+import { ProductData, SingleProduct } from 'types/types';
 import { FilterParams } from 'store/models/WindowTypes';
 
 
@@ -21,13 +21,13 @@ const getProducts = (
 
 
 const getFilteredProducts = (filters: string, sourceToken?: CancelToken) =>
-    instance.get<ProductData>(`/products/products/${filters}`, {
-        cancelToken: sourceToken
-    },);
+  instance.get<ProductData>(`/products/products/${filters}`, {
+    cancelToken: sourceToken
+  },);
 
 
 const getProductsById = (id: number, sourceToken?: CancelToken) =>
-  instance.get(`/products/products/${id}`, { cancelToken: sourceToken });
+  instance.get<SingleProduct>(`/products/products/${id}`, { cancelToken: sourceToken });
 
 const getProduct = (id: number, sourceToken?: CancelToken) =>
   instance.get(`/products/products/${id}`, { cancelToken: sourceToken });
@@ -37,14 +37,14 @@ const getProductBestSellers = (sourceToken?: CancelToken) =>
 
 
 const getForYouRandomProducts = (sourceToken?: CancelToken) =>
-  instance.get("/products/for-you-products/random_products",{ cancelToken: sourceToken });
+  instance.get("/products/for-you-products/random_products", { cancelToken: sourceToken });
 
 const getPromotionRandomProducts = (sourceToken?: CancelToken) =>
-  instance.get("/products/promotions/random_products",{ cancelToken: sourceToken });
+  instance.get("/products/promotions/random_products", { cancelToken: sourceToken });
 
 
 const getProductsofDay = (sourceToken?: CancelToken) =>
-    instance.get(`/products/product_day`, { cancelToken: sourceToken });
+  instance.get(`/products/product_day`, { cancelToken: sourceToken });
 
 
 const endpoints = {
@@ -57,7 +57,7 @@ const endpoints = {
   getForYouRandomProducts,
   getPromotionRandomProducts,
 
-    getProductsofDay,
+  getProductsofDay,
 
 
 };

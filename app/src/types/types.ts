@@ -1,5 +1,3 @@
-import { producktData } from '../data/test/testData';
-
 export interface loginValues {
     username: string
     password: string
@@ -61,7 +59,35 @@ export interface Categories {
 }
 
 
-export interface ProductPopular{
-    top_products:Product[]
-    products_of_day:Product[]
+export interface ProductPopular {
+    top_products: Product[]
+    products_of_day: Product[]
+}
+
+export interface SingleProduct {
+    id: number,
+    shop: number,
+    category: number[],
+    brand: number,
+    title: string,
+    description: string,
+    image: string,
+    product_images: {
+        id: number,
+        product: number,
+        image: string
+    }[],
+    shop_name: string,
+    shop_logo: string,
+    review_count: number,
+    average_rating: null,
+    product_attributes: {
+        key: string,
+        value: string
+    }[],
+    old_price: number,
+    price: number,
+    currency: string,
+    product_code: null,
+    created: string
 }

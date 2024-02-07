@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchFilterProducts, fetchProductById, fetchProductOfDay, fetchProducts } from 'store/reducers/producRedusers';
-import { Product, ProductData, ProductPopular } from 'types/types';
+import { Product, ProductData, ProductPopular, SingleProduct } from 'types/types';
 
 interface ProductsState {
     data: ProductData;
     status: 'idle' | 'pending' | 'succeeded' | 'failed';
     productsDay: ProductPopular | null;
-    selectedProduct: Product | null;
+    selectedProduct: SingleProduct | null;
     error: string | null;
     laoding: boolean
 }

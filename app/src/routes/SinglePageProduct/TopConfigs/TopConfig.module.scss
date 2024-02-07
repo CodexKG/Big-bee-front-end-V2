@@ -1,0 +1,62 @@
+
+
+
+.config{
+    &_block{
+        margin-top: 30px;
+    }
+    &_row{
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    &_title {
+        color: #000;
+        font-family: "SF Pro Display";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 110%;
+    }
+
+    &_value {
+        color: #000;
+        font-family: "SF Pro Display";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 110%;
+    }
+
+    &_btn {
+        color: #000;
+        font-family: "SF Pro Display";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 110%;
+        border-radius: 4px;
+        border: 1px solid #DCDCDC;
+        padding: 7px 10px;
+        background-color: transparent;
+        &_active {
+            border: 1.5px solid #F5C423;
+        }
+    }
+    &_color{
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &_active{
+            border: 2px solid #F5C423;
+        }
+    }
+    &_selected_color{
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+    }
+}

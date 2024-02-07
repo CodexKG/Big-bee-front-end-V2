@@ -11,11 +11,13 @@ import { addCartItem, addLocalCartItem } from "store/reducers/cartRedusers"
 import { CartProduct } from "store/models/CartTypes";
 import { useAppDispatch } from "store/hook";
 import { getCookie } from "helpers/cookies";
+import { useNavigate } from "react-router-dom";
 
 type DotPosition = CarouselProps["dotPosition"];
 
 const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
 
   const {
     salesman_img,
@@ -29,7 +31,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
     product_images,
     id,
     product_img,
-    
+
   } = props;
   const { Title, Text } = Typography;
   const [dotPosition, setDotPosition] = useState<DotPosition>("top");
@@ -37,22 +39,22 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const imgHover = (index: number) => {
     carouselRef.current?.goTo(index, true);
   };
-  const add_item = async ()=>{
+  const add_item = async () => {
     if (getCookie('access_token')) {
-      try{
+      try {
         const cart_id = Number(getCookie('cart_id'))
-        await dispatch(addCartItem({cart:cart_id, product_id:id,quantity:1}))
+        await dispatch(addCartItem({ cart: cart_id, product_id: id, quantity: 1 }))
         message.success('Добавлен 1 продукт в корзину')
       }
-      catch{
+      catch {
         message.error('Не получилось добавить в корзинку')
       }
-    }else{
+    } else {
       const cart_info: CartProduct = {
         id: id,
         title: title,
         description: subtitle,
-        image: product_images[0]? product_images[0].image:'' ,
+        image: product_images[0] ? product_images[0].image : '',
         product_attributes: [{ key: "Основная камера", value: "48 Mpx + 12 Mpx + 12 Mpx" }],
         price: price,
         old_price: old_price,
@@ -61,7 +63,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
       await dispatch(addLocalCartItem({ cartItem: cart_info }))
     }
   }
-  
+
   return (
     <div className={classes.promotionCard}>
       <div className={classes.img_block}>
@@ -99,7 +101,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
           <Col span={2}>Продавец</Col>
         </Row>
       </div>
-      <Title level={3}>{title}</Title>
+      <Title style={{cursor:'pointer'}} onClick={() => navigate(`/product/${id}`)} level={3}>{title}</Title>
       <div className={classes.subtitle}>
         <Text>{description}</Text>
       </div>
