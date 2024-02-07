@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import classes from "./PromotionCard.module.scss";
 import { IPromotionCard } from "interfaces";
-import { Row, Col, Typography, Button, Carousel } from "antd";
+import { Row, Col, Typography, Button, Carousel, message } from "antd";
 import messageIcon from "../../assets/icon/message.svg";
 import type { CarouselProps } from "antd";
 import { numberWithSpaces } from "helpers";
@@ -37,11 +37,16 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const imgHover = (index: number) => {
     carouselRef.current?.goTo(index, true);
   };
-  const add_item = ()=>{
+  const add_item = async ()=>{
     if (getCookie('access_token')) {
-      const cart_id = Number(getCookie('cart_id'))
-      dispatch(addCartItem({cart:cart_id, product_id:id,quantity:1}))
-      
+      try{
+        const cart_id = Number(getCookie('cart_id'))
+        await dispatch(addCartItem({cart:cart_id, product_id:id,quantity:1}))
+        message.success('Добавлен 1 продукт в корзину')
+      }
+      catch{
+        message.error('Не получилось добавить в корзинку')
+      }
     }else{
       const cart_info: CartProduct = {
         id: id,
@@ -53,7 +58,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         old_price: old_price,
         product_code: 12312,
       }
-      dispatch(addLocalCartItem({ cartItem: cart_info }))
+      await dispatch(addLocalCartItem({ cartItem: cart_info }))
     }
   }
   

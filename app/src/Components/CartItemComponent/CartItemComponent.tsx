@@ -48,8 +48,8 @@ const CartItemComponent : React.FC<Props> = ({cart_item}:Props)=>{
                     </span>
                     <p className={classes.code}>Код товара: {cart_item.product.product_code}</p>
                     <p className={classes.category}>
-                    {cart_item.product.product_attributes.map((e)=>(<span key={e.key}>
-                    {e.key}: {e.value}</span>))}
+                    {cart_item.product.product_attributes? cart_item.product.product_attributes.map((e)=>(<span key={e.key}>
+                    {e.key}: {e.value}</span>)): 'Загрузка...'}
                     </p>
                 </Flex>
             </Flex>
