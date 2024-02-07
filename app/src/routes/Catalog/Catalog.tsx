@@ -47,16 +47,13 @@ const sortOptions: SortOption[] = [
     label: 'рейтинг отзывов - по убыванию'
   }
 ];
-const options = [
-  { title: '', label: 'Apple', value: 'created' },
-  { title: '', label: 'Pear', value: 'Pear' },
-  { title: '', label: 'Orange', value: 'Orange' },
 
-];
 
 const Catalog: FC = () => {
   const { data, laoding } = useAppSelector((state) => state.produckt)
   const atributes = useAppSelector((state) => state.category.children)
+  console.log(atributes);
+
   const { filters } = useAppSelector((state) => state.window)
   const { id } = useParams()
   const dispatch = useAppDispatch()
@@ -130,7 +127,7 @@ const Catalog: FC = () => {
       <div className={classes.catalogHead}>
 
         <div >
-          <h1>Смартфоны</h1>
+          <h1>{atributes[Number(id)]?.title}</h1>
           <Breadcrumb
             style={{ display: 'flex', alignItems: 'center' }}
             separator={<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -187,7 +184,7 @@ const Catalog: FC = () => {
           </div>
           <div>
             <h1 className={classes.title}>Срок доставки</h1>
-            <ExpandableRadioGroup options={options} />
+            {/* <ExpandableRadioGroup options={options} /> */}
           </div>
           {sortRender}
 
