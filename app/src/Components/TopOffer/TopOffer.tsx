@@ -24,7 +24,7 @@ const getDiscount = (newPrice: number, oldPrice: number) => {
 }
 
 
-const TopOffer: React.FC<TopOfferProps> = ({products_quantity}) => {
+const TopOffer: React.FC<TopOfferProps> = ({ products_quantity }) => {
   const dispatch = useAppDispatch();
   const productOfDay = useAppSelector((state) => state.produckt.productsDay);
 
@@ -37,28 +37,25 @@ const TopOffer: React.FC<TopOfferProps> = ({products_quantity}) => {
     dispatch(fetchProductOfDay({ cancelToken: source.token }))
   }, []);
 
-  console.log(productOfDay?.top_products);
+  console.log(productOfDay?.products_of_day);
 
 
   return (
     <div className={`${classes.topOffer} ${classes[dynamicClass]}`}>
-      {productOfDay?.top_products.slice(0, products_quantity).map((product, index) => (
+      {productOfDay?.products_of_day.slice(0, products_quantity).map((product, index) => (
         <div key={index} style={{ position: "relative" }} className={`${classes.topOffer_Block} ${classes[dynamicClass]}`}>
           <div className={classes.topOffer_Block_Up}>
-            <div className={classes.topOffer_Block_Up_Discount}>              
-              {/* <p>Скидка - {getDiscount(product.price, product.old_price)}%</p> */}
-              <p>Скидка - 45%</p>
+            <div className={classes.topOffer_Block_Up_Discount}>
+              <p>Скидка - {getDiscount(product.price, product.old_price ).toFixed(0)}%</p>
 
             </div>
             <h3 className={classes.topOffer_Block_Up_Title}>{product.title}</h3>
             <p className={classes.topOffer_Block_Up_Price}>
-              {`Price: $${product.price.toFixed(2)} ${product.currency}`}
-              {/* <span className={classes.topOffer_Block_Up_Price_Old}>
-                {`${product.old_price.toFixed(2)}`}
-              </span> */}
+              {`${product.price} ${product.currency}`}
               <span className={classes.topOffer_Block_Up_Price_Old}>
-                {`9999999 `}
+                {`${product.old_price}`}
               </span>
+
             </p>
           </div>
           <div className={classes.topOffer_Block_Down}>
@@ -66,7 +63,7 @@ const TopOffer: React.FC<TopOfferProps> = ({products_quantity}) => {
               Перейти в каталог <CaretRightOutlined />
             </a>
             <div className={classes.topOffer_Block_Down_Image} style={{ position: "absolute", bottom: "20px", right: "20px" }}>
-              <img src={`https://bee.webtm.ru${product.image}`} alt={product.title} />
+              <img src={product.image} alt={product.title} />
             </div>
           </div>
         </div>
