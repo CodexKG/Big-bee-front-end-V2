@@ -1,10 +1,10 @@
 .topOffer {
-  width: 87%;
   max-width: 1722px;
+  padding: 0 24px;
   margin: 50px auto;
   display: flex;
   flex-wrap: wrap;
-  max-height: 650px;
+  max-height: 690px;
   gap: 14px;
 
 
@@ -106,12 +106,13 @@
         font-weight: bold;
         font-size: 15px;
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: 10px;
 
         &_Old {
           text-decoration: line-through;
-          color: #71767E;          ;
+          color: #71767E;
+          ;
         }
       }
     }
@@ -209,7 +210,7 @@
 @media screen and (max-width: 1099px) {
   .topOffer {
     &.x3 {
-      height: 510px;
+      height: 530px;
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
@@ -239,6 +240,8 @@
 
   .topOffer_Block {
     &_Up {
+      gap: 10px;
+
       &_Title {
         font-size: 18px;
       }
@@ -285,6 +288,34 @@
       .topOffer_Block {
         &:nth-child(3) {
           height: 96%;
+
+          div {
+            flex-direction: column;
+            flex-wrap: nowrap;
+            gap: 12px;
+
+            .topOffer_Block_Up_Discount {
+              width: fit-content;
+            }
+
+            .topOffer_Block_Up_Title {
+              width: 100%;
+            }
+          }
+
+          .topOffer_Block_Down {
+            &_Link {
+              margin-top: auto;
+            }
+          }
+
+          div {
+            img {
+              width: 100%;
+              margin-left: auto;
+              margin-top: 30px;
+            }
+          }
         }
 
         &:nth-child(1),
@@ -316,8 +347,11 @@
 
 
   .topOffer_Block {
+    padding: 10px;
+
     &_Up {
-      width: 100%;
+      width: 70%;
+      gap: 2px;
 
       &_Title {
         font-size: 12px;
@@ -325,6 +359,7 @@
 
       &_Price {
         font-size: 8px;
+        gap: 3px;
       }
 
       &_Discount {
@@ -340,11 +375,9 @@
       }
 
       &_Image {
-        width: 100%;
         position: absolute;
-        bottom: 20px;
         right: 20px;
-        top: 40px;
+        margin-right: 10px;
 
         img {
           max-width: 100%;
@@ -354,7 +387,7 @@
   }
 }
 
-@media screen and (max-width: 449px) {
+@media screen and (max-width: 515px) {
   .topOffer {
     &.x3 {
       height: 200px;
@@ -365,7 +398,32 @@
 
       .topOffer_Block {
         &:nth-child(3) {
-          height: 96%;
+          height: 98%;
+
+
+          .topOffer_Block_Down {
+
+            // width: 60%;
+            div {
+              position: absolute;
+              bottom: 20px;
+              left: 40px;
+              right: 30px;
+              top: 0px;
+
+              img {
+                width: 90%;
+                margin-left: auto;
+                margin-top: 0;
+              }
+            }
+            &_Link {
+              left: 0;
+              margin-top: auto;
+              margin-right: auto;
+            }
+          }
+
         }
 
         &:nth-child(1),
@@ -390,11 +448,12 @@
       width: 100%;
 
       &_Title {
-        font-size: 8px;
+        font-size: 6px;
       }
 
       &_Price {
-        font-size: 6px;
+        font-size: 5px;
+        gap: 1px;
       }
     }
 
@@ -407,14 +466,11 @@
       }
 
       &_Image {
-        width: 90%;
-        text-align: right;
+        position: absolute;
+        bottom: 0;
 
         img {
-          position: absolute;
-          bottom: 20px;
-          right: 20px;
-          object-fit: contain !important;
+          object-fit: cover !important;
         }
       }
     }
