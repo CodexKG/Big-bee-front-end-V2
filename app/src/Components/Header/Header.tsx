@@ -105,7 +105,7 @@ const HeaderComponent: React.FC = () => {
                 </Button>
                 <ul>
                     {data.map((item: Categories) =>
-                        <li key={item.id}>{item.title}</li>
+                        <li onClick={() => navigate(`/catalog/${item.id}`)} style={{ cursor: 'pointer' }} key={item.id}>{item.title}</li>
                     )}
                 </ul>
                 <Space wrap>
