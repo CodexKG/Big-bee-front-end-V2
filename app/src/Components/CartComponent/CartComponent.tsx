@@ -26,11 +26,11 @@ const CartComponent: React.FC<Props> = () => {
     const is_auth = getCookie('access_token')
 
     useEffect(() => {
-        dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));        
+        dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));
     }, []);
 
     useEffect(() => {
-        if (status === 'succeeded' && data.cart_items.length>0) {
+        if (status === 'succeeded' && data.cart_items.length > 0) {
             setIsAllCheck(data.cart_items.every(item => item.is_selected === true));
             setCost(data.cart_items.reduce((accumulator, currentItem) => accumulator + (currentItem.product.old_price * currentItem.quantity), 0));
             setTotalCost(data.cart_items.reduce((accumulator, currentItem) => accumulator + (currentItem.product.price * currentItem.quantity), 0));
@@ -43,8 +43,8 @@ const CartComponent: React.FC<Props> = () => {
             let cart_items = data.cart_items.filter(item => item.is_selected !== false)
             dispatch(deleteCheckedCartItems({ cart_items: cart_items }))
         } else {
-            dispatch(deleteCheckedCartToLocalStorage() )
-            dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));        
+            dispatch(deleteCheckedCartToLocalStorage())
+            dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));
 
         }
     }
@@ -58,7 +58,7 @@ const CartComponent: React.FC<Props> = () => {
         } else {
             setIsAllCheck(e.target.checked);
             data.cart_items.map(el => {
-                dispatch(updateCartToLocalStorage({id:el.id, action:'check'}))
+                dispatch(updateCartToLocalStorage({ id: el.id, action: 'check' }))
             });
         }
     };
@@ -117,7 +117,13 @@ const CartComponent: React.FC<Props> = () => {
                                     <span>{total_cost} с</span>
                                 </Flex>
                             </Flex>
-                            <Button>Перейти к оформлению</Button>
+
+                            <Button>
+                                <Link to={'/orderplasing'}>
+                                    Перейти к оформлению
+                                </Link>
+                            </Button>
+
                         </Flex>
                     </Flex>
                 </div>

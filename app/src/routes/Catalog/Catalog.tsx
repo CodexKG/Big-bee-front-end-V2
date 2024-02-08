@@ -52,21 +52,22 @@ const sortOptions: SortOption[] = [
 const Catalog: FC = () => {
   const { data, laoding } = useAppSelector((state) => state.produckt)
   const atributes = useAppSelector((state) => state.category.children)
-  console.log(atributes);
-
   const { filters } = useAppSelector((state) => state.window)
   const { id } = useParams()
+
   const dispatch = useAppDispatch()
-  let navigate = useNavigate();
-  let location = useLocation();
+  const navigate = useNavigate();
+
+  const location = useLocation();
   const queryRef = useRef(location.search);
+
   queryRef.current = location.search;
+
   function handleFilterChange(newFilters: string) {
     navigate({
       search: newFilters
     });
   }
-
 
   useEffect(() => {
     const queryString = queryRef.current;
@@ -76,6 +77,7 @@ const Catalog: FC = () => {
     }
     dispatch(setFilters({ category: id }))
   }, [])
+
   useEffect(() => {
     const source = axios.CancelToken.source();
     const queryString = queryRef.current;
@@ -87,9 +89,11 @@ const Catalog: FC = () => {
       source.cancel('Запрос отменен, компонент размонтирован');
     };
   }, [id, filters, location.search]);
+
   useEffect(() => {
     handleFilterChange(createQueryString(filters))
   }, [filters, location.search])
+
   useEffect(() => {
     dispatch(setFilters({ category: id }))
     const source = axios.CancelToken.source();
@@ -208,6 +212,7 @@ const Catalog: FC = () => {
 
             renderItem={(item) => (
               <CatalogProductCard
+                id={item.id}
                 product_imgs={item.product_images}
                 title={item.title}
                 colors={product_colors}

@@ -4,7 +4,7 @@ import classes from "./CatalogProductCard.module.scss";
 import { Button, Carousel, Col, Layout, Row } from "antd";
 import { Typography } from "antd";
 import { StarFilled } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DefaultButton } from "Components/UI";
 import { HeartOutlined } from "@ant-design/icons";
 import { numberWithSpaces } from "helpers";
@@ -22,6 +22,7 @@ interface ICatalogProductCart {
   salesman: string;
   salesman_img: string;
   offer: number;
+  id: number
 }
 type StringKeyObject = {
   [key: string]: any;
@@ -39,6 +40,7 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
     salesman_img,
     salesman,
     offer,
+    id
   } = props;
   const characteristicsKeys: StringKeyObject = Object.keys(characteristics);
   // рендерить звезды | stars-кол-во звезд
@@ -56,6 +58,7 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
   const imgHover = (index: number) => {
     carouselRef.current?.goTo(index, true);
   };
+  const navigate = useNavigate()
 
   return (
     <section className={classes.catalogProductCard}>
@@ -96,7 +99,7 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
         </Carousel>
       </div>
       <div className={classes.catalogProductCard_item}>
-        <Title level={3}>{title}</Title>
+        <Title onClick={() => navigate(`/product/${id}`)} level={3}>{title}</Title>
         <div className={classes.colors}>
           {colors.map((color) => {
             return (
@@ -112,7 +115,7 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
             return (
               <div>
                 <Text className={classes.chctr_title}>{el}</Text>:
-                {characteristics[el as keyof typeof characteristics]}
+                {characteristics[el as keyof  characteristics]}
               </div>
             );
           })} */}

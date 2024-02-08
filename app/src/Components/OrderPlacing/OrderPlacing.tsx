@@ -1,17 +1,70 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from './OrderPlacing.module.scss';
 import { Input, Button, Form, Radio, Checkbox } from "antd";
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from "store/hook";
+import { fetchCartItems } from "store/reducers/cartRedusers";
+import { getCookie } from "helpers/cookies";
+import axios from "axios";
+import { api } from "api";
+import { json } from "stream/consumers";
 
 const OrderPlacing: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const { data, status } = useAppSelector((state) => state.cart)
+    const user_id = Number(getCookie('user_id'));
+    useEffect(() => {
+        const source = axios.CancelToken.source();
+        dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));
+    }, []);
+
+    const obg = {
+        "username": "123",
+        "email": "3312@gmail.com",
+        "surname": "3123",
+        "number": "312",
+        "radio-group": "bankCard",
+        "country": "1234",
+        "city": "123",
+        "office": "123",
+        "region": "123",
+        "street": "123",
+        "index": "123",
+        "note": "12312",
+        "usernameCart": "123",
+        "idCart": "123",
+        "CVC/CVV": "123",
+        "agreement": true
+    }
     const onFinish = (values: any) => {
-        console.log(values);
+        api.orders(
+            {
+                "user": user_id,
+                "email": values.email,
+                "first_name": values.username,
+                "last_name": values.surname,
+                "phone": values.number,
+                "billing_receipt_type": 'd',
+                "country": values.country,
+                "region": values.region,
+                "city": values.city,
+                "street": values.street,
+                "apartment": values.office,
+                "zip_code": values.index,
+                "note": ""
+            }
+        )
+        console.log(JSON.stringify(values));
     };
+
+    console.log(data);
+
 
     const { TextArea } = Input;
 
     return (
         <section className={classes.order}>
+ 
 
             <div className={classes.conteiner}>
                 <h2>Оформление заказа</h2>
@@ -243,7 +296,7 @@ const OrderPlacing: React.FC = () => {
                                 </div>
 
                                 <div className={classes.input}>
-                                    <Form.Item name="email" rules={[{ required: true }]}>
+                                    <Form.Item name="bankCard" rules={[{ required: true }]}>
                                         <Input
                                             type="numberCart"
                                             className={classes.input}
@@ -319,81 +372,36 @@ const OrderPlacing: React.FC = () => {
                     <div className={classes.right}>
 
                         <h3>Ваш заказ</h3>
+                        {
+                            data.cart_items.map((item) => (
+                                <div className={classes.flexConteiner}>
+                                    <div className={classes.imgProduct}>
+                                        <img src={item.product.image} alt="" />
+                                    </div>
 
-                        <div className={classes.flexConteiner}>
-                            <div className={classes.imgProduct}>
-                                <img src="https://m.media-amazon.com/images/I/619f09kK7tL._AC_UF1000,1000_QL80_.jpg" alt="" />
-                            </div>
+                                    <div className={classes.title}>
+                                        <h3>
+                                            {item.product.title}
+                                        </h3>
 
-                            <div className={classes.title}>
-                                <h3>
-                                    Apple iPhone 15 256Gb Dual:
-                                    nano SIM + eSIN, черный (new)
-                                </h3>
+                                        <span>Код товара: {item.product.product_code}</span>
 
-                                <span>Код товара: 1445094</span>
+                                        <p>Цвет товара: Цвет товара</p>
 
-                                <p>Цвет товара: Цвет товара</p>
+                                        <p>Количество: {item.quantity}</p>
+                                    </div>
+                                    <div className={classes.price}>
+                                        <s>{item.product.price}</s>
 
-                                <p>Количество: 1</p>
-                            </div>
-                            <div className={classes.price}>
-                                <s>124 990</s>
+                                        <h2>{item.product.old_price}</h2>
+                                    </div>
+                                </div>
+                            ))
+                        }
 
-                                <h2>94 990 с</h2>
-                            </div>
-                        </div>
 
-                        <div className={classes.flexConteiner}>
-                            <div className={classes.imgProduct}>
-                                <img src="https://m.media-amazon.com/images/I/619f09kK7tL._AC_UF1000,1000_QL80_.jpg" alt="" />
-                            </div>
 
-                            <div className={classes.title}>
-                                <h3>
-                                    Apple iPhone 15 256Gb Dual:
-                                    nano SIM + eSIN, черный (new)
-                                </h3>
 
-                                <span>Код товара: 1445094</span>
-
-                                <p>Цвет товара: Цвет товара</p>
-
-                                <p>Количество: 1</p>
-                            </div>
-                            <div className={classes.price}>
-                                <s>124 990</s>
-
-                                <h2>94 990 с</h2>
-                            </div>
-                        </div>
-
-                        <div className={classes.flexConteiner}>
-
-                            <ul className={classes.orderSum}>
-                                <li className={classes.orderItem}>
-                                    <div>Сумма заказа</div>
-                                    <div></div>
-                                    <div>249 980 с</div>
-                                </li>
-                                <li>
-                                    <div>Скидка</div>
-                                    <div></div>
-                                    <div>- 60 000 с</div>
-                                </li>
-                                <li>
-                                    <div>Доставка</div>
-                                    <div></div>
-                                    <div>0 с</div>
-                                </li>
-                                <li>
-                                    <div>Итого к оплате</div>
-                                    <div></div>
-                                    <div><span className={classes.itog}>189 980 с</span></div>
-                                </li>
-                            </ul>
-
-                        </div>
 
                     </div>
 

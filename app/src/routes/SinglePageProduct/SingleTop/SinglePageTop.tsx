@@ -11,7 +11,10 @@ import { useAppSelector } from "store/hook";
 const SinglePageTop: FC = () => {
     const { selectedProduct } = useAppSelector((state) => state.produckt)
     const imagesList = selectedProduct?.product_images
-
+    const images: any = []
+    selectedProduct?.product_images.forEach((item) => {
+        images.push(item.image)
+    })
     const [selectedImage, setSeletedImage] = useState<any>();
     useEffect(() => {
         setSeletedImage(selectedProduct?.product_images[0])
@@ -22,7 +25,15 @@ const SinglePageTop: FC = () => {
             <div className={classes.top_descr_block_col}>
                 <div className={classes.top_descr_block_image}>
                     <span className={classes.top_descr_block_image_new}>Новинка</span>
-                    <Image src={selectedImage?.image} alt="" />
+                    <Image.PreviewGroup
+                        items={images}
+                    >
+                        <Image
+                            src={selectedImage?.image}
+
+                        />
+                    </Image.PreviewGroup>
+                    {/* <Image src={selectedImage?.image} alt="" /> */}
                 </div>
 
                 <div className={classes.top_descr_block_images_carousel}>

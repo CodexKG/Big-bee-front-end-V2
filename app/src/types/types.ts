@@ -91,3 +91,21 @@ export interface SingleProduct {
     product_code: null,
     created: string
 }
+
+
+
+export interface OrderPlacing {
+    user: number,
+    email: string,
+    first_name: string,
+    last_name: string,
+    phone: string,
+    billing_receipt_type: string,
+    country: string,
+    region: string,
+    city: string,
+    street: string,
+    apartment: string,
+    zip_code: string,
+    note: string
+}

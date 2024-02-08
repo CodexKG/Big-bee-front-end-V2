@@ -8,6 +8,7 @@ import favorites from './favorites'
 import categories from './categories'
 import banners from './banners'
 import email from './getEmail'
+import biling from './biling'
 
 const instance = axios.create({
   // @ts-ignore
@@ -29,19 +30,21 @@ console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
 // });
 
 
-const { getFilteredProducts, getProducts, getProductsById,getProductBestSellers ,getForYouRandomProducts,getPromotionRandomProducts,getProductsofDay} = produckts
+const { getFilteredProducts, getProducts, getProductsById, getProductBestSellers, getForYouRandomProducts, getPromotionRandomProducts, getProductsofDay } = produckts
 const { login, register } = auth
-const { createCart, addToCart, getOwnCartItems, deleteCartItem,updateQuantityCartItem, updateSelectedCartItem } = carts
+const { createCart, addToCart, getOwnCartItems, deleteCartItem, updateQuantityCartItem, updateSelectedCartItem } = carts
 const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, } = reviews
 const { addProductToFavorite, delProductFromFavorite } = favorites
 const { getCategories, getCategoriesById } = categories
 const { getBanners } = banners
 const { getEmail } = email
+const { orders } = biling
 
 
 
 const api = {
+  orders,
   login,
   getProducts,
   getProductsById,
