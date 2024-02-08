@@ -104,7 +104,7 @@ const HeaderComponent: React.FC = () => {
                     Каталог
                 </Button>
                 <ul>
-                    {data.map((item: Categories) =>
+                    {data.slice(0,5).map((item: Categories) =>
                         <li onClick={() => navigate(`/catalog/${item.id}`)} style={{ cursor: 'pointer' }} key={item.id}>{item.title}</li>
                     )}
                 </ul>
