@@ -4,7 +4,7 @@ import { FilterParams } from "store/models/WindowTypes";
 export function createQueryAtribute(filters: FilterParams): string {
     const attributesString = filters
         .map((attribute: { key: string, value: string }) => `${encodeURIComponent(attribute.key)}__${encodeURIComponent(attribute.value)}`)
-        .join('&');
+        .join('|');
     return attributesString;
 }
 export function createQueryString(filters: FilterParams): string {
@@ -50,20 +50,16 @@ export function parseQueryString(queryString: string): FilterParamss {
         filters.attribute = [];
 
         if (key === 'attribute' && value.includes('__')) {
-            const [attrKey, attrValue] = value.split('__');
-            console.log(attrKey, attrValue);
+            value.split('|').forEach((value, key) => {
+                if (value.includes('__')) {
+                    const [attrKey, attrValue] = value.split('__');
 
-            atrributeArray.push({ key: decodeURIComponent(attrKey), value: decodeURIComponent(attrValue) });
-        } else if (key.includes('__') || value.includes('__')) {
-            if (key === 'attribute' && value.includes('__')) {
-                const [attrKey, attrValue] = value.split('__');
-                console.log(attrKey, attrValue);
 
-                atrributeArray.push({ key: decodeURIComponent(attrKey), value: decodeURIComponent(attrValue) });
-            }
-            const [attrKey, attrValue] = key.split('__');
-            atrributeArray.push({ key: decodeURIComponent(attrKey), value: decodeURIComponent(attrValue) });
-        } else {
+                    atrributeArray.push({ key: decodeURIComponent(attrKey), value: decodeURIComponent(attrValue) });
+                }
+            })
+        }
+        else {
             if (key === 'limit' || key === 'offset' || key === 'price_min' || key === 'price_max') {
                 filters[key] = parseInt(value, 10);
             } else {
