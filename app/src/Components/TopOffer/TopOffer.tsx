@@ -37,9 +37,6 @@ const TopOffer: React.FC<TopOfferProps> = ({ products_quantity }) => {
     dispatch(fetchProductOfDay({ cancelToken: source.token }))
   }, []);
 
-  console.log(productOfDay?.top_products);
-
-
   return (
     <div className={`${classes.topOffer} ${classes[dynamicClass]}`}>
       {productOfDay?.top_products.slice(0, products_quantity).map((product, index) => (
