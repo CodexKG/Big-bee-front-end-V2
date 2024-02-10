@@ -39,7 +39,7 @@
     display: flex;
     justify-content: space-between;
     // max-width: 1722px;
-    
+
     padding: 0 24px;
     align-items: center;
 
@@ -67,7 +67,14 @@
     }
 
 }
-.select{
+
+.select {
     width: 270px;
-    height: 60px;
+    height: 50px;
+}
+
+.select_categories {
+    display: flex;
+    justify-content: end;
+    padding: 10px 24px;
 }
