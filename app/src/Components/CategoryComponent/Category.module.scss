@@ -1,0 +1,68 @@
+.category {
+
+    max-width: 1722px;
+    margin: 0 auto;
+    padding: 0 24px;
+ 
+    &_block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        a {
+            color: #000;
+            font-family: SF Pro Display;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 140%;
+        }
+    }
+
+    &_title {
+
+        color: #000;
+        font-family: SF Pro Display;
+        font-size: 49px;
+        font-weight: 700;
+        line-height: 100%;
+    }
+
+    &_row {
+        display: flex;
+        column-gap: 20px;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .nextBtn,
+    .prevBtn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        box-shadow: 0px 2px 3px rgb(172, 170, 170);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        right: -25px;
+        transform: translateY(-50%);
+        background: white !important;
+        border: none;
+        z-index: 9;
+    }
+
+    .prevBtn img {
+        transform: rotate(180deg);
+    }
+
+    .prevBtn {
+        left: -25px;
+    }
+
+
+
+}
