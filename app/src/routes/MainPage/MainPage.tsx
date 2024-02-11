@@ -5,6 +5,7 @@ import { FC } from "react";
 import { MainCaruselComponent, CompanyListComponent } from "Components";
 import { Promotion } from '../../Components/index'
 import { api } from "api";
+import Protected from "routes/Protected/Protected";
 
 
 
@@ -17,7 +18,10 @@ const MainPage: FC = () => {
       <Advantages />
       <Promotion title="Акции и скидки" getCarts={api.getProductBestSellers} />
       <CategoryComponent />
-      <Promotion title="Специально для вас" getCarts={api.getForYouRandomProducts} />
+      <Protected fallback={<div></div>}>
+        <Promotion title="Специально для вас" getCarts={api.getForYouRandomProducts} />
+      </Protected>
+
       <Promotion title="Хиты продаж" getCarts={api.getPromotionRandomProducts} />
       <TopOffer products_quantity={2} />
     </div >
