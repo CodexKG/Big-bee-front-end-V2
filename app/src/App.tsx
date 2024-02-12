@@ -5,6 +5,7 @@ import MainPage from 'routes/MainPage/MainPage';
 import { Login, OrderPlacing, SignUp } from 'Components';
 import { Catalog, Favorites, Cart } from 'routes';
 import SinglePageProduct from 'routes/SinglePageProduct/SinglePageProduct';
+import Protected from 'routes/Protected/Protected';
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
         <Route index element={<MainPage />} />
         <Route path='/catalog/:id' element={<Catalog />} />
         <Route path='/favorites' element={<Favorites />} />
-        <Route path='/orderplasing' element={<OrderPlacing />} />
+        <Route path='/orderplasing' element={<Protected fallback={<div></div>}><OrderPlacing /></Protected>} />
         <Route path='/product/:id' element={<SinglePageProduct />} />
         <Route path='/cart' element={<Cart />} />
       </Route>

@@ -44,7 +44,7 @@ const OrderPlacing: React.FC = () => {
                 "first_name": values.username,
                 "last_name": values.surname,
                 "phone": values.number,
-                "billing_receipt_type": 'd',
+                "billing_receipt_type": 'Самовывоз',
                 "country": values.country,
                 "region": values.region,
                 "city": values.city,
@@ -54,7 +54,7 @@ const OrderPlacing: React.FC = () => {
                 "note": ""
             }
         )
-        console.log(JSON.stringify(values));
+    
     };
 
     console.log(data);
