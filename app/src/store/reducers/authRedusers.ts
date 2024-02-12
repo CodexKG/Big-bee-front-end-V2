@@ -20,8 +20,8 @@ export const loginAsync = createAsyncThunk(
 
 export const registerAsync = createAsyncThunk(
     'auth/register',
-    async ({ username, password, confirm_password }: { username: string; password: string, confirm_password: string }) => {
-        const response = await api.register(username, password, confirm_password);
+    async ({ username, email, password, confirm_password }: { username: string; email: string, password: string, confirm_password: string }) => {
+        const response = await api.register(username, email, password, confirm_password);
         try{
             const cart = await api.createCart(response.data.user_id)
         }

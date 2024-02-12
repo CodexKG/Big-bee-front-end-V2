@@ -5,8 +5,8 @@ import { instance } from './index'
 const login = (username: string, password: string, sourceToken?: CancelToken) =>
     instance.post('/users/login/', { username, password }, { cancelToken: sourceToken });
 
-const register = (username: string, password: string, confirm_password: string, sourceToken?: CancelToken) =>
-    instance.post('/users/', { username, password, confirm_password }, { cancelToken: sourceToken });
+const register = (username: string, email: string, password: string, confirm_password: string, sourceToken?: CancelToken) =>
+    instance.post('/users/', { username, password, email, confirm_password }, { cancelToken: sourceToken });
 
 const endpoints = {
     login,

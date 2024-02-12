@@ -90,7 +90,7 @@ const OrderPlacing: React.FC = () => {
                                         rules={[{ required: true }]}
                                     >
                                         <Input
-                                            className={classes.input}
+                                            className={classes.input1}
                                             placeholder="Имя"
                                             size="large"
                                         ></Input>
@@ -113,7 +113,7 @@ const OrderPlacing: React.FC = () => {
 
 
                                 <div className={classes.input}>
-                                    <p className={classes.link}>У вас уже есть аккаунт? <Button className={classes.linkButton} type="link"><Link to={'/register'}>Войти</Link></Button></p>
+                                    <p className={classes.link}>У вас уже есть аккаунт? <Button className={classes.linkButton} type="link"><Link to={'/login'}>Войти</Link></Button></p>
                                     <Form.Item
                                         name="surname"
                                         style={{ marginBottom: 0 }}
