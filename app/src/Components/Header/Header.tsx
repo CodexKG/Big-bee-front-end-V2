@@ -104,7 +104,7 @@ const HeaderComponent: React.FC = () => {
                     Каталог
                 </Button>
                 <ul>
-                    {data.slice(0,5).map((item: Categories) =>
+                    {data.slice(0, 5).map((item: Categories) =>
                         <li onClick={() => navigate(`/catalog/${item.id}`)} style={{ cursor: 'pointer' }} key={item.id}>{item.title}</li>
                     )}
                 </ul>
@@ -145,7 +145,7 @@ const HeaderComponent: React.FC = () => {
                         open={open}
                         height={'top'}
                         mask={false}
-                        style={{ height: '100vh' }}
+                        style={{ height: '100vh', padding: '0px 65px' }}
                         getContainer={false}
 
                     >
