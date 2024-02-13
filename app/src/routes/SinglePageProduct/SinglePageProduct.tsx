@@ -42,45 +42,50 @@ const SinglePageProduct: FC = () => {
     }, [id])
 
     return (
-        <div className={classes.singlePage}>
-            <div className={classes.singlePage_nav}>
-                <button className={classes.singlePage_nav_btn}>
-                    Электроника
-                    <img src={arrowIcon} alt="" />
-                </button>
-                <button className={classes.singlePage_nav_btn}>
-                    Смартфоны
-                    <img src={arrowIcon} alt="" />
-                </button>
-                <button className={classes.singlePage_nav_btn}>
-                    Мобильные телефоны
-                    <img src={arrowIcon} alt="" />
-                </button>
-                <button className={classes.singlePage_nav_btn}>
-                    Apple
-                    <img src={arrowIcon} alt="" />
-                </button>
+        <div className={classes.conteiner}>
+
+            <div className={classes.singlePage}>
+                <div className={classes.singlePage_nav}>
+                    <button className={classes.singlePage_nav_btn}>
+                        Электроника
+                        <img src={arrowIcon} alt="" />
+                    </button>
+                    <button className={classes.singlePage_nav_btn}>
+                        Смартфоны
+                        <img src={arrowIcon} alt="" />
+                    </button>
+                    <button className={classes.singlePage_nav_btn}>
+                        Мобильные телефоны
+                        <img src={arrowIcon} alt="" />
+                    </button>
+                    <button className={classes.singlePage_nav_btn}>
+                        Apple
+                        <img src={arrowIcon} alt="" />
+                    </button>
+                </div>
+
+                <div className={classes.singlePage_top_row}>
+                    <h2 className={classes.singlePage_title}>{selectedProduct?.title}</h2>
+
+                    <button className={classes.singlePage_wishlist_btn}>
+                        <img src={wishListIcon} alt="" />
+                        В избранное
+                    </button>
+                </div>
+
+                <div className={classes.singlePage_row}>
+                    <Col_1 />
+                    <Col_2 />
+                </div>
+                <br />
+                <br />
+                <br />
+                <Promotion title="Акции и скидки" getCarts={api.getProductBestSellers} />
+                <Promotion title="Хиты продаж" getCarts={api.getPromotionRandomProducts} />
             </div>
 
-            <div className={classes.singlePage_top_row}>
-                <h2 className={classes.singlePage_title}>{selectedProduct?.title}</h2>
-
-                <button className={classes.singlePage_wishlist_btn}>
-                    <img src={wishListIcon} alt="" />
-                    В избранное
-                </button>
-            </div>
-
-            <div className={classes.singlePage_row}>
-                <Col_1 />
-                <Col_2 />
-            </div>
-            <br />
-            <br />
-            <br />
-            <Promotion title="Акции и скидки" getCarts={api.getProductBestSellers} />
-            <Promotion title="Хиты продаж" getCarts={api.getPromotionRandomProducts} />
         </div>
+
     )
 }
 
