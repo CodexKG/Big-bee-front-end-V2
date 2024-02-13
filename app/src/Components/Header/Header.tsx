@@ -96,7 +96,7 @@ const HeaderComponent: React.FC = () => {
                         поиск
                     </div>
                     <HeartOutlined style={{ fontSize: '24px' }} />
-                    <Link to={'/cart'}><ShoppingCartOutlined style={{ fontSize: '24px' }} /></Link>
+                    <Link style={{ color: 'black' }}  to={'/cart'}><ShoppingCartOutlined style={{ fontSize: '24px' }} /></Link>
                     <Protected fallback={<Button style={{ color: 'black' }} type='primary'><Link to={'/'}>Выйти</Link></Button>}>
                         <Button style={{ color: 'black' }} type='primary'><Link to={'/login'}>Войти</Link></Button>
                     </Protected>
