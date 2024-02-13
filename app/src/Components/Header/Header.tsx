@@ -12,8 +12,6 @@ import { setHoveredItem } from 'store/slices/categorySlice';
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderSceleton from 'Components/Skeleton/HeaderSkeleton';
 import { setFilters } from 'store/slices/WindowSlice';
-import Promotion from 'Components/Promotion/Promotion';
-import Protected from 'routes/Protected/Protected';
 
 const HeaderComponent: React.FC = () => {
     const { data, children, status } = useAppSelector((state) => state.category)
@@ -97,9 +95,7 @@ const HeaderComponent: React.FC = () => {
                     </div>
                     <HeartOutlined style={{ fontSize: '24px' }} />
                     <Link to={'/cart'}><ShoppingCartOutlined style={{ fontSize: '24px' }} /></Link>
-                    <Protected fallback={<Button style={{ color: 'black' }} type='primary'><Link to={'/'}>Выйти</Link></Button>}>
-                        <Button style={{ color: 'black' }} type='primary'><Link to={'/login'}>Войти</Link></Button>
-                    </Protected>
+                    <Button style={{ color: 'black' }} type='primary'><Link to={'/login'}>Войти</Link></Button>
 
                 </div>
             </nav>

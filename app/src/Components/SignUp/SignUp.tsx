@@ -1,27 +1,28 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, message } from 'antd';
 import classes from './SignUp.module.scss';
 import { useAppDispatch } from 'store/hook';
 import { registerAsync } from 'store/reducers/authRedusers';
 import { fetchCartItems } from 'store/reducers/cartRedusers';
-import logo from "../../assets/icon/logo.svg"
 
 const SignUp: React.FC = () => {
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const onFinish = async (values: any) => {
+        console.log('Received values of form: ', values);
         try {
             setLoading(true);
-            const response = await dispatch(registerAsync({ username: values.username, email: values.email, password: values.password, confirm_password: values.confirm_password }));
+            const response = await dispatch(registerAsync({ username: values.username, password: values.password, confirm_password: values.confirm_password }));
+            message.success('Registration successful. You can now log in.');
             await dispatch(fetchCartItems(response.payload.user_id))
             navigate('/login');
-            message.success('Регистрация прошла успешно. Теперь вы можете войти в систему.');
         } catch (error) {
-            message.error('Такой логин или email уже существует!');
+            message.error('Registration failed. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -30,17 +31,11 @@ const SignUp: React.FC = () => {
 
     return (
         <section className={classes.auth_reg}>
-
-
             <div className={classes.form}>
 
-                <div className={classes.icon}>
-                    <img src={logo} alt="" />
-                </div>
-
                 <div className={classes.title}>
-                    <h2>Создайте аккаунт!</h2>
-                    <p>Пожалуйста, заполните эту форму, чтобы создать учетную запись.</p>
+                    <h2>Сreate an account!</h2>
+                    <p>Please fill in this form to create an account.</p>
                 </div>
 
                 <Form
@@ -51,16 +46,9 @@ const SignUp: React.FC = () => {
                 >
                     <Form.Item
                         name="username"
-                        rules={[{ required: true, message: 'Please input your Username!' }, {type: "string"}]}
+                        rules={[{ required: true, message: 'Please input your Username!' }]}
                     >
-                        <Input className={classes.input}  placeholder="Username" />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="email"
-                        rules={[{ required: true, message: 'Please input your Email!' }]}
-                    >
-                        <Input className={classes.input} type='email' placeholder="Email" />
+                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                     </Form.Item>
                     <Form.Item
                         name="password"
@@ -70,13 +58,18 @@ const SignUp: React.FC = () => {
                                 message: 'Please input your password!',
                             },
                         ]}
+                        hasFeedback
                     >
-                        <Input type='password' className={classes.input} placeholder="Password" />
+                        <Input.Password
+                            placeholder="Password"
+                            prefix={<LockOutlined className="site-form-item-icon"
+                            />} />
                     </Form.Item>
 
                     <Form.Item
                         name="confirm_password"
                         dependencies={['password']}
+                        hasFeedback
                         rules={[
                             {
                                 required: true,
@@ -92,12 +85,15 @@ const SignUp: React.FC = () => {
                             }),
                         ]}
                     >
-                        <Input type='password' className={classes.input} placeholder="Confirm Password" />
+                        <Input.Password
+                            placeholder="Confirm Password"
+                            prefix={<LockOutlined className="site-form-item-icon"
+                            />} />
                     </Form.Item>
 
 
                     <Form.Item>
-                        <Button loading={loading} type="primary" htmlType="submit" className={classes.button} block>
+                        <Button loading={loading} type="primary" htmlType="submit" className="login-form-button" block>
                             SignUp
                         </Button>
                     </Form.Item>
