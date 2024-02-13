@@ -2,8 +2,8 @@
 @import '../../scss/variables/colors.module.scss';
 
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url(../../assets/fonts/SFProText-Medium.ttf);
+  font-family: 'Golos';
+  src: url(../../assets/fonts/GolosText-VariableFont_wght.ttf);
   font-weight: normal;
   font-style: normal;
 }
@@ -13,7 +13,7 @@
   margin: 0;
   list-style: none;
   outline: none;
-  font-family: 'SF Pro Display' !important;
+  font-family: 'Golos' !important;
   box-sizing: border-box;
 }
 

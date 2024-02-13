@@ -1,11 +1,9 @@
 .container {
     // max-width: 1722px;
-    margin: 0 auto;
+    margin: 130px auto 0;
     width: 100%;
-    position: relative;
-    padding: 0 100px;
-    padding-top: 50px;
-    padding-bottom: 130px;
+    padding: 0px 100px;
+    margin-bottom: 5rem;
 
     .cont {
         width: 100%;
@@ -48,8 +46,7 @@
         }
 
         .button:hover {
-            background-color: #eeb004;
-            color: #000;
+            background-color: transparent;
         }
 
         .text {

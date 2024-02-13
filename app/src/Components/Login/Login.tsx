@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import classes from './Login.module.scss';
 import { useAppDispatch } from 'store/hook';
@@ -8,8 +9,6 @@ import { loginAsync } from 'store/reducers/authRedusers';
 import { setCookie } from 'helpers/cookies';
 import {Link} from 'react-router-dom';
 import { fetchCartItems } from 'store/reducers/cartRedusers';
-import logo from "../../assets/icon/logo.svg"
-
 
 const Login: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -22,14 +21,13 @@ const Login: React.FC = () => {
         try {
             setLoading(true);
             const response = await dispatch(loginAsync({ username: values.username, password: values.password }));
-            await dispatch(fetchCartItems(response.payload.user_id))
+            message.success('Login successful');
             navigate('/');
-            message.success('Авторизация успешна!');
+            await dispatch(fetchCartItems(response.payload.user_id))
             setCookie('user_id', response.payload.user_id, 30)
             setCookie('access_token', response.payload.access, 30);
-            
         } catch (error) {
-            message.error('Ошибка входа. Пожалуйста, проверьте свои учетные данные.');
+            message.error('Login failed. Please check your credentials.');
         }finally{
             setLoading(false);
         }
@@ -41,12 +39,12 @@ const Login: React.FC = () => {
             <div className={classes.form}>
 
                 <div className={classes.icon}>
-                    <img src={logo} alt="" />
+                    <UserOutlined style={{ fontSize: '50px', color: "white" }} />
                 </div>
 
                 <div className={classes.title}>
-                    <h2>Вход</h2>
-                    <p>Войдите в свою учетную запись, чтобы продолжить</p>
+                    <h2>Welcome back!</h2>
+                    <p>Sign in to your account to continue</p>
                 </div>
 
                 <Form
@@ -59,14 +57,14 @@ const Login: React.FC = () => {
                         name="username"
                         rules={[{ required: true, message: 'Please input your Username!' }]}
                     >
-                        <Input className={classes.input} placeholder="Username" />
+                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                     </Form.Item>
                     <Form.Item
                         name="password"
                         rules={[{ required: true, message: 'Please input your Password!' }]}
                     >
                         <Input
-                            className={classes.input}
+                            prefix={<LockOutlined className="site-form-item-icon" />}
                             type="password"
                             placeholder="Password"
                         />
@@ -75,18 +73,23 @@ const Login: React.FC = () => {
                         <div className={classes.formBlock}>
                             <div>
                                 <Form.Item name="remember" valuePropName="checked" noStyle>
-                                    <Checkbox>Запомнить меня</Checkbox>
+                                    <Checkbox>Remember me</Checkbox>
                                 </Form.Item>
                             </div>
 
+                            <div>
+                                <a className="login-form-forgot" href="#/">
+                                    Forgot password
+                                </a>
+                            </div>
                         </div>
                     </Form.Item>
 
                     <Form.Item>
-                        <Button loading={loading} type="primary" htmlType="submit" className={classes.button} block>
-                            Вход
+                        <Button loading={loading} type="primary" htmlType="submit" className="login-form-button" block>
+                            Log in
                         </Button>
-                        Или <a href="#/"> <Link to={'/signUp'}>зарегистрируйтесь сейчас!</Link></a>
+                        Or <a href="#/"> <Link to={'/signUp'}>register now!</Link></a>
                     </Form.Item>
                 </Form>
             </div>
