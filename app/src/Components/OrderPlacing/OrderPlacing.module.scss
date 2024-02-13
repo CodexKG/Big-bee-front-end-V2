@@ -1,11 +1,11 @@
 // css всей страницы
 .order {
     // max-width: 1722px;
-    margin: 0 auto;
     width: 100%;
+    padding: 50px 100px;
 
     .conteiner {
-        padding: 50px 24px;
+        width: 100%;
 
         .flexConteiner {
             display: flex;
@@ -13,7 +13,7 @@
             width: 100%;
 
             .left {
-                width: 50%;
+                width: 48%;
                 // css левой стороны
 
                 h3 {
@@ -38,9 +38,14 @@
                     justify-content: space-between;
 
                     .item {
-                        width: 395px;
+                        width: 50%;
 
-                        .input {
+                        .input1 {
+                            margin-bottom: 8px;
+                            width: 100%;
+                            padding-right: 20px;
+                        }
+                        .input{
                             margin-bottom: 8px;
                         }
 
@@ -69,7 +74,7 @@
                     }
 
                     .item:first-child {
-                        width: 395px;
+                        width: 50%;
 
                         .input {
                             margin-bottom: 8px;
@@ -84,26 +89,26 @@
             // конец левой части
 
             .right {
-                width: 50%;
-                margin-left: 50px;
+                width: 48%;
 
-                h3{
+                h3 {
                     font-size: 20px;
                     font-style: normal;
                     font-weight: 800;
-                    line-height: 110%;  
+                    line-height: 110%;
                 }
 
                 .flexConteiner:nth-child(2),
                 .flexConteiner:nth-child(3),
                 .flexConteiner:nth-child(4) {
-                    width: 680px;
+                    width: 100%;
                     margin-top: 24px;
                     border-top: 1px solid rgb(220, 220, 220);
                     padding-top: 30px;
+                    
 
                     .imgProduct {
-                        width: 170px;
+                        width: 25%;
 
                         img {
                             width: 100%;
@@ -112,11 +117,10 @@
                     }
 
                     .title {
-                        width: 320px;
+                        width: 40%;
                         font-size: 16px;
                         font-weight: 500;
                         line-height: 110%;
-                        margin-right: 30px;
                         margin-bottom: 16px;
 
                         span {
@@ -138,7 +142,7 @@
                     }
 
                     .price {
-                        width: 122px;
+                        width: 20%;
 
                         h2 {
                             color: red;
@@ -146,11 +150,10 @@
                     }
 
                     .orderSum {
-                        padding: 0;
                         list-style: none;
                         width: 100%;
 
-                        div{
+                        div {
                             color: #000;
                             font-size: 18px;
                             font-style: normal;
@@ -159,7 +162,7 @@
                             margin-bottom: 20px;
                         }
 
-                        .itog{
+                        .itog {
                             font-size: 25px;
                             font-weight: 850;
                             margin-top: 15px;

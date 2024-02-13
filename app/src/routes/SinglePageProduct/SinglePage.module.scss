@@ -1,8 +1,13 @@
-.singlePage {
-    // max-width: 1722px;cd
+.conteiner{
     margin: 0 auto;
-   
-    padding: 50px 100px;
+    width: 100%;
+
+}
+
+.singlePage {
+    // max-width: 1722px;
+    padding: 20px 100px;
+    
 
 
     &_nav {
@@ -32,7 +37,9 @@
 
     &_row {
         display: flex;
+        justify-content: space-between;
         column-gap: 50px;
+        width: 100%;
     }
 
 
