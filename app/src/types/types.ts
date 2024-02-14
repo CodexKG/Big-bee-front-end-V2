@@ -107,5 +107,11 @@ export interface OrderPlacing {
     street: string,
     apartment: string,
     zip_code: string,
-    note: string
+    note: string,
+    billing_products: {
+        product: number,
+        quantity: number,
+        price: number,
+        configurator: string[]
+    }[]
 }
