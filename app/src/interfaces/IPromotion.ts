@@ -2,8 +2,6 @@
 export interface IPromotionCard {
 
     id: number;
-    product_img: string;
-    subtitle: string
     salesman_img: string;
     title: string;
     description: string;
@@ -15,5 +13,6 @@ export interface IPromotionCard {
         id: number,
         product: number,
         image: string
-    }>
+    }>;
+    product_code?:number
 }

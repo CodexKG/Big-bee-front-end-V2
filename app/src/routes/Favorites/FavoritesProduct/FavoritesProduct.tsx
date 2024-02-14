@@ -1,13 +1,31 @@
-import {FC} from 'react'
-import classes from './FavoritesProduct.module.scss'
-import { Promotion } from 'Components'
-import { api } from 'api'
-const FavoritesProduct:FC = () => {
+import { FC, useEffect, useState } from "react";
+import classes from "./FavoritesProduct.module.scss";
+import FavoritesCarusel from "../FavoritesCarusel/FavoritesCarusel";
+import { api } from "api";
+import { getCookie } from "helpers/cookies";
+import FavoritesEmpty from "../FavoritesEmpty/FavoritesEmpty";
+
+const FavoritesProduct: FC = () => {
+  const accessToken = getCookie("access_token");
+  const [data, setData] = useState<any>();
+  const getProducts = async () => {
+    const data = await api.getFavoriteProducts(accessToken);  
+    setData(data);
+  };
+  useEffect(() => {
+    getProducts();
+  }, []);
   return (
     <div className={classes.favoritesProduct}>
-        <Promotion title="Избранное" getCarts={api.getProductBestSellers} />
+      {data?.results?.length === 0 ? (
+        <FavoritesEmpty/>
+      ) : (
+        <FavoritesCarusel title=' ' getCarts={api.getProductBestSellers}/>
+        
+        // <Promotion title=" " getCarts={api.getProductBestSellers} />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default FavoritesProduct
+export default FavoritesProduct;
