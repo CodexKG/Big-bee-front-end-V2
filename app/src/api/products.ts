@@ -1,7 +1,6 @@
 import { CancelToken } from "axios";
 import { instance } from "./index";
 import { ProductData } from "types/types";
-import { get } from "http";
 
 //product
 const getProducts = (
@@ -44,11 +43,19 @@ const getProductBestSellers = (sourceToken?: CancelToken) =>
   instance.get(`/products/bestsellers/`, { cancelToken: sourceToken });
 
 const getForYouRandomProducts = (sourceToken?: CancelToken) =>
-  instance.get("/products/for-you-products/random_products",{ cancelToken: sourceToken });
+  instance.get("/products/for-you-products/random_products", {
+    cancelToken: sourceToken,
+  });
 
 const getPromotionRandomProducts = (sourceToken?: CancelToken) =>
-  instance.get("/products/promotions/random_products",{ cancelToken: sourceToken });
-
+  instance.get("/products/promotions/random_products", {
+    cancelToken: sourceToken,
+  });
+const getFavoriteProducts = (token:string,sourceToken?: CancelToken) =>
+  instance.get(`/products/favorite/`, {
+    cancelToken: sourceToken,
+    headers: {'Authorization':`Bearer ${token}`},
+  });
 
 const endpoints = {
   getProducts,
@@ -56,6 +63,7 @@ const endpoints = {
   getFilteredProducts,
   getProductBestSellers,
   getForYouRandomProducts,
-  getPromotionRandomProducts
+  getPromotionRandomProducts,
+  getFavoriteProducts
 };
 export default endpoints;

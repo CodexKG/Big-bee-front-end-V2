@@ -23,7 +23,7 @@ const instance = axios.create({
 //   if (kc_access) config.headers!['kc-access'] = kc_access;
 //   return config
 // });
-const { getFilteredProducts, getProducts, getProductsById,getProductBestSellers ,getForYouRandomProducts,getPromotionRandomProducts} = produckts
+const { getFilteredProducts, getProducts, getProductsById,getProductBestSellers ,getForYouRandomProducts,getPromotionRandomProducts,getFavoriteProducts} = produckts
 const { login, register } = auth
 const { createCart, addToCart, getOwnCartItems, deleteCartItem } = carts
 const { getFilteredShops, getShopById, getShops } = shops
@@ -57,7 +57,8 @@ const api = {
   getCategoriesById,
   getProductBestSellers,
   getForYouRandomProducts,
-  getPromotionRandomProducts
+  getPromotionRandomProducts,
+  getFavoriteProducts
 }
 
 export { instance, api };

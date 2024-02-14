@@ -10,6 +10,6 @@ import SubWithNews from "./SubscriptionsWithNews/SubWithNews"
 import CompanyListComponent from "./CompanyListComponent/CompanyListComponent";
 import MainCaruselComponent from "./MainCaruselComponent/MainCaruselComponent";
 import CategoryComponent from './CategoryComponent/CategoryComponent'
-
-export { HeaderComponent,Login, SignUp, PromotionCard,OrderPlacing, Promotion, SubWithNews, TopOffer, CompanyListComponent, MainCaruselComponent, CategoryComponent,Advantages }
+import Corset from './Corset/Corset';
+export { HeaderComponent,Login, SignUp, PromotionCard,OrderPlacing, Promotion, SubWithNews, TopOffer, CompanyListComponent, MainCaruselComponent, CategoryComponent,Advantages,Corset }
 

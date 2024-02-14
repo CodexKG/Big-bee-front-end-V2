@@ -3,7 +3,7 @@ import { CancelToken } from "axios";
 import { AddFavoriteProduct, FavoriteProduct } from "../../store/models/FavoriteTypes";
 import { api } from "../../api";
 
-export const fetchProductToFavorite = createAsyncThunk<AddFavoriteProduct, { user_id?: number, product_id?: number, cancelToken?: CancelToken }, { rejectValue?: string }>(
+export const fetchProductToFavorite = createAsyncThunk<AddFavoriteProduct, { user_id: number, product_id: number, cancelToken?: CancelToken }, { rejectValue?: string }>(
     'favorites/fetchProductToFavorite',
     async ({ cancelToken, user_id, product_id }, { rejectWithValue }) => {
         try {

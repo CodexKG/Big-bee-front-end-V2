@@ -20,9 +20,13 @@ const Login: React.FC = () => {
         try {
             setLoading(true);
             const response = await dispatch(loginAsync({ username: values.username, password: values.password }));
+            console.log(response);
+            
             message.success('Login successful');
             navigate('/');
             setCookie('access_token', response.payload.access, 30);            
+            setCookie('user_id', response.payload.user_id, 31);            
+
         } catch (error) {
             message.error('Login failed. Please check your credentials.');
         }finally{

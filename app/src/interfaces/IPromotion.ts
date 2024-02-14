@@ -11,5 +11,7 @@ export interface IPromotionCard{
         id:number,
         product:number,
         image:string
-    }>
+    }>,
+    product_code?:number,
+    id?:number
 }

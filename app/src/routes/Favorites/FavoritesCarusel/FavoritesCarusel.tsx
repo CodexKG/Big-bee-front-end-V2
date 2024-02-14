@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import classes from "./Promotion.module.scss";
+import classes from "./FavoritesCarusel.module.scss";
 import Title from "antd/es/typography/Title";
 import { Typography, Carousel } from "antd";
-import { PromotionCard } from "../index";
 import { CaretLeftFilled, CaretRightFilled } from "@ant-design/icons";
-import "./Promotion.scss";
+import "./FavoritesCarusel.scss";
 import "swiper/css";
 import { IPromotionCard } from "interfaces";
 import { sliceText } from "helpers/sliceText";
 import { PromotionSkeleton } from "Components/Skeleton";
+import FavoritesCard from "../FavoritesCard/FavoritesCard";
 const { Text } = Typography;
-interface Data {
-  data: IPromotionCard[];
-  status: number;
-}
-interface IPromotion {
+
+interface IFavoritesCarusel {
   title?: string;
   getCarts: () => any;
 }
@@ -42,9 +39,9 @@ const ArrowRight: React.FC<any> = ({ currentSlide, slideCount, ...props }) => {
   );
 };
 
-const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
+const FavoritesCarusel: React.FC<IFavoritesCarusel> = ({ title, getCarts }) => {
   const [cards, setCards] = useState([]);
-  const [status , setStatus] = useState<Status>("pending");
+  const [status, setStatus] = useState<Status>("pending");
   const getProducts = async () => {
     setStatus("pending");
     try {
@@ -65,8 +62,8 @@ const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
 
   if (status === "pending") {
     return (
-      <section className={`${classes.promotion} promotion`}>
-        <div className={classes.promotion_skeleton}>
+      <section className={`${classes.favoritesCarusel} favoritesCarusel`}>
+        <div className={classes.favoritesCarusel_skeleton}>
           <PromotionSkeleton />
           <PromotionSkeleton />
           <PromotionSkeleton />
@@ -79,16 +76,16 @@ const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
     return <Title level={1}>Произошла ошибка</Title>;
   }
   return (
-    <section className={classes.promotion + " promotion"}>
-      <div className={classes.promotion_header}>
-        <Title level={1} className={classes.promotion_title}>
+    <section className={classes.favoritesCarusel + " favoritesCarusel"}>
+      <div className={classes.favoritesCarusel_header}>
+        <Title level={1} className={classes.favoritesCarusel_title}>
           {title ? title : "Акции и скидки"}
         </Title>
         <Text>
           Все товары <CaretRightFilled color="#000" />
         </Text>
       </div>
-      <div className={classes.promotion_body}>
+      <div className={classes.favoritesCarusel_body}>
         <Carousel
           slidesToShow={4}
           dots={false}
@@ -101,24 +98,22 @@ const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
             console.log(swiper);
           }}
         >
-          {cards.map((item: IPromotionCard,index) => {
-            console.log(item);
-            
-            return (
-              <PromotionCard
-                key={index}
-                salesman_img="https://sartoreale.ru/upload/iblock/dc1/dc17cad50138ce5b963516754faba6f0.jpg"
-                title={item.title}
-                description={sliceText(item.description)}
-                price={item.price}
-                old_price={item.old_price}
-                average_rating={item.average_rating}
-                review_count={item.review_count}
-                product_images={item.product_images}
-                product_code={Number(item.product_code)}
-                id={item.id}
-              />
-            );
+          {cards.map((item: IPromotionCard, index) => {
+            if (index < 10) {
+              return (
+                <FavoritesCard
+                  key={index}
+                  salesman_img="https://sartoreale.ru/upload/iblock/dc1/dc17cad50138ce5b963516754faba6f0.jpg"
+                  title={item.title}
+                  description={sliceText(item.description)}
+                  price={item.price}
+                  old_price={item.old_price}
+                  average_rating={item.average_rating}
+                  review_count={item.review_count}
+                  product_images={item.product_images}
+                />
+              );
+            }
           })}
         </Carousel>
       </div>
@@ -126,4 +121,4 @@ const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
   );
 };
 
-export default Promotion;
+export default FavoritesCarusel;
