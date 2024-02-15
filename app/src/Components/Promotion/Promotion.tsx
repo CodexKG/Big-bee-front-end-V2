@@ -100,6 +100,8 @@ const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
           }}
         >
           {cards.map((item: IPromotionCard,index) => {
+            console.log(item );
+            
             return (
               <PromotionCard
                 key={index}

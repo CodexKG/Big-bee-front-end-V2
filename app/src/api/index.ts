@@ -9,7 +9,7 @@ import categories from './categories'
 import banners from './banners'
 import email from './getEmail'
 import biling from './biling'
-
+import users from './users'
 const instance = axios.create({
   // @ts-ignore
   baseURL: window.REACT_APP_SERVER_API !== 'REPLACE_REACT_APP_SERVER_API' ? window.REACT_APP_SERVER_API : process.env.REACT_APP_SERVER_API || 'https://bee.webtm.ru/api/v1/',
@@ -40,10 +40,11 @@ const { getCategories, getCategoriesById } = categories
 const { getBanners } = banners
 const { getEmail } = email
 const { orders } = biling
-
+const {refreshToken} = users
 
 
 const api = {
+  refreshToken,
   orders,
   login,
   getProducts,

@@ -27,6 +27,8 @@ const Login: React.FC = () => {
             message.success('Авторизация успешна!');
             setCookie('user_id', response.payload.user_id, 30)
             setCookie('access_token', response.payload.access, 30);
+            setCookie('refresh_token', response.payload.refresh, 30);
+
             
         } catch (error) {
             message.error('Ошибка входа. Пожалуйста, проверьте свои учетные данные.');

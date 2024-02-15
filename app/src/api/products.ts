@@ -2,6 +2,8 @@ import { CancelToken } from "axios";
 import { instance } from "./index";
 import { ProductData, SingleProduct } from "types/types";
 import { FilterParams } from "store/models/WindowTypes";
+import { getCookie } from "helpers/cookies";
+import accessToken from "service";
 
 //product
 const getProducts = (
@@ -44,10 +46,11 @@ const getPromotionRandomProducts = (sourceToken?: CancelToken) =>
 
 const getProductsofDay = (sourceToken?: CancelToken) =>
   instance.get(`/products/product_day`, { cancelToken: sourceToken });
-const getFavoriteProducts = (token: string, sourceToken?: CancelToken) =>
+
+const getFavoriteProducts = (sourceToken?: CancelToken) =>
   instance.get(`/products/favorite/`, {
     cancelToken: sourceToken,
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${getCookie("access_token")}` },
   });
 
 const endpoints = {

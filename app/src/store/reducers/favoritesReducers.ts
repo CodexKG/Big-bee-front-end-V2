@@ -6,12 +6,12 @@ import {
 } from "../../store/models/FavoriteTypes";
 import { api } from "../../api";
 
-export const fetchProductToFavorite = createAsyncThunk<
+export const fetchProductToFavoriteAdd = createAsyncThunk<
   AddFavoriteProduct,
   { user_id?: number; product_id?: number; cancelToken?: CancelToken },
   { rejectValue?: string }
 >(
-  "favorites/fetchProductToFavorite",
+  "favorites/fetchProductToFavoriteAdd",
   async ({ cancelToken, user_id, product_id }, { rejectWithValue }) => {
     try {
       const response = await api.addProductToFavorite(
@@ -20,6 +20,20 @@ export const fetchProductToFavorite = createAsyncThunk<
         cancelToken
       );
       return response.data as AddFavoriteProduct;
+    } catch (error) {
+      return rejectWithValue(
+        typeof error === "string" ? error : "Failed to fetch products"
+      );
+    }
+  }
+);
+
+export const fetchProductToFavorite = createAsyncThunk(
+  "favorites/fetchProductToFavorite",
+  async ({}, { rejectWithValue }) => {
+    try {
+      const data:any = await api.getFavoriteProducts()
+      return data.result
     } catch (error) {
       return rejectWithValue(
         typeof error === "string" ? error : "Failed to fetch products"

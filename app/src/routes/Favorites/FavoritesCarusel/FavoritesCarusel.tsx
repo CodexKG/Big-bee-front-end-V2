@@ -5,7 +5,7 @@ import { Typography, Carousel } from "antd";
 import { CaretLeftFilled, CaretRightFilled } from "@ant-design/icons";
 import "./FavoritesCarusel.scss";
 import "swiper/css";
-import { IPromotionCard } from "interfaces";
+import { IPromotionCard,IFavoriteCart } from "interfaces";
 import { sliceText } from "helpers/sliceText";
 import { PromotionSkeleton } from "Components/Skeleton";
 import FavoritesCard from "../FavoritesCard/FavoritesCard";
@@ -96,21 +96,20 @@ const FavoritesCarusel: React.FC<IFavoritesCarusel> = ({ title, getCarts }) => {
             console.log(swiper);
           }}
         >
-          {cards.map((item: IPromotionCard, index) => {
-   
+          {cards.map((item: IFavoriteCart, index) => {
               return (
                 <FavoritesCard
                   key={index}
-                  salesman_img="https://sartoreale.ru/upload/iblock/dc1/dc17cad50138ce5b963516754faba6f0.jpg"
-                  title={item.title}
-                  description={sliceText(item.description)}
-                  price={item.price}
-                  old_price={item.old_price}
-                  average_rating={item.average_rating}
-                  review_count={item.review_count}
-                  product_images={item.product_images}
+              
+                  title={item.product.title}
+                  description={sliceText(item.product.description)}
+                  price={item.product.price}
+                  old_price={item.product.old_price}
+                  average_rating={item.product.average_rating}
+                  review_count={item.product.review_count}
+                  product_images={item.product.product_images}
                   id={item.id}
-                  product_code={item.product_code}
+                  product_code={String(item.product.product_code)}
                 />
               );
             

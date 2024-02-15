@@ -10,6 +10,7 @@ import { CarouselRef } from "antd/es/carousel";
 import { useNavigate } from "react-router-dom";
 import { api } from "api";
 import { getCookie } from "helpers/cookies";
+import { Link } from "react-router-dom";
 type DotPosition = CarouselProps["dotPosition"];
 
 const PromotionCard: React.FC<IPromotionCard> = (props) => {
@@ -93,7 +94,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
           <Col span={2}>Продавец</Col>
         </Row>
       </div>
-      <Title level={3}>{title}</Title>
+     <Link to={`/product/${id}`}> <Title level={3}>{title}</Title></Link>
       <div className={classes.subtitle}>
         <Text>{description}</Text>
       </div>
