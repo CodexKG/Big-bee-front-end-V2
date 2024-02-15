@@ -10,7 +10,7 @@ interface Props {
 const CompanyListComponent: React.FC<Props> = () => {
     return ( 
        <div className={classes.company__list}>
-            <Flex className={classes.container}>
+            <Flex className={classes.container} justify='space-between'>
                 {
                     company_list.map(e=>{
                         return(

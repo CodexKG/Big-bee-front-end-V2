@@ -26,7 +26,7 @@ const getOwnCartItems = (id?: number, sourceToken?: CancelToken) =>
     instance.get(`/carts/cart/?user=${id}`, { cancelToken: sourceToken });
 
 const deleteCartItem = (id: number, access_token:string, sourceToken?: CancelToken) =>
-    instance.delete(`/carts/items/${id}`, {
+    instance.delete(`/carts/items/${id}/`, {
         headers: {
             Authorization: `Bearer ${access_token}`
         },
@@ -35,7 +35,7 @@ const deleteCartItem = (id: number, access_token:string, sourceToken?: CancelTok
 
 const updateQuantityCartItem = (id: number,quantity:number, access_token:string, sourceToken?: CancelToken) =>
 instance.patch(
-    `/carts/items/${id}`,
+    `/carts/items/${id}/`,
     {
         quantity: quantity
     },
@@ -49,7 +49,7 @@ instance.patch(
 
 const updateSelectedCartItem = (id: number,is_selected:boolean, access_token:string, sourceToken?: CancelToken) =>
 instance.patch(
-    `/carts/items/${id}`,
+    `/carts/items/${id}/`,
     {
       is_selected: is_selected
     },

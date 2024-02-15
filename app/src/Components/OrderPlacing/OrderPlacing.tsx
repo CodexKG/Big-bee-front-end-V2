@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import classes from './OrderPlacing.module.scss';
-import { Input, Button, Form, Radio, Checkbox } from "antd";
+import { Input, Button, Form, Radio, Checkbox, Modal, message } from "antd";
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from "store/hook";
 import { fetchCartItems } from "store/reducers/cartRedusers";
@@ -12,59 +12,97 @@ import { json } from "stream/consumers";
 const OrderPlacing: React.FC = () => {
     const dispatch = useAppDispatch();
     const { data, status } = useAppSelector((state) => state.cart)
+    const [modal, contextHolder] = Modal.useModal();
+    const [messageApi, contextHoldere] = message.useMessage();
     const user_id = Number(getCookie('user_id'));
     useEffect(() => {
         const source = axios.CancelToken.source();
         dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));
     }, []);
+    const bilingProduckts: any = []
+    data.cart_items.forEach((item) => {
+        bilingProduckts.push({
+            product: item.product.id,
+            quantity: item.quantity,
+            price: item.product.price,
+        })
+    })
+    const countDown = () => {
+        let secondsToGo = 5;
 
-    const obg = {
-        "username": "123",
-        "email": "3312@gmail.com",
-        "surname": "3123",
-        "number": "312",
-        "radio-group": "bankCard",
-        "country": "1234",
-        "city": "123",
-        "office": "123",
-        "region": "123",
-        "street": "123",
-        "index": "123",
-        "note": "12312",
-        "usernameCart": "123",
-        "idCart": "123",
-        "CVC/CVV": "123",
-        "agreement": true
-    }
-    const onFinish = (values: any) => {
-        api.orders(
-            {
-                "user": user_id,
-                "email": values.email,
-                "first_name": values.username,
-                "last_name": values.surname,
-                "phone": values.number,
-                "billing_receipt_type": 'Самовывоз',
-                "country": values.country,
-                "region": values.region,
-                "city": values.city,
-                "street": values.street,
-                "apartment": values.office,
-                "zip_code": values.index,
-                "note": ""
-            }
-        )
-    
+        const instance = modal.success({
+            title: 'This is a notification message',
+            content: `This modal will be destroyed after ${secondsToGo} second.`,
+        });
+
+        const timer = setInterval(() => {
+            secondsToGo -= 1;
+            instance.update({
+                content: `This modal will be destroyed after ${secondsToGo} second.`,
+            });
+        }, 1000);
+
+        setTimeout(() => {
+            clearInterval(timer);
+            instance.destroy();
+        }, secondsToGo * 1000);
     };
 
-    console.log(data);
+    // const onFinish = async (values: any) => {
+    //     console.log('Received values of form: ', values);
+    //     dispatch(loginAsync({ username: values.username, password: values.password }));
+    //     try {
+    //         setLoading(true);
+    //         const response = await dispatch(loginAsync({ username: values.username, password: values.password }));
+    //         await dispatch(fetchCartItems(response.payload.user_id))
+    //         navigate('/');
+    //         message.success('Авторизация успешна!');
+    //         setCookie('user_id', response.payload.user_id, 30)
+    //         setCookie('access_token', response.payload.access, 30);
+
+    //     } catch (error) {
+    //         message.error('Ошибка входа. Пожалуйста, проверьте свои учетные данные.');
+    //     }finally{
+    //         setLoading(false);
+    //     }
+    // };
+
+    const onFinish = async (values: any) => {
+        try {
+            await api.orders(
+                {
+                    "user": user_id,
+                    "email": values.email,
+                    "first_name": values.username,
+                    "last_name": values.surname,
+                    "phone": values.number,
+                    "billing_receipt_type": '',
+                    "country": values.country,
+                    "region": values.region,
+                    "city": values.city,
+                    "street": values.street,
+                    "apartment": values.office,
+                    "zip_code": values.index,
+                    "note": values.note,
+                    "billing_products": bilingProduckts
+                }
+            )
+            countDown()
+        } catch (error: any) {
+            console.log(error);
+            message.error('Ошибка входа. Пожалуйста, проверьте свои учетные данные.');
+        }
+
+    };
+
+
 
 
     const { TextArea } = Input;
 
     return (
         <section className={classes.order}>
- 
+
 
             <div className={classes.conteiner}>
                 <h2>Оформление заказа</h2>
@@ -382,6 +420,7 @@ const OrderPlacing: React.FC = () => {
                                     <div className={classes.title}>
                                         <h3>
                                             {item.product.title}
+
                                         </h3>
 
                                         <span>Код товара: {item.product.product_code}</span>
@@ -411,7 +450,7 @@ const OrderPlacing: React.FC = () => {
 
             </div>
 
-
+            {contextHolder}
         </section>
     )
 }

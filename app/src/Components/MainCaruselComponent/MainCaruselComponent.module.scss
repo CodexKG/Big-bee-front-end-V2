@@ -26,15 +26,14 @@
         background-size: cover !important;
         object-fit: cover ;   
         background-repeat: no-repeat !important;
-        height: 100%;
+        position: relative;
         border-radius: 8px;
         height: 100%;
-        min-height: 500px;
+        max-height: 650px;
+        min-height: 650px;
     }
     &__inner{
         width: 40%;
-        height: inherit;
-        min-height: inherit;
         a{
             color: inherit;
             display: flex;
