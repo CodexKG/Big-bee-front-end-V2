@@ -3,7 +3,7 @@ import { CancelToken } from "axios";
 import { Reviews, ReviewsData, AddReview } from "../../store/models/ReviewTypes";
 import { api } from "../../api";
 
-export const fetchAddReview= createAsyncThunk<AddReview, { user_id?: number, product_id?:number,text?:string,stars?:number, cancelToken?: CancelToken}, { rejectValue?: string }>(
+export const fetchAddReview= createAsyncThunk<AddReview, { user_id?: number, product_id?:number, text?:string, stars?:number, term_of_use?: string, disadvantages?: string, cancelToken?: CancelToken}, { rejectValue?: string }>(
     'review/fetchAddReview',
     async ({ cancelToken, user_id, product_id,text, stars }, { rejectWithValue }) => {
         try {
