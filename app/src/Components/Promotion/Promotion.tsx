@@ -48,7 +48,9 @@ const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
   const getProducts = async () => {
     setStatus("pending");
     try {
-      const data = await getCarts();
+
+      const data = await getCarts()
+
       if (data.status === 200) {
         setCards(data.data);
         setStatus("fullfiled");

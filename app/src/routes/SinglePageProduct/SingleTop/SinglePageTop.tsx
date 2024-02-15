@@ -9,7 +9,7 @@ import ShortDescr from '../ShortDescr/ShortDescr';
 import { useAppSelector } from "store/hook";
 
 const SinglePageTop: FC = () => {
-    const { selectedProduct } = useAppSelector((state) => state.produckt)
+    const { selectedProduct } = useAppSelector((state) => state.produckt)    
     const imagesList = selectedProduct?.product_images
     const images: any = []
     selectedProduct?.product_images.forEach((item) => {
