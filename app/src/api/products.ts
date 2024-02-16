@@ -2,6 +2,7 @@ import { CancelToken } from "axios";
 import { instance } from "./index";
 import { ProductData, SingleProduct } from "types/types";
 import { FilterParams } from "store/models/WindowTypes";
+import accessToken from "service";
 
 //product
 const getProducts = (
@@ -35,6 +36,9 @@ const getProductBestSellers = (sourceToken?: CancelToken) =>
 const getForYouRandomProducts = (sourceToken?: CancelToken) =>
   instance.get("/products/for-you-products/random_products", {
     cancelToken: sourceToken,
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
   });
 
 const getPromotionRandomProducts = (sourceToken?: CancelToken) =>

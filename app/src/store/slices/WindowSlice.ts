@@ -43,11 +43,11 @@ const windowSlice = createSlice({
                 item.key !== action.payload.key || item.value !== action.payload.value
             );
         },
-        clearFilters: (state) => {
+        clearFilters: (state, action: PayloadAction<{ id: number }>) => {
             state.filters = {
                 limit: 20,
                 offset: 0,
-                category: 0,
+                category: action.payload.id,
                 attribute: []
             }
         },

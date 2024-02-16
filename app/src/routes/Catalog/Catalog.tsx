@@ -37,12 +37,12 @@ const sortOptions: SortOption[] = [
     label: 'цена - по убыванию'
   },
   {
-    value: 'reviews_stars',
+    value: 'product_reviews',
     order: 'asc',
     label: 'рейтинг отзывов - по возрастанию'
   },
   {
-    value: '-reviews_stars',
+    value: '-product_reviews',
     order: 'desc',
     label: 'рейтинг отзывов - по убыванию'
   }
@@ -96,6 +96,7 @@ const Catalog: FC = () => {
 
   useEffect(() => {
     dispatch(setFilters({ category: id }))
+    dispatch(clearFilters({ id: Number(id) }))
     const source = axios.CancelToken.source();
     dispatch(fetchCategoriesById({ cancelToken: source.token, id: Number(id) }))
     return () => {
@@ -183,7 +184,7 @@ const Catalog: FC = () => {
       <div className={classes.catalog}>
         <aside>
           <div>
-            <Button onClick={() => dispatch(clearFilters())}>
+            <Button onClick={() => dispatch(clearFilters({ id: Number(id) }))}>
               сбросить фильтры
             </Button>
           </div>

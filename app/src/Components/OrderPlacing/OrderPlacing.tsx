@@ -13,7 +13,6 @@ const OrderPlacing: React.FC = () => {
     const dispatch = useAppDispatch();
     const { data, status } = useAppSelector((state) => state.cart)
     const [modal, contextHolder] = Modal.useModal();
-    const [messageApi, contextHoldere] = message.useMessage();
     const user_id = Number(getCookie('user_id'));
     useEffect(() => {
         const source = axios.CancelToken.source();
@@ -29,12 +28,10 @@ const OrderPlacing: React.FC = () => {
     })
     const countDown = () => {
         let secondsToGo = 5;
-
         const instance = modal.success({
             title: 'This is a notification message',
             content: `This modal will be destroyed after ${secondsToGo} second.`,
         });
-
         const timer = setInterval(() => {
             secondsToGo -= 1;
             instance.update({
@@ -48,24 +45,6 @@ const OrderPlacing: React.FC = () => {
         }, secondsToGo * 1000);
     };
 
-    // const onFinish = async (values: any) => {
-    //     console.log('Received values of form: ', values);
-    //     dispatch(loginAsync({ username: values.username, password: values.password }));
-    //     try {
-    //         setLoading(true);
-    //         const response = await dispatch(loginAsync({ username: values.username, password: values.password }));
-    //         await dispatch(fetchCartItems(response.payload.user_id))
-    //         navigate('/');
-    //         message.success('Авторизация успешна!');
-    //         setCookie('user_id', response.payload.user_id, 30)
-    //         setCookie('access_token', response.payload.access, 30);
-
-    //     } catch (error) {
-    //         message.error('Ошибка входа. Пожалуйста, проверьте свои учетные данные.');
-    //     }finally{
-    //         setLoading(false);
-    //     }
-    // };
 
     const onFinish = async (values: any) => {
         try {

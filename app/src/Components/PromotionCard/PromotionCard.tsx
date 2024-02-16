@@ -44,7 +44,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
       const response = await api.addProductToFavorite(
         Number(id),
         +getCookie("user_id"),
-        
+
       );
       console.log(response);
 
@@ -93,7 +93,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
           <Col span={2}>Продавец</Col>
         </Row>
       </div>
-      <Title level={3}>{title}</Title>
+      <Title onClick={() => navigate(`/product/${id}`)} level={3}>{title}</Title>
       <div className={classes.subtitle}>
         <Text>{description}</Text>
       </div>

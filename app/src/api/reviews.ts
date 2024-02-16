@@ -2,6 +2,7 @@ import { CancelToken } from 'axios';
 import { instance } from './index'
 import { Categories, ProductData, ShopData } from 'types/types';
 import { ReviewsData, Reviews } from 'store/models/ReviewTypes';
+import accessToken from 'service';
 
 
 const getReviews = (limit: number = 10, offset: number = 0, sourceToken?: CancelToken) =>
@@ -18,8 +19,12 @@ const getReviewById = (id: number, sourceToken?: CancelToken) =>
         cancelToken: sourceToken
     });
 
-const addReview = (user_id?: number, product_id?: number, text?: string, stars?: number, sourceToken?: CancelToken) =>
-    instance.post(`/review/`, { user_id, product_id, text, stars }, { cancelToken: sourceToken });
+const addReview = (disadvantages?: string, advantages?: string, user?: number, product?: number, text?: string, stars?: number, sourceToken?: CancelToken) =>
+    instance.post(`/products/review/`, { user, product, text, stars, advantages, disadvantages }, {
+        cancelToken: sourceToken, headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
 
 const updateReview = (id?: number, user_id?: number, product_id?: number, text?: string, stars?: number, sourceToken?: CancelToken) =>
     instance.put(`/review/${id}`, { user_id, product_id, text, stars }, { cancelToken: sourceToken });
