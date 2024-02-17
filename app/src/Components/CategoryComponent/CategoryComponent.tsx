@@ -32,6 +32,13 @@ const CategoryComponent: React.FC = () => {
       image: 'https://s1.iconbird.com/ico/2013/7/391/w512h51213727793707dside.png'
     },
   ]
+  const carouselSettings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3.5,
+    slidesToScroll: 1
+  };
 
   return (
     <div className={classes.category}>
@@ -41,7 +48,7 @@ const CategoryComponent: React.FC = () => {
       </div>
 
       <Carousel
-        slidesToShow={3.5}
+        slidesToShow={4}
         dots={false}
         prevArrow={<ArrowLeft />}
         nextArrow={<ArrowRight />}

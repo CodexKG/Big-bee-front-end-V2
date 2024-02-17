@@ -9,7 +9,7 @@ import whatsappLogo from "../../assets/icon/whatsapp.svg";
 import { Button, Form, Input } from "antd"
 import { useAppDispatch, useAppSelector } from "store/hook"
 import { useNavigate } from "react-router-dom"
-import { setFilters } from "store/slices/WindowSlice"
+import { clearFilters, setFilters } from "store/slices/WindowSlice"
 import { Categories } from "types/types"
 import HeaderSceleton from "Components/Skeleton/HeaderSkeleton"
 import { fetchCategoriesById } from "store/reducers/categoryReduser"
@@ -46,6 +46,7 @@ const FooterComponent: FC = () => {
         'succeeded': children[category]?.subcategories?.slice(0, 4).map((item: Categories) =>
             <div key={item.id}>
                 <h1 onClick={() => {
+                    dispatch(clearFilters({ id: Number(item.id) }))
                     dispatch(setFilters({ category: item.id }))
                     navigate(`/catalog/${item.id}`)
 
@@ -56,6 +57,7 @@ const FooterComponent: FC = () => {
                     {item.subcategories.map((el: Categories) =>
 
                         <p onClick={() => {
+                            dispatch(clearFilters({ id: Number(item.id) }))
                             dispatch(setFilters({ category: el.id }))
                             navigate(`/catalog/${el.id}`)
 

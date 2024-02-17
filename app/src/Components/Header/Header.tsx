@@ -11,7 +11,7 @@ import { Categories } from 'types/types';
 import { setHoveredItem } from 'store/slices/categorySlice';
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderSceleton from 'Components/Skeleton/HeaderSkeleton';
-import { setFilters } from 'store/slices/WindowSlice';
+import { clearFilters, setFilters } from 'store/slices/WindowSlice';
 import Promotion from 'Components/Promotion/Promotion';
 import Protected from 'routes/Protected/Protected';
 
@@ -52,6 +52,7 @@ const HeaderComponent: React.FC = () => {
         'succeeded': children[category]?.subcategories?.map((item: Categories) =>
             <div className={classes.openCategories_main_items_item} key={item.id}>
                 <h1 onClick={() => {
+                    dispatch(clearFilters({ id: Number(item.id) }))
                     dispatch(setFilters({ category: item.id }))
                     navigate(`/catalog/${item.id}`)
                     onClose()
@@ -62,6 +63,7 @@ const HeaderComponent: React.FC = () => {
                     {item.subcategories.map((el: Categories) =>
 
                         <p onClick={() => {
+                            dispatch(clearFilters({ id: Number(item.id) }))
                             dispatch(setFilters({ category: el.id }))
                             navigate(`/catalog/${el.id}`)
                             onClose()
@@ -95,8 +97,8 @@ const HeaderComponent: React.FC = () => {
                         <SearchOutlined style={{ fontSize: '24px' }} />
                         поиск
                     </div>
-                  <Link to={'/favorites'} style={{ color: 'black' }}  > <HeartOutlined style={{ fontSize: '24px' }} /></Link> 
-                    <Link style={{ color: 'black' }}  to={'/cart'}><ShoppingCartOutlined style={{ fontSize: '24px' }} /></Link>
+                    <Link to={'/favorites'} style={{ color: 'black' }}  > <HeartOutlined style={{ fontSize: '24px' }} /></Link>
+                    <Link style={{ color: 'black' }} to={'/cart'}><ShoppingCartOutlined style={{ fontSize: '24px' }} /></Link>
                     <Protected fallback={<Button style={{ color: 'black' }} type='primary'><Link to={'/'}>Выйти</Link></Button>}>
                         <Button style={{ color: 'black' }} type='primary'><Link to={'/login'}>Войти</Link></Button>
                     </Protected>
@@ -109,7 +111,10 @@ const HeaderComponent: React.FC = () => {
                 </Button>
                 <ul>
                     {data.slice(0, 5).map((item: Categories) =>
-                        <li onClick={() => navigate(`/catalog/${item.id}`)} style={{ cursor: 'pointer' }} key={item.id}>{item.title}</li>
+                        <li onClick={() => {
+                            dispatch(clearFilters({ id: Number(item.id) }))
+                            navigate(`/catalog/${item.id}`)
+                        }} style={{ cursor: 'pointer' }} key={item.id}>{item.title}</li>
                     )}
                 </ul>
                 <Space wrap>

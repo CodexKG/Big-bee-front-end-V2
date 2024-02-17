@@ -96,7 +96,7 @@ const Catalog: FC = () => {
 
   useEffect(() => {
     dispatch(setFilters({ category: id }))
-    dispatch(clearFilters({ id: Number(id) }))
+
     const source = axios.CancelToken.source();
     dispatch(fetchCategoriesById({ cancelToken: source.token, id: Number(id) }))
     return () => {
@@ -104,6 +104,7 @@ const Catalog: FC = () => {
     };
   }, [id]);
 
+  
 
   const product_colors = ["red", "green", "blue"];
   const sort = atributes[Number(id)]?.category_attributes
