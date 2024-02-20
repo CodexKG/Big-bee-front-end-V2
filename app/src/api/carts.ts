@@ -25,6 +25,14 @@ const addToCart = (cart: number, product: number,quantity:number, sourceToken?: 
 const getOwnCartItems = (id?: number, sourceToken?: CancelToken) =>
     instance.get(`/carts/cart/?user=${id}`, { cancelToken: sourceToken });
 
+const deleteCartItems = (id: number, access_token:string, sourceToken?: CancelToken) =>
+    instance.delete(`/carts/cart/${id}/`, {
+        headers: {
+            Authorization: `Bearer ${access_token}`
+        },
+    cancelToken: sourceToken
+},);
+
 const deleteCartItem = (id: number, access_token:string, sourceToken?: CancelToken) =>
     instance.delete(`/carts/items/${id}/`, {
         headers: {
@@ -68,5 +76,6 @@ const endpoints = {
     deleteCartItem,
     updateQuantityCartItem,
     updateSelectedCartItem,
+    deleteCartItems
 };
 export default endpoints;

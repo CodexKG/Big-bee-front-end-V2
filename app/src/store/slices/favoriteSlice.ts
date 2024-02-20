@@ -1,24 +1,17 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { fetchProductToFavorite } from 'store/reducers/favoritesReducers';
-import { AddFavoriteProduct, FavoriteProductData, FavoriteProduct } from "store/models/FavoriteTypes";
+import { createSlice } from '@reduxjs/toolkit';
+import { addProductToFavorite, getFavoriteProducts, delFavoriteProducts } from 'store/reducers/favoritesReducers';
+import {FavoriteProductData } from "store/models/FavoriteTypes";
 
 interface favoritesState {
-    data: FavoriteProductData;
+    data: FavoriteProductData[];
     status: 'idle' | 'pending' | 'succeeded' | 'failed';
-    selectedShop: FavoriteProduct | null;
     error: string | null;
     laoding: boolean
 }
 
 const initialState: favoritesState = {
-    data: {
-        count: 0,
-        next: '',
-        previous: null,
-        results: []
-    },
+    data: [],
     status: 'idle',
-    selectedShop: null,
     error: null,
     laoding: false
 };
@@ -32,13 +25,22 @@ const favoritesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchProductToFavorite.pending, (state) => {
+
+            .addCase(getFavoriteProducts.pending, (state) => {
                 state.status = 'pending';
                 state.laoding = true
             })
-            .addCase(fetchProductToFavorite.fulfilled, (state) => {
+            .addCase(getFavoriteProducts.fulfilled, (state,action) => {
                 state.status = 'succeeded';
+                state.data = action.payload
                 state.laoding = false
+            })
+
+            .addCase(delFavoriteProducts.pending, (state) => {
+            })
+            .addCase(delFavoriteProducts.fulfilled, (state,action) => {
+                state.data = state.data.filter(item => item.id !== action.payload);
             })
     },
 });
+export default favoritesSlice.reducer;

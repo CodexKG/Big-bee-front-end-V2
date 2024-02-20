@@ -1,6 +1,7 @@
 import { CancelToken } from 'axios';
 import { instance } from './index'
 import { getCookie } from 'helpers/cookies';
+import { FavoriteProductData } from 'store/models/FavoriteTypes';
 
 const addProductToFavorite = (product: number, user : number, sourceToken?: CancelToken) =>{
     return instance.post(
@@ -15,10 +16,27 @@ const addProductToFavorite = (product: number, user : number, sourceToken?: Canc
     )
  }
 const delProductFromFavorite = (fav_id: number, sourceToken?: CancelToken) =>
-    instance.post(`/products/favorite/${fav_id}`, { fav_id }, { cancelToken: sourceToken });
+{
+    return instance.delete(
+        `/products/favorite/${fav_id}`,
+        {
+        headers: {
+            Authorization: `Bearer ${getCookie("access_token")}`
+        },
+        cancelToken: sourceToken
+    })
+}
 
-const getProductsFromFavorite = (fav_id: number, sourceToken?: CancelToken) =>
-    instance.get(`/products/favorite/${fav_id}`, { cancelToken: sourceToken });
+const getProductsFromFavorite = ( sourceToken?: CancelToken) =>{
+    return instance.get<FavoriteProductData[]>(
+        `/products/favorite/`,
+        {
+        headers: {
+            Authorization: `Bearer ${getCookie("access_token")}`
+        },
+        cancelToken: sourceToken
+    })
+}
 
 const endpoints = {
     addProductToFavorite,

@@ -20,7 +20,7 @@ const SinglePageTop: FC = () => {
         setSeletedImage(selectedProduct?.product_images[0])
     }, [selectedProduct])
     useEffect(() => {
-        if( imagesList != undefined && imagesList?.length<=3){
+        if( imagesList != undefined && imagesList?.length<3){
             setCount(imagesList?.length-1)
         }else if(imagesList != undefined){
             setCount(3)

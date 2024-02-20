@@ -4,7 +4,7 @@ import { Flex, Checkbox, Button } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import CartItemComponent from 'Components/CartItemComponent/CartItemComponent';
-import { updateCartToLocalStorage, deleteCheckedCartToLocalStorage, fetchCartItems, updateSelectedCartItem, deleteCheckedCartItems } from 'store/reducers/cartRedusers';
+import { updateCartToLocalStorage, deleteCheckedCartToLocalStorage, fetchCartItems, updateSelectedCartItem, deleteCheckedCartItems, deleteCartItems } from 'store/reducers/cartRedusers';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hook';
 import { getCookie } from 'helpers/cookies';
@@ -41,11 +41,16 @@ const CartComponent: React.FC<Props> = () => {
     const deleteCheckedItems = () => {
         if (is_auth) {
             let cart_items = data.cart_items.filter(item => item.is_selected !== false)
-            dispatch(deleteCheckedCartItems({ cart_items: cart_items }))
+            if(is_all_check){
+                dispatch(deleteCartItems({id:data.id}))
+            }else dispatch(deleteCheckedCartItems({ cart_items: cart_items }))
         } else {
+            if(is_all_check){
+                dispatch(deleteCartItems({id:data.id}))
+            }else {
             dispatch(deleteCheckedCartToLocalStorage())
             dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));
-
+            }
         }
     }
 

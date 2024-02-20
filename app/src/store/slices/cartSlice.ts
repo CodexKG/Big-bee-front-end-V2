@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addCartItem, addLocalCartItem, deleteCartItem, deleteCheckedCartItems, fetchCartItems, loadCartFromLocalStorage, updateCartToLocalStorage, updateQuantityCartItem, updateSelectedCartItem } from 'store/reducers/cartRedusers';
+import { addCartItem, addLocalCartItem, deleteCartItem, deleteCartItems, deleteCheckedCartItems, fetchCartItems, loadCartFromLocalStorage, updateCartToLocalStorage, updateQuantityCartItem, updateSelectedCartItem } from 'store/reducers/cartRedusers';
 import { CartData } from '../models/CartTypes';
 import { getCookie } from 'helpers/cookies';
 const is_auth = getCookie('access_token')
@@ -146,6 +146,18 @@ const cartSlice = createSlice({
                 state.loading = false
             })
             .addCase(updateCartToLocalStorage.rejected, (state, action) => {
+                state.error = action.error ? action.error.message || 'Failed to fetch cart items' : 'Failed to fetch cart items';
+                state.loading = false
+            })
+
+            .addCase(deleteCartItems.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(deleteCartItems.fulfilled, (state) => {
+                state.data.cart_items = []
+                state.loading = false
+            })
+            .addCase(deleteCartItems.rejected, (state, action) => {
                 state.error = action.error ? action.error.message || 'Failed to fetch cart items' : 'Failed to fetch cart items';
                 state.loading = false
             })

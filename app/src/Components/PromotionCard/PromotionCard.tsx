@@ -38,7 +38,12 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
       try {
         const cart_id = Number(getCookie('cart_id'))
         await dispatch(addCartItem({ cart: cart_id, product_id: id, quantity: 1 }))
-        message.success('Добавлен 1 продукт в корзину')
+        message.open({
+          type: "success",
+          content: "Продукт добавлен в корзину",
+          onClick: () => navigate("/cart"),
+        });
+        
       }
       catch {
         message.error('Не получилось добавить в корзинку')
@@ -66,17 +71,24 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         onClick: () => navigate("/login"),
       });
     } else {
-      console.log(id, +getCookie("user_id"));
       
-      await api.addProductToFavorite(
-        Number(id),
-        +getCookie("user_id"),
-      );
-      message.open({
-        type: "success",
-        content: "Successfully added",
-        onClick: () => navigate("/favorites"),
-      });
+      try{
+        await api.addProductToFavorite(
+          Number(id),
+          +getCookie("user_id"),
+        );
+        message.open({
+          type: "success",
+          content: "Successfully added",
+          onClick: () => navigate("/favorites"),
+        });
+      }catch{
+        message.open({
+          type: "success",
+          content: "Продукт уже в избранных",
+          onClick: () => navigate("/favorites"),
+        });
+      }
     }
   };
 
@@ -117,7 +129,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
           <Col span={2}>Продавец</Col>
         </Row>
       </div>
-      <Title onClick={() => navigate(`/product/${id}`)} level={3}>{title}</Title>
+      <Title onClick={() => navigate(`/product/${id}`)} level={3}>{title.slice(0,40)}{title.length >40? '...':''}</Title>
       <div className={classes.subtitle}>
         <Text>{description}</Text>
       </div>
