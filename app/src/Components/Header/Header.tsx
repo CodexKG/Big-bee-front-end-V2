@@ -14,11 +14,14 @@ import HeaderSceleton from 'Components/Skeleton/HeaderSkeleton';
 import { clearFilters, setFilters } from 'store/slices/WindowSlice';
 import Promotion from 'Components/Promotion/Promotion';
 import Protected from 'routes/Protected/Protected';
+import accessToken from 'service';
+import { deleteCookie, getCookie } from 'helpers/cookies';
 
 const HeaderComponent: React.FC = () => {
     const { data, children, status } = useAppSelector((state) => state.category)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+
     const [open, setOpen] = useState(false);
     const [category, setCategory] = useState<number>(1)
     useEffect(() => {
@@ -87,8 +90,16 @@ const HeaderComponent: React.FC = () => {
                 <div onClick={() => navigate('/')}>
                     <img height={40} src={logo} alt="" />
                 </div>
-                <ul>
-                    <li>Стать продавцом</li>
+                <ul >
+                    <Protected fallback={<Link style={{ color: 'black' }} to={`http://localhost:3000/login`}>
+                        <li>Стать продавцом</li>
+                    </Link>}>
+                        <Link style={{ color: 'black' }} to={`http://localhost:3000`}>
+                            <li>Стать продавцом</li>
+                        </Link>
+
+                    </Protected>
+
                     <li>Покупать как компания</li>
                     <li>Помощь</li>
                 </ul>
@@ -99,8 +110,13 @@ const HeaderComponent: React.FC = () => {
                     </div>
                     <Link to={'/favorites'} style={{ color: 'black' }}  > <HeartOutlined style={{ fontSize: '24px' }} /></Link>
                     <Link style={{ color: 'black' }} to={'/cart'}><ShoppingCartOutlined style={{ fontSize: '24px' }} /></Link>
-                    <Protected fallback={<Button style={{ color: 'black' }} type='primary'><Link to={'/'}>Выйти</Link></Button>}>
-                        <Button style={{ color: 'black' }} type='primary'><Link to={'/login'}>Войти</Link></Button>
+                    <Protected fallback={<Button style={{ color: 'black' }} type='primary'><Link to={'/login'}>Войти</Link></Button>}>
+
+                        <Button onClick={() => {
+                            deleteCookie('access_token')
+                            deleteCookie('user_id')
+                            navigate('/login')
+                        }} style={{ color: 'black' }} type='primary'>Выйти</Button>
                     </Protected>
 
                 </div>

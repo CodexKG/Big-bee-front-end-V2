@@ -26,6 +26,21 @@ const addReview = (disadvantages?: string, advantages?: string, user?: number, p
         }
     });
 
+const addLike = (id: number, sourceToken?: CancelToken) =>
+    instance.post(`/products/reviews/${id}/like/`, {}, {
+        cancelToken: sourceToken,
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+const adddislike = (id: number, sourceToken?: CancelToken) =>
+    instance.post(`/products/reviews/${id}/dislike/`, {}, {
+        cancelToken: sourceToken,
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
 const updateReview = (id?: number, user_id?: number, product_id?: number, text?: string, stars?: number, sourceToken?: CancelToken) =>
     instance.put(`/review/${id}`, { user_id, product_id, text, stars }, { cancelToken: sourceToken });
 
@@ -34,7 +49,8 @@ const deleteReview = (id?: number, sourceToken?: CancelToken) =>
 
 
 const endpoints = {
-
+    adddislike,
+    addLike,
     getReviews,
     getReviewById,
     addReview,

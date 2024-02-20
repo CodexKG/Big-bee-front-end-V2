@@ -32,13 +32,13 @@ const TopConfig: FC = () => {
                                         <span className={classes.config_value}></span>
                                     </p>
                                     <div className={classes.config_row}>
-                                        {el.id === 4 ? el.value.map((vl) =>
+                                        {el.id === 4 ? el.values.map((vl) =>
                                             <div
-                                                style={{ background: `${vl}` }}
+                                                style={{ background: `${vl.title}` }}
                                                 className={classes.config_color}></div>
                                         ) : <div className={classes.config_row}>
-                                            {el.value.map((vl) =>
-                                                <button className={classes.config_btn}>{vl}</button>
+                                            {el.values.map((vl) =>
+                                                <button className={classes.config_btn}>{vl.title}</button>
                                             )}
 
                                         </div>

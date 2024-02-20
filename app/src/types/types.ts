@@ -65,52 +65,58 @@ export interface ProductPopular {
 }
 
 export interface SingleProduct {
-    id: number,
-    shop: number,
-    category: number[],
-    brand: number,
-    title: string,
-    description: string,
-    image: string,
-    product_images: {
-        id: number,
-        product: number,
-        image: string
-    }[],
-    shop_name: string,
-    shop_logo: string,
-    review_count: number,
-    product_reviews: {
-        id: number,
-        user: number,
-        username: string, 
-        term_of_use: string,
-        product: number,
-        text: string,
-        stars: number,
-        disadvantages: string,
-        count_dislike: number,
-        count_like: number,
-        advantages: string,
-        created_at: Date,
-    }[],
-    average_rating: null,
-    product_attributes: {
-        key: string,
-        value: string
-    }[],
-    product_configurator: {
-        id: number,
-        key: string,
-        value: string[],
-    }[],
-    old_price: number,
-    price: number,
-    currency: string,
-    product_code: null,
-    created: string
+    average_rating: number;
+    brand: number;
+    category: Array<number>;
+    created: string;
+    description: string;
+    id: number;
+    image: string;
+    length: null; // Assuming 'null' as the only type since no other type is visible
+    old_price: number;
+    price: number;
+    product_attributes: Array<{
+        key: string;
+        value: string;
+    }>;
+    product_code: string;
+    product_configurator: Array<{
+        id: number;
+        configurator_key: string;
+        key: string;
+        values: Array<{
+            id: number;
+            title: string;
+            price?: number; // Optional as it's not visible for all values
+            key?: string; // Optional as it's not visible for all values
+        }>;
+    }>;
+    product_images: Array<{
+        id: number;
+        product: number;
+        image: string;
+    }>;
+    product_reviews: Array<{
+        id: number;
+        user: number;
+        username: string;
+        product: number;
+        text: string;
+        stars: number;
+        advantages: string; // Assuming a string although the content is masked
+        count_dislike: number;
+        count_like: number;
+        created_at: string;
+        disadvantages: string;
+        terms_of_use?: string; // Optional as it's not visible for all reviews
+    }>;
+    review_count: number;
+    shop_logo: string;
+    shop_name: string;
+    title: string;
+    weight: null; // Assuming 'null' as the only type since no other type is visible
+    width: null; // Assuming 'null' as the only type since no other type is visible
 }
-
 
 
 export interface OrderPlacing {

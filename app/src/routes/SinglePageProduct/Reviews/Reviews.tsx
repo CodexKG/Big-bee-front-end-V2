@@ -5,13 +5,15 @@ import dislikeIcon from './dislike-icon.svg';
 import { useAppDispatch, useAppSelector } from "store/hook";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+
 import { fetchProductById } from "store/reducers/producRedusers";
 import { Rate, Button, Modal, Form, Input, Flex, Card, Select, message } from 'antd';
 import { fetchAddReview } from "store/reducers/reviewsReducers";
 import { getCookie } from "helpers/cookies";
 import TextArea from "antd/es/input/TextArea";
 import Protected from "routes/Protected/Protected";
+import { api } from "api";
+import accessToken from "service";
 interface FormValues {
     text: string;
     stars: number;
@@ -24,6 +26,7 @@ const Reviews: FC = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const { selectedProduct } = useAppSelector((state) => state.produckt)
+
     const { id } = useParams();
     const [flag, setFlag] = useState(false);
     const [star, setStar] = useState(0);
@@ -40,9 +43,7 @@ const Reviews: FC = () => {
         setIsModalOpen(false);
     };
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
+
 
 
     const onFinishFailed = (errorInfo: any) => {
@@ -90,6 +91,34 @@ const Reviews: FC = () => {
     };
 
 
+    const onLike = async (idd: number) => {
+
+        const source = axios.CancelToken.source();
+        try {
+            await api.addLike(idd)
+            dispatch(fetchProductById({ id: Number(id), cancelToken: source.token }))
+        } catch (error: any) {
+            console.log();
+
+            message.error(error?.response?.status === 401 ? (<Button onClick={() => navigate('/login')}>Авторизуйтесь</Button>) : 'error onLike')
+        }
+
+    }
+    const onDisLike = async (idd: number) => {
+
+
+        const source = axios.CancelToken.source();
+        try {
+
+            await api.adddislike(idd)
+            dispatch(fetchProductById({ id: Number(id), cancelToken: source.token }))
+        } catch (error: any) {
+            console.log();
+
+            message.error(error?.response?.status === 401 ? (<Button onClick={() => navigate('/login')}>Авторизуйтесь</Button>) : 'error onLike')
+        }
+
+    }
     const array = isAll === true ? selectedProduct?.product_reviews : selectedProduct?.product_reviews.slice(0, 3)
 
     return (
@@ -138,48 +167,15 @@ const Reviews: FC = () => {
             {
                 array?.length ?
                     array.map((el) => {
+                        let like = el.count_like
+                        let disLike = el.count_dislike
+
+
                         const dateClient: any = new Date(String(el.created_at));
                         const datenow: any = new Date();
                         const time = ((datenow - dateClient) / 1000 / 60 / 60 / 24).toFixed()
                         return (
                             <>
-                                {/* <div key={el.id} className={classes.reviews_raiting_block}>
-                                    <h3 className={classes.reviews_raiting_num}>5.0</h3>
-                                    <div className={classes.reviews_raiting_block_right}>
-                                        <div className={classes.reviews_raiting_stars}>
-                                            <img src={starIconBlack} alt="" />
-                                            <img src={starIconBlack} alt="" />
-                                            <img src={starIconBlack} alt="" />
-                                            <img src={starIconBlack} alt="" />
-                                            <img src={starIconBlack} alt="" />
-                                        </div>
-                                        <div className={classes.reviews_raiting_text}>
-                                            6 оценок
-                                            <span className={classes.reviews_raiting_text_circle}></span>
-                                            1 отзыв
-                                        </div>
-                                    </div>
-                                </div> */}
-                                {/* 
-                                <h2 className={classes.reviews_title}>Товар на BIGBEE</h2> */}
-                                {/* <div className={classes.reviews_raiting_block}>
-                                    <h3 className={classes.reviews_raiting_num}>4.9</h3>
-                                    <div className={classes.reviews_raiting_block_right}>
-                                        <div className={classes.reviews_raiting_stars}>
-                                            <img src={starIconBlack} alt="" />
-                                            <img src={starIconBlack} alt="" />
-                                            <img src={starIconBlack} alt="" />
-                                            <img src={starIconBlack} alt="" />
-                                            <img src={starIconBlack} alt="" />
-                                        </div>
-                                        <div className={classes.reviews_raiting_text}>
-                                            6 оценок
-                                            <span className={classes.reviews_raiting_text_circle}></span>
-                                            925 отзыв
-                                        </div>
-                                    </div>
-                                </div> */}
-
                                 <div className={classes.reviews_user_review}>
                                     <img src="https://pic10.kidstaff.com.ua/pictures_user/776/1934498/33194988/1934498_20221217013252_4049_600x600.jpg" className={classes.reviews_user_review_img} alt="" />
 
@@ -210,10 +206,6 @@ const Reviews: FC = () => {
                                                 <p className={classes.reviews_user_review_text_grey}><p style={{ cursor: 'pointer' }} >
                                                     Комментировать
                                                 </p>
-
-
-
-
                                                 </p>
                                                 <p className={classes.reviews_user_review_text_blue}>{time} дней назад</p>
                                             </div>
@@ -224,8 +216,14 @@ const Reviews: FC = () => {
                                                     <span></span>
                                                     <span></span>
                                                 </p>
-                                                <button><img src={likeIcon} alt="" /> {el.count_like}</button>
-                                                <button><img src={dislikeIcon} alt="" /> {el.count_dislike}</button>
+                                                <button onClick={() => {
+
+                                                    onLike(el.id)
+                                                }}><img src={likeIcon} alt="" /> {like}</button>
+                                                <button onClick={() => {
+
+                                                    onDisLike(el.id)
+                                                }}><img src={dislikeIcon} alt="" /> {disLike}</button>
                                             </div>
                                         </div>
 
