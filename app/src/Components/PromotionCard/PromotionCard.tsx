@@ -66,13 +66,12 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         onClick: () => navigate("/login"),
       });
     } else {
-      const response = await api.addProductToFavorite(
+      console.log(id, +getCookie("user_id"));
+      
+      await api.addProductToFavorite(
         Number(id),
         +getCookie("user_id"),
-
       );
-      console.log(response);
-
       message.open({
         type: "success",
         content: "Successfully added",
