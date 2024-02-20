@@ -49,7 +49,7 @@ const TopOffer: React.FC<TopOfferProps> = ({ products_quantity }) => {
               <p>Скидка - {getDiscount(product.price, product.old_price ).toFixed(0)}%</p>
 
             </div>
-            <h3 className={classes.topOffer_Block_Up_Title}>{product.title}</h3>
+            <h2 className={classes.topOffer_Block_Up_Title}>{product.title}</h2>
             <p className={classes.topOffer_Block_Up_Price}>
               {`${product.price} ${product.currency}`}
               <span className={classes.topOffer_Block_Up_Price_Old}>

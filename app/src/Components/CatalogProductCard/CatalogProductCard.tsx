@@ -1,14 +1,11 @@
-
 import { FC, useRef } from "react";
 import classes from "./CatalogProductCard.module.scss";
-import { Button, Carousel, Col, Layout, Row } from "antd";
-import { Typography } from "antd";
+import { Button, Carousel, Col, Row,Typography } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { DefaultButton } from "Components/UI";
 import { HeartOutlined } from "@ant-design/icons";
 import { numberWithSpaces } from "helpers";
-import { CarouselProps } from "antd";
 
 import { CarouselRef } from "antd/es/carousel";
 interface ICatalogProductCart {
