@@ -9,6 +9,7 @@ import categories from './categories'
 import banners from './banners'
 import email from './getEmail'
 import biling from './biling'
+import settings from './settings'
 
 const instance = axios.create({
   // @ts-ignore
@@ -40,6 +41,7 @@ const { getCategories, getCategoriesById,getPopularCategories } = categories
 const { getBanners } = banners
 const { getEmail } = email
 const { orders } = biling
+const { getSettings } = settings
 
 
 
@@ -77,6 +79,7 @@ const api = {
   getBanners,
   getEmail,
   getFavoriteProducts,
+  getSettings,
   getPopularCategories
 }
 

@@ -35,8 +35,6 @@ const BannerSlice = createSlice({
             })
             .addCase(fetchBanners.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                console.log(action.payload);
-                
                 state.data = action.payload;
                 state.laoding = false
             })

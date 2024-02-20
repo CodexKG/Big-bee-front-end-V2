@@ -37,7 +37,6 @@ const TopOffer: React.FC<TopOfferProps> = ({ products_quantity }) => {
     dispatch(fetchProductOfDay({ cancelToken: source.token }))
   }, []);
 
-  console.log(productOfDay?.top_products);
 
 
   return (
