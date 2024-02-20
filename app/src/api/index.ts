@@ -37,7 +37,7 @@ const { createCart, addToCart, getOwnCartItems, deleteCartItem, updateQuantityCa
 const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, addLike, adddislike } = reviews
 const { addProductToFavorite, delProductFromFavorite } = favorites
-const { getCategories, getCategoriesById } = categories
+const { getCategories, getCategoriesById,getPopularCategories } = categories
 const { getBanners } = banners
 const { getEmail } = email
 const { orders } = biling
@@ -79,7 +79,8 @@ const api = {
   getBanners,
   getEmail,
   getFavoriteProducts,
-  getSettings
+  getSettings,
+  getPopularCategories
 }
 
 export { instance, api };
