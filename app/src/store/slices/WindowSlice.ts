@@ -5,7 +5,7 @@ import { fetchSettings } from 'store/reducers/settingsReducers';
 interface windowState {
     user: any
     filters: FilterParams;
-    settings: SettingsType[],
+    settings: SettingsType,
     status: 'idle' | 'pending' | 'succeeded' | 'failed';
     loading: boolean
 }
@@ -18,8 +18,7 @@ const initialState: windowState = {
         category: 0,
         attribute: []
     },
-    settings:[
-        {
+    settings: {
             id: 1,
             title: "BigBee",
             description: "BigBee - Marketplace",
@@ -29,8 +28,7 @@ const initialState: windowState = {
             telegram: "https://www.t.me/@Toktorov",
             whatsapp: "https://www.wa.me/+996772343206",
             tiktok: "https://www.tiktok.com/@codex_kg"
-        }
-    ],
+        },
     status: 'idle',
     loading: false
 

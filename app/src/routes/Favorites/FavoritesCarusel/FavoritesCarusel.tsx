@@ -92,9 +92,6 @@ const FavoritesCarusel: React.FC<IFavoritesCarusel> = ({ title, getCarts }) => {
           slidesToScroll={1}
           infinite={false}
           arrows={true}
-          swipeEvent={(swiper) => {
-            console.log(swiper);
-          }}
         >
           {cards.map((item: IPromotionCard, index) => {
    

@@ -22,15 +22,6 @@ const FooterComponent: FC = () => {
     const [category, setCategory] = useState<number>(1)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-
-    const onFinish = (values: any) => {
-        console.log('Form submitted with values:', values);
-
-    };
-
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Form submission failed:', errorInfo);
-    };
     const handleMouseEnter = (key: string) => {
         if (!children[category]) {
             const source = axios.CancelToken.source();
@@ -86,8 +77,6 @@ const FooterComponent: FC = () => {
                     <Form
 
                         name="footerForm"
-                        onFinish={onFinish}
-                        onFinishFailed={onFinishFailed}
                         className={classes.footer_form}
                     >
 
@@ -112,14 +101,14 @@ const FooterComponent: FC = () => {
             </div>
             <footer className={classes.footer_bottom}>
                 <div className={classes.footer_bottom_SM}>
-                    <Link to={settings[0].instagram}>
+                    <Link to={settings.instagram}>
                         <img src={instagramLogo} height={40} alt="instagramLogo" />
                     </Link>
-                    <Link to={settings[0].telegram}>
+                    <Link to={settings.telegram}>
                         
                         <img src={telegramLogo} height={40} alt="telegramLogo" />
                     </Link>
-                    <Link to={settings[0].whatsapp}>
+                    <Link to={settings.whatsapp}>
                         
                         <img src={whatsappLogo} height={40} alt="whatsappLogo" />
                     </Link>

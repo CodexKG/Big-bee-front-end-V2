@@ -21,7 +21,6 @@ const CategoryComponent: React.FC = () => {
       source.cancel('Запрос отменен, компонент размонтирован');
     };
   }, []);
-  console.log(popular);
 
   const categories = [
     {

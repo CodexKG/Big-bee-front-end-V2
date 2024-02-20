@@ -3,7 +3,7 @@ import { instance } from './index'
 import {SettingsType} from '../store/models/SettingsType'
 
 const getSettings = ( sourceToken?: CancelToken) =>
-    instance.get<SettingsType[]>(
+    instance.get<SettingsType>(
         '/settings/',
         { cancelToken: sourceToken }
 );

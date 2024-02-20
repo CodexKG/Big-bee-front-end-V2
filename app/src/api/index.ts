@@ -21,7 +21,7 @@ const instance = axios.create({
 
 })
 //@ts-ignore
-console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
+// console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
 
 
 // instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
@@ -36,7 +36,7 @@ const { login, register } = auth
 const { createCart, addToCart, getOwnCartItems, deleteCartItem, updateQuantityCartItem, updateSelectedCartItem } = carts
 const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, addLike, adddislike } = reviews
-const { addProductToFavorite, delProductFromFavorite } = favorites
+const { addProductToFavorite, delProductFromFavorite, getProductsFromFavorite } = favorites
 const { getCategories, getCategoriesById,getPopularCategories } = categories
 const { getBanners } = banners
 const { getEmail } = email
@@ -80,7 +80,8 @@ const api = {
   getEmail,
   getFavoriteProducts,
   getSettings,
-  getPopularCategories
+  getPopularCategories,
+  getProductsFromFavorite
 }
 
 export { instance, api };

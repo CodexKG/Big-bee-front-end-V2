@@ -15,11 +15,14 @@ const addProductToFavorite = (product: number, user : number, sourceToken?: Canc
     )
  }
 const delProductFromFavorite = (fav_id: number, sourceToken?: CancelToken) =>
-    instance.post(`/favorite/${fav_id}`, { fav_id }, { cancelToken: sourceToken });
+    instance.post(`/products/favorite/${fav_id}`, { fav_id }, { cancelToken: sourceToken });
 
+const getProductsFromFavorite = (fav_id: number, sourceToken?: CancelToken) =>
+    instance.get(`/products/favorite/${fav_id}`, { cancelToken: sourceToken });
 
 const endpoints = {
     addProductToFavorite,
     delProductFromFavorite,
+    getProductsFromFavorite
 };
 export default endpoints;

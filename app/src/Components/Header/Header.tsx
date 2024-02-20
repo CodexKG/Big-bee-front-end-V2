@@ -29,16 +29,18 @@ const HeaderComponent: React.FC = () => {
         const source = axios.CancelToken.source();
         dispatch(fetchCategories({ cancelToken: source.token, }))
         dispatch(fetchSettings({ cancelToken: source.token, }))
-        document.title = settings[0].title;
-        const linkElement = document.createElement('link');
-        linkElement.rel = 'stylesheet';
-        linkElement.rel = 'icon'
-        linkElement.href = settings[0].logo;
-        document.head.appendChild(linkElement)
         return () => {
             source.cancel('Запрос отменен, компонент размонтирован');
         };
     }, []);
+    useEffect(() => {
+        document.title = settings.title;
+        const linkElement = document.createElement('link');
+        linkElement.rel = 'stylesheet';
+        linkElement.rel = 'icon'
+        linkElement.href = settings.logo;
+        document.head.appendChild(linkElement)
+    }, [settings.logo]);
     React.useEffect(() => {
         
       }, []);
@@ -99,7 +101,7 @@ const HeaderComponent: React.FC = () => {
 
             <nav>
                 <div onClick={() => navigate('/')}>
-                    <img height={40} src={settings[0].logo} alt="" />
+                    <img height={40} src={settings.logo} alt="" />
                 </div>
                 <ul >
                     <Protected fallback={<Link style={{ color: 'black' }} to={`http://localhost:3000/login`}>
