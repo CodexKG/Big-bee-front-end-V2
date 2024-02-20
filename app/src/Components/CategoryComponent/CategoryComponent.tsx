@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from './Category.module.scss';
 import moreIcon from './img/icon.svg';
 import CategoryCardComponent from '../CategoryCardComponent/CategoryCardComponent';
 import { Carousel } from "antd";
 import { CaretLeftFilled, CaretRightFilled, } from "@ant-design/icons";
+import { useAppDispatch, useAppSelector } from "store/hook";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { fetchPopularCategories } from "store/reducers/categoryReduser";
 
 const CategoryComponent: React.FC = () => {
+  const { popular } = useAppSelector((state) => state.category)
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    dispatch(fetchPopularCategories({ cancelToken: source.token, }))
+    return () => {
+      source.cancel('Запрос отменен, компонент размонтирован');
+    };
+  }, []);
+  console.log(popular);
+
   const categories = [
     {
       id: 1,
@@ -57,7 +74,7 @@ const CategoryComponent: React.FC = () => {
         swipe={true}
       >
         {
-          categories.map(item => {
+          popular.map(item => {
             return <CategoryCardComponent key={item.id} item={item} />
           })
         }
