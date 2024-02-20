@@ -1,29 +1,23 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import classes from "./FavoritesCard.module.scss";
 import { IPromotionCard } from "interfaces";
-import { Row, Col, Typography, Button, Carousel, message } from "antd";
+import { Row, Col, Typography, Button, Carousel } from "antd";
 import messageIcon from "../../../assets/icon/message.svg";
-import type { CarouselProps } from "antd";
 import { numberWithSpaces } from "helpers";
-import { StarFilled, HeartOutlined } from "@ant-design/icons";
+import { StarFilled } from "@ant-design/icons";
 import { CarouselRef } from "antd/es/carousel";
-type DotPosition = CarouselProps["dotPosition"];
 
 const FavoritesCard: React.FC<IPromotionCard> = (props) => {
   const {
-    salesman_img,
     title,
-    description,
     price,
     old_price,
     average_rating,
     review_count,
     product_images,
-    id,
   } = props;
 
   const { Title, Text } = Typography;
-  const [dotPosition, setDotPosition] = useState<DotPosition>("top");
   const carouselRef = useRef<CarouselRef>(null);
 
   const imgHover = (index: number) => {
@@ -45,7 +39,7 @@ const FavoritesCard: React.FC<IPromotionCard> = (props) => {
             );
           })}
         </div>
-        <Carousel dotPosition={dotPosition} ref={carouselRef}>
+        <Carousel dotPosition={'top'} ref={carouselRef}>
           {product_images.map((item, index) => {
             return (
               <div className={classes.img_block_item} key={index}>

@@ -245,7 +245,7 @@ const Catalog: FC = () => {
                 price={item.price}
                 old_price={item.old_price}
                 salesman={item.shop_name}
-                salesman_img={`https://bee.webtm.ru${item.shop_logo}`}
+                salesman_img={item.shop_logo}
                 offer={109}
               />
             )}

@@ -1,17 +1,17 @@
-import { FC, useEffect, useState } from "react";
-import classes from './SingleTop.module.scss';
-import singleClass from '../SinglePage.module.scss';
-import { Carousel, Image, Rate } from "antd";
 import { CaretLeftFilled, CaretRightFilled, } from "@ant-design/icons";
-import goldStartIcon from '../icons/gold-star-icon.svg';
-import TopConfig from "../TopConfigs/TopConfig";
-import ShortDescr from '../ShortDescr/ShortDescr';
+import { Carousel, Image, Rate } from "antd";
+import { FC, useEffect, useState } from "react";
 import { useAppSelector } from "store/hook";
+import ShortDescr from '../ShortDescr/ShortDescr';
+import singleClass from '../SinglePage.module.scss';
+import TopConfig from "../TopConfigs/TopConfig";
+import classes from './SingleTop.module.scss';
 
 const SinglePageTop: FC = () => {
     const { selectedProduct } = useAppSelector((state) => state.produckt)    
     const imagesList = selectedProduct?.product_images
     const images: any = []
+    const [count, setCount] = useState<number|undefined>(1)
     selectedProduct?.product_images.forEach((item) => {
         images.push(item.image)
     })
@@ -19,6 +19,13 @@ const SinglePageTop: FC = () => {
     useEffect(() => {
         setSeletedImage(selectedProduct?.product_images[0])
     }, [selectedProduct])
+    useEffect(() => {
+        if( imagesList != undefined && imagesList?.length<=3){
+            setCount(imagesList?.length-1)
+        }else if(imagesList != undefined){
+            setCount(3)
+        }
+    }, [imagesList])
 
     return (
         <div className={classes.top_descr_block}>
@@ -38,7 +45,7 @@ const SinglePageTop: FC = () => {
 
                 <div className={classes.top_descr_block_images_carousel}>
                     <Carousel
-                        slidesToShow={3}
+                        slidesToShow={count}
                         dots={false}
                         prevArrow={<ArrowLeft />}
                         nextArrow={<ArrowRight />}
