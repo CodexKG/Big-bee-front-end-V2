@@ -1,23 +1,24 @@
 import { Footer } from "antd/es/layout/layout"
 import { FC, useEffect, useState } from "react"
 import classes from './FooterComponent.module.scss'
-import { FooterEl, categoriesMack } from "data/categories/navCategories"
 import logoFooter from '../../assets/icon/logoFooter.svg'
 import instagramLogo from "../../assets/icon/instagram.svg";
 import telegramLogo from "../../assets/icon/telegram.svg";
 import whatsappLogo from "../../assets/icon/whatsapp.svg";
 import { Button, Form, Input } from "antd"
 import { useAppDispatch, useAppSelector } from "store/hook"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { clearFilters, setFilters } from "store/slices/WindowSlice"
 import { Categories } from "types/types"
 import HeaderSceleton from "Components/Skeleton/HeaderSkeleton"
 import { fetchCategoriesById } from "store/reducers/categoryReduser"
 import { setHoveredItem } from "store/slices/categorySlice"
+import { fetchSettings } from 'store/reducers/settingsReducers';
 import axios from "axios"
 
 const FooterComponent: FC = () => {
     const { data, children, status } = useAppSelector((state) => state.category)
+    const { settings } = useAppSelector((state) => state.window)
     const [category, setCategory] = useState<number>(1)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -31,8 +32,8 @@ const FooterComponent: FC = () => {
         console.log('Form submission failed:', errorInfo);
     };
     const handleMouseEnter = (key: string) => {
-        const source = axios.CancelToken.source();
         if (!children[category]) {
+            const source = axios.CancelToken.source();
             dispatch(fetchCategoriesById({ cancelToken: source.token, id: +key })).then((res: any) => {
                 dispatch(setHoveredItem(res.payload));
             });
@@ -40,6 +41,8 @@ const FooterComponent: FC = () => {
         setCategory(+key);
     };
     useEffect(() => {
+        const source = axios.CancelToken.source();
+        dispatch(fetchSettings({ cancelToken: source.token, }))
         handleMouseEnter(`83`)
     }, [])
     const subCateoryList = {
@@ -109,9 +112,17 @@ const FooterComponent: FC = () => {
             </div>
             <footer className={classes.footer_bottom}>
                 <div className={classes.footer_bottom_SM}>
-                    <img src={instagramLogo} height={40} alt="instagramLogo" />
-                    <img src={telegramLogo} height={40} alt="telegramLogo" />
-                    <img src={whatsappLogo} height={40} alt="whatsappLogo" />
+                    <Link to={settings[0].instagram}>
+                        <img src={instagramLogo} height={40} alt="instagramLogo" />
+                    </Link>
+                    <Link to={settings[0].telegram}>
+                        
+                        <img src={telegramLogo} height={40} alt="telegramLogo" />
+                    </Link>
+                    <Link to={settings[0].whatsapp}>
+                        
+                        <img src={whatsappLogo} height={40} alt="whatsappLogo" />
+                    </Link>
                 </div>
                 <div className={classes.flex_justify}>
                     <p>© 2024 ООО «BIGBEE». Все права защищены.</p>

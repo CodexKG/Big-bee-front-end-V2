@@ -1,9 +1,9 @@
 // Header.tsx
 import React, { useEffect, useState } from 'react';
-import { Button, Drawer, DrawerProps, Layout, Menu, Select, Skeleton, Space } from 'antd';
+import { Button, Drawer, Select, Skeleton, Space } from 'antd';
 import classes from './Header.module.scss'
 import logo from "../../assets/icon/logo.svg";
-import { AppleOutlined, CloseOutlined, HeartOutlined, SearchOutlined, ShoppingCartOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { CloseOutlined, HeartOutlined, SearchOutlined, ShoppingCartOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'store/hook';
 import axios from 'axios';
 import { fetchCategories, fetchCategoriesById } from 'store/reducers/categoryReduser';
@@ -12,13 +12,14 @@ import { setHoveredItem } from 'store/slices/categorySlice';
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderSceleton from 'Components/Skeleton/HeaderSkeleton';
 import { clearFilters, setFilters } from 'store/slices/WindowSlice';
-import Promotion from 'Components/Promotion/Promotion';
 import Protected from 'routes/Protected/Protected';
-import accessToken from 'service';
-import { deleteCookie, getCookie } from 'helpers/cookies';
+import { deleteCookie } from 'helpers/cookies';
+import { fetchSettings } from 'store/reducers/settingsReducers';
+
 
 const HeaderComponent: React.FC = () => {
     const { data, children, status } = useAppSelector((state) => state.category)
+    const { settings } = useAppSelector((state) => state.window)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
@@ -27,10 +28,20 @@ const HeaderComponent: React.FC = () => {
     useEffect(() => {
         const source = axios.CancelToken.source();
         dispatch(fetchCategories({ cancelToken: source.token, }))
+        dispatch(fetchSettings({ cancelToken: source.token, }))
+        document.title = settings[0].title;
+        const linkElement = document.createElement('link');
+        linkElement.rel = 'stylesheet';
+        linkElement.rel = 'icon'
+        linkElement.href = settings[0].logo;
+        document.head.appendChild(linkElement)
         return () => {
             source.cancel('Запрос отменен, компонент размонтирован');
         };
     }, []);
+    React.useEffect(() => {
+        
+      }, []);
     const showDrawer = () => {
         setOpen(true);
     };
@@ -88,7 +99,7 @@ const HeaderComponent: React.FC = () => {
 
             <nav>
                 <div onClick={() => navigate('/')}>
-                    <img height={40} src={logo} alt="" />
+                    <img height={40} src={settings[0].logo} alt="" />
                 </div>
                 <ul >
                     <Protected fallback={<Link style={{ color: 'black' }} to={`http://localhost:3000/login`}>

@@ -1,8 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { SettingsType } from 'store/models/SettingsType';
 import { FilterParams } from 'store/models/WindowTypes';
+import { fetchSettings } from 'store/reducers/settingsReducers';
 interface windowState {
     user: any
     filters: FilterParams;
+    settings: SettingsType[],
+    status: 'idle' | 'pending' | 'succeeded' | 'failed';
+    loading: boolean
 }
 
 const initialState: windowState = {
@@ -12,7 +17,23 @@ const initialState: windowState = {
         offset: 0,
         category: 0,
         attribute: []
-    }
+    },
+    settings:[
+        {
+            id: 1,
+            title: "BigBee",
+            description: "BigBee - Marketplace",
+            logo: "https://bee.webtm.ru/media/logo/logo.32d00f413f33e858aaa1267182250079.png",
+            phone: "0772343206",
+            instagram: "https://www.instagram.com/neobis.club/",
+            telegram: "https://www.t.me/@Toktorov",
+            whatsapp: "https://www.wa.me/+996772343206",
+            tiktok: "https://www.tiktok.com/@codex_kg"
+        }
+    ],
+    status: 'idle',
+    loading: false
+
 };
 
 
@@ -53,7 +74,22 @@ const windowSlice = createSlice({
         },
         setOffset: (state, action: PayloadAction<number>) => {
             state.filters.offset = action.payload
-        }
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchSettings.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(fetchSettings.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.settings = action.payload
+                state.loading = false
+            })
+            .addCase(fetchSettings.rejected, (state, action) => {
+                state.status = 'failed';
+                state.loading = false
+            })
     },
 
 });
