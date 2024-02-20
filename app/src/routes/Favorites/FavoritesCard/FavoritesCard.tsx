@@ -1,25 +1,28 @@
 import { useRef } from "react";
 import classes from "./FavoritesCard.module.scss";
-import { IPromotionCard } from "interfaces";
-import { Row, Col, Typography, Button, Carousel } from "antd";
+import { Row, Col, Typography, Button, Carousel, Flex } from "antd";
 import messageIcon from "../../../assets/icon/message.svg";
 import { numberWithSpaces } from "helpers";
-import { StarFilled } from "@ant-design/icons";
+import { HeartFilled, StarFilled } from "@ant-design/icons";
 import { CarouselRef } from "antd/es/carousel";
+import { FavoriteProductData } from "store/models/FavoriteTypes";
+import { useAppDispatch } from "store/hook";
+import { delFavoriteProducts, getFavoriteProducts } from "store/reducers/favoritesReducers";
+import axios from "axios";
 
-const FavoritesCard: React.FC<IPromotionCard> = (props) => {
+const FavoritesCard: React.FC<FavoriteProductData> = (props) => {
   const {
-    title,
-    price,
-    old_price,
-    average_rating,
-    review_count,
-    product_images,
+    id,
+    product
   } = props;
-
+  const source = axios.CancelToken.source();
+  const dispatch = useAppDispatch();
+  const delProduct = ()=>{
+    dispatch(delFavoriteProducts({id:id}))
+    dispatch(getFavoriteProducts({cancelToken:source.token}))
+  }
   const { Title, Text } = Typography;
   const carouselRef = useRef<CarouselRef>(null);
-
   const imgHover = (index: number) => {
     carouselRef.current?.goTo(index, true);
   };
@@ -29,7 +32,7 @@ const FavoritesCard: React.FC<IPromotionCard> = (props) => {
       <div className={classes.img_block}>
         <div className={classes.discount_block}>-14%</div>
         <div className={classes.img_block_hover}>
-          {product_images.map((item, index) => {
+          {product.product_images.map((item, index) => {
             return (
               <div
                 className={classes.img_block_hover_it}
@@ -40,10 +43,10 @@ const FavoritesCard: React.FC<IPromotionCard> = (props) => {
           })}
         </div>
         <Carousel dotPosition={'top'} ref={carouselRef}>
-          {product_images.map((item, index) => {
+          {product.product_images.map((item, index) => {
             return (
               <div className={classes.img_block_item} key={index}>
-                <img src={item.image} alt={title} />
+                <img src={item.image} alt={product.title} />
               </div>
             );
           })}
@@ -61,34 +64,40 @@ const FavoritesCard: React.FC<IPromotionCard> = (props) => {
                 marginBottom: "2px",
               }}
             >
-              {numberWithSpaces(price)} с
+              {numberWithSpaces(product.price)} {product.currency}
             </Title>
           </Text>
         </Col>
         <Col span={12} className={classes.old_price_wrap}>
           <span className={classes.old_price}>
-            {numberWithSpaces(old_price)}
+            {numberWithSpaces(product.old_price)}
           </span>
         </Col>
       </Row>
-      <Title level={3}>{title}</Title>
+      <Title level={3}>{product.title.slice(0,40)}{product.title.length >40? '...':''}</Title>
       <div>
         <div className={classes.row}>
           <span>
             <StarFilled style={{ color: "#F5C423" }} />
-            {average_rating}
+            {product.average_rating}
           </span>
           <span>
             <img src={messageIcon} alt="message" />
-            {numberWithSpaces(review_count)} отзыва
+            {numberWithSpaces(product.review_count)} отзыва
           </span>
         </div>
         <Text>Доставка продавца, завтра</Text>
       </div>
 
-      <Row style={{ justifyContent: "space-between" }}>
+      <Flex gap={15}>
         <Button className={classes.cart_button}>В корзину</Button>
-      </Row>
+        <Button 
+          className={classes.cart_favorites}
+          onClick={()=>{delProduct()}}
+        >
+          <HeartFilled />
+        </Button>
+      </Flex>
     </div>
   );
 };

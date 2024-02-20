@@ -33,7 +33,7 @@ const instance = axios.create({
 
 const { getFilteredProducts, getProducts, getProductsById, getProductBestSellers, getForYouRandomProducts, getPromotionRandomProducts, getProductsofDay, getFavoriteProducts } = produckts
 const { login, register } = auth
-const { createCart, addToCart, getOwnCartItems, deleteCartItem, updateQuantityCartItem, updateSelectedCartItem } = carts
+const { createCart, addToCart, getOwnCartItems, deleteCartItem, updateQuantityCartItem, updateSelectedCartItem,deleteCartItems } = carts
 const { getFilteredShops, getShopById, getShops } = shops
 const { getReviews, getReviewById, addReview, updateReview, deleteReview, addLike, adddislike } = reviews
 const { addProductToFavorite, delProductFromFavorite, getProductsFromFavorite } = favorites
@@ -81,7 +81,8 @@ const api = {
   getFavoriteProducts,
   getSettings,
   getPopularCategories,
-  getProductsFromFavorite
+  getProductsFromFavorite,
+  deleteCartItems
 }
 
 export { instance, api };

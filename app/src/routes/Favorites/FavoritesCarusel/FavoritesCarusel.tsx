@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "./FavoritesCarusel.module.scss";
 import Title from "antd/es/typography/Title";
 import { Typography, Carousel } from "antd";
 import { CaretLeftFilled, CaretRightFilled } from "@ant-design/icons";
 import "./FavoritesCarusel.scss";
 import "swiper/css";
-import { IPromotionCard } from "interfaces";
-import { sliceText } from "helpers/sliceText";
 import { PromotionSkeleton } from "Components/Skeleton";
 import FavoritesCard from "../FavoritesCard/FavoritesCard";
+import { FavoriteProductData } from "store/models/FavoriteTypes";
+
 const { Text } = Typography;
 
 interface IFavoritesCarusel {
   title?: string;
-  getCarts: () => any;
+  data: FavoriteProductData[];
+  status:string;
 }
-type Status = "fullfiled" | "rejected" | "pending";
 
 const ArrowLeft: React.FC<any> = ({ currentSlide, slideCount, ...props }) => (
   <button
@@ -39,24 +39,7 @@ const ArrowRight: React.FC<any> = ({ currentSlide, slideCount, ...props }) => {
   );
 };
 
-const FavoritesCarusel: React.FC<IFavoritesCarusel> = ({ title, getCarts }) => {
-  const [cards, setCards] = useState([]);
-  const [status, setStatus] = useState<Status>("pending");
-  const getProducts = async () => {
-    setStatus("pending");
-    try {
-      const data = await getCarts();
-      if (data.status === 200) {
-        setCards(data.data);
-        setStatus("fullfiled");
-      }
-    } catch (err) {
-      setStatus("rejected");
-    }
-  };
-  useEffect(() => {
-    getProducts();
-  }, []);
+const FavoritesCarusel: React.FC<IFavoritesCarusel> = ({ title, data,status }) => {
 
   if (status === "pending") {
     return (
@@ -87,28 +70,19 @@ const FavoritesCarusel: React.FC<IFavoritesCarusel> = ({ title, getCarts }) => {
         <Carousel
           slidesToShow={4}
           dots={false}
-          prevArrow={<ArrowLeft slideCount={cards.length} />}
-          nextArrow={<ArrowRight slideCount={cards.length} />}
+          prevArrow={<ArrowLeft slideCount={data.length} />}
+          nextArrow={<ArrowRight slideCount={data.length} />}
           slidesToScroll={1}
           infinite={false}
           arrows={true}
         >
-          {cards.map((item: IPromotionCard, index) => {
+          {data.map((item: FavoriteProductData) => {
    
               return (
                 <FavoritesCard
-                  key={index}
-                  salesman_img="https://sartoreale.ru/upload/iblock/dc1/dc17cad50138ce5b963516754faba6f0.jpg"
-                  title={item.title}
-                  description={sliceText(item.description)}
-                  price={item.price}
-                  old_price={item.old_price}
-                  average_rating={item.average_rating}
-                  review_count={item.review_count}
-                  product_images={item.product_images}
+                  product={item.product}
                   id={item.id}
-                  product_code={item.product_code}
-                />
+                  />
               );
             
           })}

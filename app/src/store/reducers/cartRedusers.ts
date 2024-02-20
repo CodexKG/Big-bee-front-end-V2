@@ -54,6 +54,18 @@ export const deleteCheckedCartItems = createAsyncThunk(
         return cart_items
     }
 );
+export const deleteCartItems = createAsyncThunk(
+    'cart/deleteCartItems',
+    async ({ id }: { id: number; }, { signal }) => {
+        const source = axios.CancelToken.source();
+        signal.addEventListener('abort', () => source.cancel('Operation canceled by the user.'));
+        try{
+            api.deleteCartItems(id, access_token, source.token)
+        }catch{
+
+        }
+    }
+);
 
 export const addCartItem = createAsyncThunk<CartItem, { cancelToken?: CancelToken, cart: number, product_id: number, quantity: number }, { rejectValue?: string }>(
     'cart/addCartItem',

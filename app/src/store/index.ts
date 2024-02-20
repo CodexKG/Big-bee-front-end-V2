@@ -7,6 +7,7 @@ import shopReduser from './slices/shopSlice'
 import categoryReducer from './slices/categorySlice'
 import windowReducer from './slices/WindowSlice'
 import bannerReducer from './slices/BannerSlice'
+import favoriteReducer from './slices/favoriteSlice'
 
 const store = configureStore({
   reducer: {
@@ -16,7 +17,8 @@ const store = configureStore({
     shop: shopReduser,
     category: categoryReducer,
     window: windowReducer,
-    baner: bannerReducer
+    baner: bannerReducer,
+    favorite: favoriteReducer,
   },
 });
 
