@@ -7,6 +7,14 @@ export function createQueryAtribute(filters: FilterParams): string {
         .join('|');
     return attributesString;
 }
+export function createQueryConfig(filters: FilterParams): string {
+    console.log(filters);
+    
+    const attributesString = filters
+        .map((config: { key: string, value: string }) => `${encodeURIComponent(config.key)}__${encodeURIComponent(config.value)}`)
+        .join('|');
+    return attributesString;
+}
 export function createQueryString(filters: FilterParams): string {
     const queryParts: string[] = [];
 
@@ -15,6 +23,8 @@ export function createQueryString(filters: FilterParams): string {
         if (value !== undefined) { // Игнорировать поля с неопределенными значениями
             if (key === 'attribute') {
                 queryParts.push(`${encodeURIComponent(key)}=${createQueryAtribute(value)}`);
+            } else if (key === 'config') {
+                queryParts.push(`${encodeURIComponent(key)}=${createQueryConfig(value)}`);
             } else {
                 queryParts.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
             }
