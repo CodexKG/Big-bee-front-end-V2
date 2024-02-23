@@ -219,11 +219,11 @@ const Reviews: FC = () => {
                                                 <button onClick={() => {
 
                                                     onLike(el.id)
-                                                }}><img src={likeIcon} alt="" /> {like}</button>
+                                                }}><img src={likeIcon} alt="" /> {el.count_like}</button>
                                                 <button onClick={() => {
 
                                                     onDisLike(el.id)
-                                                }}><img src={dislikeIcon} alt="" /> {disLike}</button>
+                                                }}><img src={dislikeIcon} alt="" /> {el.count_dislike}</button>
                                             </div>
                                         </div>
 

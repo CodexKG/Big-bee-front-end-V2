@@ -64,6 +64,18 @@ export interface ProductPopular {
     products_of_day: Product[]
 }
 
+type ProductDelivery = {
+    id: null | number; // Поскольку id указано как null, возможно это поле предназначено для автогенерируемого идентификатора, который может быть числом
+    old_price: number; // Старая цена товара
+    price: number; // Текущая цена товара
+    product: number; // Идентификатор продукта
+    average_rating: number; // Средний рейтинг
+    delivery_date: string; // Дата доставки в текстовом формате
+    payment_method: string; // Методы оплаты, перечисленные через запятую в строке
+    pickup_available: boolean; // Доступность самовывоза
+    review_count: number; // Количество обзоров
+    shop: string; // Название магазина
+}
 export interface SingleProduct {
     average_rating: number;
     brand: number;
@@ -78,7 +90,8 @@ export interface SingleProduct {
     product_attributes: Array<{
         key: string;
         value: string;
-    }>;
+    }>,
+    product_delivery: ProductDelivery[],
     product_code: string;
     product_configurator: Array<{
         id: number;

@@ -18,7 +18,7 @@ const FavoritesProduct: FC = () => {
       {data.length === 0 ? (
         <FavoritesEmpty/>
       ) : (
-        <FavoritesCarusel title='dawda' data={data} status={status}/>
+        <FavoritesCarusel title='Избранное' data={data} status={status}/>
       )}
     </div>
   );

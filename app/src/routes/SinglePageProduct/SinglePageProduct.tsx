@@ -80,8 +80,11 @@ const SinglePageProduct: FC = () => {
                 <br />
                 <br />
                 <br />
-                <Promotion title="Акции и скидки" getCarts={api.getProductBestSellers} />
-                <Promotion title="Хиты продаж" getCarts={api.getPromotionRandomProducts} />
+                <div className={classes.section}>
+                    <Promotion title="Акции и скидки" getCarts={api.getProductBestSellers} />
+                    <Promotion title="Хиты продаж" getCarts={api.getPromotionRandomProducts} />
+                </div>
+
             </div>
 
         </div>

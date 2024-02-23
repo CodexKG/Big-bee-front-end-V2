@@ -22,8 +22,8 @@ const getFilteredProducts = (filters: string, sourceToken?: CancelToken) =>
     cancelToken: sourceToken,
   });
 
-const getProductsById = (id: number, sourceToken?: CancelToken) =>
-  instance.get<SingleProduct>(`/products/products/${id}`, {
+const getProductsById = (config?: string, id?: number, sourceToken?: CancelToken) =>
+  instance.get<SingleProduct>(`/products/products/${id}/${config ? config : ''}`, {
     cancelToken: sourceToken,
   });
 

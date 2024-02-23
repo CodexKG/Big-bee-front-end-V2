@@ -30,11 +30,11 @@ export const fetchFilterProducts = createAsyncThunk<ProductData, { cancelToken: 
     }
 );
 
-export const fetchProductById = createAsyncThunk<SingleProduct, { id: number; cancelToken?: CancelToken }, { rejectValue?: string }>(
+export const fetchProductById = createAsyncThunk<SingleProduct, { config?: string; id: number; cancelToken?: CancelToken }, { rejectValue?: string }>(
     'products/fetchProductById',
-    async ({ id }, { rejectWithValue }) => {
+    async ({ id, config }, { rejectWithValue }) => {
         try {
-            const response = await api.getProductsById(id);
+            const response = await api.getProductsById(config, id);
             return response.data as SingleProduct;
         } catch (error) {
             return rejectWithValue(typeof error === 'string' ? error : 'Failed to fetch product');

@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import classes from './TopConfig.module.scss'
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "store/hook";
 import { fetchProductById } from "store/reducers/producRedusers";
 import axios from "axios";
@@ -18,7 +18,11 @@ const TopConfig: FC = () => {
     const { id } = useParams()
     const navigate = useNavigate()
     const { selectedProduct } = useAppSelector((state) => state.produckt)
-    const [state, setState] = useState([])
+
+    const location = useLocation();
+    const queryRef = useRef(location.search);
+
+    queryRef.current = location.search;
 
     function handleFilterChange(newFilters: string) {
         navigate({
@@ -29,6 +33,7 @@ const TopConfig: FC = () => {
     const [selectedConfigs, setSelectedConfigs] = useState<{ [key: string]: string }>({});
 
     const onChange = (e: RadioChangeEvent, key: string) => {
+
         setSelectedConfigs((prevConfigs) => ({
             ...prevConfigs,
             [key]: e.target.value,
@@ -43,14 +48,14 @@ const TopConfig: FC = () => {
                 array.push({ key: key, value: element })
             }
         }
-        return handleFilterChange(createQueryString({ config: array }))
+        return handleFilterChange(createQueryString({ product_configurator: array }))
     }, [selectedConfigs])
-  
 
     useEffect(() => {
+        const queryString = queryRef.current;
         const source = axios.CancelToken.source();
-        dispatch(fetchProductById({ id: Number(id), cancelToken: source.token }))
-    }, [id]);
+        dispatch(fetchProductById({ config: queryString, id: Number(id), cancelToken: source.token }))
+    }, [id, location.search]);
 
     return (
         <div>
@@ -71,7 +76,7 @@ const TopConfig: FC = () => {
                                                 style={{ background: `${vl.title}` }}
                                                 className={classes.config_color}></div>
                                         ) : <div className={classes.config_row}>
-                                            <Radio.Group onChange={(e) => onChange(e, el.configurator_key)} className="redioGroup" defaultValue={el.values[0].title} size="large">
+                                            <Radio.Group onChange={(e) => onChange(e, `${el.id}`)} className="redioGroup" defaultValue={el.values[0].title} size="large">
                                                 {el.values.map((vl) =>
                                                     <Radio.Button value={vl.title}>{vl.title}</Radio.Button>
                                                 )}
