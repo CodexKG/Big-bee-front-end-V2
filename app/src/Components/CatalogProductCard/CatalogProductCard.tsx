@@ -1,6 +1,6 @@
 import { FC, useRef } from "react";
 import classes from "./CatalogProductCard.module.scss";
-import { Button, Carousel, Col, Row,Typography } from "antd";
+import { Button, Carousel, Col, Row, Typography } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { DefaultButton } from "Components/UI";
@@ -8,6 +8,7 @@ import { HeartOutlined } from "@ant-design/icons";
 import { numberWithSpaces } from "helpers";
 
 import { CarouselRef } from "antd/es/carousel";
+import { getDiscount } from "helpers/getDiscount";
 interface ICatalogProductCart {
   product_imgs: Array<string>;
   title: string;
@@ -88,7 +89,7 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
               <div className={classes.carousel_item}>
                 <img src={src.image} alt={title} />
 
-                <div className={classes.carousel_item_discount}>-14%</div>
+                <div className={classes.carousel_item_discount}>{getDiscount(old_price,price)}%</div>
 
               </div>
             );

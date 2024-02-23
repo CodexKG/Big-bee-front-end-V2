@@ -17,7 +17,7 @@ const Login: React.FC = () => {
     const navigate = useNavigate()
 
     const onFinish = async (values: any) => {
-        console.log('Received values of form: ', values);
+     
         dispatch(loginAsync({ username: values.username, password: values.password }));
         try {
             setLoading(true);

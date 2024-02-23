@@ -13,7 +13,7 @@ const SubWithNews: React.FC<Props> = () => {
 
 
     const onFinish = (values: any) => {
-        console.log('Success:', values);
+   
         try {
             dispatch(getEmailAsync({ email: values.email }))
             message.success('Ваш email успешно принят, на вашу почту будут отправлятся новости!')

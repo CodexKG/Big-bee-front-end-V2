@@ -42,8 +42,8 @@ const HeaderComponent: React.FC = () => {
         document.head.appendChild(linkElement)
     }, [settings.logo]);
     React.useEffect(() => {
-        
-      }, []);
+
+    }, []);
     const showDrawer = () => {
         setOpen(true);
     };
@@ -100,7 +100,7 @@ const HeaderComponent: React.FC = () => {
         <header className={classes.header}>
 
             <nav>
-                <div onClick={() => navigate('/')}>
+                <div style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
                     <img height={40} src={settings.logo} alt="" />
                 </div>
                 <ul >
@@ -134,6 +134,7 @@ const HeaderComponent: React.FC = () => {
 
                 </div>
             </nav>
+            <div style={{ height: '80px' }}></div>
             <div className={classes.categories}>
                 <Button onClick={!open ? showDrawer : onClose} className={classes.categories_btn} style={{ color: 'black !important' }} type="primary" icon={!open ? <UnorderedListOutlined /> : <CloseOutlined />} >
                     Каталог
@@ -149,7 +150,7 @@ const HeaderComponent: React.FC = () => {
                 <Space wrap>
                     <Select
                         defaultValue="USD"
-                        style={{ width: 90 }}
+                        style={{ width: 75 }}
                         bordered={false}
                         options={[
                             { value: "USD", label: "USD" },
@@ -160,7 +161,7 @@ const HeaderComponent: React.FC = () => {
                     />
                     <Select
                         defaultValue="EN"
-                        style={{ width: 90 }}
+                        style={{ width: 65 }}
                         bordered={false}
                         options={[
                             { value: "EN", label: "EN" },

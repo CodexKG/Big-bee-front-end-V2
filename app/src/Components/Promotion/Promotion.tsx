@@ -98,7 +98,7 @@ const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
           infinite={false}
           arrows={true}
           swipeEvent={(swiper) => {
-            console.log(swiper);
+       
           }}
         >
           {cards.map((item: IPromotionCard,index) => {

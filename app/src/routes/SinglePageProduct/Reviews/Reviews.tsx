@@ -47,7 +47,7 @@ const Reviews: FC = () => {
 
 
     const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
+     
     };
 
     type FieldType = {
@@ -85,8 +85,6 @@ const Reviews: FC = () => {
 
             })
             .catch((errorInfo) => {
-
-                console.log('Validate Failed:', errorInfo);
             });
     };
 
@@ -98,7 +96,7 @@ const Reviews: FC = () => {
             await api.addLike(idd)
             dispatch(fetchProductById({ id: Number(id), cancelToken: source.token }))
         } catch (error: any) {
-            console.log();
+          
 
             message.error(error?.response?.status === 401 ? (<Button onClick={() => navigate('/login')}>Авторизуйтесь</Button>) : 'error onLike')
         }
@@ -113,7 +111,6 @@ const Reviews: FC = () => {
             await api.adddislike(idd)
             dispatch(fetchProductById({ id: Number(id), cancelToken: source.token }))
         } catch (error: any) {
-            console.log();
 
             message.error(error?.response?.status === 401 ? (<Button onClick={() => navigate('/login')}>Авторизуйтесь</Button>) : 'error onLike')
         }

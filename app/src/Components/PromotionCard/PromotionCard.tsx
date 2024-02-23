@@ -12,6 +12,7 @@ import { getCookie } from "helpers/cookies";
 import { useAppDispatch } from "store/hook";
 import { CartProduct } from "store/models/CartTypes";
 import { addCartItem, addLocalCartItem } from "store/reducers/cartRedusers";
+import { getDiscount } from "helpers/getDiscount";
 
 const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const {
@@ -29,7 +30,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const dispatch = useAppDispatch();
   const { Title, Text } = Typography;
   const carouselRef = useRef<CarouselRef>(null);
-  
+
   const imgHover = (index: number) => {
     carouselRef.current?.goTo(index, true);
   };
@@ -43,7 +44,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
           content: "Продукт добавлен в корзину",
           onClick: () => navigate("/cart"),
         });
-        
+
       }
       catch {
         message.error('Не получилось добавить в корзинку')
@@ -71,8 +72,8 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         onClick: () => navigate("/login"),
       });
     } else {
-      
-      try{
+
+      try {
         await api.addProductToFavorite(
           Number(id),
           +getCookie("user_id"),
@@ -82,7 +83,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
           content: "Successfully added",
           onClick: () => navigate("/favorites"),
         });
-      }catch{
+      } catch {
         message.open({
           type: "success",
           content: "Продукт уже в избранных",
@@ -95,7 +96,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   return (
     <div className={classes.promotionCard}>
       <div className={classes.img_block}>
-        <div className={classes.discount_block}>-14%</div>
+        <div className={classes.discount_block}>{`${getDiscount(old_price, price)}%`}</div>
         <div className={classes.img_block_hover}>
           {product_images.map((item, index) => {
             return (
@@ -129,7 +130,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
           <Col span={2}>Продавец</Col>
         </Row>
       </div>
-      <Title onClick={() => navigate(`/product/${id}`)} level={3}>{title.slice(0,40)}{title.length >40? '...':''}</Title>
+      <Title onClick={() => navigate(`/product/${id}`)} level={3}>{title.slice(0, 40)}{title.length > 40 ? '...' : ''}</Title>
       <div className={classes.subtitle}>
         <Text>{description}</Text>
       </div>
@@ -154,7 +155,7 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
         </Col>
       </Row>
       <Row style={{ justifyContent: "space-between" }}>
-        <Button onClick={()=>add_item()} className={classes.cart_button}>Добавить в корзину</Button>
+        <Button onClick={() => add_item()} className={classes.cart_button}>Добавить в корзину</Button>
         <Button
           className={classes.cart_favorites}
           onClick={() => onFavorites()}

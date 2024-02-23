@@ -68,7 +68,7 @@ const OrderPlacing: React.FC = () => {
             )
             countDown()
         } catch (error: any) {
-            console.log(error);
+           
             message.error('Ошибка входа. Пожалуйста, проверьте свои учетные данные.');
         }
 

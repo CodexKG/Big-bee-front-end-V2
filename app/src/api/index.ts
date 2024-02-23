@@ -21,7 +21,7 @@ const instance = axios.create({
 
 })
 //@ts-ignore
-// console.log(process.env.REACT_APP_SERVER_API, window.REACT_APP_SERVER_API);
+
 
 
 // instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {

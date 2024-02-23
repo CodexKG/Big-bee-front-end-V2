@@ -8,7 +8,7 @@ export function createQueryAtribute(filters: FilterParams): string {
     return attributesString;
 }
 export function createQueryConfig(filters: FilterParams): string {
-    console.log(filters);
+  
     
     const attributesString = filters
         .map((product_configurator: { key: string, value: string }) => `${encodeURIComponent(product_configurator.key)}__${encodeURIComponent(product_configurator.value)}`)
@@ -44,7 +44,7 @@ type FilterParamss = {
 };
 export function parseQueryString(queryString: string): FilterParamss {
     const params = new URLSearchParams(queryString);
-    console.log('call');
+   
 
 
 
@@ -56,7 +56,7 @@ export function parseQueryString(queryString: string): FilterParamss {
 
 
     params.forEach((value, key) => {
-        console.log('call params:', { key: key, value: value });
+  
         filters.attribute = [];
 
         if (key === 'attribute' && value.includes('__')) {
@@ -77,7 +77,7 @@ export function parseQueryString(queryString: string): FilterParamss {
             }
         }
     });
-    // console.log('atribute ', atrributeArray);
+   
     filters.attribute = atrributeArray
     return filters;
 }
