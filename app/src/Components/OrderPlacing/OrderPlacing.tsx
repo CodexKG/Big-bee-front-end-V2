@@ -68,7 +68,7 @@ const OrderPlacing: React.FC = () => {
             )
             countDown()
         } catch (error: any) {
-           
+
             message.error('Ошибка входа. Пожалуйста, проверьте свои учетные данные.');
         }
 
@@ -393,7 +393,7 @@ const OrderPlacing: React.FC = () => {
                             data.cart_items.map((item) => (
                                 <div className={classes.flexConteiner}>
                                     <div className={classes.imgProduct}>
-                                        <img src={item.product.image} alt="" />
+                                        <img  src={item.product.image} alt="" />
                                     </div>
 
                                     <div className={classes.title}>
@@ -410,7 +410,6 @@ const OrderPlacing: React.FC = () => {
                                     </div>
                                     <div className={classes.price}>
                                         <s>{item.product.price}</s>
-
                                         <h2>{item.product.old_price}</h2>
                                     </div>
                                 </div>

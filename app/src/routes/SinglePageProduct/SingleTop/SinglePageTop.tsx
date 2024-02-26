@@ -8,10 +8,10 @@ import TopConfig from "../TopConfigs/TopConfig";
 import classes from './SingleTop.module.scss';
 
 const SinglePageTop: FC = () => {
-    const { selectedProduct } = useAppSelector((state) => state.produckt)    
+    const { selectedProduct } = useAppSelector((state) => state.produckt)
     const imagesList = selectedProduct?.product_images
     const images: any = []
-    const [count, setCount] = useState<number|undefined>(1)
+    const [count, setCount] = useState<number | undefined>(1)
     selectedProduct?.product_images.forEach((item) => {
         images.push(item.image)
     })
@@ -20,9 +20,9 @@ const SinglePageTop: FC = () => {
         setSeletedImage(selectedProduct?.product_images[0])
     }, [selectedProduct])
     useEffect(() => {
-        if( imagesList != undefined && imagesList?.length<3){
-            setCount(imagesList?.length-1)
-        }else if(imagesList != undefined){
+        if (imagesList != undefined && imagesList?.length < 3) {
+            setCount(imagesList?.length - 1)
+        } else if (imagesList != undefined) {
             setCount(3)
         }
     }, [imagesList])
@@ -77,11 +77,11 @@ const SinglePageTop: FC = () => {
 
             <div className={classes.top_descr_block_col}>
                 <div className={classes.top_descr_block_raiting}>
-                    <Rate allowHalf defaultValue={2.5} />
+                    <Rate disabled defaultValue={selectedProduct?.average_rating} />
 
                     <div>
-                        <span className={classes.singlePage_top_descr_block_raiting_count}>4.9</span>
-                        <span className={classes.singlePage_top_descr_block_raiting_full}>/39</span>
+                        <span className={classes.singlePage_top_descr_block_raiting_count}>{selectedProduct?.average_rating}</span>
+                        <span className={classes.singlePage_top_descr_block_raiting_full}>/{selectedProduct?.review_count}</span>
                     </div>
                 </div>
                 <TopConfig />

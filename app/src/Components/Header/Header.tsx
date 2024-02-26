@@ -104,10 +104,10 @@ const HeaderComponent: React.FC = () => {
                     <img height={40} src={settings.logo} alt="" />
                 </div>
                 <ul >
-                    <Protected fallback={<Link style={{ color: 'black' }} to={`http://localhost:3000/login`}>
+                    <Protected fallback={<Link style={{ color: 'black' }} to={`https://seller-black.vercel.app//login`}>
                         <li>Стать продавцом</li>
                     </Link>}>
-                        <Link style={{ color: 'black' }} to={`http://localhost:3000`}>
+                        <Link style={{ color: 'black' }} to={`https://seller-black.vercel.app/`}>
                             <li>Стать продавцом</li>
                         </Link>
 

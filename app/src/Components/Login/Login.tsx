@@ -5,19 +5,23 @@ import { Button, Checkbox, Form, Input, message } from 'antd';
 import classes from './Login.module.scss';
 import { useAppDispatch } from 'store/hook';
 import { loginAsync } from 'store/reducers/authRedusers';
-import { setCookie } from 'helpers/cookies';
-import {Link} from 'react-router-dom';
-import { fetchCartItems } from 'store/reducers/cartRedusers';
+import { getCookie, setCookie } from 'helpers/cookies';
+import { Link } from 'react-router-dom';
+import { addCartItem, fetchCartItems } from 'store/reducers/cartRedusers';
 import logo from "../../assets/icon/logo.svg"
+import { transferCart } from 'helpers/transferCart';
 
 
 const Login: React.FC = () => {
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
-
+    const cart_id = Number(getCookie('cart_id'))
+    const transferCall = (obj: { cart: number, product_id: number, quantity: number }) => {
+        dispatch(addCartItem(obj))
+    }
     const onFinish = async (values: any) => {
-     
+
         dispatch(loginAsync({ username: values.username, password: values.password }));
         try {
             setLoading(true);
@@ -27,10 +31,10 @@ const Login: React.FC = () => {
             message.success('Авторизация успешна!');
             setCookie('user_id', response.payload.user_id, 30)
             setCookie('access_token', response.payload.access, 30);
-            
+            transferCart(cart_id, transferCall)
         } catch (error) {
             message.error('Ошибка входа. Пожалуйста, проверьте свои учетные данные.');
-        }finally{
+        } finally {
             setLoading(false);
         }
     };

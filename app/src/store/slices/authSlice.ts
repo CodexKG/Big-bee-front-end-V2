@@ -1,5 +1,5 @@
 // authSlice.ts
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../index';
 import { loginAsync } from 'store/reducers/authRedusers';
 
@@ -16,7 +16,9 @@ const initialState: AuthState = {
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+
+    },
     extraReducers: (builder) => {
         builder.addCase(loginAsync.fulfilled, (state) => {
             state.isAuthenticated = true;

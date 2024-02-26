@@ -7,6 +7,7 @@ import { useAppDispatch } from 'store/hook';
 import { registerAsync } from 'store/reducers/authRedusers';
 import { fetchCartItems } from 'store/reducers/cartRedusers';
 import logo from "../../assets/icon/logo.svg"
+import { transferCart } from 'helpers/transferCart';
 
 const SignUp: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -17,7 +18,10 @@ const SignUp: React.FC = () => {
         try {
             setLoading(true);
             const response = await dispatch(registerAsync({ username: values.username, email: values.email, password: values.password, confirm_password: values.confirm_password }));
-            await dispatch(fetchCartItems(response.payload.user_id))
+            await dispatch(fetchCartItems(response.payload.user_id)).then(() => {
+                // transferCart()
+            })
+
             navigate('/login');
             message.success('Регистрация прошла успешно. Теперь вы можете войти в систему.');
         } catch (error) {
@@ -51,9 +55,9 @@ const SignUp: React.FC = () => {
                 >
                     <Form.Item
                         name="username"
-                        rules={[{ required: true, message: 'Please input your Username!' }, {type: "string"}]}
+                        rules={[{ required: true, message: 'Please input your Username!' }, { type: "string" }]}
                     >
-                        <Input className={classes.input}  placeholder="Username" />
+                        <Input className={classes.input} placeholder="Username" />
                     </Form.Item>
 
                     <Form.Item
