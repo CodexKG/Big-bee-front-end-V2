@@ -55,7 +55,7 @@ const OrderPlacing: React.FC = () => {
                     "first_name": values.username,
                     "last_name": values.surname,
                     "phone": values.number,
-                    "billing_receipt_type": '',
+                    "billing_receipt_type": values.billing_receipt_type,
                     "country": values.country,
                     "region": values.region,
                     "city": values.city,
@@ -164,11 +164,11 @@ const OrderPlacing: React.FC = () => {
 
                         <div className={classes.flexForm}>
                             <div className={classes.item}>
-                                <Form.Item name="radio-group">
+                                <Form.Item name="billing_receipt_type">
                                     <Radio.Group>
-                                        <Radio className={classes.radio} value="courier">Доставка курьером до двери</Radio>
-                                        <Radio className={classes.radio} value="Pickup">Самовывоз из магазина</Radio>
-                                        <Radio className={classes.radio} value="postOffices">Кыргыз почтасы</Radio>
+                                        <Radio className={classes.radio} value="Доставка">Доставка курьером до двери</Radio>
+                                        <Radio className={classes.radio} value="Самовывоз">Самовывоз из магазина</Radio>
+                                        {/* <Radio className={classes.radio} value="postOffices">Кыргыз почтасы</Radio> */}
                                     </Radio.Group>
                                 </Form.Item>
                             </div>
@@ -393,7 +393,7 @@ const OrderPlacing: React.FC = () => {
                             data.cart_items.map((item) => (
                                 <div className={classes.flexConteiner}>
                                     <div className={classes.imgProduct}>
-                                        <img  src={item.product.image} alt="" />
+                                        <img src={item.product.image} alt="" />
                                     </div>
 
                                     <div className={classes.title}>
