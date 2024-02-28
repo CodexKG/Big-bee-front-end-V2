@@ -25,12 +25,13 @@ jobs:
         fi
 
     - name: Build
-      run: npm run build
+      run: |
+        cd app
+        npm run build
 
     - name: Deploy to server
       run: |
-        sshpass -p ${{ secrets.SERVER_PASSWORD }} scp -r build/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/var/www/bigbee.mnogosushi.kg/
-        echo ${{ secrets.SERVER_PASSWORD }} | sudo -S cp -r /home/binniev/Bigbee-front/app/build/* /var/www/bigbee.mnogosushi.kg/
+        sshpass -p ${{ secrets.SERVER_PASSWORD }} scp -r app/build/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/var/www/bigbee.mnogosushi.kg/
         sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 'sudo systemctl restart nginx'
       env:
         SSHPASS: ${{ secrets.SERVER_PASSWORD }}
