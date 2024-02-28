@@ -12,7 +12,7 @@ const Favorites: FC = () => {
     <Corset>
       <div className={classes.favorites}>
         {/* <Title level={1}>Избранное</Title> */}
-        helloƒ
+        hello world
         <Protected fallback={<NoLogin />}>
           <FavoritesProduct />
         </Protected>
