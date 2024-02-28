@@ -20,16 +20,17 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd Big-bee-front-end-V2/app
+        cd app
         npm install
 
     - name: Build
       run: |
+        cd app
         npm run build
 
     - name: Deploy to server
       run: |
-        cd Big-bee-front-end-V2/app
+        cd app
         scp -r build/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/var/www/bigbee.mnogosushi.kg/
         ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 'sudo systemctl restart nginx'
       env:
