@@ -1,0 +1,107 @@
+.cart__item{
+    border-top: 1px solid #DCDCDC;
+    padding-top: 30px;
+    width: 100%;
+    font-style: normal;
+    font-weight: 500;
+    >.left{
+        >label{
+            >span{
+                font-size: 18px;
+                >span{
+                    width: 20px;
+                    height: 20px;
+                    &::after{
+                        width: 17px;   
+                        height: 17px;    
+                        transform: translate(-50%,-50%);       
+                        content: url('../../assets/icon/check_bl.svg');
+                        border: none;
+                        inset-inline-start: none;
+                        display: block;
+                    }
+                }
+                input{
+                    line-height: normal;
+                    box-sizing: border-box;
+                }
+            }
+            
+        }
+        >img{
+            width: 100%;
+            max-width: 200px;
+            object-fit: contain;
+        }
+        .title{
+            font-size: 20px;
+            font-weight: 600;
+            // max-width: 220px;
+        }
+        .code{
+            font-size: 14px;
+            font-weight: 400;
+            opacity: .4;
+        }
+        .category{
+            font-size: 18px;
+            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    >.right{
+        >.count{
+            >span{
+                color: #DCDCDC;
+                transition: color .2s;
+                &:hover{
+                    color: black;
+                }
+            }
+            >input{
+                width: 45px;
+                padding: 8px 10px;
+                outline: none;
+                flex-shrink: 0;
+                border-radius: 4px;
+                font-size: 18px;
+                border: 1px solid #DCDCDC;
+                &::-webkit-outer-spin-button,
+                &::-webkit-inner-spin-button{
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+            }
+        }
+        .old_price{
+            color: #71767E;
+            font-size: 16px;
+            text-decoration: line-through;
+            
+        }
+        .price{
+            color: #FF0032;
+            font-size: 29px;
+            font-weight: 700;
+        }
+        .spans{
+            >span{
+                width: 24px;
+                color: #9E9B98;
+                cursor: pointer;
+                &:first-child:hover{
+                    color: #FF0032;
+                }
+                &:last-child:hover{
+                    color: #000;
+                }
+            }
+            .active{
+                >svg{
+                    fill: #FF0032;
+                }
+            }
+        }
+    }
+}

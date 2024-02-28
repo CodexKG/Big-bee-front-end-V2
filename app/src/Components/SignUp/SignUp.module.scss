@@ -1,0 +1,60 @@
+.auth_reg {
+    max-width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+        text-align: center;
+        margin-top: 25px;
+        margin-bottom: 45px;
+
+        p{
+            font-size: 14px;
+        }
+    }
+
+    .form {
+        width: 590px;
+        height: 650px;
+        padding: 50px 60px;
+        border-radius: 10px;
+        background-color: #FFFDFD;
+        border: 1px solid #DCDCDC;
+
+        .icon {
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 150px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .formBlock {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .input {
+            background: #EEEEEF;
+            border-radius: 4px;
+            height: 45px;
+        }
+
+        .button {
+            height: 45px;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .button:hover{
+            color: #000;
+        }
+
+    }
+}

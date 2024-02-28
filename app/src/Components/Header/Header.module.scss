@@ -2,17 +2,22 @@
 
 .header {
     position: relative;
-    max-width: 1722px;
+    // max-width: 1722px;
     margin: 0 auto;
     width: 100%;
 
-
     nav {
 
-        padding: 20px 24px;
+        width: 100%;
+        background: white;
+        position: fixed;
+        z-index: 111111;
+        padding: 20px 100px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        // border-bottom: 1px solid #ccc;
+        // box-shadow: 0px 69px 112px -17px rgba(0, 0, 0, 0.33);
 
         ul {
             margin-bottom: 0;
@@ -45,7 +50,7 @@
         align-items: center;
         justify-content: space-between;
         padding: 13px 20px;
-        margin: 0 24px;
+        margin: 0 100px;
         border-radius: 8px;
         background-color: black;
 
@@ -79,7 +84,7 @@
 
     .all {
         overflow: hidden;
-        max-width: 1722px;
+        // max-width: 1722px;
         margin: 0 auto;
         position: relative;
         transition: 0.3s;
@@ -90,12 +95,14 @@
 
 
 .openCategories {
-    max-width: 1722px;
+    // max-width: 1722px;
     margin: 0 auto;
     display: flex;
+    justify-content: space-between;
+
 
     &_sideBar {
-        max-width: 400px;
+        width: 20%;
         height: 77vh;
         overflow-y: auto;
         padding-right: 1rem;
@@ -128,39 +135,46 @@
     &_main {
         height: 77vh;
         overflow-y: auto;
-        width: 100%;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
+        width: 80%;
         padding: 0 1rem;
-        // justify-content: space-between;
 
-        &_item {
-            width: 24%;
-            height: fit-content;
+        &_items {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+
+
+            &_item {
+                width: 24%;
+                height: fit-content;
+            }
+
+            h1 {
+                cursor: pointer;
+                color: #000;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+            }
+
+            p {
+                cursor: pointer;
+                color: #71767E;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%;
+                margin-bottom: 12px;
+                /* 20.8px */
+            }
         }
 
-        h1 {
-            color: #000;
-            font-size: 18px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-        }
-
-        p {
-            color: #71767E;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 130%;
-            /* 20.8px */
-        }
     }
 }
 
 .test {
-    height: 100vh;
+    // height: 100vh;
     position: absolute;
     width: 100%;
 }

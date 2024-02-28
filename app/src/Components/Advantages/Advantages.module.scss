@@ -1,0 +1,194 @@
+.advantages {
+  // max-width: 1722px !important;
+  padding: 0 100px;
+  margin: 50px auto ;
+  display: flex;
+  row-gap: 20px;
+  gap: 7%;
+
+  .advantage {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #DCDCDC;
+    padding: 20px;
+    gap: 20px;
+    max-width: 23%;
+
+    &_Image {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: #F2F3F7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    h3 {
+      font-weight: 700;
+      font-size: 19px;
+    }
+  }
+}
+
+@media (min-width: 1500px) {
+  .advantages {
+  
+    padding: 0 100px;
+    margin: 100px auto;
+    display: flex;
+    row-gap: 20px;
+    gap: 6%;
+
+
+
+    .advantage {
+
+      &_Image {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        background-color: #F2F3F7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      h3 {
+        font-weight: 700;
+        font-size: 26px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .advantages {
+    row-gap: 20px;
+    gap: 6%;
+
+    .advantage {
+
+      &_Image {
+        width: 60px;
+        height: 60px;
+  
+        img {
+          width: 27px;
+          height: 27px;
+        }
+      }
+      h3 {
+        font-weight: 700;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .advantages {
+    row-gap: 20px;
+    gap: 5%;
+
+    .advantage {
+
+      &_Image {
+        width: 50px;
+        height: 50px;
+        img {
+          width: 25px;
+          height: 25px;
+        }
+      }
+      h3 {
+        font-weight: 700;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .advantages {
+    gap: 3%;
+
+    .advantage {
+
+      &_Image {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        img {
+          width: 22px;
+          height: 22px;
+        }
+      }
+      h3 {
+        font-weight: 700;
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .advantages {
+    gap: 3%;
+
+    .advantage {
+      padding: 10px;
+      gap: 12px;
+      &_Image {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        img {
+          width: 18px;
+          height: 18px;
+        }
+      }
+      h3 {
+        font-weight: 700;
+        font-size: 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 399px) {
+  .advantages {
+    gap: 2%;
+
+    .advantage {
+      padding: 10px;
+      gap: 10px;
+
+      &_Image {
+        width: 28px;
+        height: 28px;
+      
+        img {
+          width: 15px;
+          height: 15px;
+        }
+      }
+      h3 {
+        font-weight: 700;
+        font-size: 6px;
+      }
+    }
+  }
+}
+

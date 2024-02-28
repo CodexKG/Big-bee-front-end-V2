@@ -3,11 +3,60 @@
 @import "./variables/colors.module.scss";
 
 //заголовков таблицы
-thead[class*="ant-table-thead"] th{
+thead[class*="ant-table-thead"] th {
   background-color: $white !important;
   border-top: .5px solid $lightdivider;
+
   &::before {
     display: none !important;
   }
 }
 
+// .ant-breadcrumb-separator{
+//   border: 1px solid #ffffff00 !important;
+//   background: rgba(0, 0, 0, 0) !important;
+//   margin: -10px !important;
+// }
+// a{
+//   color: inherit;
+//   &:hover{
+//     color: inherit;
+//   }
+// }
+.ant-checkbox-inner {
+  border: none !important;
+  background-color: #EEEEEE !important;
+  width: 25px !important;
+  /* Устанавливает ширину чекбокса */
+  height: 25px !important;
+  /* Устанавливает высоту чекбокса */
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #F5C423 !important;
+  /* Цвет фона для активного чекбокса */
+  border-color: #F5C423 !important;
+  /* Цвет границы для активного чекбокса */
+}
+
+.ant-checkbox-inner::after {
+
+  width: 8px !important;
+  /* Устанавливает ширину иконки галочки */
+  height: 14px !important;
+  color: black !important;
+
+  ;
+  border: black;
+  /* Устанавливает высоту иконки галочки */
+  left: 5px;
+  /* Центрирование по горизонтали */
+  top: 2px;
+  /* Центрирование по вертикали */
+}
+
+.ant-checkbox-checked .ant-checkbox-inner::after {
+  border-color: rgb(0, 0, 0);
+  /* Цвет галочки */
+
+}

@@ -1,0 +1,122 @@
+.conteiner {
+    margin: 0 auto;
+    width: 100%;
+
+}
+
+.singlePage {
+    // max-width: 1722px;
+    padding: 20px 100px;
+
+
+
+    &_nav {
+        display: flex;
+        column-gap: 10px;
+
+        &_btn {
+            border-radius: 8px;
+            background: #F2F3F7;
+            padding: 7px 14px;
+            color: #000;
+            font-family: "SF Pro Display";
+            font-size: 16px;
+            font-weight: 400;
+            line-height: normal;
+            border: none;
+
+        }
+    }
+
+    &_top_row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 40px;
+    }
+
+    &_row {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 50px;
+        width: 100%;
+    }
+
+
+
+
+
+    &_title {
+        color: #000;
+        font-family: "SF Pro Display";
+        font-size: 38px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 100%;
+    }
+
+    &_wishlist_btn {
+        color: #000;
+        font-family: "SF Pro Display";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        border: none;
+        background-color: transparent;
+    }
+
+    .nextBtn,
+    .prevBtn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        box-shadow: 0px 2px 3px rgb(172, 170, 170);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        right: -25px;
+        transform: translateY(-50%);
+        background: white !important;
+        border: none;
+        z-index: 9;
+    }
+
+    .prevBtn img {
+        transform: rotate(180deg);
+    }
+
+    .prevBtn {
+        left: -25px;
+    }
+
+    &_more_link {
+        color: #005BFF;
+        text-align: center;
+        font-family: "SF Pro Display";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 110%;
+        display: block;
+        padding: 17px 0;
+        width: 100%;
+        border-radius: 4px;
+        border: 1.5px solid transparent;
+        transition: .5s;
+
+        &:hover {
+            border-color: #F5C423;
+            color: #005BFF;
+        }
+    }
+
+}
+
+.section {
+    section {
+        padding: 0 !important;
+    }
+}

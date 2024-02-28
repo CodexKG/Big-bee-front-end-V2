@@ -1,0 +1,95 @@
+
+
+.top{
+
+        margin-top: 30px;
+
+        &_descr_block {
+            display: flex;
+            column-gap: 51px;
+
+            &_col {
+                width: 50%;
+                &:last-child{
+                    width: 100%;
+                }
+            }
+
+            &_images_carousel {
+                width: 100%;
+                margin-top: 20px;
+
+                &_item {
+                    width: 170px !important;
+                    height: 170px;
+                    border-radius: 5.535px;
+                    border: 1px solid #DCDCDC;
+                    background: #FFF;
+                    padding: 15px 33px;
+                    margin-right: 20px;
+
+                    &_active {
+                        border: 1.5px solid #F5C423;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+
+            &_image {
+                padding: 48px 55px;
+                border-radius: 8px;
+                border: 1px solid #DCDCDC;
+                background: #FFF;
+                position: relative;
+
+                &_new {
+                    display: inline-block;
+                    color: #000;
+                    font-family: "SF Pro Display";
+                    font-size: 15.1px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                    padding: 5px 10px;
+                    border-radius: 4px;
+                    background: #F5C423;
+                    position: absolute;
+                    top: 18px;
+                    left: 18px;
+                }
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            &_raiting {
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+
+                &_count {
+                    color: #000;
+                    font-family: "SF Pro Display";
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 110%;
+                }
+
+                &_full {
+                    color: rgba(0, 0, 0, 0.40);
+                    font-family: "SF Pro Display";
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 110%;
+                }
+            }
+        }
+}
