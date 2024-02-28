@@ -1,4 +1,4 @@
-name: Deploy
+name: Build and Deploy
 
 on:
   push:
@@ -6,27 +6,21 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '14'
 
-    - name: Check if dependencies are installed
-      run: |
-        if [ ! -d "node_modules" ]; then
-          npm install
-        fi
-
     - name: Install dependencies
       run: |
-        cd app
+        cd Big-bee-front-end-V2/app
         npm install
 
     - name: Build
@@ -35,8 +29,8 @@ jobs:
 
     - name: Deploy to server
       run: |
-        cd app
-        sshpass -p ${{ secrets.SERVER_PASSWORD }} scp -r build/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/var/www/bigbee.mnogosushi.kg/
-        sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 'sudo systemctl restart nginx'
+        cd Big-bee-front-end-V2/app
+        scp -r build/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/var/www/bigbee.mnogosushi.kg/
+        ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 'sudo systemctl restart nginx'
       env:
         SSHPASS: ${{ secrets.SERVER_PASSWORD }}
