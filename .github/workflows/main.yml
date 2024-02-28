@@ -25,6 +25,7 @@ jobs:
 
     - name: Build
       run: |
+        cd app
         npm run build
 
     - name: Deploy to server
