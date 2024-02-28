@@ -4,7 +4,6 @@ import Title from "antd/es/typography/Title";
 import { Typography, Carousel } from "antd";
 import { CaretLeftFilled, CaretRightFilled } from "@ant-design/icons";
 import "./FavoritesCarusel.scss";
-import "swiper/css";
 import { PromotionSkeleton } from "Components/Skeleton";
 import FavoritesCard from "../FavoritesCard/FavoritesCard";
 import { FavoriteProductData } from "store/models/FavoriteTypes";

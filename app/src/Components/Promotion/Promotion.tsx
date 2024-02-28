@@ -5,7 +5,6 @@ import { Typography, Carousel } from "antd";
 import { PromotionCard } from "../index";
 import { CaretLeftFilled, CaretRightFilled } from "@ant-design/icons";
 import "./Promotion.scss";
-import "swiper/css";
 import { IPromotionCard } from "interfaces";
 import { sliceText } from "helpers/sliceText";
 import { PromotionSkeleton } from "Components/Skeleton";
