@@ -5,7 +5,6 @@ import { Typography, Carousel } from "antd";
 import { PromotionCard } from "../index";
 import { CaretLeftFilled, CaretRightFilled } from "@ant-design/icons";
 import "./Promotion.scss";
-import "swiper/css";
 import { IPromotionCard } from "interfaces";
 import { sliceText } from "helpers/sliceText";
 import { PromotionSkeleton } from "Components/Skeleton";
@@ -76,7 +75,7 @@ const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
     );
   }
   if (status === "rejected") {
-    return <Title level={1}>Произошла ошибка</Title>;
+    return <Title level={1}></Title>;
   }
   return (
     <section className={classes.promotion + " promotion"}>
