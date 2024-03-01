@@ -3,13 +3,12 @@ import { CancelToken } from "axios";
 import {
   AddFavoriteProduct,
   FavoriteProductData,
-  FavoriteProduct
+  FavoriteProductPost
 } from "../../store/models/FavoriteTypes";
 import { api } from "../../api";
-import { access } from "fs";
 
 export const addProductToFavorite = createAsyncThunk<
-  AddFavoriteProduct,
+  FavoriteProductPost,
   { user_id: number; product_id: number; cancelToken?: CancelToken },
   { rejectValue?: string }
 >(
