@@ -6,6 +6,10 @@ interface windowState {
     user: any
     filters: FilterParams;
     settings: SettingsType,
+    bredCrumps: {
+        title: string,
+        href?: string,
+    }[],
     status: 'idle' | 'pending' | 'succeeded' | 'failed';
     loading: boolean
 }
@@ -19,16 +23,17 @@ const initialState: windowState = {
         attribute: []
     },
     settings: {
-            id: 1,
-            title: "BigBee",
-            description: "BigBee - Marketplace",
-            logo: "https://bee.webtm.ru/media/logo/logo.32d00f413f33e858aaa1267182250079.png",
-            phone: "0772343206",
-            instagram: "https://www.instagram.com/neobis.club/",
-            telegram: "https://www.t.me/@Toktorov",
-            whatsapp: "https://www.wa.me/+996772343206",
-            tiktok: "https://www.tiktok.com/@codex_kg"
-        },
+        id: 1,
+        title: "BigBee",
+        description: "BigBee - Marketplace",
+        logo: "https://bee.webtm.ru/media/logo/logo.32d00f413f33e858aaa1267182250079.png",
+        phone: "0772343206",
+        instagram: "https://www.instagram.com/neobis.club/",
+        telegram: "https://www.t.me/@Toktorov",
+        whatsapp: "https://www.wa.me/+996772343206",
+        tiktok: "https://www.tiktok.com/@codex_kg"
+    },
+    bredCrumps: [],
     status: 'idle',
     loading: false
 
@@ -39,6 +44,12 @@ const windowSlice = createSlice({
     name: 'window',
     initialState,
     reducers: {
+        setBredCrumps: (state, action: PayloadAction<{
+            title: string,
+            href?: string,
+        }[]>) => {
+            state.bredCrumps = action.payload
+        },
         setParams: (state, action: PayloadAction<FilterParams>) => {
             state.filters = action.payload
         },
@@ -92,7 +103,7 @@ const windowSlice = createSlice({
 
 });
 
-export const { setFilters, clearFilters, setOffset, setAtribute, addAttribute, removeValue, setParams } = windowSlice.actions;
+export const { setFilters, clearFilters, setOffset, setAtribute, addAttribute, removeValue, setParams, setBredCrumps } = windowSlice.actions;
 
 
 export default windowSlice.reducer;
