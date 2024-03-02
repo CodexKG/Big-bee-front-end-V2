@@ -2,6 +2,11 @@ export interface AddFavoriteProduct {
     user_id: number,
     porduct_id: number
 }
+export interface FavoriteProductPost {
+    id: number,
+    user: number,
+    product: number
+}
 export interface FavoriteProduct{
     id: number,
     title: string,

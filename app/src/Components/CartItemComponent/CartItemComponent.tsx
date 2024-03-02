@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import classes from './CartItemComponent.module.scss'
-import { Flex, Checkbox } from 'antd';
+import { Flex, Checkbox, message } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { CloseOutlined, HeartOutlined, MinusOutlined, PlusOutlined, HeartFilled } from '@ant-design/icons';
 import { CartItem } from 'store/models/CartTypes';
 import { deleteCartItem, updateCartToLocalStorage, updateQuantityCartItem, updateSelectedCartItem } from 'store/reducers/cartRedusers';
 import { getCookie } from 'helpers/cookies';
-import { useAppDispatch } from 'store/hook';
-
-
+import { useAppDispatch, useAppSelector } from 'store/hook';
+import { useNavigate } from 'react-router-dom';
+import { delFavoriteProducts, getFavoriteProducts } from 'store/reducers/favoritesReducers';
+import { api } from 'api';
+import axios from 'axios';
 type Props = {
     cart_item: CartItem,
 }
 
 const CartItemComponent: React.FC<Props> = ({ cart_item }: Props) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const { data, status } = useAppSelector((state) => state.favorite)
     const [count, setCount] = useState(cart_item.quantity)
     const [fav, setFav] = useState(false)
+    const [fav_id, setFavId] = useState(0)
     const is_auth = getCookie('access_token')
     const onChange: CheckboxProps['onChange'] = (e) => {
         if (is_auth) {
@@ -32,6 +37,57 @@ const CartItemComponent: React.FC<Props> = ({ cart_item }: Props) => {
             dispatch(deleteCartItem({ id: cart_item.id }))
         } else dispatch(updateCartToLocalStorage({ id: cart_item.id, action: 'delete' }))
     }
+    const delFav =()=>{
+        dispatch(delFavoriteProducts({id:fav_id}))
+        setFav(!fav)
+        message.open({
+            type: "success",
+            content: "Successfully deleted",
+            onClick: () => navigate("/favorites"),
+          });
+    }
+    const onFavorites = async () => {
+        if (!is_auth) {
+          message.open({
+            type: "error",
+            content: "You are not logged in",
+            onClick: () => navigate("/login"),
+          });
+        } else {
+          try {            
+            const favorite =await api.addProductToFavorite(cart_item.product.id,+getCookie("user_id"));
+            setFav(!fav)
+            setFavId(favorite.data['id'])
+            message.open({
+              type: "success",
+              content: "Successfully added",
+              onClick: () => navigate("/favorites"),
+            });
+          } catch {
+            setFav(true)
+
+            message.open({
+              type: "success",
+              content: "Продукт уже в избранных",
+              onClick: () => navigate("/favorites"),
+            });
+          }
+        }
+      };
+    useEffect(()=>{
+        const source = axios.CancelToken.source();
+
+        dispatch(getFavoriteProducts({cancelToken:source.token}))
+    },[])
+    useEffect(()=>{
+        const is_fav = data.filter(function(obj) {
+            return obj.product.id === cart_item.product.id;
+        });
+        if (is_fav.length !=0) {
+            setFav(true)            
+            setFavId(is_fav[0].id)
+        }
+    },[data])
     useEffect(() => {
         if (is_auth) {
             dispatch(updateQuantityCartItem({ id: cart_item.id, quantity: count }))
@@ -66,9 +122,9 @@ const CartItemComponent: React.FC<Props> = ({ cart_item }: Props) => {
                 <Flex gap={20} className={classes.spans}>
                     {
                         fav ?
-                            <HeartFilled onClick={() => setFav(!fav)} className={classes.active}></HeartFilled>
+                            <HeartFilled onClick={() => delFav()} className={classes.active}></HeartFilled>
                             :
-                            <HeartOutlined onClick={() => setFav(!fav)}></HeartOutlined>
+                            <HeartOutlined onClick={() => onFavorites()}></HeartOutlined>
                     }
                     <CloseOutlined onClick={() => { delete_item() }}></CloseOutlined>
                 </Flex>

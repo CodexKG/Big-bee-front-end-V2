@@ -78,7 +78,8 @@ const FavoritesCarusel: React.FC<IFavoritesCarusel> = ({ title, data,status }) =
           {data.map((item: FavoriteProductData) => {
    
               return (
-                <FavoritesCard
+                <FavoritesCard 
+                  key={item.id}
                   product={item.product}
                   id={item.id}
                   />
