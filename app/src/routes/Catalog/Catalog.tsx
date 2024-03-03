@@ -7,7 +7,7 @@ import axios from "axios";
 import { fetchFilterProducts } from "store/reducers/producRedusers";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { createQueryString, parseQueryString } from "helpers/params";
-import { clearFilters, setFilters, setOffset, setParams } from "store/slices/WindowSlice";
+import { clearFilters, removeValue, setFilters, setOffset, setParams } from "store/slices/WindowSlice";
 import { fetchCategoriesById } from "store/reducers/categoryReduser";
 import { ExpandableCheckboxGroup, ExpandableRadioGroup } from "Components";
 type SortOption = {
@@ -129,7 +129,7 @@ const Catalog: FC = () => {
 
   };
   console.log(bredCrumps);
-  
+
   return (
     <div>
       <div className={classes.catalogHead}>
@@ -153,6 +153,9 @@ const Catalog: FC = () => {
         </svg>} className={classes.select} options={sortOptions} />
       </div>
       <div className={classes.select_categories}>
+        <Button style={{ height: "40px", backgroundColor: '#F5C423', color: 'black !important' }} onClick={() => dispatch(clearFilters({ id: Number(id) }))}>
+          сбросить фильтры
+        </Button>
         {
           filters.attribute.map((item: any) => (
             <Tag
@@ -160,21 +163,26 @@ const Catalog: FC = () => {
               closable
               onClose={(e) => {
                 e.preventDefault();
-
+                dispatch(removeValue({ key: item?.key, value: item?.value }));
               }}
             >
-              {item?.value}
+              {item?.key}:
+              <b>
+                {item?.value}
+              </b>
+
             </Tag>
           ))
         }
+
       </div>
 
       <div className={classes.catalog}>
         <aside>
           <div>
-            <Button onClick={() => dispatch(clearFilters({ id: Number(id) }))}>
+            {/* <Button onClick={() => dispatch(clearFilters({ id: Number(id) }))}>
               сбросить фильтры
-            </Button>
+            </Button> */}
           </div>
 
           <div>
