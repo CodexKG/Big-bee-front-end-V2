@@ -8,15 +8,16 @@ import Col_2 from "./Col_2/Col_2";
 import { Promotion } from "Components";
 import { api } from "api";
 import { useAppDispatch, useAppSelector } from "store/hook";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchProductById } from "store/reducers/producRedusers";
 import axios from "axios";
 import { fetchBanners } from "store/reducers/BannerReducesr";
+import { clearFilters } from "store/slices/WindowSlice";
 
 const SinglePageProduct: FC = () => {
     const { id } = useParams()
     const { selectedProduct } = useAppSelector((state) => state.produckt)
-
+    const navigate = useNavigate()
     const { data, status } = useAppSelector((state) => state.baner)
 
     const dispatch = useAppDispatch()
@@ -46,22 +47,16 @@ const SinglePageProduct: FC = () => {
 
             <div className={classes.singlePage}>
                 <div className={classes.singlePage_nav}>
-                    <button className={classes.singlePage_nav_btn}>
-                        Электроника
+                    {selectedProduct?.breadcrumbs[0]?.map((item: { id: number, title: string }) => (<button key={item.id} onClick={() => {
+                        navigate(`/catalog/${item.id}`)
+                        dispatch(clearFilters({ id: Number(item.id) }))
+                    }} className={classes.singlePage_nav_btn}>
+                        {item.title}
+
                         <img src={arrowIcon} alt="" />
-                    </button>
-                    <button className={classes.singlePage_nav_btn}>
-                        Смартфоны
-                        <img src={arrowIcon} alt="" />
-                    </button>
-                    <button className={classes.singlePage_nav_btn}>
-                        Мобильные телефоны
-                        <img src={arrowIcon} alt="" />
-                    </button>
-                    <button className={classes.singlePage_nav_btn}>
-                        Apple
-                        <img src={arrowIcon} alt="" />
-                    </button>
+                    </button>))}
+
+
                 </div>
 
                 <div className={classes.singlePage_top_row}>

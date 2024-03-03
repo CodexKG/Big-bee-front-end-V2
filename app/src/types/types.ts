@@ -87,6 +87,7 @@ export interface SingleProduct {
     length: null; // Assuming 'null' as the only type since no other type is visible
     old_price: number;
     price: number;
+    breadcrumbs: { id: number, title: string }[][]
     product_attributes: Array<{
         key: string;
         value: string;
