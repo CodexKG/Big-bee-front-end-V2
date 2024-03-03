@@ -15,7 +15,7 @@ import { clearFilters, setBredCrumps, setFilters } from 'store/slices/WindowSlic
 import Protected from 'routes/Protected/Protected';
 import { deleteCookie } from 'helpers/cookies';
 import { fetchSettings } from 'store/reducers/settingsReducers';
-import { getBredCrumps } from 'helpers/getBreadCrumps';
+import { findCategoryById, getBredCrumps } from 'helpers/getBreadCrumps';
 
 
 const HeaderComponent: React.FC = () => {
@@ -88,6 +88,7 @@ const HeaderComponent: React.FC = () => {
                             navigate(`/catalog/${el.id}`)
                             onClose()
                             dispatch(setBredCrumps((getBredCrumps(children[category]?.title, item.title, el.title))))
+                            console.log('test',findCategoryById(el.id, children[category]));
                         }} key={el.id}>{el.title}</p>
 
                     )}
@@ -99,6 +100,7 @@ const HeaderComponent: React.FC = () => {
         'failed': 'samthing went wrong'
 
     }
+
 
 
 
