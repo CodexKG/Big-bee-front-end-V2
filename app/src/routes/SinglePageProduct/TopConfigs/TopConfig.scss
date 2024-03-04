@@ -3,3 +3,22 @@
         color: black !important;
     }
 }
+
+.config {
+    .ant-radio-group {
+        display: flex !important;
+    }
+
+
+
+    .ant-radio-wrapper .ant-radio {
+        opacity: 0 !important;
+    }
+}
+
+.redioGroup {
+    .ant-radio-checked .ant-radio-inner {
+        border: 5px solid black !important;
+
+    }
+}

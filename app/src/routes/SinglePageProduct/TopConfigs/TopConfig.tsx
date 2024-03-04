@@ -40,6 +40,8 @@ const TopConfig: FC = () => {
         }));
     };
 
+
+
     useEffect(() => {
         const array = []
         for (const key in selectedConfigs) {
@@ -71,17 +73,23 @@ const TopConfig: FC = () => {
                                         <span className={classes.config_value}></span>
                                     </p>
                                     <div className={classes.config_row}>
-                                        {el.id === 4 ? el.values.map((vl) =>
-                                            <div
-                                                style={{ background: `${vl.title}` }}
-                                                className={classes.config_color}></div>
-                                        ) : <div className={classes.config_row}>
-                                            <Radio.Group onChange={(e) => onChange(e, `${el.id}`)} className="redioGroup" defaultValue={el.values[0].title} size="large">
-                                                {el.values.map((vl) =>
-                                                    <Radio.Button value={vl.title}>{vl.title}</Radio.Button>
-                                                )}
-                                            </Radio.Group>
-                                        </div>
+                                        {el.id === 4 ?
+                                            <div className='config'>
+                                                <Radio.Group onChange={(e) => onChange(e, `${el.id}`)} className="redioGroup" defaultValue={el.values[0].title} size="large">
+                                                    {el.values.map((vl) =>
+                                                        <Radio className={classes.config_color} style={selectedConfigs[4] === vl.title ? { background: `${vl.title}`, border: `2px solid #F5C423` } : { background: `${vl.title}` }} value={vl.title}></Radio>
+                                                    )}
+                                                </Radio.Group>
+                                            </div>
+
+                                            :
+                                            <div className={classes.config_row}>
+                                                <Radio.Group onChange={(e) => onChange(e, `${el.id}`)} className="redioGroup" defaultValue={el.values[0].title} size="large">
+                                                    {el.values.map((vl) =>
+                                                        <Radio.Button value={vl.title}>{vl.title}</Radio.Button>
+                                                    )}
+                                                </Radio.Group>
+                                            </div>
                                         }
                                     </div>
                                 </div >

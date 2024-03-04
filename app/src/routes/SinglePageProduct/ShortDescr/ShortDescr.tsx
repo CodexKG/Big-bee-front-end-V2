@@ -22,42 +22,7 @@ const ShortDescr: FC = () => {
                     </div>
                 ))
             }
-{/*             
-            // <div className={classes.short_config}>
-            //     <p className={classes.short_name}>Экран</p>
-            //     <div className={classes.short_config_line}></div>
-            //     <p className={classes.short_value}>6.1" (2556x1179) OLED</p>
-            // </div>
 
-            // <div className={classes.short_config}>
-            //     <p className={classes.short_name}>Память</p>
-            //     <div className={classes.short_config_line}></div>
-            //     <p className={classes.short_value}>встроенная 128 ГБ</p>
-            // </div>
-
-            // <div className={classes.short_config}>
-            //     <p className={classes.short_name}>Фото</p>
-            //     <div className={classes.short_config_line}></div>
-            //     <p className={classes.short_value}>двойная камера, основная 48 МП</p>
-            // </div>
-
-            // <div className={classes.short_config}>
-            //     <p className={classes.short_name}>Процессор</p>
-            //     <div className={classes.short_config_line}></div>
-            //     <p className={classes.short_value}>Apple A16 Bionic</p>
-            // </div>
-
-            // <div className={classes.short_config}>
-            //     <p className={classes.short_name}>SIM-карты</p>
-            //     <div className={classes.short_config_line}></div>
-            //     <p className={classes.short_value}>Dual nano SIM</p>
-            // </div>
-
-            // <div className={classes.short_config}>
-            //     <p className={classes.short_name}>Операционная система</p>
-            //     <div className={classes.short_config_line}></div>
-            //     <p className={classes.short_value}>iOS 17</p>
-            // </div> */}
 
             <div className={classes.short_links}>
                 <p>
