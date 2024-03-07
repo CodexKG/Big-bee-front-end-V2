@@ -7,8 +7,6 @@ import { useAppDispatch } from 'store/hook';
 import { registerAsync } from 'store/reducers/authRedusers';
 import { fetchCartItems } from 'store/reducers/cartRedusers';
 import logo from "../../assets/icon/logo.svg"
-import { transferCart } from 'helpers/transferCart';
-
 const SignUp: React.FC = () => {
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState(false);

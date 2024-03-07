@@ -1,5 +1,5 @@
 import { getCookie } from "helpers/cookies";
-import { FC, ReactElement, ReactNode } from "react";
+import { FC, ReactElement } from "react";
 
 interface ProtectedProps {
     children: ReactElement;

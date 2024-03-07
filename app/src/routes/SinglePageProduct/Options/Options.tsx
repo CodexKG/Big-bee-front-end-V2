@@ -2,6 +2,7 @@ import { FC } from "react";
 import classes from './Options.module.scss';
 import moreIcon from './SVG.svg';
 import { useAppSelector } from "store/hook";
+import { Link } from "react-router-dom";
 
 const Options: FC = () => {
     const { selectedProduct } = useAppSelector((state) => state.produckt)
@@ -19,9 +20,9 @@ const Options: FC = () => {
 
 
 
-            <a href="#" className={classes.options_value_blue}>Все характеристики <img src={moreIcon} alt="" /></a>
+            <Link to="#" className={classes.options_value_blue}>Все характеристики <img src={moreIcon} alt="" /></Link>
             <p className={classes.options_text}>Перед покупкой уточняйте характеристики и комплектацию у продавца.</p>
-            <a href="#" className={classes.options_complain}>Пожаловаться на товар</a>
+            <Link to="#" className={classes.options_complain}>Пожаловаться на товар</Link>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 
 import { CancelToken } from "axios";
 import { instance } from "./index";
-import { OrderPlacing, ProductData, SingleProduct } from 'types/types';
+import { OrderPlacing } from 'types/types';
 import accessToken from "service";
 
 const orders = (data: OrderPlacing, sourceToken?: CancelToken) =>

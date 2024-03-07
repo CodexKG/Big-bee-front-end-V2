@@ -1,7 +1,6 @@
 import { CancelToken } from "axios";
 import { instance } from "./index";
 import { ProductData, SingleProduct } from "types/types";
-import { FilterParams } from "store/models/WindowTypes";
 import accessToken from "service";
 
 //product
@@ -27,8 +26,8 @@ const getProductsById = (config?: string, id?: number, sourceToken?: CancelToken
     cancelToken: sourceToken,
   });
 
-const getProduct = (id: number, sourceToken?: CancelToken) =>
-  instance.get(`/products/products/${id}`, { cancelToken: sourceToken });
+// const getProduct = (id: number, sourceToken?: CancelToken) =>
+//   instance.get(`/products/products/${id}`, { cancelToken: sourceToken });
 
 const getProductBestSellers = (sourceToken?: CancelToken) =>
   instance.get(`/products/bestsellers/`, { cancelToken: sourceToken });
@@ -62,7 +61,6 @@ const endpoints = {
   getFavoriteProducts,
   getForYouRandomProducts,
   getPromotionRandomProducts,
-
   getProductsofDay,
 };
 export default endpoints;

@@ -1,10 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
 import { CancelToken } from "axios";
-import { Product, ProductData, ProductPopular, SingleProduct } from "../../types/types";
+import { ProductData, ProductPopular, SingleProduct } from "../../types/types";
 import { api } from "../../api";
-import { FilterParams } from "store/models/WindowTypes";
-
 
 
 export const fetchProducts = createAsyncThunk<ProductData, { cancelToken?: CancelToken, shop?: string, limit?: number, offset?: number, search?: string }, { rejectValue?: string }>(

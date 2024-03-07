@@ -4,14 +4,10 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "store/hook";
 import { fetchProductById } from "store/reducers/producRedusers";
 import axios from "axios";
-import Item from "antd/es/list/Item";
 import './TopConfig.scss'
 import { Radio, RadioChangeEvent } from "antd";
 import { createQueryString } from "helpers/params";
-interface ConfigItem {
-    id: number;
-    [key: string]: any;
-}
+
 const TopConfig: FC = () => {
 
     const dispatch = useAppDispatch();

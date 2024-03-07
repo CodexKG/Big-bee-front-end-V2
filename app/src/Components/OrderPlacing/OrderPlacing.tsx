@@ -7,11 +7,10 @@ import { fetchCartItems } from "store/reducers/cartRedusers";
 import { getCookie } from "helpers/cookies";
 import axios from "axios";
 import { api } from "api";
-import { json } from "stream/consumers";
 
 const OrderPlacing: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { data, status } = useAppSelector((state) => state.cart)
+    const { data } = useAppSelector((state) => state.cart)
     const [modal, contextHolder] = Modal.useModal();
     const user_id = Number(getCookie('user_id'));
     useEffect(() => {

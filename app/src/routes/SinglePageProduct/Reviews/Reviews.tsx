@@ -7,13 +7,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import { fetchProductById } from "store/reducers/producRedusers";
-import { Rate, Button, Modal, Form, Input, Flex, Card, Select, message } from 'antd';
+import { Rate, Button, Modal, Form, Input, Card, Select, message } from 'antd';
 import { fetchAddReview } from "store/reducers/reviewsReducers";
 import { getCookie } from "helpers/cookies";
 import TextArea from "antd/es/input/TextArea";
 import Protected from "routes/Protected/Protected";
 import { api } from "api";
-import accessToken from "service";
 interface FormValues {
     text: string;
     stars: number;
@@ -30,6 +29,7 @@ const Reviews: FC = () => {
     const { id } = useParams();
     const [flag, setFlag] = useState(false);
     const [star, setStar] = useState(0);
+    
     const product_id = Number(id)
     const [form] = Form.useForm();
 
@@ -47,7 +47,7 @@ const Reviews: FC = () => {
 
 
     const onFinishFailed = (errorInfo: any) => {
-     
+
     };
 
     type FieldType = {
@@ -96,7 +96,7 @@ const Reviews: FC = () => {
             await api.addLike(idd)
             dispatch(fetchProductById({ id: Number(id), cancelToken: source.token }))
         } catch (error: any) {
-          
+
 
             message.error(error?.response?.status === 401 ? (<Button onClick={() => navigate('/login')}>Авторизуйтесь</Button>) : 'error onLike')
         }

@@ -2,7 +2,7 @@ import { Button, Checkbox } from "antd";
 import { FC, useState } from "react";
 import classes from './CheckBoxGroup.module.scss'
 import { useAppDispatch, useAppSelector } from "store/hook";
-import { addAttribute, removeValue, setAtribute } from "store/slices/WindowSlice";
+import { addAttribute, removeValue } from "store/slices/WindowSlice";
 import { useQuery } from "helpers/params";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 type CheckboxOption = {
@@ -47,9 +47,10 @@ const ExpandableCheckboxGroup: FC<ExpandableCheckboxGroupProps> = ({ options, ti
 
     return (
         <div>
-            <Checkbox.Group value={parsToCheckboxValue(selectedValues)}  onChange={onChange} style={{ flexDirection: 'column', gap: '12px' }}>
+            
+            <Checkbox.Group value={parsToCheckboxValue(selectedValues)} onChange={onChange} style={{ flexDirection: 'column', gap: '12px' }}>
                 {visibleOptions.map(option => (
-                    <Checkbox  className={classes.Checkbox} key={option} value={option}>
+                    <Checkbox className={classes.Checkbox} key={option} value={option}>
                         {option}
                     </Checkbox>
                 ))}

@@ -3,6 +3,7 @@ import Salesman from "../Salesman/Salesman";
 import singleClass from '../SinglePage.module.scss';
 import { useAppSelector } from "store/hook";
 import { getDiscount } from "helpers/getDiscount";
+import { Link } from "react-router-dom";
 
 const SinglePageTop2: FC = () => {
     const { selectedProduct } = useAppSelector((state) => state.produckt)
@@ -25,7 +26,7 @@ const SinglePageTop2: FC = () => {
             }
 
 
-            <a href="#" className={singleClass.singlePage_more_link}>Все 91 предложения</a>
+            <Link to="#" className={singleClass.singlePage_more_link}>Все 91 предложения</Link>
         </div>
     )
 }

@@ -1,7 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
 import { CancelToken } from "axios";
-import { Banner } from "store/models/BannersType";
 import { api } from "../../api/";
 
 

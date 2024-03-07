@@ -2,7 +2,6 @@ import { FC, useEffect } from "react";
 import classes from './SinglePage.module.scss';
 import arrowIcon from './icons/arrow-icon.svg';
 import wishListIcon from './icons/wishlist-icon.svg';
-import SinglePageTop from "./SingleTop/SinglePageTop";
 import Col_1 from "./Col_1/Col_1";
 import Col_2 from "./Col_2/Col_2";
 import { Promotion } from "Components";
@@ -18,7 +17,6 @@ const SinglePageProduct: FC = () => {
     const { id } = useParams()
     const { selectedProduct } = useAppSelector((state) => state.produckt)
     const navigate = useNavigate()
-    const { data, status } = useAppSelector((state) => state.baner)
 
     const dispatch = useAppDispatch()
     useEffect(() => {
