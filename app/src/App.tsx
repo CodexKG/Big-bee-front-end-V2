@@ -19,7 +19,7 @@ function App() {
       <Route path='/signUp' element={<SignUp />} />
       <Route path='/' element={<Main />}>
         <Route index element={<MainPage />} />
-        <Route path='/catalog/:id' element={<Suspense fallback={<div>Loading...</div>}>
+        <Route path='/catalog/:id' element={<Suspense fallback={<div>Loading....</div>}>
           <Catalog />
         </Suspense>} />
         <Route path='/favorites' element={<Favorites />} />
