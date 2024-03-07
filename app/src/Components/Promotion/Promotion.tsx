@@ -75,7 +75,7 @@ const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
     );
   }
   if (status === "rejected") {
-    return <Title level={1}>Произошла ошибка</Title>;
+    return <Title level={1}></Title>;
   }
   return (
     <section className={classes.promotion + " promotion"}>

@@ -1,10 +1,9 @@
 import { Button, Checkbox } from "antd";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import classes from './CheckBoxGroup.module.scss'
 import { useAppDispatch, useAppSelector } from "store/hook";
 import { addAttribute, removeValue, setAtribute } from "store/slices/WindowSlice";
 import { useQuery } from "helpers/params";
-import { useLocation } from "react-router-dom";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 type CheckboxOption = {
     key: string;
@@ -32,17 +31,15 @@ const ExpandableCheckboxGroup: FC<ExpandableCheckboxGroupProps> = ({ options, ti
     const visibleOptions = expanded ? options : options.slice(0, 5);
 
     const onChange = (checkedList: CheckboxValueType[]) => {
-        // Формируем список ключей, которые уже выбраны для этой категории
+
         const selectedKeys = selectedValues
             .filter((item: CheckboxOption) => item.key === title)
             .map((item: CheckboxOption) => item.value);
 
-        // Удаляем все значения для этой категории
         selectedKeys.forEach((value: any) => {
             dispatch(removeValue({ key: title, value }));
         });
 
-        // Теперь добавляем обратно только те, что были выбраны
         checkedList.forEach(value => {
             dispatch(addAttribute({ key: title, value: String(value) }));
         });

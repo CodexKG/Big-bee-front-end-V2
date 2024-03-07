@@ -11,10 +11,11 @@ import { Categories } from 'types/types';
 import { setHoveredItem } from 'store/slices/categorySlice';
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderSceleton from 'Components/Skeleton/HeaderSkeleton';
-import { clearFilters, setFilters } from 'store/slices/WindowSlice';
+import { clearFilters, setBredCrumps, setFilters } from 'store/slices/WindowSlice';
 import Protected from 'routes/Protected/Protected';
 import { deleteCookie } from 'helpers/cookies';
 import { fetchSettings } from 'store/reducers/settingsReducers';
+import { findCategoryById, getBredCrumps } from 'helpers/getBreadCrumps';
 
 
 const HeaderComponent: React.FC = () => {
@@ -57,8 +58,11 @@ const HeaderComponent: React.FC = () => {
     const handleMouseEnter = (key: string) => {
         const source = axios.CancelToken.source();
         if (!children[category]) {
+
+
             dispatch(fetchCategoriesById({ cancelToken: source.token, id: +key })).then((res: any) => {
                 dispatch(setHoveredItem(res.payload));
+                // getBredCrumps(res.payload, 18)
             });
         }
         setCategory(+key);
@@ -83,6 +87,8 @@ const HeaderComponent: React.FC = () => {
                             dispatch(setFilters({ category: el.id }))
                             navigate(`/catalog/${el.id}`)
                             onClose()
+                            dispatch(setBredCrumps((getBredCrumps(children[category]?.title, item.title, el.title))))
+                            console.log('test',findCategoryById(el.id, children[category]));
                         }} key={el.id}>{el.title}</p>
 
                     )}
@@ -94,6 +100,9 @@ const HeaderComponent: React.FC = () => {
         'failed': 'samthing went wrong'
 
     }
+
+
+
 
     return (
 

@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { DefaultButton } from "Components/UI";
 import { HeartOutlined } from "@ant-design/icons";
 import { numberWithSpaces } from "helpers";
-
 import { CarouselRef } from "antd/es/carousel";
 import { getDiscount } from "helpers/getDiscount";
 interface ICatalogProductCart {

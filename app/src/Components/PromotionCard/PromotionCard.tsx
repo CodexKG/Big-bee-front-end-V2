@@ -30,12 +30,13 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
   const dispatch = useAppDispatch();
   const { Title, Text } = Typography;
   const carouselRef = useRef<CarouselRef>(null);
+  const accessToken = getCookie("access_token");
 
   const imgHover = (index: number) => {
     carouselRef.current?.goTo(index, true);
   };
   const add_item = async () => {
-    if (getCookie('access_token')) {
+    if (accessToken) {
       try {
         const cart_id = Number(getCookie('cart_id'))
         await dispatch(addCartItem({ cart: cart_id, product_id: id, quantity: 1 }))
@@ -63,7 +64,6 @@ const PromotionCard: React.FC<IPromotionCard> = (props) => {
       await dispatch(addLocalCartItem({ cartItem: cart_info }))
     }
   }
-  const accessToken = getCookie("access_token");
   const onFavorites = async () => {
     if (!accessToken) {
       message.open({

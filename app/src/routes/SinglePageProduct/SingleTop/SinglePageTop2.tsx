@@ -1,7 +1,6 @@
 import { FC } from "react";
 import Salesman from "../Salesman/Salesman";
 import singleClass from '../SinglePage.module.scss';
-import classes from './SingleTop.module.scss';
 import { useAppSelector } from "store/hook";
 import { getDiscount } from "helpers/getDiscount";
 
@@ -21,6 +20,7 @@ const SinglePageTop2: FC = () => {
                     currentPrice={`${item.price} c`}
                     selected={index === 0 ? true : false}
                     delivery_date={item.delivery_date}
+                    selectedProduct={selectedProduct}
                 />)
             }
 
