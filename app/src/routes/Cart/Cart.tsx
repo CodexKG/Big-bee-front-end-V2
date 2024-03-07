@@ -7,6 +7,7 @@ interface CartProps {
 const Cart: React.FC<CartProps> = () => {
     return (
         <div>
+            
             <CartComponent />
         </div>
     );
