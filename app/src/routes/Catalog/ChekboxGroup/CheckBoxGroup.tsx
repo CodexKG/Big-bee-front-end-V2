@@ -47,6 +47,7 @@ const ExpandableCheckboxGroup: FC<ExpandableCheckboxGroupProps> = ({ options, ti
 
     return (
         <div>
+            
             <Checkbox.Group value={parsToCheckboxValue(selectedValues)} onChange={onChange} style={{ flexDirection: 'column', gap: '12px' }}>
                 {visibleOptions.map(option => (
                     <Checkbox className={classes.Checkbox} key={option} value={option}>
