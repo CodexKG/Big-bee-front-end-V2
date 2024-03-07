@@ -1,4 +1,3 @@
-import { setBredCrumps } from "store/slices/WindowSlice";
 
 
 export function getBredCrumps(title: string, subTitle: string, subSubTitle?: string) {

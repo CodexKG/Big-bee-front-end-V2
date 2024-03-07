@@ -17,7 +17,7 @@ import { fetchSettings } from 'store/reducers/settingsReducers';
 import axios from "axios"
 
 const FooterComponent: FC = () => {
-    const { data, children, status } = useAppSelector((state) => state.category)
+    const { children, status } = useAppSelector((state) => state.category)
     const { settings } = useAppSelector((state) => state.window)
     const [category, setCategory] = useState<number>(1)
     const navigate = useNavigate()
@@ -105,11 +105,11 @@ const FooterComponent: FC = () => {
                         <img src={instagramLogo} height={40} alt="instagramLogo" />
                     </Link>
                     <Link to={settings.telegram}>
-                        
+
                         <img src={telegramLogo} height={40} alt="telegramLogo" />
                     </Link>
                     <Link to={settings.whatsapp}>
-                        
+
                         <img src={whatsappLogo} height={40} alt="whatsappLogo" />
                     </Link>
                 </div>

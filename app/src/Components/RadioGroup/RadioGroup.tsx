@@ -1,4 +1,4 @@
-import { Button, Checkbox, Radio, RadioChangeEvent, Space } from "antd";
+import { Button, Radio, RadioChangeEvent, Space } from "antd";
 import { FC, useState } from "react";
 import classes from './RadioGroup.module.scss'
 interface Option {

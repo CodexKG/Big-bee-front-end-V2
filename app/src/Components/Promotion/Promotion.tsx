@@ -9,10 +9,7 @@ import { IPromotionCard } from "interfaces";
 import { sliceText } from "helpers/sliceText";
 import { PromotionSkeleton } from "Components/Skeleton";
 const { Text } = Typography;
-interface Data {
-  data: IPromotionCard[];
-  status: number;
-}
+
 interface IPromotion {
   title?: string;
   getCarts: () => any;
@@ -43,7 +40,7 @@ const ArrowRight: React.FC<any> = ({ currentSlide, slideCount, ...props }) => {
 
 const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
   const [cards, setCards] = useState([]);
-  const [status , setStatus] = useState<Status>("pending");
+  const [status, setStatus] = useState<Status>("pending");
   const getProducts = async () => {
     setStatus("pending");
     try {
@@ -97,10 +94,10 @@ const Promotion: React.FC<IPromotion> = ({ title, getCarts }) => {
           infinite={false}
           arrows={true}
           swipeEvent={(swiper) => {
-       
+
           }}
         >
-          {cards.map((item: IPromotionCard,index) => {
+          {cards.map((item: IPromotionCard, index) => {
             return (
               <PromotionCard
                 key={index}

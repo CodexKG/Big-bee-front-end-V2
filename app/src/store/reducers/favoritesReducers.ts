@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { CancelToken } from "axios";
 import {
-  AddFavoriteProduct,
   FavoriteProductData,
   FavoriteProductPost
 } from "../../store/models/FavoriteTypes";

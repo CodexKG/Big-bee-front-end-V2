@@ -1,6 +1,5 @@
 import { CancelToken } from 'axios';
 import { instance } from './index'
-import { Categories, ProductData, ShopData } from 'types/types';
 import { ReviewsData, Reviews } from 'store/models/ReviewTypes';
 import accessToken from 'service';
 

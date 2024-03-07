@@ -5,7 +5,7 @@ import { useAppSelector } from "store/hook";
 
 const ADBlock: FC = () => {
 
-    const { data, status } = useAppSelector((state) => state.baner)
+    const { data } = useAppSelector((state) => state.baner)
     return (
         <div className={classes.adblock}>
             <a href="#" className={classes.adblock_link_blue}>Пожаловаться на описание товара</a>

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Drawer, Select, Skeleton, Space } from 'antd';
 import classes from './Header.module.scss'
-import logo from "../../assets/icon/logo.svg";
 import { CloseOutlined, HeartOutlined, SearchOutlined, ShoppingCartOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'store/hook';
 import axios from 'axios';

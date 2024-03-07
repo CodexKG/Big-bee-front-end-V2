@@ -24,7 +24,7 @@ const CartComponent: React.FC<Props> = () => {
     const source = axios.CancelToken.source();
     const user_id = Number(getCookie('user_id'));
     const is_auth = getCookie('access_token')
-
+    setDelivery(0)
     useEffect(() => {
         dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));
     }, []);
@@ -41,15 +41,15 @@ const CartComponent: React.FC<Props> = () => {
     const deleteCheckedItems = () => {
         if (is_auth) {
             let cart_items = data.cart_items.filter(item => item.is_selected !== false)
-            if(is_all_check){
-                dispatch(deleteCartItems({id:data.id}))
-            }else dispatch(deleteCheckedCartItems({ cart_items: cart_items }))
+            if (is_all_check) {
+                dispatch(deleteCartItems({ id: data.id }))
+            } else dispatch(deleteCheckedCartItems({ cart_items: cart_items }))
         } else {
-            if(is_all_check){
-                dispatch(deleteCartItems({id:data.id}))
-            }else {
-            dispatch(deleteCheckedCartToLocalStorage())
-            dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));
+            if (is_all_check) {
+                dispatch(deleteCartItems({ id: data.id }))
+            } else {
+                dispatch(deleteCheckedCartToLocalStorage())
+                dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));
             }
         }
     }

@@ -5,13 +5,11 @@ import CategoryCardComponent from '../CategoryCardComponent/CategoryCardComponen
 import { Carousel } from "antd";
 import { CaretLeftFilled, CaretRightFilled, } from "@ant-design/icons";
 import { useAppDispatch, useAppSelector } from "store/hook";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { fetchPopularCategories } from "store/reducers/categoryReduser";
 
 const CategoryComponent: React.FC = () => {
   const { popular } = useAppSelector((state) => state.category)
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -22,39 +20,6 @@ const CategoryComponent: React.FC = () => {
     };
   }, []);
 
-  const categories = [
-    {
-      id: 1,
-      title: 'Наушники',
-      price: 'от 14 990 с',
-      image: 'https://gadgetstore.kz/wa-data/public/shop/products/42/03/342/images/1873/1873.970.jpeg'
-    },
-    {
-      id: 2,
-      title: 'Телефоны',
-      price: 'от 94 990 с',
-      image: 'https://www.myphone.kg/files/media/22/22499.png'
-    },
-    {
-      id: 3,
-      title: 'Ноутбуки',
-      price: 'от 74 990 с',
-      image: 'https://abi.kg/upload/iblock/fb3/ghpwpxfzumw64fazw1i0f9n72h8vrc9j.jpg   '
-    },
-    {
-      id: 4,
-      title: 'Фото и видео',
-      price: 'от 74 990 с',
-      image: 'https://s1.iconbird.com/ico/2013/7/391/w512h51213727793707dside.png'
-    },
-  ]
-  const carouselSettings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3.5,
-    slidesToScroll: 1
-  };
 
   return (
     <div className={classes.category}>

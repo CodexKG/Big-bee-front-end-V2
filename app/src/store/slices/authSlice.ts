@@ -1,5 +1,5 @@
 // authSlice.ts
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../index';
 import { loginAsync } from 'store/reducers/authRedusers';
 

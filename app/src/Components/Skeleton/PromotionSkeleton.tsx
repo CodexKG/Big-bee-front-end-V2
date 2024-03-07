@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
-import { Skeleton, Row, Col, Space } from "antd";
-import { DotChartOutlined, FileImageOutlined } from "@ant-design/icons";
-type SizeType = "default" | "small" | "large";
+import { Skeleton, Row, Space } from "antd";
+import { FileImageOutlined } from "@ant-design/icons";
 const SkeletonImage: FC<any> = ({ styleProps }) => {
   return (
     <Skeleton.Node active style={styleProps}>
@@ -17,7 +16,7 @@ const SkeletonBlock: FC<any> = ({ styleProps }) => {
   );
 };
 const PromotionSkeleton: FC = () => {
-  const [size, setSize] = useState<SizeType>("default");
+
   return (
     <div>
       <SkeletonImage styleProps={{ width: "300px", height: "400px" }} />

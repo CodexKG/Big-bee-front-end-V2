@@ -1,5 +1,4 @@
-import { useAppDispatch } from 'store/hook';
-import { addCartItem, loadCartFromLocalStorage } from 'store/reducers/cartRedusers';
+import { loadCartFromLocalStorage } from 'store/reducers/cartRedusers';
 export function transferCart(cart_id: number, callback: Function) {
     const array: any = loadCartFromLocalStorage()
     for (let i = 0; i < array?.length; i++) {

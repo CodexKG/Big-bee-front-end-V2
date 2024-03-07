@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchFilterProducts, fetchProductById, fetchProductOfDay, fetchProducts } from 'store/reducers/producRedusers';
-import { Product, ProductData, ProductPopular, SingleProduct } from 'types/types';
+import { ProductData, ProductPopular, SingleProduct } from 'types/types';
 
 interface ProductsState {
     data: ProductData;

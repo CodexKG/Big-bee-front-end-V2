@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import classes from './TopOffer.module.scss';
 import { CaretRightOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'store/hook';
-import axios, { CancelToken } from 'axios';
+import axios from 'axios';
 import { fetchProductOfDay } from 'store/reducers/producRedusers';
 
 interface TopOfferProps {
@@ -45,7 +45,7 @@ const TopOffer: React.FC<TopOfferProps> = ({ products_quantity }) => {
         <div key={index} style={{ position: "relative" }} className={`${classes.topOffer_Block} ${classes[dynamicClass]}`}>
           <div className={classes.topOffer_Block_Up}>
             <div className={classes.topOffer_Block_Up_Discount}>
-              <p>Скидка - {getDiscount(product.price, product.old_price ).toFixed(0)}%</p>
+              <p>Скидка - {getDiscount(product.price, product.old_price).toFixed(0)}%</p>
 
             </div>
             <h2 className={classes.topOffer_Block_Up_Title}>{product.title}</h2>
