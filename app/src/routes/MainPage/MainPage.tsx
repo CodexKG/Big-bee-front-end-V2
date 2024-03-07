@@ -21,7 +21,6 @@ const MainPage: FC = () => {
       <Protected fallback={<div></div>}>
         <Promotion title="Специально для вас" getCarts={api.getForYouRandomProducts} />
       </Protected>
-      hello
       <Promotion title="Хиты продаж" getCarts={api.getPromotionRandomProducts} />
       <TopOffer products_quantity={2} />
     </div >
