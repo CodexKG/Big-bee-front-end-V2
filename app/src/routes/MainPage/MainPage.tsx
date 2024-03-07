@@ -12,7 +12,7 @@ import Protected from "routes/Protected/Protected";
 const MainPage: FC = () => {
   return (
     <div className={classes.main}>
-      <MainCaruselComponent />
+      <MainCaruselComponent />.
       <CompanyListComponent />
       <TopOffer products_quantity={3} />
       <Advantages />
