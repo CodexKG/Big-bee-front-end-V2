@@ -10,7 +10,6 @@ import SubWithNews from "./SubscriptionsWithNews/SubWithNews"
 import CompanyListComponent from "./CompanyListComponent/CompanyListComponent";
 import MainCaruselComponent from "./MainCaruselComponent/MainCaruselComponent";
 import CategoryComponent from './CategoryComponent/CategoryComponent'
-import ExpandableCheckboxGroup from './ChekboxGroup/CheckBoxGroup'
 import ExpandableRadioGroup from './RadioGroup/RadioGroup'
 
-export { ExpandableRadioGroup,Advantages, OrderPlacing, ExpandableCheckboxGroup, HeaderComponent, Login, SignUp, PromotionCard, Promotion, SubWithNews, TopOffer, CompanyListComponent, MainCaruselComponent, CategoryComponent }
+export { ExpandableRadioGroup,Advantages, OrderPlacing, HeaderComponent, Login, SignUp, PromotionCard, Promotion, SubWithNews, TopOffer, CompanyListComponent, MainCaruselComponent, CategoryComponent }

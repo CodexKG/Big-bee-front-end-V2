@@ -1,6 +1,5 @@
 import classes from "./Catalog.module.scss";
-import { FC, useEffect, useRef, useState } from "react";
-import CatalogProductCard from "Components/CatalogProductCard/CatalogProductCard";
+import { FC, useEffect, useRef } from "react";
 import { List, InputNumber, Select, Breadcrumb, Skeleton, Button, Tag } from "antd";
 import { useAppDispatch, useAppSelector } from "store/hook";
 import axios from "axios";
@@ -9,7 +8,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { createQueryString, parseQueryString } from "helpers/params";
 import { clearFilters, removeValue, setFilters, setOffset, setParams } from "store/slices/WindowSlice";
 import { fetchCategoriesById } from "store/reducers/categoryReduser";
-import { ExpandableCheckboxGroup, ExpandableRadioGroup } from "Components";
+import CatalogProductCard from "./CatalogProductCard/CatalogProductCard";
+import ExpandableCheckboxGroup from "./ChekboxGroup/CheckBoxGroup";
 type SortOption = {
   value: string;
   order: 'asc' | 'desc';
