@@ -26,8 +26,11 @@ jobs:
     - name: Build
       run: |
         cd app
+        echo "Current directory: $(pwd)"
+        ls -la
         npm run build
-
+        echo "Build complete"
+   
     - name: Deploy to server
       run: |
         cd app
