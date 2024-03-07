@@ -55,6 +55,11 @@ export interface Categories {
     title: string,
     slug: string,
     subcategories: Categories[]
+    breadcrumbs: {
+        id: number
+        slug: string
+        title: string
+    }[]
     category_attributes: { [key: string]: string[] };
 }
 

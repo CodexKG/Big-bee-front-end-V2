@@ -52,7 +52,7 @@ const sortOptions: SortOption[] = [
 const Catalog: FC = () => {
   const { data, laoding } = useAppSelector((state) => state.produckt)
   const atributes = useAppSelector((state) => state.category.children)
-  const { filters, bredCrumps } = useAppSelector((state) => state.window)
+  const { filters } = useAppSelector((state) => state.window)
   const { id } = useParams()
 
   const dispatch = useAppDispatch()
@@ -128,7 +128,7 @@ const Catalog: FC = () => {
     dispatch(setFilters({ ordering: value }))
 
   };
-  console.log(bredCrumps);
+
 
   return (
     <div>
@@ -136,12 +136,13 @@ const Catalog: FC = () => {
 
         <div >
           <h1>{atributes[Number(id)]?.title}</h1>
+          {/* {atributes[Number(id)]?.breadcrumbs?.map((item) => <div>{item.title}</div>)} */}
           <Breadcrumb
             style={{ display: 'flex', alignItems: 'center' }}
             separator={<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0156 7.86241C11.1079 7.94127 11.1819 8.03917 11.2327 8.14937C11.2834 8.25958 11.3097 8.37947 11.3097 8.50081C11.3097 8.62214 11.2834 8.74204 11.2327 8.85225C11.1819 8.96245 11.1079 9.06035 11.0156 9.13921L7.26672 12.3522C7.14471 12.4568 6.99524 12.5243 6.83606 12.5465C6.67687 12.5687 6.51464 12.5448 6.36864 12.4776C6.22263 12.4104 6.09897 12.3027 6.01234 12.1673C5.92571 12.0319 5.87973 11.8745 5.87988 11.7138L5.87988 5.28781C5.87987 5.12723 5.92589 4.97001 6.01248 4.83478C6.09907 4.69955 6.22261 4.59198 6.36846 4.5248C6.51431 4.45762 6.67636 4.43365 6.83541 4.45574C6.99446 4.47782 7.14385 4.54503 7.26588 4.64941L11.0156 7.86325V7.86241Z" fill="black" />
             </svg>}
-            items={bredCrumps}
+            items={atributes[Number(id)]?.breadcrumbs}
           />
 
 
