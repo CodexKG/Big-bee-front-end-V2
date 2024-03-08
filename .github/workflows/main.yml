@@ -43,6 +43,6 @@ jobs:
    
     - name: Deploy to server
       run: |
-        sshpass -p $SSH_PASSWORD ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
+        sshpass -p $SSH_PASSWORD ssр ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
       env:
         SSHPASS: ${{ secrets.SERVER_PASSWORD }}
