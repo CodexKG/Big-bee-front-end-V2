@@ -16,7 +16,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18.17.1'
+        node-version: '20.2'
         architecture: 'x64'
 
     - name: Install dependencies
@@ -29,6 +29,7 @@ jobs:
         cd app
         echo "Current directory: $(pwd)"
         ls -la
+        npm -v
         npm run build --loglevel verbose
         echo "Build complete"
    
