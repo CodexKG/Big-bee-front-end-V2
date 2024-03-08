@@ -30,6 +30,7 @@ jobs:
         echo "Current directory: $(pwd)"
         ls -la
         npm -v
+        node -v
         npm run build --loglevel verbose
         echo "Build complete"
    
