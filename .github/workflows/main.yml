@@ -11,36 +11,24 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
+
+    - name: Set CI to false
+      run: echo "CI=false" >> $GITHUB_ENV
 
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18.17.1'
-        architecture: 'x64'
-
-    - name: Install npm
-      run: |
-        npm install -g npm@9.6.7
+        node-version: '18.x'
 
     - name: Install dependencies
-      run: |
-        cd app
-        npm install
+      run: npm install
 
     - name: Build
-      run: |
-        cd app
-        echo "Current directory: $(pwd)"
-        ls -la
-        npm -v
-        node -v
-        npm run build --loglevel verbose
-        echo "Build complete"
-   
+      run: npm run build
+
     - name: Deploy to server
       run: |
-        cd app
         scp -r build/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/var/www/bigbee.mnogosushi.kg/
         ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 'sudo systemctl restart nginx'
       env:
