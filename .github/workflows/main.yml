@@ -43,7 +43,6 @@ jobs:
    
     - name: Deploy to server
       run: |
-        scp -r build/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/var/www/bigbee.mnogosushi.kg/
-        ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 'sudo systemctl restart nginx'
+        sshpass -p $SSH_PASSWORD ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
       env:
         SSHPASS: ${{ secrets.SERVER_PASSWORD }}
