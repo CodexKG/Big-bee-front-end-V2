@@ -40,10 +40,11 @@ jobs:
         node -v
         npm run build --loglevel verbose
         echo "Build complete"
-        
+
     - name: Deploy to server
+      env:
+        SSHPASS: ${{ secrets.SERVER_PASSWORD }}
       run: |
         sudo apt-get install -y sshpass
         sshpass -p $SSH_PASSWORD ssр ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
-      env:
-        SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+     
