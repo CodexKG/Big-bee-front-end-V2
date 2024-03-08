@@ -18,8 +18,32 @@ jobs:
       with:
         node-version: '18.17.1'
         architecture: 'x64'
+
+    - name: Install npm
+      run: |
+        npm install -g npm@9.6.7
+
+    - name: Install dependencies
+      run: |
+        cd app
+        npm install
+
+    - name: Set CI to false
+      run: echo "CI=false" >> $GITHUB_ENV
+
+    - name: Build
+      run: |
+        cd app
+        echo "Current directory: $(pwd)"
+        ls -la
+        npm -v
+        node -v
+        npm run build --loglevel verbose
+        echo "Build complete"
+   
     - name: Deploy to server
       run: |
-        ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
+        scp -r build/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/var/www/bigbee.mnogosushi.kg/
+        ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 'sudo systemctl restart nginx'
       env:
         SSHPASS: ${{ secrets.SERVER_PASSWORD }}
