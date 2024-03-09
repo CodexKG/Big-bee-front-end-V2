@@ -48,9 +48,5 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           #port: ${{ secrets.PORT }}
-          # script: |
-          #   cd /var/www/html/troniex # we move into our app's folder 
-          #   git pull # we pull any changes from git 
-          #   export NVM_DIR=~/.nvm #get the nvm envirorment to run pm commands source ~/.nvm/nvm. sh            
-          #   npm install # we install any missing dependencies npm run build # we build our app
-          #   pm2 reload office-site # we reload the app via PM2
+          script: |
+            ls
