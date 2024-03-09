@@ -54,7 +54,7 @@ jobs:
             git pull
             cd app
             npm run build
-            sudo cp -rf ./build/static/* /var/www/bigbee.mnogosushi.kg/static/
+            sudo cp -rf ./build/* /var/www/bigbee.mnogosushi.kg/
             ls
             sudo systemctl restart nginx
 
