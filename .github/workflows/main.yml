@@ -46,6 +46,6 @@ jobs:
 
       - name: Deploy to server
         run: |
-          /usr/bin/sshpass -p 3gd ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}
+          /usr/bin/sshpass -p 3gd$mHt35KgZ ssh -t ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}
         env:
           SSHPASS: ${{ secrets.SERVER_PASSWORD }}
