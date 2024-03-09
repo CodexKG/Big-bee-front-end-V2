@@ -10,40 +10,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18.17.1'
-        architecture: 'x64'
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.17.1'
+          architecture: 'x64'
 
-    - name: Install npm
-      run: |
-        npm install -g npm@9.6.7
+      - name: Install npm
+        run: |
+          npm install -g npm@9.6.7
 
-    - name: Install dependencies
-      run: |
-        cd app
-        npm install
+      - name: Install dependencies
+        run: |
+          cd app
+          npm install
 
-    - name: Set CI to false
-      run: echo "CI=false" >> $GITHUB_ENV
+      - name: Set CI to false
+        run: echo "CI=false" >> $GITHUB_ENV
 
-    - name: Build
-      run: |
-        cd app
-        echo "Current directory: $(pwd)"
-        ls -la
-        npm -v
-        node -v
-        npm run build --loglevel verbose
-        echo "Build complete"
+      - name: Build
+        run: |
+          cd app
+          echo "Current directory: $(pwd)"
+          ls -la
+          npm -v
+          node -v
+          npm run build --loglevel verbose
+          echo "Build complete"
 
-    - name: Deploy to server
-      run: |
-        sudo apt-get install -y sshpass
-        echo "3gd$mHt35KgZ"
-        sshpass -p 3gd$mHt35KgZ ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
-     
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: Deploy to server
+        run: |
+          /usr/bin/sshpass -p 3gd ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}
+        env:
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
