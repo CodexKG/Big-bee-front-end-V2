@@ -46,5 +46,6 @@ jobs:
         SSHPASS: ${{ secrets.SERVER_PASSWORD }}
       run: |
         sudo apt-get install -y sshpass
+        echo $SSH_PASSWORD
         sshpass -p $SSH_PASSWORD ssр ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
      
