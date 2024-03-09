@@ -16,8 +16,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.17.1'
-          architecture: 'x64'
+          node-version: "18.17.1"
+          architecture: "x64"
 
       - name: Install npm
         run: |
@@ -41,11 +41,16 @@ jobs:
           npm run build --loglevel verbose
           echo "Build complete"
 
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass
-
-      - name: Deploy to server
-        run: |
-          /usr/bin/sshpass -p 3gd$mHt35KgZ ssh -t ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}
-        env:
-          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+      - name: Deploying to Digitalocean droplet
+        uses: appleboy/ssh-action@master # An action made to control Linux servers
+        with: # We set all our secrets here for the action, these won't be shown in the action logs
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${f secrets.SERVER_PASSWORD }}
+          #port: ${{ secrets.PORT }}
+          # script: |
+          #   cd /var/www/html/troniex # we move into our app's folder 
+          #   git pull # we pull any changes from git 
+          #   export NVM_DIR=~/.nvm #get the nvm envirorment to run pm commands source ~/.nvm/nvm. sh            
+          #   npm install # we install any missing dependencies npm run build # we build our app
+          #   pm2 reload office-site # we reload the app via PM2
