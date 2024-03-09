@@ -49,4 +49,6 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           #port: ${{ secrets.PORT }}
           script: |
+            cd Bigbee-front
             ls
+
