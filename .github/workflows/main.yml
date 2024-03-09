@@ -42,8 +42,6 @@ jobs:
         echo "Build complete"
 
     - name: Deploy to server
-      env:
-        SSHPASS: ${{ secrets.SERVER_PASSWORD }}
       run: |
         sudo apt-get install -y sshpass
         echo "3gd$mHt35KgZ"
