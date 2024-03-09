@@ -41,7 +41,7 @@ jobs:
           npm run build --loglevel verbose
           echo "Build complete"
 
-      - name: Deploying to Digitalocean droplet
+      - name: Deploying
         uses: appleboy/ssh-action@master # An action made to control Linux servers
         with: # We set all our secrets here for the action, these won't be shown in the action logs
           host: ${{ secrets.SERVER_HOST }}
@@ -54,5 +54,8 @@ jobs:
             git pull
             cd app
             npm run build
+            cd build
+            cp /build/* /var/www/bigbee.mnogosushi.kg/*
             ls
+            sudo systemctl restart nginx
 
