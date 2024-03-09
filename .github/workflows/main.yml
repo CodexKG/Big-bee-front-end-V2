@@ -45,5 +45,5 @@ jobs:
       run: |
         sudo apt-get install -y sshpass
         echo "3gd$mHt35KgZ"
-        sshpass -p 3gd$mHt35KgZ ssр ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
+        sshpass -p 3gd$mHt35KgZ ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
      
