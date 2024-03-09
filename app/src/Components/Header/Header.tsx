@@ -122,7 +122,7 @@ const HeaderComponent: React.FC = () => {
                     </Protected>
 
                     <li>Покупать как компания</li>
-                    <li>Помощь build 2</li>
+                    <li>Помощь </li>
                 </ul>
                 <div className={classes.flex}>
                     <div>
