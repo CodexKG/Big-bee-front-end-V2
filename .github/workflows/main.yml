@@ -48,4 +48,4 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           #port: ${{ secrets.PORT }}
-          script: bash ./deploy.sh
+          script: bash /home/binniev/Bigbee-front/.github/workflows/deploy.sh
