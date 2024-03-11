@@ -8,3 +8,5 @@ npm run build
 sudo cp -rf ./build/* /var/www/bigbee.mnogosushi.kg/
 ls
 sudo systemctl restart nginx
+
+echo Successfully 

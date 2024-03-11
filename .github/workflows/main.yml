@@ -48,13 +48,4 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           #port: ${{ secrets.PORT }}
-          script: |
-            cd Bigbee-front
-            ls
-            git pull
-            cd app
-            npm run build
-            sudo cp -rf ./build/* /var/www/bigbee.mnogosushi.kg/
-            ls
-            sudo systemctl restart nginx
-
+          script: bash /home/binniev/Bigbee-front/.github/workflows/deploy.sh
