@@ -24,7 +24,7 @@ const CartComponent: React.FC<Props> = () => {
     const source = axios.CancelToken.source();
     const user_id = Number(getCookie('user_id'));
     const is_auth = getCookie('access_token')
-    setDelivery(0)
+  
     useEffect(() => {
         dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));
     }, []);
