@@ -136,7 +136,6 @@ const Catalog: FC = () => {
 
         <div >
           <h1>{atributes[Number(id)]?.title}</h1>
-          {/* {atributes[Number(id)]?.breadcrumbs?.map((item) => <div>{item.title}</div>)} */}
           <Breadcrumb
             style={{ display: 'flex', alignItems: 'center' }}
             separator={<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -144,8 +143,6 @@ const Catalog: FC = () => {
             </svg>}
             items={atributes[Number(id)]?.breadcrumbs}
           />
-
-
         </div>
 
 
@@ -175,17 +172,10 @@ const Catalog: FC = () => {
             </Tag>
           ))
         }
-
       </div>
 
       <div className={classes.catalog}>
         <aside>
-          <div>
-            {/* <Button onClick={() => dispatch(clearFilters({ id: Number(id) }))}>
-              сбросить фильтры
-            </Button> */}
-          </div>
-
           <div>
             <h1 className={classes.title}>Цена, ₽</h1>
             <div className={classes.flex}>
@@ -209,10 +199,8 @@ const Catalog: FC = () => {
           </div>
           <div>
             <h1 className={classes.title}>Срок доставки</h1>
-            {/* <ExpandableRadioGroup options={options} /> */}
           </div>
           {sortRender}
-
         </aside>
         <div className={classes.catalog_block}>
           <div style={{ height: '150px' }}></div>
@@ -243,6 +231,7 @@ const Catalog: FC = () => {
                 price={item.price}
                 old_price={item.old_price}
                 salesman={item.shop_name}
+                product_configurator={item.product_configurator}
                 salesman_img={item.shop_logo}
                 offer={109}
               />

@@ -16,6 +16,15 @@ export interface Product {
     product_images: string[]; // Массив строк с URL-адресами изображений
     price: number;
     currency: string;
+    product_configurator: {
+        id: number,
+        configurator_key: string,
+        key: string,
+        values: {
+            price: number,
+            title: string
+        }[]
+    }[],
     created: string; // Дата в формате строки
     product_attributes: { key: string, value: string }[]
     shop_name: string

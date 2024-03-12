@@ -87,7 +87,7 @@ const HeaderComponent: React.FC = () => {
                             navigate(`/catalog/${el.id}`)
                             onClose()
                             dispatch(setBredCrumps((getBredCrumps(children[category]?.title, item.title, el.title))))
-                            console.log('test',findCategoryById(el.id, children[category]));
+                            console.log('test', findCategoryById(el.id, children[category]));
                         }} key={el.id}>{el.title}</p>
 
                     )}
@@ -171,6 +171,7 @@ const HeaderComponent: React.FC = () => {
                         defaultValue="EN"
                         style={{ width: 65 }}
                         bordered={false}
+                    
                         options={[
                             { value: "EN", label: "EN" },
                             { value: "RU", label: "RU" },

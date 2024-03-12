@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classes from './CartComponent.module.scss'
-import { Flex, Checkbox, Button } from 'antd';
+import { Flex, Checkbox, Button, Spin } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import CartItemComponent from 'Components/CartItemComponent/CartItemComponent';
@@ -24,7 +24,7 @@ const CartComponent: React.FC<Props> = () => {
     const source = axios.CancelToken.source();
     const user_id = Number(getCookie('user_id'));
     const is_auth = getCookie('access_token')
-  
+    
     useEffect(() => {
         dispatch(fetchCartItems({ id: user_id, cancelToken: source.token }));
     }, []);
@@ -70,7 +70,7 @@ const CartComponent: React.FC<Props> = () => {
 
     return (
         <>
-            {status === 'pending' && <div>Loading...</div>}
+            {status === 'pending' && <Spin fullscreen />}
             {data.cart_items.length <= 0 && (
                 <div className={classes.container}>
                     <Flex vertical justify='center' gap={20} align='center' className={classes.cart__empty}>

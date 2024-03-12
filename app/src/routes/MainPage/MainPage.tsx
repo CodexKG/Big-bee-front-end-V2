@@ -16,10 +16,10 @@ const MainPage: FC = () => {
       <CompanyListComponent />
       <TopOffer products_quantity={3} />
       <Advantages />
-      <Promotion title="Акции и скидки" getCarts={api.getProductBestSellers} />
+      <Promotion title="Акции и скидки" getCarts={api.getPromotionRandomProducts} />
       <CategoryComponent />
       <Protected fallback={<div></div>}>
-        <Promotion title="Специально для вас" getCarts={api.getForYouRandomProducts} />
+        <Promotion title="Специально для вас" getCarts={api.getPromotionRandomProducts} />
       </Protected>
       <TopOffer products_quantity={2} />
       <Promotion title="Хиты продаж" getCarts={api.getPromotionRandomProducts} />

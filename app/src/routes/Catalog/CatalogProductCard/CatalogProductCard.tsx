@@ -14,6 +14,15 @@ interface ICatalogProductCart {
   colors: Array<string>;
   characteristics: { key: string | number, value: string | number }[];
   rating: number | null;
+  product_configurator: {
+    id: number,
+    configurator_key: string,
+    key: string,
+    values: {
+      price: number,
+      title: string
+    }[]
+  }[],
   price: number;
   old_price: number;
   salesman: string;
@@ -37,6 +46,7 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
     salesman_img,
     salesman,
     offer,
+    product_configurator,
     id
   } = props;
   const characteristicsKeys: StringKeyObject = Object.keys(characteristics);
@@ -56,6 +66,10 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
     carouselRef.current?.goTo(index, true);
   };
   const navigate = useNavigate()
+
+
+
+
 
   return (
     <section className={classes.catalogProductCard}>
@@ -88,7 +102,7 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
               <div className={classes.carousel_item}>
                 <img src={src.image} alt={title} />
 
-                <div className={classes.carousel_item_discount}>{getDiscount(old_price,price)}%</div>
+                <div className={classes.carousel_item_discount}>{getDiscount(old_price, price)}%</div>
 
               </div>
             );
@@ -98,24 +112,14 @@ const CatalogProductCard: FC<ICatalogProductCart> = (props) => {
       <div className={classes.catalogProductCard_item}>
         <Title onClick={() => navigate(`/product/${id}`)} level={3}>{title}</Title>
         <div className={classes.colors}>
-          {colors.map((color) => {
-            return (
-              <div
-                className={classes.color}
-                style={{ background: color }}
-              ></div>
-            );
-          })}
+          {product_configurator.map((item) => <div className={classes.colors}>
+            {item.id === 4 && item.values.map((value) => <div style={{ background: value.title }} className={classes.color}>
+
+            </div>)}
+          </div>)}
+
         </div>
         <div className={classes.characteristics}>
-          {/* {characteristicsKeys.map((el: string) => {
-            return (
-              <div>
-                <Text className={classes.chctr_title}>{el}</Text>:
-                {characteristics[el as keyof  characteristics]}
-              </div>
-            );
-          })} */}
           {characteristics.map((el) => {
             return (
               <div>

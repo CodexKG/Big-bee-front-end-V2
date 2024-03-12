@@ -27,20 +27,8 @@ type props = {
 
 const Salesman: FC<props> = ({ discount, oldPrice, currentPrice, selected, delivery_date, pickup_available, payment_method, average_rating, review_count, selectedProduct }) => {
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector((state) => state.favorite)
-  const [fav, setFav] = useState(false)
-  const [fav_id, setFavId] = useState(0)
   const is_auth = getCookie('access_token')
   const navigate = useNavigate();
-  const delFav = () => {
-    dispatch(delFavoriteProducts({ id: fav_id }))
-    setFav(!fav)
-    message.open({
-      type: "success",
-      content: "Successfully deleted",
-      onClick: () => navigate("/favorites"),
-    });
-  }
   const add_item = async () => {
     if (is_auth) {
       try {
@@ -70,48 +58,11 @@ const Salesman: FC<props> = ({ discount, oldPrice, currentPrice, selected, deliv
       await dispatch(addLocalCartItem({ cartItem: cart_info }))
     }
   }
-  const onFavorites = async () => {
-    if (!is_auth) {
-      message.open({
-        type: "error",
-        content: "You are not logged in",
-        onClick: () => navigate("/login"),
-      });
-    } else {
-      try {
-        const favorite = await api.addProductToFavorite(selectedProduct.id, +getCookie("user_id"));
-        setFav(!fav)
-        setFavId(favorite.data['id'])
-        message.open({
-          type: "success",
-          content: "Successfully added",
-          onClick: () => navigate("/favorites"),
-        });
-      } catch {
-        setFav(true)
-
-        message.open({
-          type: "success",
-          content: "Продукт уже в избранных",
-          onClick: () => navigate("/favorites"),
-        });
-      }
-    }
-  };
   useEffect(() => {
     const source = axios.CancelToken.source();
-
     dispatch(getFavoriteProducts({ cancelToken: source.token }))
   }, [])
-  useEffect(() => {
-    const is_fav = data.filter(function (obj) {
-      return obj.product.id === selectedProduct.id;
-    });
-    if (is_fav.length != 0) {
-      setFav(true)
-      setFavId(is_fav[0].id)
-    }
-  }, [data])
+
   return (
     <div className={
       selected
@@ -165,12 +116,7 @@ const Salesman: FC<props> = ({ discount, oldPrice, currentPrice, selected, deliv
             ? <button onClick={() => add_item()} className={classes.salesman_active_btn}>Добавить в корзину</button>
             : ''
         }
-        {
-          fav ?
-            <HeartFilled onClick={() => delFav()} className={classes.salesman_active_btn}></HeartFilled>
-            :
-            <HeartOutlined className={classes.salesman_active_btn} onClick={() => onFavorites()}></HeartOutlined>
-        }
+
       </Flex>
     </div>
 

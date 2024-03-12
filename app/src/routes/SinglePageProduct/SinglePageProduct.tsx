@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import classes from './SinglePage.module.scss';
 import arrowIcon from './icons/arrow-icon.svg';
 import wishListIcon from './icons/wishlist-icon.svg';
@@ -12,13 +12,55 @@ import { fetchProductById } from "store/reducers/producRedusers";
 import axios from "axios";
 import { fetchBanners } from "store/reducers/BannerReducesr";
 import { clearFilters } from "store/slices/WindowSlice";
+import { delFavoriteProducts } from "store/reducers/favoritesReducers";
+import { message } from "antd";
+import { getCookie } from "helpers/cookies";
+import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
 const SinglePageProduct: FC = () => {
     const { id } = useParams()
     const { selectedProduct } = useAppSelector((state) => state.produckt)
     const navigate = useNavigate()
-
+    const [fav, setFav] = useState(false)
     const dispatch = useAppDispatch()
+    const [fav_id, setFavId] = useState(0)
+    const is_auth = getCookie('access_token')
+    const delFav = () => {
+        dispatch(delFavoriteProducts({ id: fav_id }))
+        setFav(!fav)
+        message.open({
+            type: "success",
+            content: "Successfully deleted",
+            onClick: () => navigate("/favorites"),
+        });
+    }
+    const onFavorites = async () => {
+        if (!is_auth) {
+            message.open({
+                type: "error",
+                content: "You are not logged in",
+                onClick: () => navigate("/login"),
+            });
+        } else {
+            try {
+                const favorite = await api.addProductToFavorite(Number(id), +getCookie("user_id"));
+                setFav(!fav)
+                setFavId(favorite.data['id'])
+                message.open({
+                    type: "success",
+                    content: "Successfully added",
+                    onClick: () => navigate("/favorites"),
+                });
+            } catch {
+                setFav(true)
+                message.open({
+                    type: "success",
+                    content: "Продукт уже в избранных",
+                    onClick: () => navigate("/favorites"),
+                });
+            }
+        }
+    };
     useEffect(() => {
         const source = axios.CancelToken.source();
         dispatch(fetchProductById({ id: Number(id), cancelToken: source.token }))
@@ -61,7 +103,12 @@ const SinglePageProduct: FC = () => {
                     <h2 className={classes.singlePage_title}>{selectedProduct?.title}</h2>
 
                     <button className={classes.singlePage_wishlist_btn}>
-                        <img src={wishListIcon} alt="" />
+                        {
+                            fav ?
+                                <HeartFilled onClick={() => delFav()} className={classes.salesman_active_btn}></HeartFilled>
+                                :
+                                <HeartOutlined className={classes.salesman_active_btn} onClick={() => onFavorites()}></HeartOutlined>
+                        }
                         В избранное
                     </button>
                 </div>
@@ -74,8 +121,9 @@ const SinglePageProduct: FC = () => {
                 <br />
                 <br />
                 <div className={classes.section}>
-                    <Promotion title="Акции и скидки" getCarts={api.getProductBestSellers} />
-                    <Promotion title="Хиты продаж" getCarts={api.getPromotionRandomProducts} />
+                    <Promotion title="Еще может подойти" getCarts={api.getPromotionRandomProducts} />
+                    <Promotion title="Аксессуары" getCarts={api.getPromotionRandomProducts} />
+                    <Promotion title="С этим товаром покупают" getCarts={api.getPromotionRandomProducts} />
                 </div>
 
             </div>
