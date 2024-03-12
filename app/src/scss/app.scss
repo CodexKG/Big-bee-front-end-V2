@@ -60,3 +60,13 @@ thead[class*="ant-table-thead"] th {
   /* Цвет галочки */
 
 }
+
+.ant-radio-wrapper {
+  .ant-radio-input {
+    border: none !important;
+    background-color: #EEEEEE !important;
+    width: 25px !important;
+    /* Устанавливает ширину чекбокса */
+    height: 25px !important;
+  }
+}

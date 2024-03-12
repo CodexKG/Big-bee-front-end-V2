@@ -75,7 +75,18 @@ const OrderPlacing: React.FC = () => {
 
 
 
-
+    const inputStyle = {
+        height: '50px',
+        borderRadius: '8px',
+        background: '#EEEEEE',
+        border: 'none'
+    }
+    const radioStyle = {
+        width: "24px",
+        height: "24px",
+        background: '#EEEEEE',
+        border: 'none'
+    }
     const { TextArea } = Input;
 
     return (
@@ -106,6 +117,7 @@ const OrderPlacing: React.FC = () => {
                                         rules={[{ required: true }]}
                                     >
                                         <Input
+                                            style={inputStyle}
                                             className={classes.input1}
                                             placeholder="Имя"
                                             size="large"
@@ -116,6 +128,7 @@ const OrderPlacing: React.FC = () => {
                                 <div className={classes.input}>
                                     <Form.Item name="email" rules={[{ required: true }]}>
                                         <Input
+                                            style={inputStyle}
                                             type="email"
                                             className={classes.input}
                                             placeholder="E-mail"
@@ -135,7 +148,7 @@ const OrderPlacing: React.FC = () => {
                                         style={{ marginBottom: 0 }}
                                         rules={[{ required: true }]}
                                     >
-                                        <Input
+                                        <Input style={inputStyle}
                                             className={classes.input}
                                             placeholder="Фамилия"
                                             size="large"
@@ -148,7 +161,7 @@ const OrderPlacing: React.FC = () => {
                                         name="number"
                                         rules={[{ required: true }]}
                                     >
-                                        <Input
+                                        <Input style={inputStyle}
                                             className={classes.input}
                                             placeholder="Телефон"
                                             size="large"
@@ -165,7 +178,7 @@ const OrderPlacing: React.FC = () => {
                             <div className={classes.item}>
                                 <Form.Item name="billing_receipt_type">
                                     <Radio.Group>
-                                        <Radio className={classes.radio} value="Доставка">Доставка курьером до двери</Radio>
+                                        <Radio  className={classes.radio} value="Доставка">Доставка курьером до двери</Radio>
                                         <Radio className={classes.radio} value="Самовывоз">Самовывоз из магазина</Radio>
                                         {/* <Radio className={classes.radio} value="postOffices">Кыргыз почтасы</Radio> */}
                                     </Radio.Group>
@@ -192,7 +205,7 @@ const OrderPlacing: React.FC = () => {
                                         style={{ marginBottom: 0 }}
                                         rules={[{ required: true }]}
                                     >
-                                        <Input
+                                        <Input style={inputStyle}
                                             className={classes.input}
                                             placeholder="Страна"
                                             size="large"
@@ -206,7 +219,7 @@ const OrderPlacing: React.FC = () => {
                                         rules={[{ required: true }]}
                                         style={{ marginBottom: 0 }}
                                     >
-                                        <Input
+                                        <Input style={inputStyle}
                                             type="text"
                                             className={classes.input}
                                             placeholder="Город"
@@ -220,7 +233,7 @@ const OrderPlacing: React.FC = () => {
                                         style={{ marginBottom: 0 }}
                                         name="office"
                                         rules={[{ required: true }]}>
-                                        <Input
+                                        <Input style={inputStyle}
                                             type="text"
                                             className={classes.input}
                                             placeholder="Квартира/Офис"
@@ -238,7 +251,7 @@ const OrderPlacing: React.FC = () => {
                                         style={{ marginBottom: 0 }}
                                         rules={[{ required: true }]}
                                     >
-                                        <Input
+                                        <Input style={inputStyle}
                                             className={classes.input}
                                             placeholder="Край/Область/Регион"
                                             size="large"
@@ -252,7 +265,7 @@ const OrderPlacing: React.FC = () => {
                                         name="street"
                                         rules={[{ required: true }]}
                                     >
-                                        <Input
+                                        <Input style={inputStyle}
                                             className={classes.input}
                                             placeholder="Улица/Дом"
                                             size="large"
@@ -266,7 +279,7 @@ const OrderPlacing: React.FC = () => {
                                         name="index"
                                         rules={[{ required: true }]}
                                     >
-                                        <Input
+                                        <Input style={inputStyle}
                                             className={classes.input}
                                             placeholder="Индекс"
                                             size="large"
@@ -278,7 +291,7 @@ const OrderPlacing: React.FC = () => {
                         </div>
 
                         <Form.Item name="note">
-                            <TextArea className={classes.item} rows={6} />
+                            <TextArea style={inputStyle} className={classes.item} rows={6} />
                         </Form.Item>
 
                         <h3>Способ оплаты</h3>
@@ -303,7 +316,7 @@ const OrderPlacing: React.FC = () => {
                                         style={{ marginBottom: 0 }}
                                         rules={[{ required: true }]}
                                     >
-                                        <Input
+                                        <Input style={inputStyle}
                                             className={classes.input}
                                             placeholder="Фамилия и имя на карте"
                                             size="large"
@@ -313,7 +326,7 @@ const OrderPlacing: React.FC = () => {
 
                                 <div className={classes.input}>
                                     <Form.Item name="bankCard" rules={[{ required: true }]}>
-                                        <Input
+                                        <Input style={inputStyle}
                                             type="numberCart"
                                             className={classes.input}
                                             placeholder="Номер банковской карты"
@@ -332,7 +345,7 @@ const OrderPlacing: React.FC = () => {
                                         style={{ marginBottom: 0 }}
                                         rules={[{ required: true }]}
                                     >
-                                        <Input
+                                        <Input style={inputStyle}
                                             className={classes.input}
                                             placeholder="ММ/ГГ"
                                             size="large"
@@ -345,7 +358,7 @@ const OrderPlacing: React.FC = () => {
                                         name="CVC/CVV"
                                         rules={[{ required: true }]}
                                     >
-                                        <Input
+                                        <Input style={inputStyle}
                                             className={classes.input}
                                             placeholder="CVC/CVV"
                                             size="large"
@@ -425,10 +438,10 @@ const OrderPlacing: React.FC = () => {
 
                 </div>
 
-            </div>
+            </div >
 
             {contextHolder}
-        </section>
+        </section >
     )
 }
 
